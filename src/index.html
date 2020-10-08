@@ -6,8 +6,24 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    (function (window) {
+      window.__env = window.__env || {};
+      // API url
+      window.__env.sceibaApi = "https://sceiba-lab.upr.edu.cu/api/";
+
+      window.__env.cuorApi = "https://cuor-lab.upr.edu.cu/api/";
+
+      window.__env.sceibaHost = "https://cuor-lab.upr.edu.cu/";
+
+      window.__env.oauthRedirectUri = "https://localhost:4200/";
+      window.__env.oauthClientId = "nCjpQ1p66vGwfbpHdixoBCh8QZBUGjntr7cj1ANB";
+      window.__env.oauthScope = "user:email";
+      window.__env.enableDebug = true;
+    })(this);
+  </script>
 </head>
 <body>
-  <app-root></app-root>
+  <toco-org-root></toco-org-root>
 </body>
 </html>

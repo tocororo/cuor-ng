@@ -58,8 +58,5 @@
   },
   "optionalDependencies": {
     "fsevents": "^2.1.2"
-  },
-  "browserslist": [
-    "defaults"
-  ]
+  }
 }

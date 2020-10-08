@@ -1,0 +1,54 @@
+<mat-card *ngIf="hitList && hitList.hits.length > 0; else templateNotInfo">
+    <mat-card-content>
+      <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
+
+        <h2 routerLink="/{{hit.metadata.id}}/view" style="cursor: pointer;">{{hit.metadata.name}}</h2>
+
+        <span *ngIf="hit.metadata.established != -1" class="p-40">Fundada en: {{hit.metadata.established}}</span>
+
+        <ul fxLayout="row wrap" *ngIf="hit.metadata.types && hit.metadata.types.length > 0">
+          <span>Tipos:</span>
+          <li *ngFor="let type of hit.metadata.types; let i = index" class="li-margin-style">
+            {{type}} 
+            <ng-container *ngIf="i < hit.metadata.types.length - 1"> | </ng-container>
+          </li>
+        </ul>
+
+        <ul fxLayout="row wrap" *ngIf="hit.metadata.acronyms && hit.metadata.acronyms.length > 0">
+          <span>Acrónimos:</span>
+          <li *ngFor="let acronym of hit.metadata.acronyms; let i = index" class="li-margin-style">
+            {{acronym}} 
+            <ng-container *ngIf="i < hit.metadata.acronyms.length - 1"> | </ng-container>
+          </li>
+        </ul>
+
+        <ul fxLayout="row wrap" *ngIf="hit.metadata.aliases && hit.metadata.aliases.length > 0">
+          <span>Conocida como:</span>
+          <li *ngFor="let alias of hit.metadata.aliases; let i = index" class="li-margin-style">
+            {{alias}} 
+            <ng-container *ngIf="i < hit.metadata.aliases.length - 1"> | </ng-container>
+          </li>
+        </ul>
+
+        <ul fxLayout="row wrap" *ngIf="hit.metadata.identifiers && hit.metadata.identifiers.length > 0">
+          <span>Identificadores:</span>
+          <li *ngFor="let identifier of hit.metadata.identifiers; let i = index" class="li-margin-style">
+            {{identifier.idtype}}: {{identifier.value}} 
+            <ng-container *ngIf="i < hit.metadata.identifiers.length - 1"> | </ng-container>
+          </li>
+        </ul>
+        <hr class="hr-grey-ligth" *ngIf="pos < hitList.hits.length - 1">
+        <!-- <toco-org-view [org]="hit.metadata"></toco-org-view> -->
+
+      </div>
+    </mat-card-content>
+
+</mat-card>
+
+<ng-template #templateNotInfo>
+  <mat-card>
+    <mat-card-content>
+      <h2>No hay resultados para su búsqueda...</h2>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

@@ -1,0 +1,15 @@
+
+@import '../../../tools/src/lib/core/nav/nav.component-theme' ;
+@import '../../../tools/src/lib/filters/boolean-filter/boolean-filter.component-theme';
+
+// Styles for the docs app that are based on the current theme.
+@mixin toco-app-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    @include toco-nav-component-theme($theme);
+    @include toco-boolean-filter-component-theme($theme);
+}

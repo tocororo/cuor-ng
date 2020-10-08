@@ -1,0 +1,71 @@
+
+<mat-toolbar class="mat-elevation-z6" color="primary" style="position: relative; z-index: 2;">
+
+    <mat-toolbar-row
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="space-between center"
+        style="height: auto !important; min-height: 56px;"
+    >
+        <a class="color-white" [routerLink]="['/']" style="white-space: normal;">
+            <!-- <img src="assets/images/logo_mes.png" alt="MES" width="140"> -->
+            Organizaciones
+        </a>
+        <div
+            appearance="legacy"
+            aria-label="Menu de Inicio"
+            fxLayout="row wrap"
+            fxLayoutGap="15px"
+        >
+
+            <button mat-icon-button [matMenuTriggerFor]="menuNetwork" matTooltip="Redes Sociales">
+                <mat-icon>share</mat-icon>
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
+                <mat-icon>help</mat-icon>
+            </button>
+
+
+        </div>
+
+    </mat-toolbar-row>
+
+</mat-toolbar>
+
+
+<mat-menu #menuNetwork="matMenu">
+    <a mat-menu-item href="https://www.facebook.com/" target="_blank">
+        <!-- <mat-icon>info</mat-icon> -->
+        Facebook
+    </a>
+    <a mat-menu-item href="https://twitter.com/" target="_blank">
+        <!-- <mat-icon>question_answer</mat-icon> -->
+        Twitter
+    </a>
+</mat-menu>
+
+<mat-menu #menuHelp="matMenu">
+    <!-- <a mat-menu-item [routerLink]="['/help']">
+        <mat-icon>help_outline</mat-icon>
+        Ayuda
+    </a> -->
+    <a mat-menu-item [routerLink]="['/faq']">
+        <mat-icon>question_answer</mat-icon>
+        FAQs
+    </a>
+    <a mat-menu-item [routerLink]="['/about']">
+        <mat-icon>info</mat-icon>
+        Acerca de
+    </a>
+    <a mat-menu-item [routerLink]="['/contact']">
+        <mat-icon>contacts</mat-icon>
+        Contactos
+    </a>
+</mat-menu>
+
+<router-outlet></router-outlet> 
+
+<div  [ngStyle]="{'margin-top': '2em'}">
+    <org-footer [sites]="footerSites" [information]="footerInformation"></org-footer>
+</div>

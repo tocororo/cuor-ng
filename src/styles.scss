@@ -1,1 +1,193 @@
+
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@import './styles/typography';
+@import './styles/app-theme';
+//@import './styles/general'
+
+$md-azul: (
+    50 : #e1e5ea,
+    100 : #b4bdcb,
+    200 : #8292a9,
+    300 : #506687,
+    400 : #2b456d,
+    500 : #052453,
+    600 : #04204c,
+    700 : #041b42,
+    800 : #031639,
+    900 : #010d29,
+    A100 : #6380ff,
+    A200 : #3057ff,
+    A400 : #002ffc,
+    A700 : #002ae3,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$md-azullight: (
+    50 : #ecf3fa,
+    100 : #cfe1f2,
+    200 : #afcde9,
+    300 : #8fb9e0,
+    400 : #77aad9,
+    500 : #5f9bd2,
+    600 : #5793cd,
+    700 : #4d89c7,
+    800 : #437fc1,
+    900 : #326db6,
+    A100 : #fcfeff,
+    A200 : #c9e1ff,
+    A400 : #96c3ff,
+    A700 : #7db5ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-grey: (
+    50 : #eaeaea,
+    100 : #cacaca,
+    200 : #a6a6a6,
+    300 : #828282,
+    400 : #686868,
+    500 : #4d4d4d,
+    600 : #464646,
+    700 : #3d3d3d,
+    800 : #343434,
+    900 : #252525,
+    A100 : #f18282,
+    A200 : #ec5454,
+    A400 : #ff0e0e,
+    A700 : #f30000,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$md-greylight: (
+    50 : #f3f3f3,
+    100 : #e2e2e2,
+    200 : #cecece,
+    300 : #bababa,
+    400 : #acacac,
+    500 : #9d9d9d,
+    600 : #959595,
+    700 : #8b8b8b,
+    800 : #818181,
+    900 : #6f6f6f,
+    A100 : #fdf1f1,
+    A200 : #f8c3c3,
+    A400 : #ff8a8a,
+    A700 : #ff7070,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+
+/* - colors - */
+$toco-primary: mat-palette($md-grey);
+$toco-accent: mat-palette($mat-grey);
+//$toco-warn: mat-palette($mat-grey, 200, 100, 900);
+$toco-warn: mat-palette($mat-deep-orange, A700);
+
+$toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
+
+@include angular-material-theme($toco-theme);
+@include toco-app-theme($toco-theme);
+
+.alternate-theme {
+    $alternate-primary: mat-palette($md-grey);
+    $alternate-accent:  mat-palette($md-azullight);
+    $toco-warn: mat-palette($md-greylight);
+
+    $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $toco-warn);
+
+    @include angular-material-theme($alternate-theme);
+    @include toco-app-theme($toco-theme);
+}
+
+.alternate-theme-footer {
+    $alternate-primary: mat-palette($md-greylight);
+    $alternate-accent:  mat-palette($md-azullight);
+    $toco-warn: mat-palette($md-azul);
+
+    $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $toco-warn);
+
+    @include angular-material-theme($alternate-theme);
+    @include toco-app-theme($toco-theme);
+}
+
+/* autoprefixer grid: autoplace */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.m-1{
+    margin: 1em;
+}
+.m-2{
+    margin: 2em;
+}
+.p-1{
+    padding: 16px;
+}
+.query-input .mat-form-field-wrapper{
+    padding-bottom: 0 !important;
+}

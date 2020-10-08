@@ -1,0 +1,53 @@
+
+    <mat-toolbar color="accent"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    style="height: 80px;"
+  >
+  
+    <span>Búsqueda</span>
+  
+  </mat-toolbar>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer mode="side" opened position="start">
+      <!-- <app-aggregations fxLayout="row wrap" fxLayout.xs="column wrap" fxFlex="{{ currentlayout.width }}"
+        fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="1em"
+        class=" back-grey mat-elevation-z8"></app-aggregations> -->
+      <!-- <toco-org-search></toco-org-search> -->
+      <toco-search-aggregations
+        *ngIf="sr"
+        [aggregations]="sr.aggregations"
+        [selectedAggr]="aggrsSelection"
+        (keySelect)="aggrChange($event)"
+  
+      ></toco-search-aggregations>
+    </mat-drawer>
+
+    <div class="m-1" *ngIf="sr">
+
+      <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
+        <button
+          mat-icon-button
+          (click)="drawer.toggle()"
+          matTooltip="Filtros avanzados"
+        >
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <toco-search-query-input [query]="query" class="p-1" (queryChange)="queryChange($event)" style="width: 100%;"></toco-search-query-input>
+      </div>
+
+
+      <search-list [hitList]="sr.hits"></search-list>
+
+      <mat-paginator
+        [length]="sr.hits.total"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="pageChange($event)"
+      >
+      </mat-paginator>
+    </div>
+  </mat-drawer-container>
+  
