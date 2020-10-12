@@ -4,8 +4,8 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 
-import { Organization, SearchResponse } from '@toco/tools/entities';
-import { SearchService } from '@toco/tools/backend';
+import { Organization, SearchResponse } from 'toco-lib';
+import { SearchService } from 'toco-lib';
 
 const orgExample: any = 
 {

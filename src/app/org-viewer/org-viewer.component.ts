@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Organization } from '@toco/tools/entities';
+import { Organization } from 'toco-lib';
 
 @Component({
 	selector: 'app-org-view',

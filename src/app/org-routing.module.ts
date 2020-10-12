@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrgEditComponent, OrgAddComponent } from '@toco/tools/organizations';
+import { OrgEditComponent, OrgAddComponent } from 'toco-lib';
 
 import { OrganizationDetailResolverService } from './organization-detail-resolver.service.ts';
 import { HomeComponent } from './home/home.component';

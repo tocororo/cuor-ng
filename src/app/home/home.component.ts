@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { SearchService } from '@toco/tools/backend';
-import { SearchResponse, Organization } from '@toco/tools/entities';
+import { SearchService } from 'toco-lib';
+import { SearchResponse, Organization } from 'toco-lib';
 
 @Component({
 	selector: "app-home",

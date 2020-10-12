@@ -1,7 +1,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 
-import { HitList, Organization } from '@toco/tools/entities';
+import { HitList, Organization } from 'toco-lib';
 
 @Component({
 	selector: 'search-list',

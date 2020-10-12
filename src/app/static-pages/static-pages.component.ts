@@ -4,7 +4,7 @@
  */
 
 import { Component, OnInit, Input } from '@angular/core';
-import { MetadataService } from '@toco/tools/core';
+import { MetadataService } from 'toco-lib';
 import { ActivatedRoute, Data, RouterOutlet } from '@angular/router';
 
 @Component({

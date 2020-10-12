@@ -28,6 +28,7 @@
     "hammerjs": "^2.0.8",
     "ngx-markdown": "^8.2.2",
     "rxjs": "~6.4.0",
+    "toco-lib": "0.0.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

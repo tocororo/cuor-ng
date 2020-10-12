@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpParams } from "@angular/common/http";
-import { SearchResponse, Organization } from "@toco/tools/entities";
-import { SearchService } from "@toco/tools/backend";
+import { SearchResponse, Organization, AggregationsSelection } from "toco-lib";
+import { SearchService } from "toco-lib";
 import { PageEvent } from "@angular/material";
-import { AggregationsSelection } from "@toco/tools/search/aggregations/aggregations.component";
 import {
   ActivatedRoute,
   Router,
