@@ -8,13 +8,27 @@
   
     <span>Búsqueda</span>
   
+    <div *ngIf="search_type; then search_list_button else search_charts_button"></div>
+
+    <ng-template #search_list_button>
+      <button mat-icon-button  matTooltip="Estadisticas" (click)="changeView()">
+        <mat-icon>insert_chart</mat-icon>
+      </button>
+    </ng-template>
+
+    <ng-template #search_charts_button>
+      <button mat-icon-button  matTooltip="Organizaciones" (click)="changeView()">
+        <mat-icon>list</mat-icon>
+      </button>
+    </ng-template>
+
   </mat-toolbar>
 <mat-drawer-container autosize>
     <mat-drawer #drawer mode="side" opened position="start">
-      <!-- <app-aggregations fxLayout="row wrap" fxLayout.xs="column wrap" fxFlex="{{ currentlayout.width }}"
+     <!--  <app-aggregations fxLayout="row wrap" fxLayout.xs="column wrap" fxFlex="{{ currentlayout.width }}"
         fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="1em"
-        class=" back-grey mat-elevation-z8"></app-aggregations> -->
-      <!-- <toco-org-search></toco-org-search> -->
+        class=" back-grey mat-elevation-z8"></app-aggregations> 
+      <toco-org-search></toco-org-search>  -->
       <toco-search-aggregations
         *ngIf="sr"
         [aggregations]="sr.aggregations"
@@ -22,32 +36,85 @@
         (keySelect)="aggrChange($event)"
   
       ></toco-search-aggregations>
+
+      <!-- <toco-search-aggregations-visual
+        *ngIf="sr"
+        [aggregations]="aggr_keys"
+        [selectedAggr]="aggrsSelection"
+        (keySelect)="aggrChange($event)"
+      ></toco-search-aggregations-visual> -->
+     
     </mat-drawer>
 
-    <div class="m-1" *ngIf="sr">
+    <div *ngIf="search_type; then search_list else search_charts">{{search_type}}</div>
 
-      <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
-        <button
-          mat-icon-button
-          (click)="drawer.toggle()"
-          matTooltip="Filtros avanzados"
-        >
-          <mat-icon>filter_list</mat-icon>
-        </button>
-        <toco-search-query-input [query]="query" class="p-1" (queryChange)="queryChange($event)" style="width: 100%;"></toco-search-query-input>
-      </div>
+<!-- templatefor search list -->
+<ng-template #search_list>
 
+  <div class="m-1" *ngIf="sr">
 
-      <search-list [hitList]="sr.hits"></search-list>
-
-      <mat-paginator
-        [length]="sr.hits.total"
-        [pageSize]="pageSize"
-        [pageIndex]="pageIndex"
-        [pageSizeOptions]="pageSizeOptions"
-        (page)="pageChange($event)"
+    <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
+      <button
+        mat-icon-button
+        (click)="drawer.toggle()"
+        matTooltip="Filtros avanzados"
       >
-      </mat-paginator>
+        <mat-icon>filter_list</mat-icon>
+      </button>
+      <toco-search-query-input [query]="query" class="p-1" (queryChange)="queryChange($event)" style="width: 100%;"></toco-search-query-input>
     </div>
+
+
+    <search-list [hitList]="sr.hits"></search-list>
+
+    <mat-paginator
+      [length]="sr.hits.total"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageChange($event)"
+    >
+    </mat-paginator>
+  </div>
+</ng-template>
+
+<!-- template for charts -->
+<ng-template #search_charts>
+
+  <div class="m-1" *ngIf="sr">
+
+    <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
+      <button
+        mat-icon-button
+        (click)="drawer.toggle()"
+        matTooltip="Filtros avanzados"
+      >
+        <mat-icon>filter_list</mat-icon>
+      </button>
+
+      <mat-card>
+        <section class="example-section">
+         <!--  <label class="example-margin">Align:</label> -->
+          <mat-radio-group [(ngModel)]="typeChart">
+            <mat-radio-button class="example-margin" value="Polar Chart">Pastel</mat-radio-button>
+            <mat-radio-button class="example-margin" value="Vertical Bar">Barra</mat-radio-button>
+            <!-- <mat-radio-button class="example-margin" value="Pie Grid">Pie Grid</mat-radio-button> -->
+            <mat-radio-button class="example-margin" value="Gauge Chart">Calibración</mat-radio-button>
+         </mat-radio-group>
+        </section>
+      </mat-card>
+      
+    </div>
+
+    <toco-search-aggregations-visual
+        *ngIf="sr"
+        [typeChart]="typeChart"
+        [aggregations]="aggr_keys"
+        [selectedAggr]="aggrsSelection"
+        (keySelect)="aggrChange($event)"
+      ></toco-search-aggregations-visual>
+  </div>
+</ng-template>
+
   </mat-drawer-container>
   

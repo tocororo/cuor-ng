@@ -1,0 +1,16 @@
+
+<ng-container >
+  <mat-grid-list 
+    cols="2" 
+    rowHeight="4:3" 
+    ><mat-grid-tile
+    *ngFor="let aggr of aggregations"
+    ><app-charts 
+       [typeChart]="typeChart"
+       [aggregation_value]="aggr.value" 
+       [_yAxisLabel]="aggr.key" 
+       (aggrSelect)="selectionChange($event)"
+      ></app-charts>      
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-container>

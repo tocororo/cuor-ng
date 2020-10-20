@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { HttpParams } from "@angular/common/http";
 import { SearchResponse, Organization, AggregationsSelection } from "toco-lib";
 import { SearchService } from "toco-lib";
-import { PageEvent } from "@angular/material";
+import {  PageEvent } from "@angular/material";
 import {
   ActivatedRoute,
   Router,
@@ -16,7 +16,11 @@ import {
   styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
-  // begin Layout stuff
+
+  aggr_keys:Array<any>
+  search_type:Boolean = true
+  typeChart: "Polar Chart" | "Vertical Bar" | /* "Pie Grid" | */ "Gauge Chart"= "Polar Chart"
+  
   layoutPosition = [
     {
       name: "Derecha",
@@ -65,7 +69,9 @@ export class SearchComponent implements OnInit {
   public constructor(
     private _searchService: SearchService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+
+    // private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -107,12 +113,18 @@ export class SearchComponent implements OnInit {
         
         this.updateFetchParams();
         this.fetchSearchRequest();
+
+       
       },
 
       error: (e) => {},
       
       complete: () => {},
     });
+  }
+
+  changeView(): void {
+    this.search_type = !this.search_type
   }
 
   private updateFetchParams() {
@@ -139,6 +151,13 @@ export class SearchComponent implements OnInit {
 
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
+
+        this.aggr_keys = [
+          {value: this.sr.aggregations.country, key: 'País'},
+          {value: this.sr.aggregations.state, key: 'Provincia'},
+          {value: this.sr.aggregations.status, key: 'Estado'},
+          {value: this.sr.aggregations.types, key: 'Tipo'},
+        ]
       },
       (error: any) => {
         console.log("ERROPR");
@@ -155,7 +174,7 @@ export class SearchComponent implements OnInit {
     this.updateQueryParams();
   }
 
-  public aggrChange(event?: AggregationsSelection): void {
+  public aggrChange(event/* ?: AggregationsSelection */): void {
     console.log(event);
     this.aggrsSelection = event;
     this.updateQueryParams();
@@ -189,4 +208,5 @@ export class SearchComponent implements OnInit {
 
     this.router.navigate(["."], this.navigationExtras);
   }
+
 }

@@ -21,7 +21,16 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
+import { ChartsComponent } from './charts/charts.component';
 
+// testing charts organizations
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PolarChartComponent } from './charts/polar-chart/polar-chart.component';
+import { BarVerticalComponent } from './charts/bar-vertical/bar-vertical.component';
+import { PieGridComponent } from './charts/pie-grid/pie-grid.component';
+import { AggregationsComponent } from './aggregations/aggregations.component';
+import { MatRadioModule } from '@angular/material';
+import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -29,10 +38,20 @@ import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 		SearchComponent,
 		SearchListComponent,
 		StaticPagesComponent,
-		OrgViewerComponent
+		OrgViewerComponent,
+		// testing charts organizations
+		ChartsComponent,
+		PolarChartComponent,
+		BarVerticalComponent,
+		PieGridComponent,
+		AggregationsComponent,
+		GaugeChartComponent
+		//DialogChartComponent
 	],
-
 	imports: [
+		NgxChartsModule,
+		MatRadioModule,
+
 		BrowserAnimationsModule,
 		SharedModule,
 		CoreModule,
