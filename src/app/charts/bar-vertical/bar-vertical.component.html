@@ -1,0 +1,25 @@
+<div fxLayout="column nowrap" fxLayoutAlign="center center">
+    <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="this.dataChild"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+
+    <mat-label 
+    style="background-color: #CFC0BB; 
+    padding: 10px;
+    border-radius: 5px ;"
+    >{{xAxisLabel}}</mat-label>
+</div>
+

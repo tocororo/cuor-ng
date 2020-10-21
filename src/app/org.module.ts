@@ -25,6 +25,15 @@ import { OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatepickerYearComponent } from './datapicker-year/datapicker-year.component';
 
+// testing charts organizations
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PolarChartComponent } from './charts/polar-chart/polar-chart.component';
+import { BarVerticalComponent } from './charts/bar-vertical/bar-vertical.component';
+import { PieGridComponent } from './charts/pie-grid/pie-grid.component';
+import { AggregationsComponent } from './aggregations/aggregations.component';
+import { MatRadioModule } from '@angular/material';
+import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
+import { ChartsComponent } from './charts/charts.component';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -35,10 +44,20 @@ import { DatepickerYearComponent } from './datapicker-year/datapicker-year.compo
 		OrgViewerComponent,
 		OrgEditComponent,
 		OrganizationDialogRelasionship,
-		DatepickerYearComponent
+		DatepickerYearComponent,
+		// testing charts organizations
+		ChartsComponent,
+		PolarChartComponent,
+		BarVerticalComponent,
+		PieGridComponent,
+		AggregationsComponent,
+		GaugeChartComponent
+		//DialogChartComponent
 	],
-
 	imports: [
+		NgxChartsModule,
+		MatRadioModule,
+
 		BrowserAnimationsModule,
 		SharedModule,
 		CoreModule,

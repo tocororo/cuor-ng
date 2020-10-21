@@ -64,13 +64,15 @@ const routes: Routes = [
         component: StaticPagesComponent,
         data: {src: 'assets/markdown/inclussion.md', title: '¿Nueva Organización?'}
     },
-	// {
-	// 	path: '**',
-	// 	redirectTo: '',
-	// 	pathMatch: 'full'
-	// 	//TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí. 
-	// 	//component: PageNotFoundComponent
-	// }
+	{
+		path: '**',
+		redirectTo: '',
+		pathMatch: 'full'
+		//TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí. 
+		//component: PageNotFoundComponent
+	},
+
+	
 ];
 
 @NgModule({
