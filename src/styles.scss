@@ -191,3 +191,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .query-input .mat-form-field-wrapper{
     padding-bottom: 0 !important;
 }
+.my-outline{
+    border: 2px solid mat-color($toco-primary, 50);
+    border-radius: 4px;
+    padding: 8px;
+    padding-bottom: 0px;
+    margin-bottom: 24px;
+ }
+ .my-outline:hover{
+    border: 2px solid mat-color($toco-primary);
+ }
+ .tooltip-red{
+    // background: #b71c1c !important;
+     background: mat-color($toco-primary, A700);
+ }

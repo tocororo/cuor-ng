@@ -306,6 +306,8 @@ export class OrganizationDetailResolverService implements Resolve<SearchResponse
 		return this.service.getOrganizationById(uuid).pipe(
             take(1),
             map(node => {
+				console.log(node);
+				
                 if (node) {
                     return node;
 				}

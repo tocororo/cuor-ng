@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from 'toco-lib';
+import { OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { OrganizationsModule } from 'toco-lib';
@@ -21,6 +21,9 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
+import { OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DatepickerYearComponent } from './datapicker-year/datapicker-year.component';
 
 @NgModule({
 	declarations: [
@@ -29,20 +32,24 @@ import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 		SearchComponent,
 		SearchListComponent,
 		StaticPagesComponent,
-		OrgViewerComponent
+		OrgViewerComponent,
+		OrgEditComponent,
+		OrganizationDialogRelasionship,
+		DatepickerYearComponent
 	],
 
 	imports: [
 		BrowserAnimationsModule,
 		SharedModule,
 		CoreModule,
+		StaticsModule,
 		// The `HttpClientInMemoryWebApiModule` module intercepts HTTP requests 
 		// and returns simulated server responses. 
 		// Remove it when a real server is ready to receive requests. 
 		// HttpClientInMemoryWebApiModule.forRoot(
 		// 	InMemoryDataService, { dataEncapsulation: false }
 		// ),
-		//    ReactiveFormsModule,    
+		ReactiveFormsModule,
 		OrganizationsModule,
 		// AuthenticationModule,
 		TocoFormsModule,
@@ -53,10 +60,13 @@ import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 			loader: HttpClient
 		  })
 	],
-
+	entryComponents: [
+		OrganizationDialogRelasionship
+	],
 	providers: [
 		SearchService,
-		EnvServiceProvider
+		EnvServiceProvider,
+		OrganizationServiceNoAuth
 	],
 
 	bootstrap: [OrgRootComponent]
