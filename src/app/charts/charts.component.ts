@@ -29,11 +29,9 @@ export class ChartsComponent implements OnInit  {
     for (let index = 0; index < this.aggregation_value.buckets.length; index++) {
         this.charts.push({name:this.aggregation_value.buckets[index].key, value:this.aggregation_value.buckets[index].doc_count});      
     }
-    console.log(this.charts);
   }
 
   _aggrSelect(new_aggr){
-    console.log(new_aggr);
     
     this.aggrSelected.emit(new_aggr)
   }

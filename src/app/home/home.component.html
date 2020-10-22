@@ -3,7 +3,13 @@
     <h1 style="text-align: center;">Catálogo de Organizaciones Cubanas</h1>
 
     <toco-search-query-input [query]="''" (queryChange)="queryChange($event)" style="width: 70%;"></toco-search-query-input>
-
+    <p  style="text-align: start; width: 70%; margin: 0;">
+        <mat-chip-list>
+            <mat-chip [routerLink]="['/search']">
+                Incluir Organizaciones Internacionales
+            </mat-chip>
+        </mat-chip-list>
+    </p>
     <br>
     <br>
     <!-- <mat-chip-list>
@@ -14,8 +20,17 @@
             {{cubanOrganizationTotal}} Organizaciones Cubanas
         </mat-chip>
     </mat-chip-list> -->
-    <app-bar-vertical 
-        [dataChild]="homeCharts.types" 
-        [_yAxisLabel]="'Tipo de Organizaciones'">
-    </app-bar-vertical>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <app-polar-chart *ngIf="loadCharts"
+            [dataChild]="homeCharts.total"
+            [_yAxisLabel]="'Tipo de Organizaciones'">
+        </app-polar-chart>
+    
+        <app-polar-chart *ngIf="loadCharts"
+            [dataChild]="homeCharts.type"
+            [_yAxisLabel]="'Tipo de Organizaciones'">
+        </app-polar-chart>
+    </div>
+
 </div>

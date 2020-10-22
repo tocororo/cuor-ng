@@ -14,14 +14,14 @@ export class BarVerticalComponent implements OnInit{
   bucket: Array<any> = new Array<any>() //{name:e.name, value:e.value}
 
   @Input()
-  dataChild:[] = [];
+  dataChild: Array<Object> = [];
   @Input()
   _yAxisLabel;
   @Output()
   aggrSelect = new EventEmitter<object>();
 
   // options
-  view: any[] = [400, 300];
+  view: any[] = [300, 300];
   showXAxis = false;
   showYAxis = false;
   gradient = false;
@@ -34,7 +34,20 @@ export class BarVerticalComponent implements OnInit{
   maxXAxisTickLength = false
 
   colorScheme = {
-    domain: [/* '#5AA454', '#A10A28', '#C7B42C', */ '#4d4d4d']
+    domain: [
+      // '#a6a6a6',
+      '#828282',
+      '#686868',
+      '#4d4d4d',
+      '#464646',
+      '#3d3d3d',
+      '#343434',
+      '#252525',
+      '#555555',
+      '#434343',
+      '#262626',
+      '#000000'
+    ]
   };
 
   constructor() {
@@ -43,13 +56,10 @@ export class BarVerticalComponent implements OnInit{
 
   ngOnInit(): void{
     this.xAxisLabel = this._yAxisLabel
-    console.log("this.dataChild", this.dataChild);
     
   }
 
   onSelect(e) {
-   
-    console.log({key:this._yAxisLabel, bucket:{name:e.name, value:e.value}});
     this.aggrSelect.emit({key:this._yAxisLabel, buckets:{name:e.name, value:e.value}})
   }
 

@@ -16,7 +16,20 @@ export class GaugeChartComponent  {
   xAxisLabel=''
 
   colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+    domain: [
+      // '#a6a6a6',
+      '#828282',
+      '#686868',
+      '#4d4d4d',
+      '#464646',
+      '#3d3d3d',
+      '#343434',
+      '#252525',
+      '#555555',
+      '#434343',
+      '#262626',
+      '#000000'
+    ]
   };
 
   constructor() {
