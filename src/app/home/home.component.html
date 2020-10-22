@@ -6,12 +6,16 @@
 
     <br>
     <br>
-    <mat-chip-list>
+    <!-- <mat-chip-list>
         <mat-chip [routerLink]="['/search']">
             {{organizationsTotal}} Organizaciones
         </mat-chip>
         <mat-chip [routerLink]="['/search']" [queryParams]="{country: 'Cuba'}">
             {{cubanOrganizationTotal}} Organizaciones Cubanas
         </mat-chip>
-  </mat-chip-list>
+    </mat-chip-list> -->
+    <app-bar-vertical 
+        [dataChild]="homeCharts.types" 
+        [_yAxisLabel]="'Tipo de Organizaciones'">
+    </app-bar-vertical>
 </div>

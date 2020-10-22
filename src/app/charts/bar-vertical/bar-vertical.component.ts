@@ -4,7 +4,7 @@ import { AggregationsSelection } from 'toco-lib';
 @Component({
   selector: 'app-bar-vertical',
   templateUrl: './bar-vertical.component.html',
-  styleUrls: ['./bar-vertical.component.css']
+  styleUrls: ['./bar-vertical.component.scss']
 })
 export class BarVerticalComponent implements OnInit{
 
@@ -14,7 +14,7 @@ export class BarVerticalComponent implements OnInit{
   bucket: Array<any> = new Array<any>() //{name:e.name, value:e.value}
 
   @Input()
-  dataChild:string;
+  dataChild:[] = [];
   @Input()
   _yAxisLabel;
   @Output()
@@ -38,11 +38,13 @@ export class BarVerticalComponent implements OnInit{
   };
 
   constructor() {
-    Object.assign(this, this.dataChild)
+    // Object.assign(this, this.dataChild)
   }
 
   ngOnInit(): void{
     this.xAxisLabel = this._yAxisLabel
+    console.log("this.dataChild", this.dataChild);
+    
   }
 
   onSelect(e) {

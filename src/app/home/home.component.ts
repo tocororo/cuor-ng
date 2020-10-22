@@ -13,6 +13,11 @@ export class HomeComponent implements OnInit {
 	public organizationsTotal: number = 0;
 	public cubanOrganizationTotal: number = 0;
 
+	public homeCharts = {
+		type: [],
+		total: []
+	}
+
 	public constructor(private router: Router, private activatedRoute: ActivatedRoute, private _searchService: SearchService)
 	{ }
 
@@ -28,16 +33,24 @@ export class HomeComponent implements OnInit {
 					if (!element.key.localeCompare("Cuba"))
 						this.cubanOrganizationTotal = element.doc_count;
 				});
-
+				searchResponse.aggregations['types'].buckets.forEach(element => {
+					this.homeCharts.type.push({ name: element.key, value: element.doc_count})
+				});
+				this.homeCharts.total = [
+					{name: "Internacionales", value: searchResponse.hits.total - this.cubanOrganizationTotal},
+					{name: "Cubanas", value: this.cubanOrganizationTotal}
+				]
 			}
 		})
+		console.log("homeCharts", this.homeCharts);
+		
 	}
 
 	public queryChange(event?: string): void
 	{
 		this.router.navigate(["search"], {
 			relativeTo: this.activatedRoute,
-			queryParams: { q: event },
+			queryParams: { q: event, country: 'Cuba' },
 			queryParamsHandling: "",
 		});
 	}

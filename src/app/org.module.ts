@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from 'toco-lib';
+import { OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { OrganizationsModule } from 'toco-lib';
@@ -21,7 +21,9 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
-import { ChartsComponent } from './charts/charts.component';
+import { OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DatepickerYearComponent } from './datapicker-year/datapicker-year.component';
 
 // testing charts organizations
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -31,6 +33,7 @@ import { PieGridComponent } from './charts/pie-grid/pie-grid.component';
 import { AggregationsComponent } from './aggregations/aggregations.component';
 import { MatRadioModule } from '@angular/material';
 import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
+import { ChartsComponent } from './charts/charts.component';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -39,6 +42,9 @@ import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
 		SearchListComponent,
 		StaticPagesComponent,
 		OrgViewerComponent,
+		OrgEditComponent,
+		OrganizationDialogRelasionship,
+		DatepickerYearComponent,
 		// testing charts organizations
 		ChartsComponent,
 		PolarChartComponent,
@@ -55,13 +61,14 @@ import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
 		BrowserAnimationsModule,
 		SharedModule,
 		CoreModule,
+		StaticsModule,
 		// The `HttpClientInMemoryWebApiModule` module intercepts HTTP requests 
 		// and returns simulated server responses. 
 		// Remove it when a real server is ready to receive requests. 
 		// HttpClientInMemoryWebApiModule.forRoot(
 		// 	InMemoryDataService, { dataEncapsulation: false }
 		// ),
-		//    ReactiveFormsModule,    
+		ReactiveFormsModule,
 		OrganizationsModule,
 		// AuthenticationModule,
 		TocoFormsModule,
@@ -72,10 +79,13 @@ import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
 			loader: HttpClient
 		  })
 	],
-
+	entryComponents: [
+		OrganizationDialogRelasionship
+	],
 	providers: [
 		SearchService,
-		EnvServiceProvider
+		EnvServiceProvider,
+		OrganizationServiceNoAuth
 	],
 
 	bootstrap: [OrgRootComponent]

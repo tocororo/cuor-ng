@@ -2,13 +2,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrgEditComponent, OrgAddComponent } from 'toco-lib';
+import { OrgAddComponent } from 'toco-lib';
 
 import { OrganizationDetailResolverService } from './organization-detail-resolver.service.ts';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
+import { OrgEditComponent } from './org-edit/org-edit.component';
 
 
 const routes: Routes = [
@@ -26,10 +27,10 @@ const routes: Routes = [
 			'org': OrganizationDetailResolverService
 		}
     },
-    {
-        path: 'add',
-        component: OrgAddComponent
-	},
+    // {
+    //     path: 'add',
+    //     component: OrgAddComponent
+	// },
 	{
 		path: 'search',
 		component: SearchComponent
@@ -62,7 +63,7 @@ const routes: Routes = [
         path: 'inclussion',
         component: StaticPagesComponent,
         data: {src: 'assets/markdown/inclussion.md', title: '¿Nueva Organización?'}
-	},
+    },
 	{
 		path: '**',
 		redirectTo: '',
