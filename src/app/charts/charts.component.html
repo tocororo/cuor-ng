@@ -1,0 +1,30 @@
+<ng-container *ngIf=" typeChart == 'Polar Chart' " > 
+        <app-polar-chart 
+        [dataChild]="charts" 
+        (aggrSelect)="_aggrSelect($event)"
+        [_yAxisLabel]="_yAxisLabel"  
+    ></app-polar-chart>
+ </ng-container>
+ 
+ <ng-container *ngIf=" typeChart == 'Vertical Bar' ">
+        <app-bar-vertical 
+            [dataChild]="charts" 
+            [_yAxisLabel]="_yAxisLabel" 
+            (aggrSelect)="_aggrSelect($event)" 
+        ></app-bar-vertical>
+ </ng-container>
+
+ <ng-container *ngIf=" typeChart == 'Gauge Chart' ">
+    <app-gauge-chart 
+        [dataChild]="charts" 
+        [_yAxisLabel]="_yAxisLabel" 
+        (aggrSelect)="_aggrSelect($event)" 
+    ></app-gauge-chart>
+</ng-container>
+ 
+ <ng-container *ngIf=" typeChart == 'Pie Grid' ">
+        <app-pie-grid 
+        [dataChild]="charts" 
+        (aggrSelect)="_aggrSelect($event)" 
+    ></app-pie-grid> 
+ </ng-container> 

@@ -1,0 +1,17 @@
+<div fxLayout="column nowrap" fxLayoutAlign="center center">
+  <ngx-charts-gauge
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="dataChild"
+    [legend]="legend"
+    [legendPosition]="legendPosition"
+    (select)="onSelect($event)"
+    >
+  </ngx-charts-gauge>
+
+  <mat-label 
+    style="background-color: #CFC0BB; 
+    padding: 10px;
+    border-radius: 5px ;"
+    >{{xAxisLabel}}</mat-label>
+</div>
