@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-polar-chart',
   templateUrl: './polar-chart.component.html',
-  styleUrls: ['./polar-chart.component.css']
+  styleUrls: ['./polar-chart.component.scss']
 })
 export class PolarChartComponent implements OnInit {
   view: any[] = [380, 370];
