@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 		type: [],
 		total: []
 	}
+	loadCharts= false;
 
 	public constructor(private router: Router, private activatedRoute: ActivatedRoute, private _searchService: SearchService)
 	{ }
@@ -25,7 +26,6 @@ export class HomeComponent implements OnInit {
 	{
 		this._searchService.getOrganizations(null).subscribe({
 			next: (searchResponse: SearchResponse<Organization>) => {
-				console.log(searchResponse);
 
 				this.organizationsTotal = searchResponse.hits.total;
 
@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
 					if (!element.key.localeCompare("Cuba"))
 						this.cubanOrganizationTotal = element.doc_count;
 				});
+
 				searchResponse.aggregations['types'].buckets.forEach(element => {
 					this.homeCharts.type.push({ name: element.key, value: element.doc_count})
 				});
@@ -40,10 +41,9 @@ export class HomeComponent implements OnInit {
 					{name: "Internacionales", value: searchResponse.hits.total - this.cubanOrganizationTotal},
 					{name: "Cubanas", value: this.cubanOrganizationTotal}
 				]
+				this.loadCharts = true;
 			}
 		})
-		console.log("homeCharts", this.homeCharts);
-		
 	}
 
 	public queryChange(event?: string): void

@@ -49,8 +49,6 @@ export class AggregationsComponent implements OnInit {
         this.keys.push({"key":key, "sp":this._translate(key)});
       }
     }
-    console.log(this.typeChart);
-    console.log(this.keys);
   }
 
   //aqui se agregan los casos que puedan haber en las agregaciones para q salgan siempre en español
@@ -103,7 +101,6 @@ export class AggregationsComponent implements OnInit {
   } */
 
   selectionChange(new_aggr) {
-    console.log("new_aggr");
     
     if (!this.selectedAggr.hasOwnProperty(new_aggr.key)){
       this.selectedAggr[new_aggr.key] = [];

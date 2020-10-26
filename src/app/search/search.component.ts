@@ -81,11 +81,9 @@ export class SearchComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe({
       next: (initQueryParams) => {
         this.aggrsSelection = {};
-        console.log(initQueryParams);
 
         for (let index = 0; index < initQueryParams.keys.length; index++) {
           const key = initQueryParams.keys[index];
-          console.log(initQueryParams.get(key));
 
           switch (key) {
             case "size":
@@ -108,8 +106,6 @@ export class SearchComponent implements OnInit {
               break;
           }
         }
-        
-        console.log(this.aggrsSelection);
         
         this.updateFetchParams();
         this.fetchSearchRequest();
@@ -146,8 +142,6 @@ export class SearchComponent implements OnInit {
   public fetchSearchRequest() {
     this._searchService.getOrganizations(this.params).subscribe(
       (response: SearchResponse<Organization>) => {
-        console.log(response);
-        console.log("RESPONSE", response);
 
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
@@ -175,13 +169,11 @@ export class SearchComponent implements OnInit {
   }
 
   public aggrChange(event/* ?: AggregationsSelection */): void {
-    console.log(event);
     this.aggrsSelection = event;
     this.updateQueryParams();
   }
 
   queryChange(event?: string) {
-    console.log(event);
     this.query = event;
     this.updateQueryParams();
   }

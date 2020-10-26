@@ -20,13 +20,13 @@ const routes: Routes = [
 			'org': OrganizationDetailResolverService
 		}
 	},
-	{
-		path:':uuid/edit',
-		component: OrgEditComponent,
-		resolve: {
-			'org': OrganizationDetailResolverService
-		}
-    },
+	// {
+	// 	path:':uuid/edit',
+	// 	component: OrgEditComponent,
+	// 	resolve: {
+	// 		'org': OrganizationDetailResolverService
+	// 	}
+    // },
     // {
     //     path: 'add',
     //     component: OrgAddComponent

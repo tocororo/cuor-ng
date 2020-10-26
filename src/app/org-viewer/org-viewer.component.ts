@@ -22,8 +22,6 @@ export class OrgViewerComponent implements OnInit
 			(data) => {
 				this.org = data.org.metadata;
 				// this.org = data.org;
-
-				console.log('Data got for viewing: ', this.org);
 			}
 		);
 	}

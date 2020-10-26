@@ -25,12 +25,10 @@ export class PieGridComponent implements OnInit{
 
   ngOnInit() {
     //Object.assign(this, this.dataChild );
-  console.log(this.dataChild);
   
   }
 
   onSelect(event) {
-    console.log(event);
   }
 
 }

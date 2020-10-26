@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PolarChartComponent implements OnInit {
   view: any[] = [380, 370];
 
-  @Input() public dataChild: string;
+  @Input() public dataChild: Array<Object> = [];
   @Input() _yAxisLabel
   xAxisLabel=""
 
@@ -20,7 +20,20 @@ export class PolarChartComponent implements OnInit {
   legendPosition: string = 'below';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: [
+      // '#a6a6a6',
+      '#828282',
+      '#686868',
+      '#4d4d4d',
+      '#464646',
+      '#3d3d3d',
+      '#343434',
+      '#252525',
+      '#555555',
+      '#434343',
+      '#262626',
+      '#000000'
+    ]
   };
 
   constructor() {
@@ -31,6 +44,7 @@ export class PolarChartComponent implements OnInit {
 
 
   ngOnInit(): void{
+    
     this.xAxisLabel = this._yAxisLabel
   }
 
