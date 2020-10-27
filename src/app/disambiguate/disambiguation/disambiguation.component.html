@@ -1,0 +1,309 @@
+<div *ngIf="loaded" fxLayout="row wrap" style="margin: 1em;">
+    <!-- navigate buttons -->
+    <mat-toolbar>
+      
+      <mat-toolbar-row fxLayoutGap="1em" fxLayoutAlign="end center">
+        <div fxLayoutAlign="start" fxLayoutGap="1em">
+          <button mat-stroked-button color="primary" (click)="approve()">
+            Editar
+          </button>
+          <button mat-stroked-button color="warn" (click)="editVersion()">
+            Guardar
+          </button>        
+        </div>
+        <div>
+          <mat-slide-toggle (change)="showSecundaries = !showSecundaries" color="primary">
+            <!-- <span *ngIf="showSecundaries">Ocultar</span>
+                            <span *ngIf="!showSecundaries">Mostrar</span> -->
+            Organizaciones análogas
+          </mat-slide-toggle>
+          <div *ngIf="showSecundaries">
+            <button
+              mat-icon-button
+              aria-label="Organización Anterior"            
+              matTooltip="Organización Anterior"
+              [disabled]="isDisabledNavigatePrevious"
+              (click)="previousOrg()"
+            >
+              <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              aria-label="Próxima Organización"            
+              matTooltip="Próxima Organización"
+              [disabled]="isDisabledNavigateNext"
+              (click)="nextOrg()"
+            >
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </div>
+        </div>        
+        
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div
+      fxLAyout="column"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+    
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-card-field
+          [cardTitle]="masterOrganization.metadata.name"
+          [cardSubtitles]="['UUID Organización:' + masterOrganization.id, masterOrganization.metadata.status]"
+          style="margin: .5em;"
+        ></app-disambiguate-card-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-card-field
+          [cardTitle]="selectedsecundaryOrganization.metadata.name"
+          [cardSubtitles]="['UUID Organización:' + selectedsecundaryOrganization.id, selectedsecundaryOrganization.metadata.status]"
+          style="margin: .5em;"
+        ></app-disambiguate-card-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-card-chips-field
+          chipsTitle="Identificadores"
+          [contentList]="masterOrganization.metadata.identifiers"
+          idName="idtype"
+          valueName="value"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-card-chips-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-card-chips-field
+          chipsTitle="Identificadores"
+          [isMaster]="false"
+          [contentList]="selectedsecundaryOrganization.metadata.identifiers"
+          idName="idtype"
+          valueName="value"
+          (propagate)="mergeIdentifiers($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-card-chips-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Acrónimos con que se conoce la Organización"
+          [contentList]="masterOrganization.metadata.acronyms"          
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Acrónimos con que se conoce la Organización"
+          [isMaster]="false"
+          [contentList]="selectedsecundaryOrganization.metadata.acronyms"
+          (propagate)="mergeAcronyms($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Otros nombres con los que se conoce la Organización"
+          [contentList]="masterOrganization.metadata.aliases"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Otros nombres con los que se conoce la Organización"
+          [isMaster]="false"
+          [contentList]="selectedsecundaryOrganization.metadata.aliases"
+          (propagate)="mergeAliases($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Tipos que describen a la Organización"
+          [contentList]="masterOrganization.metadata.types"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Tipos que describen a la Organización"
+          [isMaster]="false"
+          [contentList]="selectedsecundaryOrganization.metadata.types"
+          (propagate)="mergeTypes($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-text-field
+          textLabel="Año de fundada la Organización"
+          [textContent]="masterOrganization.metadata.established"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-text-field
+          textLabel="Año de fundada la Organización"
+          [isMaster]="false"
+          [textContent]="selectedsecundaryOrganization.metadata.established"
+          (propagate)="mergeEstablished($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-text-field
+          textLabel="URL de la página de Wikipedia de la Organización"
+          [textContent]="masterOrganization.metadata.wikipedia_url"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-text-field
+          textLabel="URL de la página de Wikipedia de la Organización"
+          [isMaster]="false"
+          [textContent]="selectedsecundaryOrganization.metadata.wikipedia_url"
+          (propagate)="mergeWikipedia_url($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-text-field
+          textLabel="Correo electrónico de contacto de la Organización"
+          [textContent]="masterOrganization.metadata.email_address"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-text-field
+          textLabel="Correo electrónico de contacto de la Organización"
+          [isMaster]="false"
+          [textContent]="selectedsecundaryOrganization.metadata.email_address"
+          (propagate)="mergeEmail_address($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-relationships
+          [contentList]="masterOrganization.metadata.relationships"          
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-relationships>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-relationships
+          [isMaster]="false"
+          [contentList]="selectedsecundaryOrganization.metadata.relationships"          
+          (propagate)="mergeRelationships($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-relationships>
+      </ng-container>
+    </div>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill     
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Enlaces conocidos de la Organización"
+          [contentList]="masterOrganization.metadata.links"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>  
+      </ng-container> 
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-accord-chips-field
+          accordionChipsTitle="Enlaces conocidos de la Organización"
+          [isMaster]="false"
+          [contentList]="selectedsecundaryOrganization.metadata.links"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-accord-chips-field>
+      </ng-container>
+    </div>
+
+    
+    
+  
+    <mat-card *ngIf="!secundariesOrganizations" style="margin: 1em;">
+      <mat-card-content>
+        <h1>Este componente necesita datos de otras organizaciones.</h1>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <mat-card *ngIf="!loaded" style="margin: 1em;">
+    <mat-card-content>
+      <h1>No se encontraron los datos de las organziaciones para desambiguar</h1>
+    </mat-card-content>
+  </mat-card>
+  
+
+

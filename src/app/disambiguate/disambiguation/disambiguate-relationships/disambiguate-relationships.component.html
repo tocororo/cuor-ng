@@ -1,0 +1,49 @@
+<mat-accordion *ngIf="contentList && contentList.length">
+    <mat-expansion-panel>
+            <mat-expansion-panel-header>                
+                <mat-panel-title>
+                    Relaciones con otras Organizaciones
+                </mat-panel-title>
+                <mat-panel-title *ngIf="!isMaster">
+                        <button mat-icon-button aria-label="Incluir todos los elementos" 
+                        matTooltip="Agregar todos los elementos a la organizacion principal" 
+                        (click)="onPropagate()">
+                            <mat-icon color="warn">merge_type_left</mat-icon>
+                        </button>
+                    </mat-panel-title>
+            </mat-expansion-panel-header>           
+                
+            <app-show-one-relationship
+            [isMaster]=isMaster
+            accordionTitle="Padres"
+            [contentList]=parents
+            (propagate)="getPropagateRelationships($event)"
+            ></app-show-one-relationship>
+            
+            <app-show-one-relationship
+            [isMaster]=isMaster
+            accordionTitle="Hijas"
+            [contentList]=children
+            (propagate)="getPropagateRelationships($event)"
+            ></app-show-one-relationship>
+
+            <app-show-one-relationship
+            [isMaster]=isMaster
+            accordionTitle="Otro tipo de relación"
+            [contentList]=others            
+            (propagate)="getPropagateRelationships($event)"
+            ></app-show-one-relationship>
+                    
+        </mat-expansion-panel>        
+</mat-accordion>
+
+<mat-accordion *ngIf="!contentList || contentList.length==0" class="static-mat-accordion" >
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{accordionTitle}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label class="text-muted text-through">Vacío</mat-label>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,12 @@
+
+<mat-label *ngIf="textLabel">{{textLabel}}:</mat-label>
+<mat-label *ngIf="textContent">{{textContent}}</mat-label> 
+<button *ngIf="!isMaster && textContent" mat-icon-button 
+aria-label="Cambiar en la organización principal" 
+matTooltip="Cambiar en la organizacion principal" 
+(click)="onPropagate(textContent)">
+    <mat-icon color="warn">merge_type</mat-icon>
+</button> 
+
+<mat-label *ngIf="!textContent" class="text-muted text-through">Vacío</mat-label>
+
