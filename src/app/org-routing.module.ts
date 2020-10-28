@@ -10,6 +10,8 @@ import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
+import { DisambiguateSearchComponent } from './disambiguate/disambiguate-search/disambiguate-search.component';
+import { DisambiguationComponent } from './disambiguate/disambiguation/disambiguation.component';
 
 
 const routes: Routes = [
@@ -20,13 +22,13 @@ const routes: Routes = [
 			'org': OrganizationDetailResolverService
 		}
 	},
-	// {
-	// 	path:':uuid/edit',
-	// 	component: OrgEditComponent,
-	// 	resolve: {
-	// 		'org': OrganizationDetailResolverService
-	// 	}
-    // },
+	{
+		path:':uuid/edit',
+		component: OrgEditComponent,
+		resolve: {
+			'org': OrganizationDetailResolverService
+		}
+    },
     // {
     //     path: 'add',
     //     component: OrgAddComponent
@@ -34,6 +36,14 @@ const routes: Routes = [
 	{
 		path: 'search',
 		component: SearchComponent
+	},
+	{
+		path: 'disambiguate',
+		component: DisambiguateSearchComponent
+	},	
+	{
+		path: 'disambiguation',
+		component: DisambiguationComponent
 	},
 	{
 		path:'',

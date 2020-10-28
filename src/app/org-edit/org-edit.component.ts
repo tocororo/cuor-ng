@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSelect, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Hit, Identifier, IdentifierSchemas, Organization, OrganizationService, OrganizationRelationships, Relationship } from 'toco-lib';
+import { Hit, Identifier, IdentifierSchemas, Organization, OrganizationService, OrganizationRelationships, Relationship, EnvService, SearchService, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 import { isUndefined } from 'util';
+import { OrgService } from '../org.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class OrgEditComponent implements OnInit {
 
   org: Organization = new Organization();
 
-  public orgFormGroup: FormGroup;
+  public orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
 
   // TODO: pasar para organization.entity, es similar a organizationRelationship
   selectOptions = [
@@ -58,59 +59,100 @@ export class OrgEditComponent implements OnInit {
 
   orgRelationships = OrganizationRelationships;
 
-
   constructor(
     private _activatedRoute: ActivatedRoute, 
     private _formBuilder: FormBuilder,
-    private _orgservice: OrganizationService,
-    private _dialog: MatDialog) { }
+    private _orgService: OrgService,
+    private _dialog: MatDialog,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.orgFormGroup = this._formBuilder.group({},[])
-    /* Gets the `Organization` data. */
-		this._activatedRoute.data.subscribe(
+    this._activatedRoute.data.subscribe(
 			(data: { 'org': Hit<Organization> }) => {
-
         this.org.deepcopy(data.org.metadata);
 
-        this.orgFormGroup = this._formBuilder.group({
-          id: new FormControl(this.org.id, Validators.required),
-
-          acronyms: this.addItemsFormArray(this.org.acronyms),
-
-          aliases: this.addItemsFormArray(this.org.aliases),
-
-          addresses: new FormControl({value: this.org.addresses, disabled: true}, Validators.required),
-
-          established: new FormControl( this.org.established, Validators.required),
-
-          identifiers: this.addItemsFormArrayIdentifiers(this.org.identifiers),
-
-          labels: this.addItemsFormArray(this.org.labels),
-
-          name: new FormControl({value: this.org.name, disabled: true}, Validators.required),
-
-          relationships: this.addItemsFormArrayRelationships(this.org.relationships),
-
-          status: new FormControl({value: this.org.status? this.org.status : "" , disabled: true}, Validators.required),
-
-          types: this.addItemsFormArray(this.org.types),
-        });
+        this.initData(this.org);
 
       }
     )
+
     for (const key in IdentifierSchemas) {
       this.selectOptionsIdType.push({ idtype: IdentifierSchemas[key], value: IdentifierSchemas[key]})
     }
     // console.log('Data got for editing: ', this.org, this.orgFormGroup);
   }
 
+
+  /******************************************************************
+   * UPDATE FUNCTIONS
+   ******************************************************************/
+  private initData(orgInput: Organization){
+    this.orgFormGroup = this._formBuilder.group({},[]);
+    /* Gets the `Organization` data. */
+
+    this.orgFormGroup = this._formBuilder.group({
+      id: new FormControl(orgInput.id, Validators.required),
+
+      acronyms: this.addItemsFormArray(orgInput.acronyms),
+
+      aliases: this.addItemsFormArray(orgInput.aliases),
+
+      established: new FormControl( orgInput.established, Validators.required),
+
+      identifiers: this.addItemsFormArrayIdentifiers(orgInput.identifiers),
+
+      labels: this.addItemsFormArray(orgInput.labels),
+
+      name: new FormControl(orgInput.name),
+
+      relationships: this.addItemsFormArrayRelationships(orgInput.relationships),
+
+      status: new FormControl(orgInput.status? orgInput.status : "" ),
+
+      types: this.addItemsFormArray(orgInput.types),
+
+
+      // addresses: new FormControl(orgInput.addresses, Validators.required),
+
+      // wikipedia_url: new FormControl(orgInput.wikipedia_url),
+
+      // email_address: new FormControl(orgInput.email_address),
+
+      // ip_addresses: this.addItemsFormArray(orgInput.ip_addresses),
+
+      // links: this.addItemsFormArray(orgInput.links)
+    });
+
+    this.identifiersControl = this.addItemsFormArrayIdentifiers(orgInput.identifiers);
+
+    this.relationshipsControl = this.addItemsFormArrayRelationships(orgInput.relationships);
+  }
+
+
   /******************************************************************
    * UPDATE FUNCTIONS
    ******************************************************************/
   update(){
+    // update orgFormGroup
+    this.orgFormGroup.setControl('identifiers', this.identifiersControl)
+    this.orgFormGroup.setControl('relationships', this.relationshipsControl)
+
     console.log("update: ", this.orgFormGroup.valid, this.orgFormGroup);
-    // this._orgservice.update()
+
+    this._orgService.editOrganization(this.orgFormGroup.value).subscribe({
+      next: (result: Hit<Organization>) => {
+        console.log(result);
+        const m = new MessageHandler(null,this._dialog);
+        m.showMessage(StatusCode.OK, "La Organización fue modificada correctamente", HandlerComponent.dialog, "Operación exitosa", "50%");
+        this.initData(result.metadata);
+      },
+      error: err => {
+        console.log(err);
+        
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, err.message)
+      }
+    })
   }
 
 
@@ -123,9 +165,17 @@ export class OrgEditComponent implements OnInit {
   }
 
   deleteAcronyms(pos: number){
-    this.org.acronyms.splice(pos,1);
-    console.log(pos, this.org.acronyms);
-    (this.orgFormGroup.get('acronyms') as FormArray).removeAt(pos);
+    const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
+      width: '40%',
+      data: { label: (this.orgFormGroup.get('acronyms') as FormArray).value[pos]}
+    });
+
+    dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
+      if(isDeleted){
+        this.org.acronyms.splice(pos,1);
+        (this.orgFormGroup.get('acronyms') as FormArray).removeAt(pos);
+      }
+    });
   }
 
   addItemsFormArray(items: any[]){
@@ -150,40 +200,81 @@ export class OrgEditComponent implements OnInit {
   }
 
   deleteAliases(pos: number){
-    this.org.aliases.splice(pos,1);
-    console.log(pos, this.org.aliases);
-    (this.orgFormGroup.get('aliases') as FormArray).removeAt(pos);
+    
+    const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
+      width: '40%',
+      data: { label: (this.orgFormGroup.get('aliases') as FormArray).value[pos]}
+    });
+
+    dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
+      if(isDeleted){
+        this.org.aliases.splice(pos,1);
+        (this.orgFormGroup.get('aliases') as FormArray).removeAt(pos);
+      }
+    });
+
   }
 
   /******************************************************************
    * ACRONYMS FUNCTIONS
    ******************************************************************/
+
   addTypes(){
     this.org.types.push("");
     (this.orgFormGroup.get('types') as FormArray).push(this._formBuilder.control(''));
   }
 
   deleteTypes(pos: number){
-    this.org.types.splice(pos,1);
-    console.log(pos, this.org.types);
-    (this.orgFormGroup.get('types') as FormArray).removeAt(pos);
+    const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
+      width: '40%',
+      data: { label: (this.orgFormGroup.get('types') as FormArray).value[pos]}
+    });
+
+    dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
+      if(isDeleted){
+        this.org.types.splice(pos,1);
+        (this.orgFormGroup.get('types') as FormArray).removeAt(pos);
+      }
+    });
   }
+  typeSelectChanges(event){
+    console.log("typeSelectChanges",event);
+  }
+
 
   /******************************************************************
    * IDENTIFIERS FUNCTIONS
    ******************************************************************/
+
+   public identifiersControl = this._formBuilder.array([]);
 
   addIdentifiers(){
     this.org.identifiers.push(new Identifier());
     (this.orgFormGroup.get('identifiers') as FormArray).push(this._formBuilder.group({
         idtype: new FormControl(""),
         value: new FormControl("")
-      }))
+      })
+    );
+    this.identifiersControl.push(this._formBuilder.group({
+        idtype: new FormControl(""),
+        value: new FormControl("")
+      })
+    );
   }
 
   deleteidentifiers(pos){
-    this.org.identifiers.splice(pos,1);
-    (this.orgFormGroup.get('identifiers') as FormArray).removeAt(pos);
+    const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
+      width: '40%',
+      data: { label: this.identifiersControl.value[pos].idtype + ": " + this.identifiersControl.value[pos].value}
+    });
+
+    dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
+      if(isDeleted){
+        this.org.identifiers.splice(pos,1);
+        (this.orgFormGroup.get('identifiers') as FormArray).removeAt(pos);
+        this.identifiersControl.removeAt(pos);
+      }
+    });
   }
 
   addItemsFormArrayIdentifiers(items: any[]){
@@ -202,13 +293,15 @@ export class OrgEditComponent implements OnInit {
   /******************************************************************
    * RELATIONSHIPS FUNCTIONS
    ******************************************************************/
+  
+   public relationshipsControl = this._formBuilder.array([]);
 
   addItemsFormArrayRelationships(items: any[]){
     let formArrayGroup = this._formBuilder.array([]);
     for (const key in items) {
       formArrayGroup.push(this._formBuilder.group(
         {
-          id: new FormControl(items[key].id),
+          // id: new FormControl(items[key].id),
           identifiers: this.addItemsFormArrayIdentifiers(items[key].identifiers),
           label: new FormControl(items[key].label),
           type: new FormControl(items[key].type)
@@ -219,22 +312,33 @@ export class OrgEditComponent implements OnInit {
   }
 
   deleteRelationship(pos){
-    this.org.identifiers.splice(pos,1);
-    (this.orgFormGroup.get('relationships') as FormArray).removeAt(pos);
+    const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
+      width: '40%',
+      data: { label: this.relationshipsControl.value[pos].label}
+    });
+
+    dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
+      if(isDeleted){
+        this.org.relationships.splice(pos,1);
+        (this.orgFormGroup.get('relationships') as FormArray).removeAt(pos);
+        this.relationshipsControl.removeAt(pos);
+      }
+    });
   }
 
-  openDialog(type: string): void {
+  addToRelationship(type: string): void {
     const dialogRef = this._dialog.open(OrganizationDialogRelasionship, {
       width: '60%',
       data: {}
     });
 
     dialogRef.afterClosed().subscribe((result: Relationship) => {
-      console.log('The dialog was closed');
-      console.log("dialog-result", result);
-      result.type = type;
-      this.org.relationships.push(result);
-      this.orgFormGroup.setControl("relationships", this.addItemsFormArrayRelationships(this.org.relationships))
+      if (result) {
+        result.type = type;
+        this.org.relationships.push(result);
+        this.orgFormGroup.setControl("relationships", this.addItemsFormArrayRelationships(this.org.relationships))
+        this.relationshipsControl = this.addItemsFormArrayRelationships(this.org.relationships);
+      }
     });
   }
 
@@ -261,7 +365,7 @@ export class OrgEditComponent implements OnInit {
           [columnsHeaderText]="['Identifier type', 'Identifier value']">
       </static-table>
     </div>
-    <div mat-dialog-actions>
+    <div mat-dialog-actions align="end">
       <button mat-button (click)="onNoClick()">Cancelar</button>
       <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Adicionar</button>
     </div>
@@ -282,9 +386,34 @@ export class OrganizationDialogRelasionship {
   selectedOrg(event){
     this.org.deepcopy(event)
     console.log(event);
-    this.data.id = this.org.id;
     this.data.identifiers = this.org.identifiers;
     this.data.label = this.org.name;
+  }
+
+}
+
+@Component({
+  selector: 'org-delete-confirm-dialog',
+  template: `
+    <h1 mat-dialog-title> Está usted seguro que desea eliminar a</h1>
+    <div mat-dialog-content>
+      {{data.label}}
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="onNoClick()">Cancelar</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="warning">Eliminar</button>
+    </div>
+  `,
+  styleUrls: ['./org-edit.component.scss']
+})
+export class OrganizationDialogDeleteConfirm {
+
+  constructor(
+    public dialogRef: MatDialogRef<OrganizationDialogDeleteConfirm>,
+    @Inject(MAT_DIALOG_DATA) public data) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

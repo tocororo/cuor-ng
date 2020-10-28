@@ -1,10 +1,16 @@
+<mat-toolbar color="accent"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    style="height: 80px;"
+  >
+  
+    <span>Edita la Organización</span>
+
+  </mat-toolbar>
+
 <mat-card>
-    <mat-card-title-group>
-        <mat-card-title>Edita la organización seleccionada</mat-card-title>
-        <!-- <mat-card-subtitle>Subtitle</mat-card-subtitle> -->
-        <!-- <img matCardImage src="Side image"> -->
-    </mat-card-title-group>
-    <!-- <img matCardImage src="Card wide image source"> -->
+
     <mat-card-content>
 
         <form [formGroup]="orgFormGroup">
@@ -12,40 +18,25 @@
             <!-- Start Name -->
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Escriba el nombre de la Organización" [value]="org.name"
-                    formControlName="name">
+                <input matInput placeholder="Escriba el nombre de la Organización" [value]="org.name" disabled>
+                <!-- formControlName="name" -->
             </mat-form-field>
             <!-- End Name -->
 
             <!-- Start Status -->
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Estatus</mat-label>
-                <input matInput placeholder="Estatus de la Organización" [value]="org.status" formControlName="status">
+                <input matInput placeholder="Estatus de la Organización" [value]="org.status" disabled>
+                <!-- formControlName="status" -->
             </mat-form-field>
             <!-- End Status -->
 
             <!-- Start Established -->
             <toco-datepicker-year
-                 [formControl]="orgFormGroup.controls.established"
-                 [label]="'Establecida en'"
+                 [formControl]="orgFormGroup.controls['established']"
+                 [label]="'Fundada en'"
                  [touchUi]="false">
             </toco-datepicker-year>
-
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Establecida en</mat-label>
-                <input matInput [matDatepicker]="dp"
-                    placeholder="Seleccione la fecha en que fue establecida la Organización" [value]="org.established"
-                    formControlName="established" required>
-                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-                <mat-datepicker #dp disabled="false"></mat-datepicker>
-            </mat-form-field>
-            <!-- End Established -->
-
-            <!-- <static-table *ngIf="org.identifiers && org.identifiers.length"
-                [desc]="'Lista de los identificadores de la organización'" [value]="org.identifiers"
-                [columnsObjectProperty]="['idtype', 'value']"
-                [columnsHeaderText]="['Identifier type', 'Identifier value']">
-            </static-table> -->
 
             <!-- Start Identifiers -->
             <mat-card class="mb-2">
@@ -54,12 +45,12 @@
                         <mat-label>Identidicadores</mat-label>
                     </p>
 
-                    <div class="w-100 my-outline" *ngFor="let identifier of org.identifiers; let pos = index"
-                        [formGroup]="orgFormGroup.controls.identifiers.controls[pos]" fxLayout="row wrap"
+                    <div class="w-100 my-outline" *ngFor="let identifier of identifiersControl.controls; let pos = index"
+                        [formGroup]="identifiersControl.controls[pos]" fxLayout="row wrap"
                         fxLayoutAlign="space-between center">
 
                         <mat-form-field class="w-45">
-                            <mat-select class="w-100" placeholder="Seleccione el tipo" [value]="identifier.idtype"
+                            <mat-select class="w-100" placeholder="Seleccione el tipo" [value]="identifier.value.idtype"
                                 formControlName="idtype">
                                 <mat-option *ngFor="let item of selectOptionsIdType" [value]="item.idtype">
                                     {{ item.value }}</mat-option>
@@ -68,12 +59,12 @@
 
 
                         <mat-form-field class="w-45">
-                            <input matInput placeholder="Valor" [value]="identifier.value" formControlName="value">
+                            <input matInput placeholder="Valor" [value]="identifier.value.value" formControlName="value">
                         </mat-form-field>
 
                         <button mat-icon-button matSuffix class="mat-18" (click)="deleteidentifiers(pos)"
-                            matTooltip="Eliminar">
-                            <mat-icon>close</mat-icon>
+                            matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                            <mat-icon>delete</mat-icon>
                         </button>
 
                     </div>
@@ -95,8 +86,8 @@
                         <input matInput placeholder="Acrónimo de la Organización" [value]="acronymo"
                             [formControlName]="pos">
                         <button mat-icon-button matSuffix class="mat-18" (click)="deleteAcronyms(pos)"
-                            matTooltip="Eliminar">
-                            <mat-icon>close</mat-icon>
+                            matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                            <mat-icon>delete</mat-icon>
                         </button>
                     </mat-form-field>
 
@@ -113,12 +104,12 @@
                     <mat-label>Alias</mat-label>
                     <mat-form-field appearance="outline" class="w-100"
                         *ngFor="let acronymo of org.aliases; let pos = index">
-                        <mat-label>Acrónimo {{pos + 1}}</mat-label>
-                        <input matInput placeholder="Acrónimo de la Organización" [value]="acronymo"
+                        <mat-label>Alias {{pos + 1}}</mat-label>
+                        <input matInput placeholder="Alias de la Organización" [value]="acronymo"
                             [formControlName]="pos">
                         <button mat-icon-button matSuffix class="mat-18" (click)="deleteAliases(pos)"
-                            matTooltip="Eliminar">
-                            <mat-icon>close</mat-icon>
+                            matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                            <mat-icon>delete</mat-icon>
                         </button>
                     </mat-form-field>
 
@@ -133,20 +124,27 @@
             <mat-card class="mb-2">
                 <mat-card-content formArrayName="types">
                     <mat-label>Tipos</mat-label>
-                    <mat-form-field appearance="outline" class="w-100" *ngFor="let type of org.types; let pos = index">
-                        <mat-label>Tipo {{pos + 1}}</mat-label>
-                        <mat-select class="w-100" placeholder="Seleccione el tipo de Organización" [value]="types"
-                            [formControlName]="pos">
-                            <mat-option *ngFor="let item of selectOptions" [value]="item.value">{{ item.label }}
-                            </mat-option>
-                        </mat-select>
-                        <button mat-icon-button matSuffix class="mat-18" (click)="deleteTypes(pos)"
-                            matTooltip="Eliminar">
-                            <mat-icon>close</mat-icon>
+                    <div fxLayout="row nowrap" *ngFor="let type of org.types; let pos = index">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Tipo {{pos + 1}}</mat-label>
+                            <mat-select 
+                                #typeSelect
+                                placeholder="Seleccione el tipo de Organización" 
+                                [value]="type"
+                                [formControlName]="pos">
+                                <mat-option *ngFor="let item of selectOptions" [value]="item.value">{{ item.label }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-icon-button matSuffix 
+                            class="mat-18" 
+                            (click)="deleteTypes(pos)"
+                            matTooltip="Eliminar" 
+                            matTooltipClass="tooltip-red" 
+                            style="margin-left: -39px;top: 8px">
+                            <mat-icon>delete</mat-icon>
                         </button>
-                    </mat-form-field>
-
-
+                    </div>
                 </mat-card-content>
                 <mat-card-actions align="end">
                     <button mat-stroked-button color="primary" (click)="addTypes()">Adicionar</button>
@@ -154,7 +152,7 @@
             </mat-card>
             <!-- End Type -->
 
-            <!-- End Relationships -->
+            <!-- Start Relationships -->
             <mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
@@ -165,7 +163,7 @@
                     </mat-expansion-panel-header>
 
                     <mat-action-list>
-                        <ng-container *ngFor="let relation of orgFormGroup.controls.relationships.controls; let pos = index">
+                        <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
                             <button mat-list-item *ngIf="orgRelationships.PARENT.value == relation.value.type"
                                 (click)="deleteRelationship(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
                                 {{ relation.value.label }}
@@ -173,7 +171,7 @@
                         </ng-container>
                     </mat-action-list>
                     <mat-action-row>
-                        <button mat-stroked-button color="primary" (click)="openDialog(orgRelationships.PARENT.value)">Adicionar</button>
+                        <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.PARENT.value)">Adicionar</button>
                     </mat-action-row>
                 </mat-expansion-panel>
 
@@ -186,7 +184,7 @@
                     </mat-expansion-panel-header>
 
                     <mat-action-list>
-                        <ng-container *ngFor="let relation of orgFormGroup.controls.relationships.controls; let pos = index">
+                        <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
                             <button mat-list-item *ngIf="orgRelationships.CHILD.value == relation.value.type"
                                 (click)="deleteRelationship(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
                                 {{ relation.value.label }}
@@ -194,7 +192,7 @@
                         </ng-container>
                     </mat-action-list>
                     <mat-action-row>
-                        <button mat-stroked-button color="primary" (click)="openDialog(orgRelationships.CHILD.value)">Adicionar</button>
+                        <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.CHILD.value)">Adicionar</button>
                     </mat-action-row>
                 </mat-expansion-panel>
 
@@ -207,7 +205,7 @@
                     </mat-expansion-panel-header>
 
                     <mat-action-list>
-                        <ng-container *ngFor="let relation of orgFormGroup.controls.relationships.controls; let pos = index">
+                        <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
                             <button mat-list-item *ngIf="orgRelationships.RELATED.value == relation.value.type"
                                 (click)="deleteRelationship(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
                                 {{ relation.value.label }}
@@ -215,7 +213,7 @@
                         </ng-container>
                     </mat-action-list>
                     <mat-action-row>
-                        <button mat-stroked-button color="primary" (click)="openDialog(orgRelationships.RELATED.value)">Adicionar</button>
+                        <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.RELATED.value)">Adicionar</button>
                     </mat-action-row>
                 </mat-expansion-panel>
             </mat-accordion>
@@ -226,10 +224,6 @@
     </mat-card-content>
     <mat-card-actions align="start">
         <button mat-button (click)="update()">Editar</button>
-        <!-- <button mat-button (click)="onAction(event)">Action2</button> -->
 
     </mat-card-actions>
-    <!-- <mat-card-footer>
-        Footer
-    </mat-card-footer> -->
 </mat-card>

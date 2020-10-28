@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DatepickerYearComponent } from './datapicker-year.component';
+import { DisambiguateSearchComponent } from './disambiguate-search.component';
 
-describe('DatapickerYearComponent', () => {
-  let component: DatepickerYearComponent;
-  let fixture: ComponentFixture<DatepickerYearComponent>;
+describe('DisambiguateSearchComponent', () => {
+  let component: DisambiguateSearchComponent;
+  let fixture: ComponentFixture<DisambiguateSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatepickerYearComponent ]
+      declarations: [ DisambiguateSearchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DatepickerYearComponent);
+    fixture = TestBed.createComponent(DisambiguateSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

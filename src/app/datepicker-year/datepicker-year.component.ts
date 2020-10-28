@@ -27,8 +27,8 @@ export const YEAR_MODE_FORMATS = {
 
 @Component({
   selector: 'toco-datepicker-year',
-  templateUrl: './datapicker-year.component.html',
-  styleUrls: ['./datapicker-year.component.scss'],
+  templateUrl: './datepicker-year.component.html',
+  styleUrls: ['./datepicker-year.component.scss'],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt' },
     {
@@ -51,8 +51,6 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
 
   /** Component label */
   @Input() label = '';
-
-  @Input() value: string = '';
 
   _max: Moment;
   @Input()
@@ -108,8 +106,6 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
   writeValue(date: Date): void {
     //if (date && this._isYearEnabled(date.getFullYear())) {
     const momentDate = moment(date.toString(), "YYYY");
-    console.log("momentDate", momentDate.set({ date: 1 }));
-    
     if (momentDate.isValid()) {
       this._inputCtrl.setValue(momentDate.set({ date: 1 }), { emitEvent: true });
     }
@@ -137,11 +133,7 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
     if (!this._isYearEnabled(chosenDate.year())) {
       return;
     }
-
-    // chosenDate.set({ date: 1 });
-    console.log("yearSelect", chosenDate.year());
-    
-    this._inputCtrl.setValue(chosenDate.year(), { emitEvent: true });
+    this._inputCtrl.setValue(chosenDate, { emitEvent: true });
     this.onChange(chosenDate.year());
     this.onTouched();
   }

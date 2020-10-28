@@ -1,0 +1,16 @@
+
+<mat-card  aria-label="Muestra la organización seleccionada">
+    <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title *ngIf="cardTitle">{{ cardTitle }}</mat-card-title>                    
+        <mat-card-subtitle *ngIf="cardSubtitles">
+            <div *ngFor="let item of cardSubtitles; let i = index">
+                {{item}}
+            </div>                
+        </mat-card-subtitle>      
+    </mat-card-header>
+    <mat-card-content>
+        {{cardContent}}
+    </mat-card-content>
+</mat-card>
+

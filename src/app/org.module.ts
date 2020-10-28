@@ -21,9 +21,9 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
-import { OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
+import { OrganizationDialogDeleteConfirm, OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DatepickerYearComponent } from './datapicker-year/datapicker-year.component';
+import { DatepickerYearComponent } from './datepicker-year/datepicker-year.component';
 
 // testing charts organizations
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -34,6 +34,15 @@ import { AggregationsComponent } from './aggregations/aggregations.component';
 import { MatRadioModule } from '@angular/material';
 import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
 import { ChartsComponent } from './charts/charts.component';
+import { DisambiguateListComponent } from './disambiguate/disambiguate-list/disambiguate-list.component';
+import { DisambiguateSearchComponent } from './disambiguate/disambiguate-search/disambiguate-search.component';
+import { DisambiguationComponent } from './disambiguate/disambiguation/disambiguation.component';
+import { DisambiguateCardFieldComponent } from './disambiguate/disambiguation/disambiguate-card-field/disambiguate-card-field.component';
+import { DisambiguateCardChipsFieldComponent } from './disambiguate/disambiguation/disambiguate-card-chips-field/disambiguate-card-chips-field.component';
+import { DisambiguateAccordChipsFieldComponent } from './disambiguate/disambiguation/disambiguate-accord-chips-field/disambiguate-accord-chips-field.component';
+import { DisambiguateTextFieldComponent } from './disambiguate/disambiguation/disambiguate-text-field/disambiguate-text-field.component';
+import { DisambiguateRelationshipsComponent } from './disambiguate/disambiguation/disambiguate-relationships/disambiguate-relationships.component';
+import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -45,18 +54,28 @@ import { ChartsComponent } from './charts/charts.component';
 		OrgEditComponent,
 		OrganizationDialogRelasionship,
 		DatepickerYearComponent,
+		OrganizationDialogDeleteConfirm,
 		// testing charts organizations
 		ChartsComponent,
 		PolarChartComponent,
 		BarVerticalComponent,
 		PieGridComponent,
 		AggregationsComponent,
-		GaugeChartComponent
+		GaugeChartComponent,
 		//DialogChartComponent
-	],
+		DisambiguateListComponent,
+		DisambiguateSearchComponent,
+		DisambiguationComponent,
+		DisambiguateCardFieldComponent,
+		DisambiguateCardChipsFieldComponent,
+		DisambiguateAccordChipsFieldComponent,
+		DisambiguateTextFieldComponent,
+		DisambiguateRelationshipsComponent,
+		ShowOneRelationshipComponent
+	], 
 	imports: [
-		NgxChartsModule,
 		MatRadioModule,
+		NgxChartsModule,
 
 		BrowserAnimationsModule,
 		SharedModule,
@@ -80,7 +99,8 @@ import { ChartsComponent } from './charts/charts.component';
 		  })
 	],
 	entryComponents: [
-		OrganizationDialogRelasionship
+		OrganizationDialogRelasionship,
+		OrganizationDialogDeleteConfirm
 	],
 	providers: [
 		SearchService,
