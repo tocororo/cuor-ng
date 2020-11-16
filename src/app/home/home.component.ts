@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
 	{
 		this.router.navigate(["search"], {
 			relativeTo: this.activatedRoute,
-			queryParams: { q: event, country: 'Cuba' },
+			queryParams: { q: event, country: 'Cuba', status: 'active' },
 			queryParamsHandling: "",
 		});
 	}

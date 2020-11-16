@@ -27,6 +27,18 @@
                 <mat-icon>help</mat-icon>
             </button>
 
+            <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{user.email}}">
+                <mat-icon class="mat-18">person_pin</mat-icon>
+            </button>
+
+            <toco-authentication 
+                [authBackend]="authBackend"
+                [isButtonLogin]="'true'"
+                [isButtonLoginIcon]="'true'"
+                [isButtonLoginText]="'Autenticarse'"
+                *ngIf="!user"
+                >
+            </toco-authentication>
 
         </div>
 
@@ -62,6 +74,49 @@
     <a mat-menu-item [routerLink]="['/contact']">
         <mat-icon>contacts</mat-icon>
         Contactos
+    </a>
+</mat-menu>
+
+<mat-menu #menuUser="matMenu">
+
+    <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
+        <mat-icon>person</mat-icon>
+        Perfil de usuario
+    </a>
+    <a mat-menu-item href="{{ cuorHost }}account/settings/password/">
+        <mat-icon>vpn_key</mat-icon>
+        Cambiar contraseña
+    </a>
+    <a mat-menu-item href="{{ cuorHost }}account/settings/security/">
+        <mat-icon>security</mat-icon>
+        Seguridad
+    </a>
+    <a mat-menu-item href="{{ cuorHost }}account/settings/applications/">
+        <mat-icon>settings_applications</mat-icon>
+        Aplicaciones
+    </a>
+    <a mat-menu-item href="{{ cuorHost }}admin/">
+        <mat-icon>settings</mat-icon>
+        Administración
+    </a>
+    <a mat-menu-item (click)="logout()">
+        <mat-icon>lock_outline</mat-icon>
+        Salir
+    </a>
+</mat-menu>
+
+<mat-menu #menuLogin="matMenu">
+    <button mat-menu-item (click)="loginClick()">
+        <mat-icon>lock_open</mat-icon>
+        Action
+    </button>
+    <a mat-menu-item href="{{ cuorHost }}login" c>
+        <mat-icon>lock_open</mat-icon>
+        Autenticarse
+    </a>
+    <a mat-menu-item href="{{ cuorHost }}signup">
+        <mat-icon>assignment_ind</mat-icon>
+        Registarse
     </a>
 </mat-menu>
 

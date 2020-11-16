@@ -1,6 +1,6 @@
 
 <mat-expansion-panel *ngIf="contentList && contentList.length">
-    <mat-expansion-panel-header>               
+    <mat-expansion-panel-header>
         <mat-panel-title>
             {{accordionChipsTitle}}
         </mat-panel-title>
@@ -12,7 +12,7 @@
                 (click)="onPropagate(contentList)">
                     <mat-icon color="warn">merge_type_left</mat-icon>
                 </button>
-            </mat-panel-title>     
+            </mat-panel-title>
     </mat-expansion-panel-header>
 
     <mat-chip-list>
@@ -31,7 +31,7 @@
 
 <mat-expansion-panel *ngIf="!contentList || contentList.length==0">
     <mat-expansion-panel-header>
-        <mat-panel-title>                
+        <mat-panel-title>
             {{accordionChipsTitle}}
         </mat-panel-title>
     </mat-expansion-panel-header>

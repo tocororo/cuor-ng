@@ -9,7 +9,7 @@
           </button>
           <button mat-stroked-button color="warn" (click)="editVersion()">
             Guardar
-          </button>        
+          </button>
         </div>
         <div>
           <mat-slide-toggle (change)="showSecundaries = !showSecundaries" color="primary">
@@ -20,7 +20,7 @@
           <div *ngIf="showSecundaries">
             <button
               mat-icon-button
-              aria-label="Organización Anterior"            
+              aria-label="Organización Anterior"
               matTooltip="Organización Anterior"
               [disabled]="isDisabledNavigatePrevious"
               (click)="previousOrg()"
@@ -29,7 +29,7 @@
             </button>
             <button
               mat-icon-button
-              aria-label="Próxima Organización"            
+              aria-label="Próxima Organización"
               matTooltip="Próxima Organización"
               [disabled]="isDisabledNavigateNext"
               (click)="nextOrg()"
@@ -37,14 +37,14 @@
               <mat-icon>navigate_next</mat-icon>
             </button>
           </div>
-        </div>        
+        </div>
         
       </mat-toolbar-row>
     </mat-toolbar>
     <div
       fxLAyout="column"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
     >
     
       <ng-container *ngIf="masterOrganization">
@@ -52,7 +52,7 @@
           [cardTitle]="masterOrganization.metadata.name"
           [cardSubtitles]="['UUID Organización:' + masterOrganization.id, masterOrganization.metadata.status]"
           style="margin: .5em;"
-        ></app-disambiguate-card-field>  
+        ></app-disambiguate-card-field>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-card-field
@@ -66,7 +66,7 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-card-chips-field
@@ -76,7 +76,7 @@
           valueName="value"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-card-chips-field>  
+        ></app-disambiguate-card-chips-field>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-card-chips-field
@@ -95,15 +95,15 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-accord-chips-field
           accordionChipsTitle="Acrónimos con que se conoce la Organización"
-          [contentList]="masterOrganization.metadata.acronyms"          
+          [contentList]="masterOrganization.metadata.acronyms"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-accord-chips-field>  
+        ></app-disambiguate-accord-chips-field>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-accord-chips-field
@@ -128,7 +128,7 @@
           [contentList]="masterOrganization.metadata.aliases"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-accord-chips-field>  
+        ></app-disambiguate-accord-chips-field>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-accord-chips-field
@@ -170,7 +170,7 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-text-field
@@ -178,7 +178,7 @@
           [textContent]="masterOrganization.metadata.established"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-text-field>  
+        ></app-disambiguate-text-field>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-text-field
@@ -203,7 +203,7 @@
           [textContent]="masterOrganization.metadata.wikipedia_url"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-text-field>  
+        ></app-disambiguate-text-field>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-text-field
@@ -220,7 +220,7 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-text-field
@@ -228,7 +228,7 @@
           [textContent]="masterOrganization.metadata.email_address"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-text-field>  
+        ></app-disambiguate-text-field>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-text-field
@@ -245,19 +245,19 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-relationships
-          [contentList]="masterOrganization.metadata.relationships"          
+          [contentList]="masterOrganization.metadata.relationships"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-relationships>  
+        ></app-disambiguate-relationships>
       </ng-container> 
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-relationships
           [isMaster]="false"
-          [contentList]="selectedsecundaryOrganization.metadata.relationships"          
+          [contentList]="selectedsecundaryOrganization.metadata.relationships"
           (propagate)="mergeRelationships($event)"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
@@ -268,7 +268,7 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-accord-chips-field
@@ -284,6 +284,7 @@
           [isMaster]="false"
           [contentList]="selectedsecundaryOrganization.metadata.links"
           fxFlex="1 2 calc(15em + 20px)"
+          (propagate)="mergeLinks($event)"
           style="margin: .5em;"
         ></app-disambiguate-accord-chips-field>
       </ng-container>

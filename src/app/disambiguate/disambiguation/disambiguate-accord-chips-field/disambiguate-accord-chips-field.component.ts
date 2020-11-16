@@ -18,7 +18,7 @@ export class DisambiguateAccordChipsFieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  onPropagate(message){    
+  onPropagate(message){
     this.propagate.emit(message)
   }
 

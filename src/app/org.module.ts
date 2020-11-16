@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
+import { AuthenticationModule, AuthenticationService, OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { OrganizationsModule } from 'toco-lib';
@@ -43,6 +43,7 @@ import { DisambiguateAccordChipsFieldComponent } from './disambiguate/disambigua
 import { DisambiguateTextFieldComponent } from './disambiguate/disambiguation/disambiguate-text-field/disambiguate-text-field.component';
 import { DisambiguateRelationshipsComponent } from './disambiguate/disambiguation/disambiguate-relationships/disambiguate-relationships.component';
 import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -96,7 +97,8 @@ import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disa
 		HttpClientModule,
 		MarkdownModule.forRoot({
 			loader: HttpClient
-		  })
+		  }),
+		AuthenticationModule
 	],
 	entryComponents: [
 		OrganizationDialogRelasionship,
@@ -105,7 +107,8 @@ import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disa
 	providers: [
 		SearchService,
 		EnvServiceProvider,
-		OrganizationServiceNoAuth
+		OrganizationServiceNoAuth,
+		AuthenticationService
 	],
 
 	bootstrap: [OrgRootComponent]

@@ -61,6 +61,33 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "tocuordev" :{
+              "baseHref": "https://localhost:5001/",
+              "deployUrl": "https://localhost:5001/static/organizations/",
+              "watch": true,
+              "outputPath": "/home/craiadmin/.local/share/virtualenvs/cuor-WmaogaD7/var/instance/static/organizations",
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },
