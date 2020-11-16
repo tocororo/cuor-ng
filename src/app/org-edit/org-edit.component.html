@@ -4,7 +4,7 @@
     fxLayoutAlign="space-between center"
     style="height: 80px;"
   >
-  
+
     <span>Edita la Organización</span>
 
   </mat-toolbar>
@@ -32,11 +32,11 @@
             <!-- End Status -->
 
             <!-- Start Established -->
-            <toco-datepicker-year
+            <cuor-datepicker-year
                  [formControl]="orgFormGroup.controls['established']"
                  [label]="'Fundada en'"
                  [touchUi]="false">
-            </toco-datepicker-year>
+            </cuor-datepicker-year>
 
             <!-- Start Identifiers -->
             <mat-card class="mb-2">
@@ -127,20 +127,20 @@
                     <div fxLayout="row nowrap" *ngFor="let type of org.types; let pos = index">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Tipo {{pos + 1}}</mat-label>
-                            <mat-select 
+                            <mat-select
                                 #typeSelect
-                                placeholder="Seleccione el tipo de Organización" 
+                                placeholder="Seleccione el tipo de Organización"
                                 [value]="type"
                                 [formControlName]="pos">
                                 <mat-option *ngFor="let item of selectOptions" [value]="item.value">{{ item.label }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-icon-button matSuffix 
-                            class="mat-18" 
+                        <button mat-icon-button matSuffix
+                            class="mat-18"
                             (click)="deleteTypes(pos)"
-                            matTooltip="Eliminar" 
-                            matTooltipClass="tooltip-red" 
+                            matTooltip="Eliminar"
+                            matTooltipClass="tooltip-red"
                             style="margin-left: -39px;top: 8px">
                             <mat-icon>delete</mat-icon>
                         </button>

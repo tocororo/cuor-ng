@@ -26,7 +26,7 @@ export const YEAR_MODE_FORMATS = {
 };
 
 @Component({
-  selector: 'toco-datepicker-year',
+  selector: 'cuor-datepicker-year',
   templateUrl: './datepicker-year.component.html',
   styleUrls: ['./datepicker-year.component.scss'],
   providers: [
