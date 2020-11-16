@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrgAddComponent } from 'toco-lib';
+import { AuthenticationService, OrgAddComponent } from 'toco-lib';
 
 import { OrganizationDetailResolverService } from './organization-detail-resolver.service.ts';
 import { HomeComponent } from './home/home.component';
@@ -27,7 +27,8 @@ const routes: Routes = [
 		component: OrgEditComponent,
 		resolve: {
 			'org': OrganizationDetailResolverService
-		}
+		},
+		canActivate: [AuthenticationService]
     },
     // {
     //     path: 'add',
@@ -39,11 +40,13 @@ const routes: Routes = [
 	},
 	{
 		path: 'disambiguate',
-		component: DisambiguateSearchComponent
+		component: DisambiguateSearchComponent,
+		canActivate: [AuthenticationService]
 	},	
 	{
 		path: 'disambiguation',
-		component: DisambiguationComponent
+		component: DisambiguationComponent,
+		canActivate: [AuthenticationService]
 	},
 	{
 		path:'',
@@ -87,7 +90,8 @@ const routes: Routes = [
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule]
+	exports: [RouterModule],
+	providers: [AuthenticationService]
 })
 export class OrgRoutingModule
 { }

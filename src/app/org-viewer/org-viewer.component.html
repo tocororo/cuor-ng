@@ -3,9 +3,16 @@
     fxLayout="row wrap"
     fxLayout.xs="column"
     fxLayoutAlign="space-between center"
-    style="height: 80px;">
+    >
 
-    <span>Información de la Organización</span>
-
+    <mat-toolbar-row>
+        <!-- <button mat-icon-button (click)="onClick()">
+            <mat-icon class="mat-18">arrow_back</mat-icon>
+        </button> -->
+        <span>Información de la Organización</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row></mat-toolbar-row>
+    <mat-toolbar-row></mat-toolbar-row>
+    <mat-toolbar-row></mat-toolbar-row>
 </mat-toolbar>
-<toco-org-view [org]="org"></toco-org-view>
+<toco-org-view [org]="org" fxLayout="row" fxLayoutAlign="center" style="margin-top: -8em;"></toco-org-view>

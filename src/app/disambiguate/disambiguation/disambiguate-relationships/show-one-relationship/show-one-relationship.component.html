@@ -1,45 +1,39 @@
-<mat-accordion *ngIf="contentList && contentList.length" class="static-mat-accordion" >
-    <ng-container>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>                
-                <mat-panel-title>
-                    {{accordionTitle}}
-                </mat-panel-title>
-                <mat-panel-title *ngIf="!isMaster">
-                    <button mat-icon-button 
-                    aria-label="Incluir todos los elementos" 
-                    matTooltip="Agregar todos los elementos a la organizacion principal" 
-                    (click)="onPropagate(contentList)">
-                        <mat-icon color="warn">merge_type_left</mat-icon>
-                    </button>
-                </mat-panel-title>
-                <mat-panel-description>                    
-                </mat-panel-description>
-            </mat-expansion-panel-header>
 
-            <mat-list role="list">
-                <mat-list-item *ngFor="let item of contentList; let i = index" role="listitem">
-                    <a href="">{{item.label}}</a> 
-                    <button *ngIf="!isMaster" mat-icon-button 
-                    aria-label="Incluir otro elemento a la organizacion principal" 
-                    matTooltip="Agregar elemento a la organizacion principal" 
-                    (click)="onPropagate([item])">
-                        <mat-icon color="primary">merge_type</mat-icon>
-                    </button>
-                </mat-list-item>                   
-            </mat-list>           
-        </mat-expansion-panel>
-    </ng-container>
-    &nbsp;
-</mat-accordion>
-
-<mat-accordion *ngIf="!contentList || contentList.length==0" class="static-mat-accordion" >
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngIf="contentList && contentList.length">
         <mat-expansion-panel-header>
-            <mat-panel-title>                
+            <mat-panel-title>
+                {{accordionTitle}}
+            </mat-panel-title>
+            <mat-panel-description *ngIf="!isMaster">
+                <button mat-icon-button 
+                aria-label="Incluir todos los elementos" 
+                matTooltip="Agregar todos los elementos a la organizacion principal" 
+                (click)="onPropagate(contentList)">
+                    <mat-icon color="warn">merge_type_left</mat-icon>
+                </button>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-list role="list">
+            <mat-list-item *ngFor="let item of contentList; let i = index" role="listitem">
+                <a href="">{{item.label}}</a> 
+                <button *ngIf="!isMaster" mat-icon-button 
+                aria-label="Incluir otro elemento a la organizacion principal" 
+                matTooltip="Agregar elemento a la organizacion principal" 
+                (click)="onPropagate([item])">
+                    <mat-icon color="primary">merge_type</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="!contentList || contentList.length==0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
                 {{accordionTitle}}
             </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-label class="text-muted text-through">Vacío</mat-label>
     </mat-expansion-panel>
-</mat-accordion>
+
+

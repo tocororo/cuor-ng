@@ -25,4 +25,8 @@ export class OrgViewerComponent implements OnInit
 			}
 		);
 	}
+	onClick(){
+		console.log(this._activatedRoute, this._router);
+		
+	}
 }

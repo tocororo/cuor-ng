@@ -1,6 +1,8 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Organization, Hit, MessageHandler, StatusCode, Relationship, Address, Identifier } from 'toco-lib';
 import { MatSnackBar } from '@angular/material';
+import { OrgService } from 'src/app/org.service';
+import { PartialObserver, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-disambiguation',
@@ -20,6 +22,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private _orgService: OrgService
   ) { }
 
   ngOnInit() {
@@ -106,58 +109,59 @@ export class DisambiguationComponent implements OnInit, OnChanges {
         //this.selectedsecundaryOrganization = version;
 
         this.selectedsecundaryOrganization = this.secundariesOrganizations[this.posSecundaryOrg];
-
+        console.log(this.selectedsecundaryOrganization.metadata);
+        
     }
   }
 
   mergeIdentifiers(pids){
-    var oldPids = this.masterOrganization.metadata.identifiers;        
+    var oldPids = this.masterOrganization.metadata.identifiers;
     var newOnes = pids.filter(a => {return !oldPids.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
-      this.masterOrganization.metadata.identifiers = oldPids.concat(newOnes);    
+      this.masterOrganization.metadata.identifiers = oldPids.concat(newOnes);
     }
     else {
-      const m = new MessageHandler(this._snackBar);                        
+      const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
     }   
   }
 
   mergeAcronyms(acronyms:[]){
     //console.log(acronyms);    
-    var oldAcronyms = this.masterOrganization.metadata.acronyms;        
+    var oldAcronyms = this.masterOrganization.metadata.acronyms;
     var newOnes = acronyms.filter(a => {return !oldAcronyms.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
-      this.masterOrganization.metadata.acronyms = oldAcronyms.concat(newOnes);    
+      this.masterOrganization.metadata.acronyms = oldAcronyms.concat(newOnes);
     }
     else {
-      const m = new MessageHandler(this._snackBar);                        
+      const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
     }   
-    //console.log(" nuevos acronimossssssssssssssssssssssss", this.masterOrganization);    
+    //console.log(" nuevos acronimossssssssssssssssssssssss", this.masterOrganization);
 
   }
 
   mergeAliases(aliases:[]){
-    var oldAliases = this.masterOrganization.metadata.aliases;        
+    var oldAliases = this.masterOrganization.metadata.aliases;
     var newOnes = aliases.filter(a => {return !oldAliases.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
-      this.masterOrganization.metadata.aliases = oldAliases.concat(newOnes);    
+      this.masterOrganization.metadata.aliases = oldAliases.concat(newOnes);
     }
     else {
-      const m = new MessageHandler(this._snackBar);                        
+      const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
     }   
 
   }
 
   mergeTypes(types:[]){
-    var oldTypes = this.masterOrganization.metadata.types;        
+    var oldTypes = this.masterOrganization.metadata.types;
     var newOnes = types.filter(a => {return !oldTypes.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
-      this.masterOrganization.metadata.types = oldTypes.concat(newOnes);    
+      this.masterOrganization.metadata.types = oldTypes.concat(newOnes);
     }
     else {
-      const m = new MessageHandler(this._snackBar);                        
+      const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
     }   
 
@@ -166,34 +170,34 @@ export class DisambiguationComponent implements OnInit, OnChanges {
   mergeEstablished(newEstablished){
     var old = this.masterOrganization.metadata.established;  
     if(newEstablished && newEstablished !== old) {
-      this.masterOrganization.metadata.established = newEstablished;    
+      this.masterOrganization.metadata.established = newEstablished;
     }
     else {
-      const m = new MessageHandler(this._snackBar);                        
+      const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "El año es coincidente con el de la organziación principal");
     }   
   }
 
 
   mergeWikipedia_url(newWikipedia_url){
-    var old = this.masterOrganization.metadata.wikipedia_url;  
+    var old = this.masterOrganization.metadata.wikipedia_url;
     if(newWikipedia_url && newWikipedia_url !== old) {
-      this.masterOrganization.metadata.wikipedia_url = newWikipedia_url;    
+      this.masterOrganization.metadata.wikipedia_url = newWikipedia_url;
     }
     else {
-      const m = new MessageHandler(this._snackBar);                        
+      const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "La URL es coincidente con el de la organziación principal");
     }   
   }
 
 
   mergeEmail_address(newEmail_Address){
-    var old = this.masterOrganization.metadata.email_address;  
+    var old = this.masterOrganization.metadata.email_address;
     if(newEmail_Address && newEmail_Address !== old) {
-      this.masterOrganization.metadata.email_address = newEmail_Address;    
+      this.masterOrganization.metadata.email_address = newEmail_Address;
     }
     else {
-      const m = new MessageHandler(this._snackBar);                        
+      const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "El correo electrónico es coincidente con el de la organziación principal");
     }   
   }
@@ -223,7 +227,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
           addThisOne = false;
           orgPrincipal.relationships[index].identifiers = oldPids.concat(realNewPids);
           if(orgPrincipal.relationships[index].type !== newR.type){
-            const m = new MessageHandler(this._snackBar);                        
+            const m = new MessageHandler(this._snackBar);
             m.showMessage(
               StatusCode.serverError, 
               "Se encontraron relaciones entre organizaciones con tipos diferentes de relación, se mantiene el tipo registrado en la organziación principal."
@@ -235,7 +239,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
           addThisOne = false;
           index = orgPrincipal.relationships.length;
 
-          const m = new MessageHandler(this._snackBar);                        
+          const m = new MessageHandler(this._snackBar);
           m.showMessage(
               StatusCode.serverError, 
               "Organización principal ya tiene registrada la relación."
@@ -247,7 +251,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
       //si llega aqui sin haber interceociones es que despues de recorrerlas todas no hubo coincidencias
       //entonces se agrega desde cero
       if(addThisOne){
-        realOnes.push(newR)    
+        realOnes.push(newR)
             
       }
     }//primer for
@@ -258,6 +262,18 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   }//cierre del metodo
 
+
+  mergeLinks(links: string[]){
+    var oldlinks = this.masterOrganization.metadata.links;
+    var newOnes = links.filter(a => {return !oldlinks.some(x => x == a) })
+    if(newOnes && newOnes.length > 0) {
+      this.masterOrganization.metadata.links = oldlinks.concat(newOnes);    
+    }
+    else {
+      const m = new MessageHandler(this._snackBar);
+      m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
+    }
+  }
   approve(){
     console.log("approve()");
     
@@ -265,7 +281,35 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   editVersion(){
     console.log("editVersion()");
+  
+    // editar la organizacion principal
+    this._orgService.editOrganization(this.masterOrganization.metadata).subscribe({
+      next: (result: Hit<Organization>) => {
+        console.log(result);
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, "La Organización fue modificada correctamente");
+      },
+      error: err => {
+        console.log(err);
+        
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, err.message)
+      }
+    })
     
+    // cambiar el estado de las secundarias a reconect
+    this.secundariesOrganizations.forEach(secOrg => {
+      secOrg.metadata.status = "reconnect";
+      this._orgService.editOrganization(secOrg.metadata).subscribe({
+        next: (result: Hit<Organization>) => {
+          console.log(result);
+        },
+        error: err => {
+          console.log("reconnect",err);
+        }
+      })
+    });
+
   }
 
 }
