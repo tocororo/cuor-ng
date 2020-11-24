@@ -66,6 +66,9 @@ export class SearchComponent implements OnInit {
   sr: SearchResponse<Organization>;
   queryParams: Params;
   navigationExtras: NavigationExtras;
+
+  loading: boolean = true;
+
   public constructor(
     private _searchService: SearchService,
     private activatedRoute: ActivatedRoute,
@@ -158,6 +161,7 @@ export class SearchComponent implements OnInit {
       },
       () => {
         console.log("END...");
+        this.loading = false;
       }
     );
   }
@@ -179,6 +183,9 @@ export class SearchComponent implements OnInit {
   }
 
   private updateQueryParams() {
+
+    this.loading = true;
+
     this.queryParams = {};
 
     this.queryParams["size"] = this.pageSize.toString(10);

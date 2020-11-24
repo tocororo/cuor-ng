@@ -16,23 +16,25 @@ export class DisambiguateRelationshipsComponent implements OnInit, OnChanges {
 
   @Output() propagate = new EventEmitter<Relationship[]>();
 
-  children: Relationship[] = null;
-  parents: Relationship[] = null;
-  others: Relationship[] = null;
+  children: Relationship[];
+  parents: Relationship[];
+  others: Relationship[];
 
   constructor() { }
   ngOnChanges(): void {
-    this.separatingRelationships();
+    if (this.parents != undefined && this.children != undefined && this.others != undefined )
+      this.separatingRelationships();
   }
 
-  ngOnInit() {
-    this.children = new Array<Relationship>()
-    this.parents = new Array<Relationship>()
-    this.others = new Array<Relationship>()
+  ngOnInit() {    
     this.separatingRelationships();
   }
 
   separatingRelationships() {
+    this.children = new Array<Relationship>()
+    this.parents = new Array<Relationship>()
+    this.others = new Array<Relationship>()
+    
     for (let item of this.contentList) {
       switch (item.type) {
         case 'parent':

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DisambiguateSearchComponent } from './disambiguate-search.component';
+import { DisambiguateComponent } from './disambiguate.component';
 
-describe('DisambiguateSearchComponent', () => {
-  let component: DisambiguateSearchComponent;
-  let fixture: ComponentFixture<DisambiguateSearchComponent>;
+describe('DisambiguateComponent', () => {
+  let component: DisambiguateComponent;
+  let fixture: ComponentFixture<DisambiguateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DisambiguateSearchComponent ]
+      declarations: [ DisambiguateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DisambiguateSearchComponent);
+    fixture = TestBed.createComponent(DisambiguateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

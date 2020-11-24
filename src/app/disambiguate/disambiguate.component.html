@@ -1,0 +1,121 @@
+<mat-toolbar color="accent"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    style="height: 80px;"
+> 
+    <span>Desambiguación</span>  
+</mat-toolbar>
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="masterFormControl">
+        <ng-template matStepLabel>Seleccione una Organización</ng-template>
+
+        <toco-org-search
+          [orgFilter]="orgFilter"
+          [label]="'Organización que se considera original o principal'"
+          [cleaning]="'false'"
+          [appearance]="'outline'"
+          (selectedOrg)="receivingMaster($event)">
+        </toco-org-search>
+
+        <toco-org-view 
+          *ngIf="masterOrganization"
+          [org]="masterOrganization">
+        </toco-org-view>
+
+        <button mat-stroked-button matStepperNext color="primary" class="mt-1">Siguiente</button>
+ 
+    </mat-step>
+
+    <mat-step [stepControl]="secundaryFormGroup">
+      <ng-template matStepLabel>Seleccione organizaciones análogas</ng-template>        
+
+      <toco-org-search
+        [orgFilter]="orgFilter"
+        [label]="'Seleccionando organizaciones que son análogas'"
+        [cleaning]="'true'"
+        [appearance]="'outline'"
+        (selectedOrg)="receivingSecundaries($event, secundarySearch)">
+      </toco-org-search>
+
+      <!-- <mat-action-list *ngIf="secundaryFormGroup">
+        <ng-container *ngFor="let org of secundaryFormGroup.value.analogas; let pos = index">
+            <button mat-list-item
+                (click)="deleteSecundaryOrg(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
+                {{ org.name }}
+            </button>
+        </ng-container>
+      </mat-action-list>    -->
+
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel 
+          *ngFor="let org of secundariesOrganizations; let pos = index"
+          [expanded]="step === pos"
+          (opened)="setStep(pos)"
+          hideToggle>
+
+            <mat-expansion-panel-header>
+              <div
+                fxLAyout="row"
+                fxLayoutAlign="space-between center"
+                style="width: 100%;">
+
+                <mat-label> <strong>{{ org.name }}</strong></mat-label>
+
+                <button mat-icon-button (click)="deleteSecundaryOrg(pos)" matTooltip="Eliminar">
+                  <mat-icon color="warn">delete</mat-icon>
+                </button>
+
+              </div>
+
+            </mat-expansion-panel-header>
+
+            <toco-org-view
+              [org]="org">
+            </toco-org-view>
+
+            <!-- <div
+              fxLAyout="row"
+              fxLayoutAlign="space-between start"
+              fxFlexFill>
+        
+              <app-disambiguate-card-chips-field
+                chipsTitle="Identificadores"
+                [contentList]="org.identifiers"
+                idName="idtype"
+                valueName="value"
+                style="margin: .5em;">
+              </app-disambiguate-card-chips-field>  
+
+              <app-disambiguate-accord-chips-field
+                accordionChipsTitle="Acrónimos con que se conoce la Organización"
+                [contentList]="org.acronyms"
+                style="margin: .5em;">
+              </app-disambiguate-accord-chips-field>
+
+              <app-disambiguate-accord-chips-field
+                accordionChipsTitle="Otros nombres con los que se conoce la Organización"
+                [contentList]="org.aliases"
+                style="margin: .5em;">
+              </app-disambiguate-accord-chips-field> 
+            </div> -->
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <button mat-stroked-button matStepperPrevious class="mt-1 mx-1">Anterior</button>
+      <button mat-stroked-button matStepperNext class="mt-1 mx-1">Siguiente</button>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Desambiguar</ng-template>
+  
+      <app-disambiguation
+        [masterOrganization]="masterOrganization"
+        [secundariesOrganizations]="secundariesOrganizations">
+      </app-disambiguation>
+  
+      <button mat-button matStepperPrevious class="mt-1 mx-1">Anterior</button>
+      <button mat-stroked-button color="warn" class="mt-1 mx-1" (click)="goDisambiguate()">Guardar Desambiguación</button>
+
+    </mat-step>
+  </mat-horizontal-stepper>

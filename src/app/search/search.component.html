@@ -23,6 +23,9 @@
     </ng-template>
 
   </mat-toolbar>
+
+  <toco-progress [loading]="loading"></toco-progress>
+
 <mat-drawer-container autosize>
     <mat-drawer #drawer mode="side" opened position="start">
      <!--  <app-aggregations fxLayout="row wrap" fxLayout.xs="column wrap" fxFlex="{{ currentlayout.width }}"

@@ -10,8 +10,8 @@ import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
-import { DisambiguateSearchComponent } from './disambiguate/disambiguate-search/disambiguate-search.component';
 import { DisambiguationComponent } from './disambiguate/disambiguation/disambiguation.component';
+import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 
 
 const routes: Routes = [
@@ -40,7 +40,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'disambiguate',
-		component: DisambiguateSearchComponent,
+		component: DisambiguateComponent,
 		canActivate: [AuthenticationService]
 	},	
 	{

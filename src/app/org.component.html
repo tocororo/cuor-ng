@@ -79,8 +79,13 @@
 
 <mat-menu #menuUser="matMenu">
 
+    <a mat-menu-item [routerLink]="['/disambiguate']">
+        <mat-icon>mode_edit</mat-icon>
+        Desambiguar Organizaciones
+    </a>
+
     <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
-        <mat-icon>person</mat-icon>
+        <mat-icon>account_circle</mat-icon>
         Perfil de usuario
     </a>
     <a mat-menu-item href="{{ cuorHost }}account/settings/password/">
@@ -99,10 +104,10 @@
         <mat-icon>settings</mat-icon>
         Administración
     </a>
-    <a mat-menu-item (click)="logout()">
-        <mat-icon>lock_outline</mat-icon>
+    <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
         Salir
-    </a>
+    </button>
 </mat-menu>
 
 <mat-menu #menuLogin="matMenu">

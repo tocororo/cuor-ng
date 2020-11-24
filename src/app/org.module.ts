@@ -34,8 +34,6 @@ import { AggregationsComponent } from './aggregations/aggregations.component';
 import { MatRadioModule } from '@angular/material';
 import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component'
 import { ChartsComponent } from './charts/charts.component';
-import { DisambiguateListComponent } from './disambiguate/disambiguate-list/disambiguate-list.component';
-import { DisambiguateSearchComponent } from './disambiguate/disambiguate-search/disambiguate-search.component';
 import { DisambiguationComponent } from './disambiguate/disambiguation/disambiguation.component';
 import { DisambiguateCardFieldComponent } from './disambiguate/disambiguation/disambiguate-card-field/disambiguate-card-field.component';
 import { DisambiguateCardChipsFieldComponent } from './disambiguate/disambiguation/disambiguate-card-chips-field/disambiguate-card-chips-field.component';
@@ -43,7 +41,7 @@ import { DisambiguateAccordChipsFieldComponent } from './disambiguate/disambigua
 import { DisambiguateTextFieldComponent } from './disambiguate/disambiguation/disambiguate-text-field/disambiguate-text-field.component';
 import { DisambiguateRelationshipsComponent } from './disambiguate/disambiguation/disambiguate-relationships/disambiguate-relationships.component';
 import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -64,15 +62,14 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 		AggregationsComponent,
 		GaugeChartComponent,
 		//DialogChartComponent
-		DisambiguateListComponent,
-		DisambiguateSearchComponent,
+		DisambiguateComponent,
 		DisambiguationComponent,
 		DisambiguateCardFieldComponent,
 		DisambiguateCardChipsFieldComponent,
 		DisambiguateAccordChipsFieldComponent,
 		DisambiguateTextFieldComponent,
 		DisambiguateRelationshipsComponent,
-		ShowOneRelationshipComponent
+		ShowOneRelationshipComponent,
 	], 
 	imports: [
 		MatRadioModule,
@@ -82,15 +79,8 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 		SharedModule,
 		CoreModule,
 		StaticsModule,
-		// The `HttpClientInMemoryWebApiModule` module intercepts HTTP requests 
-		// and returns simulated server responses. 
-		// Remove it when a real server is ready to receive requests. 
-		// HttpClientInMemoryWebApiModule.forRoot(
-		// 	InMemoryDataService, { dataEncapsulation: false }
-		// ),
 		ReactiveFormsModule,
 		OrganizationsModule,
-		// AuthenticationModule,
 		TocoFormsModule,
 		OrgRoutingModule, 
 		SearchModule,
@@ -107,8 +97,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 	providers: [
 		SearchService,
 		EnvServiceProvider,
-		OrganizationServiceNoAuth,
-		AuthenticationService
+		OrganizationServiceNoAuth
 	],
 
 	bootstrap: [OrgRootComponent]
