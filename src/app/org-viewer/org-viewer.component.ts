@@ -1,22 +1,21 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Organization } from 'toco-lib';
+import { Permission } from '../permission.service';
 
 @Component({
 	selector: 'app-org-view',
 	templateUrl: './org-viewer.component.html',
 	styleUrls: ['./org-viewer.component.scss']
 })
-export class OrgViewerComponent implements OnInit
-{
+export class OrgViewerComponent implements OnInit {
 	public org: Organization;
 
-	public constructor(private _router: Router, private _activatedRoute: ActivatedRoute)
-	{ }
+	public constructor(private oauthStorage: OAuthStorage, private _activatedRoute: ActivatedRoute) { }
 
-	public ngOnInit(): void
-	{
+	public ngOnInit(): void {
 		/* Gets the `Organization` data. */
 		this._activatedRoute.data.subscribe(
 			(data) => {
@@ -25,8 +24,16 @@ export class OrgViewerComponent implements OnInit
 			}
 		);
 	}
-	onClick(){
-		console.log(this._activatedRoute, this._router);
-		
+
+	/**
+	* hasPermission return true if the user have permission
+	*/
+	public get hasPermission(): boolean {
+		let permission = new Permission(this.oauthStorage);
+
+		if (permission.hasPermissions("admin")) {
+			return true;
+		}
+		return false;
 	}
 }

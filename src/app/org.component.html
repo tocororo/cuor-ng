@@ -79,7 +79,7 @@
 
 <mat-menu #menuUser="matMenu">
 
-    <a mat-menu-item [routerLink]="['/disambiguate']">
+    <a mat-menu-item [routerLink]="['/disambiguate']" *ngIf="hasPermission">
         <mat-icon>mode_edit</mat-icon>
         Desambiguar Organizaciones
     </a>
@@ -110,7 +110,7 @@
     </button>
 </mat-menu>
 
-<mat-menu #menuLogin="matMenu">
+<!-- <mat-menu #menuLogin="matMenu">
     <button mat-menu-item (click)="loginClick()">
         <mat-icon>lock_open</mat-icon>
         Action
@@ -123,7 +123,7 @@
         <mat-icon>assignment_ind</mat-icon>
         Registarse
     </a>
-</mat-menu>
+</mat-menu> -->
 
 <router-outlet></router-outlet> 
 

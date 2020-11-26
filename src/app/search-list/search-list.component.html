@@ -2,7 +2,14 @@
     <mat-card-content>
       <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
 
-        <h2 routerLink="/{{hit.metadata.id}}/view" style="cursor: pointer;">{{hit.metadata.name}}</h2>
+        <h2>
+          <button mat-icon-button *ngIf="hasPermission" routerLink="/{{hit.metadata.id}}/edit" matTooltip="Editar la Organización">
+            <mat-icon class="mat-18">mode_edit</mat-icon>
+          </button>
+          <span routerLink="/{{hit.metadata.id}}/view" style="cursor: pointer;">
+            {{hit.metadata.name}}
+          </span>
+        </h2>
 
         <span *ngIf="hit.metadata.established != -1" class="p-40">Fundada en: {{hit.metadata.established}}</span>
 

@@ -10,8 +10,8 @@ import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
-import { DisambiguationComponent } from './disambiguate/disambiguation/disambiguation.component';
 import { DisambiguateComponent } from './disambiguate/disambiguate.component';
+import { AdminPermissionService, CuratorPermissionService } from './permission.service';
 
 
 const routes: Routes = [
@@ -28,7 +28,7 @@ const routes: Routes = [
 		resolve: {
 			'org': OrganizationDetailResolverService
 		},
-		canActivate: [AuthenticationService]
+		canActivate: [AuthenticationService, AdminPermissionService]
     },
     // {
     //     path: 'add',
@@ -41,12 +41,7 @@ const routes: Routes = [
 	{
 		path: 'disambiguate',
 		component: DisambiguateComponent,
-		canActivate: [AuthenticationService]
-	},	
-	{
-		path: 'disambiguation',
-		component: DisambiguationComponent,
-		canActivate: [AuthenticationService]
+		canActivate: [AuthenticationService, CuratorPermissionService]
 	},
 	{
 		path:'',
@@ -91,7 +86,7 @@ const routes: Routes = [
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],
-	providers: [AuthenticationService]
+	providers: [AuthenticationService, CuratorPermissionService, AdminPermissionService]
 })
 export class OrgRoutingModule
 { }

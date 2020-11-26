@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { AuthBackend, AuthenticationService, EnvService, User } from 'toco-lib';
 import { OrgService } from './org.service';
+import { Permission } from './permission.service';
 
 @Component({
 	selector: 'toco-org-root',
@@ -19,19 +20,21 @@ export class OrgRootComponent
 
   public user: User;
 
-  public cuorHost
+  public cuorHost: string;
 
   public authBackend: AuthBackend;
 
 	public constructor(
     private authenticationService: AuthenticationService, 
     private oauthStorage: OAuthStorage,
-    private oauthService: OAuthService) {
+    private oauthService: OAuthService,
+    private env: EnvService) {
 
     }
 
     public ngOnInit(): void
     {
+        this.cuorHost = this.env.cuorHost;
         this.footerSites =  Array();
         this.footerInformation =  Array();
 
@@ -47,6 +50,7 @@ export class OrgRootComponent
         this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true});
 
         this.authBackend = AuthBackend.cuor;
+        this.authenticationService.authBackend = this.authBackend;
 
         this.authenticationService.authenticationSubjectObservable.subscribe(
           {
@@ -54,6 +58,19 @@ export class OrgRootComponent
               if (logguedChange){
                 this.user = new User();
                 this.user.email = this.oauthStorage.getItem("email");
+
+                // pedir la info del usuario para guardar los roles
+                this.authenticationService.getUserInfo().subscribe({
+                  next: (response) => {
+                    let roles = '';
+                    for (const rol in response.roles) {
+                      const element = response.roles[rol];
+                      roles += "," + element.name;
+                    }
+                    this.oauthStorage.setItem("roles", roles)
+                  },
+                  error: e => console.log(e)
+                });
               }
             },
             error: (err) => {
@@ -61,7 +78,6 @@ export class OrgRootComponent
             }
           }
         )
-
     }
 
   /**
@@ -70,7 +86,20 @@ export class OrgRootComponent
   public logout() {
     this.oauthService.logOut();
     this.oauthStorage.removeItem("email");
+    this.oauthStorage.removeItem("roles");
     this.user = undefined;
+  }
+
+  /**
+   * hasPermission return true if the user have permission
+   */
+  public get hasPermission(): boolean {
+    let permission = new Permission(this.oauthStorage);
+
+    if (permission.hasPermissions("curator") || permission.hasPermissions("admin")){
+      return true;
+    }
+    return false;
   }
 
 }
