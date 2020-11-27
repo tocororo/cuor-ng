@@ -102,4 +102,15 @@ export class OrgRootComponent
     return false;
   }
 
+    /**
+   * hasPermission return true if the user have permission
+   */
+  public get hasPermissionAdmin(): boolean {
+    let permission = new Permission(this.oauthStorage);
+
+    if (permission.hasPermissions("admin")){
+      return true;
+    }
+    return false;
+  }
 }

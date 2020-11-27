@@ -12,6 +12,7 @@ import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
 import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 import { AdminPermissionService, CuratorPermissionService } from './permission.service';
+import { ImportComponent } from './import/import.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,11 @@ const routes: Routes = [
 		path: 'disambiguate',
 		component: DisambiguateComponent,
 		canActivate: [AuthenticationService, CuratorPermissionService]
+	},
+	{
+		path: 'import',
+		component: ImportComponent,
+		canActivate: [AuthenticationService, AdminPermissionService]
 	},
 	{
 		path:'',

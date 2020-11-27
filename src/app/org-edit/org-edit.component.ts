@@ -59,6 +59,8 @@ export class OrgEditComponent implements OnInit {
 
   orgRelationships = OrganizationRelationships;
 
+  loading: boolean = false;
+
   constructor(
     private _activatedRoute: ActivatedRoute, 
     private _formBuilder: FormBuilder,
@@ -133,17 +135,17 @@ export class OrgEditComponent implements OnInit {
    * UPDATE FUNCTIONS
    ******************************************************************/
   update(){
+    this.loading = true;
     // update orgFormGroup
     this.orgFormGroup.setControl('identifiers', this.identifiersControl)
     this.orgFormGroup.setControl('relationships', this.relationshipsControl)
 
-    console.log("update: ", this.orgFormGroup.valid, this.orgFormGroup);
-
     this._orgService.editOrganization(this.orgFormGroup.value).subscribe({
       next: (result: Hit<Organization>) => {
-        console.log(result);
+
         const m = new MessageHandler(null,this._dialog);
         m.showMessage(StatusCode.OK, "La Organización fue modificada correctamente", HandlerComponent.dialog, "Operación exitosa", "50%");
+
         this.initData(result.metadata);
       },
       error: err => {
@@ -151,7 +153,8 @@ export class OrgEditComponent implements OnInit {
         
         const m = new MessageHandler(this._snackBar);
         m.showMessage(StatusCode.OK, err.message)
-      }
+      },
+      complete: () => this.loading = false
     })
   }
 

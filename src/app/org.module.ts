@@ -42,6 +42,7 @@ import { DisambiguateTextFieldComponent } from './disambiguate/disambiguation/di
 import { DisambiguateRelationshipsComponent } from './disambiguate/disambiguation/disambiguate-relationships/disambiguate-relationships.component';
 import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component';
 import { DisambiguateComponent } from './disambiguate/disambiguate.component';
+import { ImportComponent } from './import/import.component';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -70,6 +71,7 @@ import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 		DisambiguateTextFieldComponent,
 		DisambiguateRelationshipsComponent,
 		ShowOneRelationshipComponent,
+		ImportComponent,
 	], 
 	imports: [
 		MatRadioModule,

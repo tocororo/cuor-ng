@@ -83,7 +83,10 @@
         <mat-icon>mode_edit</mat-icon>
         Desambiguar Organizaciones
     </a>
-
+    <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
+        <mat-icon>file_upload</mat-icon>
+        Importar
+    </a>
     <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
         <mat-icon>account_circle</mat-icon>
         Perfil de usuario
@@ -100,7 +103,7 @@
         <mat-icon>settings_applications</mat-icon>
         Aplicaciones
     </a>
-    <a mat-menu-item href="{{ cuorHost }}admin/">
+    <a mat-menu-item href="{{ cuorHost }}admin/" *ngIf="hasPermissionAdmin">
         <mat-icon>settings</mat-icon>
         Administración
     </a>
