@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { OrgService } from '../org.service';
 
 @Component({
@@ -18,21 +18,17 @@ export class ImportComponent implements OnInit {
 
   /**
    * handleFileInput, saves file in a variable according to type
-   * @param files is a `FileList` object
+   * @param file is a `File` object
    * @param type is a `string` with the type of the file, example "GRID"
    */
-  public handleFileInput(files: FileList, type: string){
+  public handleFileInput(file: File, type: string){
     switch (type) {
       case "GRID":
-        console.log(files);
-        
-        this.fileUploadGRID = files.item(0);
-        var formData = new FormData();
-        formData.append("fileGRID",this.fileUploadGRID, this.fileUploadGRID.name);
-        console.log(formData);
+        this.fileUploadGRID = file;
+        console.log(file);
         
         break;
-    
+
       default:
         break;
     }
@@ -48,5 +44,4 @@ export class ImportComponent implements OnInit {
       }
     });
   }
-
 }

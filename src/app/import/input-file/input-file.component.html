@@ -1,0 +1,20 @@
+<mat-form-field appearance="outline" [ngStyle]="{'width': '100%'}">
+
+    <mat-label *ngIf="label">{{ label }}</mat-label>
+
+    <input matInput readonly [(ngModel)]="placeholder">
+
+    <!-- <button mat-icon-button matSuffix> -->
+        <mat-icon matSuffix>file_upload</mat-icon>
+    <!-- </button> -->
+
+    <input 
+        #inputElement
+        id="inputElement"
+        type="file"
+        enctype="multipart/form-data"
+        accept="{{ accept }}"
+        [formControl]="formControl"
+        (change)="handleFileInput($event.target.files)">
+
+</mat-form-field>

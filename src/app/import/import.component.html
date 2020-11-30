@@ -15,17 +15,65 @@
           <mat-card-subtitle>Subtitle</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-          <!-- Start GRID -->
-        <mat-label>Fichero de GRID</mat-label>
+            <!-- Start GRID -->
+            <app-input-file
+                [label]="'Fichero de GRID'"
+                [accept]="'.json'"
+                (file)="handleFileInput($event, 'GRID')">
+            </app-input-file>
+
+            <!-- Start C_orga -->
+            <app-input-file
+                [label]="'Fichero de la ONEI con organismos superiores (C_orga)'"
+                [accept]="'.xlsx'"
+                (file)="handleFileInput($event, 'C_orga')">
+            </app-input-file>
+
+            <!-- Start C_Uniones -->
+            <app-input-file
+                [label]="'Fichero de la ONEI con organismos (C_Uniones)'"
+                [accept]="'.xlsx'"
+                (file)="handleFileInput($event, 'C_Uniones')">
+            </app-input-file>
+        
+            <!-- Start RE0420 -->
+            <app-input-file
+                [label]="'Fichero de la ONEI con Organismos (RE0420)'"
+                [accept]="'.xlsx'"
+                (file)="handleFileInput($event, 'RE0420')">
+            </app-input-file>
+        
+            <!-- Start CNOA0420 -->
+            <app-input-file
+                [label]="'Fichero de la ONEI con Organismos (CNOA0420)'"
+                [accept]="'.xlsx'"
+                (file)="handleFileInput($event, 'CNOA0420')">
+            </app-input-file>
+
+            <!-- Start ME0420 -->
+            <app-input-file
+                [label]="'Fichero de la ONEI con Organismos (ME0420)'"
+                [accept]="'.xlsx'"
+                (file)="handleFileInput($event, 'ME0420')">
+            </app-input-file>
+
+            <!-- Start dpa -->
+            <app-input-file
+                [label]="'Fichero de la ONEI con Organismos (dpa.json)'"
+                [accept]="'.json'"
+                (file)="handleFileInput($event, 'dpa')">
+            </app-input-file>
+        <!-- <mat-label>Fichero de GRID</mat-label>
         <input 
             type="file" 
             enctype="multipart/form-data" 
             accept=".json" 
             placeholder="Click para seleccionar un fichero" 
-            (change)="handleFileInput($event.target.files, 'GRID')">
+            (change)="handleFileInput($event.target.files, 'GRID')"> -->
 
       </mat-card-content>
       <mat-card-actions align="start">
-          <button mat-button (click)="import()">Action1</button>
+          <button mat-stroked-button (click)="import()" color="primary">Importar</button>
+          <button mat-stroked-button (click)="eject" color="warn">Ejecutar</button>
       </mat-card-actions>
   </mat-card>
