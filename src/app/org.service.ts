@@ -38,7 +38,7 @@ export class OrgService{
     return this.http.put<any>(url, JSON.stringify(org), this.httpOptions);
   }
 
-  public fileUpload(file: File, type: string) {
+  public fileUpload(formData: FormData) {
     const url = this.env.cuorHost + "import";
 
     const httpOptions = {
@@ -49,8 +49,8 @@ export class OrgService{
     this.httpOptions.headers.set("Authorization", "Bearer " + this.oauthStorage.getItem("access_token"));
     this.httpOptions.headers.set("Content-Type", "application/x-www-form-urlencoded");
 
-    const formData = new FormData();
-    formData.append("file",file, file.name);
+    // const formData = new FormData();
+    // formData.append("file",file, file.name);
 
     return this.newHttp.post<any>(url, formData);
   }

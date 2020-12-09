@@ -15,7 +15,7 @@ export class InputFileComponent implements OnInit {
   public enctype: string;
 
   @Input()
-  public formControl: FormControl
+  public control: FormControl
 
   @Input()
   public placeholder: string;
@@ -40,7 +40,7 @@ export class InputFileComponent implements OnInit {
     if (this.width == undefined) this.width = "100%";
     if (this.accept == undefined) this.accept = ".json";
     if (this.enctype == undefined) this.enctype = "multipart/form-data";
-    if (this.formControl == undefined) this.formControl = new FormControl();
+    if (this.control == undefined) this.control = new FormControl();
   }
 
   /**
@@ -50,8 +50,13 @@ export class InputFileComponent implements OnInit {
   public handleFileInput(files: FileList){
     if (files && files.item(0)){
       this.placeholder = files.item(0).name;
+      this.control.setValue(files.item(0))
       this.file.emit(files.item(0));
     }
-    else this.file.emit(null);
+    else {
+      this.placeholder = "Click para seleccionar un fichero";
+      this.control.setValue(null)
+      this.file.emit(null);
+    }
   }
 }

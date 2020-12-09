@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline" [ngStyle]="{'width': '100%'}">
+<mat-form-field appearance="outline" [ngStyle]="{'width': width, 'min-width': '15em'}">
 
     <mat-label *ngIf="label">{{ label }}</mat-label>
 
@@ -14,7 +14,6 @@
         type="file"
         enctype="multipart/form-data"
         accept="{{ accept }}"
-        [formControl]="formControl"
         (change)="handleFileInput($event.target.files)">
 
 </mat-form-field>

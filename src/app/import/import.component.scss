@@ -8,3 +8,11 @@
     top: 2px;
     cursor: pointer;
 }
+.input-width{
+    width: 49.5%;
+}
+@media(max-width: 599px) {
+    .input-width{
+        width: 100%;
+    }
+}
