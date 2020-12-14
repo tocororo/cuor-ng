@@ -8,8 +8,7 @@
         style="height: auto !important; min-height: 56px;"
     >
         <a class="color-white" [routerLink]="['/']" style="white-space: normal;">
-            <!-- <img src="assets/images/logo_mes.png" alt="MES" width="140"> -->
-            Organizaciones
+            Sceiba Organizaciones
         </a>
         
         <div
@@ -85,7 +84,7 @@
     </a>
     <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
         <mat-icon>file_upload</mat-icon>
-        Importar
+        Importar (beta)
     </a>
     <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
         <mat-icon>account_circle</mat-icon>
