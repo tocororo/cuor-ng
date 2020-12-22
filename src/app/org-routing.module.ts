@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthenticationService, OrgAddComponent } from 'toco-lib';
+import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 
 import { OrganizationDetailResolverService } from './organization-detail-resolver.service.ts';
 import { HomeComponent } from './home/home.component';
@@ -22,14 +22,14 @@ const routes: Routes = [
 		resolve: {
 			'org': OrganizationDetailResolverService
 		}
-	},
+  },
 	{
 		path:':uuid/edit',
 		component: OrgEditComponent,
 		resolve: {
 			'org': OrganizationDetailResolverService
 		},
-		canActivate: [AuthenticationService, AdminPermissionService]
+		canActivate: [SimpleAuthenticationService, AdminPermissionService]
     },
     // {
     //     path: 'add',
@@ -42,12 +42,12 @@ const routes: Routes = [
 	{
 		path: 'disambiguate',
 		component: DisambiguateComponent,
-		canActivate: [AuthenticationService, CuratorPermissionService]
+		canActivate: [SimpleAuthenticationService, CuratorPermissionService]
 	},
 	{
 		path: 'import',
 		component: ImportComponent,
-		canActivate: [AuthenticationService, AdminPermissionService]
+		canActivate: [SimpleAuthenticationService, AdminPermissionService]
 	},
 	{
 		path:'',
@@ -56,43 +56,43 @@ const routes: Routes = [
     {
         path: 'faq',
         component: StaticPagesComponent,
-        data: {src: 'assets/markdown/faq.md', title: 'FAQ'}
+        data: {src: 'static/organizations/assets/markdown/faq.md', title: 'FAQ'}
     },
     {
         path: 'about',
         component: StaticPagesComponent,
-        data: {src: 'assets/markdown/about.md', title: 'Sobre Nosotros'}
+        data: {src: 'static/organizations/assets/markdown/about.md', title: 'Sobre Nosotros'}
     },
     {
         path: 'help',
         component: StaticPagesComponent,
-        data: {src: 'assets/markdown/help.md', title: 'Ayuda'}
+        data: {src: 'static/organizations/assets/markdown/help.md', title: 'Ayuda'}
     },
     {
         path: 'contact',
         component: StaticPagesComponent,
-        data: {src: 'assets/markdown/contact.md', title: 'Contacto'}
+        data: {src: 'static/organizations/assets/markdown/contact.md', title: 'Contacto'}
 	},
 	{
         path: 'inclussion',
         component: StaticPagesComponent,
-        data: {src: 'assets/markdown/inclussion.md', title: '¿Nueva Organización?'}
+        data: {src: 'static/organizations/assets/markdown/inclussion.md', title: '¿Nueva Organización?'}
     },
 	{
 		path: '**',
 		redirectTo: '',
 		pathMatch: 'full'
-		//TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí. 
+		//TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí.
 		//component: PageNotFoundComponent
 	},
 
-	
+
 ];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],
-	providers: [AuthenticationService, CuratorPermissionService, AdminPermissionService]
+	providers: [SimpleAuthenticationService, CuratorPermissionService, AdminPermissionService]
 })
 export class OrgRoutingModule
 { }

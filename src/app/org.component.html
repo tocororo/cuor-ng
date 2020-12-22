@@ -10,7 +10,7 @@
         <a class="color-white" [routerLink]="['/']" style="white-space: normal;">
             Sceiba Organizaciones
         </a>
-        
+
         <div
             appearance="legacy"
             aria-label="Menu de Inicio"
@@ -25,19 +25,21 @@
             <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
                 <mat-icon>help</mat-icon>
             </button>
-
+            <a mat-icon-button href="/login/?next=%2F" *ngIf="!user" matTooltip="Autenticarse">
+              <mat-icon>person_pin</mat-icon>
+            </a>
             <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{user.email}}">
                 <mat-icon class="mat-18">person_pin</mat-icon>
             </button>
 
-            <toco-authentication 
+            <!-- <toco-authentication
                 [authBackend]="authBackend"
                 [isButtonLogin]="'true'"
                 [isButtonLoginIcon]="'true'"
                 [isButtonLoginText]="'Autenticarse'"
                 *ngIf="!user"
                 >
-            </toco-authentication>
+            </toco-authentication> -->
 
         </div>
 
@@ -106,10 +108,14 @@
         <mat-icon>settings</mat-icon>
         Administración
     </a>
-    <button mat-menu-item (click)="logout()">
+    <a mat-menu-item href="{{ cuorHost }}logout/" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      Salir
+    </a>
+    <!-- <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         Salir
-    </button>
+    </button> -->
 </mat-menu>
 
 <!-- <mat-menu #menuLogin="matMenu">
@@ -127,7 +133,7 @@
     </a>
 </mat-menu> -->
 
-<router-outlet></router-outlet> 
+<router-outlet></router-outlet>
 
 <div  [ngStyle]="{'margin-top': '2em'}">
     <org-footer [sites]="footerSites" [information]="footerInformation"></org-footer>

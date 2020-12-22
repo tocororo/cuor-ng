@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { AuthBackend, AuthenticationService, EnvService, User } from 'toco-lib';
+import { AuthBackend, SimpleAuthenticationService, EnvService, User } from 'toco-lib';
 import { OrgService } from './org.service';
 import { Permission } from './permission.service';
 
@@ -13,7 +13,7 @@ import { Permission } from './permission.service';
 export class OrgRootComponent
 {
   public title = "Catálogo de Organizaciones Cubanas";
-  
+
   public footerSites: Array< { name: string, url: string, useRouterLink: boolean } >;
 
   public footerInformation: Array< { name: string, url: string, useRouterLink: boolean } >;
@@ -25,9 +25,9 @@ export class OrgRootComponent
   public authBackend: AuthBackend;
 
 	public constructor(
-    private authenticationService: AuthenticationService, 
+    private SimpleAuthenticationService: SimpleAuthenticationService,
     private oauthStorage: OAuthStorage,
-    private oauthService: OAuthService,
+    // private oauthService: OAuthService,
     private env: EnvService) {
 
     }
@@ -50,41 +50,57 @@ export class OrgRootComponent
         this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true});
 
         this.authBackend = AuthBackend.cuor;
-        this.authenticationService.authBackend = this.authBackend;
+        this.SimpleAuthenticationService.authBackend = this.authBackend;
 
-        this.authenticationService.authenticationSubjectObservable.subscribe(
-          {
-            next: (logguedChange) => {
-              if (logguedChange){
-                this.user = new User();
-                this.user.email = this.oauthStorage.getItem("email");
-
-                // pedir la info del usuario para guardar los roles
-                this.authenticationService.getUserInfo().subscribe({
-                  next: (response) => {
-                    let roles = '';
-                    for (const rol in response.roles) {
-                      const element = response.roles[rol];
-                      roles += "," + element.name;
-                    }
-                    this.oauthStorage.setItem("roles", roles)
-                  },
-                  error: e => console.log(e)
-                });
+        if(this.env.user != null) {
+          this.user = this.env.user;
+          // pedir la info del usuario para guardar los roles
+          this.SimpleAuthenticationService.getUserInfo().subscribe({
+            next: (response) => {
+              let roles = '';
+              for (const rol in response.roles) {
+                const element = response.roles[rol];
+                roles += "," + element.name;
               }
+              this.oauthStorage.setItem("roles", roles)
             },
-            error: (err) => {
-              console.log("logguedChange", err);
-            }
-          }
-        )
+            error: e => console.log(e)
+          });
+        }
+
+        // this.SimpleAuthenticationService.authenticationSubjectObservable.subscribe(
+        //   {
+        //     next: (logguedChange) => {
+        //       if (logguedChange){
+        //         this.user = new User();
+        //         this.user.email = this.oauthStorage.getItem("email");
+
+        //         // pedir la info del usuario para guardar los roles
+        //         this.SimpleAuthenticationService.getUserInfo().subscribe({
+        //           next: (response) => {
+        //             let roles = '';
+        //             for (const rol in response.roles) {
+        //               const element = response.roles[rol];
+        //               roles += "," + element.name;
+        //             }
+        //             this.oauthStorage.setItem("roles", roles)
+        //           },
+        //           error: e => console.log(e)
+        //         });
+        //       }
+        //     },
+        //     error: (err) => {
+        //       console.log("logguedChange", err);
+        //     }
+        //   }
+        // )
     }
 
   /**
    * logout
    */
   public logout() {
-    this.oauthService.logOut();
+    // this.oauthService.logOut();
     this.oauthStorage.removeItem("email");
     this.oauthStorage.removeItem("roles");
     this.user = undefined;

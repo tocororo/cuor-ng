@@ -4,9 +4,12 @@
     fxLayoutAlign="space-between center"
     style="height: 80px;"
   >
-
-    <span>Edita la Organización</span>
-
+  <mat-toolbar-row>
+  <button mat-icon-button routerLink="/{{org.id}}/view" matTooltip="Ver la Organización">
+    <mat-icon class="mat-18">visibility</mat-icon>
+</button>
+    <span>Editando: {{org.name}}</span>
+</mat-toolbar-row>
   </mat-toolbar>
 
   <toco-progress [loading]="loading"></toco-progress>
@@ -224,7 +227,7 @@
 
     </mat-card-content>
     <mat-card-actions align="start">
-        <button mat-button (click)="update()">Editar</button>
+        <button mat-button (click)="update()">Guardar</button>
 
     </mat-card-actions>
 </mat-card>

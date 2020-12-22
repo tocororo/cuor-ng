@@ -7,7 +7,7 @@ import { take, map } from 'rxjs/operators';
 import { Organization, SearchResponse } from 'toco-lib';
 import { SearchService } from 'toco-lib';
 
-const orgExample: any = 
+const orgExample: any =
 {
 	'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
 	'identifiers': [
@@ -305,9 +305,9 @@ export class OrganizationDetailResolverService implements Resolve<SearchResponse
 		let uuid = route.paramMap.get('uuid');
 		return this.service.getOrganizationById(uuid).pipe(
             take(1),
-            map(node => {
-                if (node) {
-                    return node;
+            map(hit => {
+                if (hit) {
+                    return hit;
 				}
 				else {
                     this.router.navigate(['/']);

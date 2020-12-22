@@ -18,10 +18,10 @@ El sistema se desarrolla en código abierto accesible desde [Github](https://git
 * Universidad de Amberes (Bélgica)
 
 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center">
-    <img src="/assets/images/upr.png" width="93" style="margin:1em">
-    <img src="/assets/images/uh.png" width="93" style="margin:1em">
-    <img src="/assets/images/lamolina.jpg" width="93" height="108" style="margin:1em">
-    <img src="/assets/images/usil.png" width="93" height="108" style="margin:1em">
-    <img src="/assets/images/hasselt.png" width="140" height="108" style="margin:1em">
-    <img src="/assets/images/antwerpent.png" width="93" height="108" style="margin:1em">
+    <img src="static/organizations/assets/images/upr.png" width="93" style="margin:1em">
+    <img src="static/organizations/assets/images/uh.png" width="93" style="margin:1em">
+    <img src="static/organizations/assets/images/lamolina.jpg" width="93" height="108" style="margin:1em">
+    <img src="static/organizations/assets/images/usil.png" width="93" height="108" style="margin:1em">
+    <img src="static/organizations/assets/images/hasselt.png" width="140" height="108" style="margin:1em">
+    <img src="static/organizations/assets/images/antwerpent.png" width="93" height="108" style="margin:1em">
  </div>

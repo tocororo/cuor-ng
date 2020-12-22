@@ -74,7 +74,7 @@ export class DisambiguateComponent implements OnInit {
 
 
   /***********************************************************
-   * addItemsFormArray build a form array group 
+   * addItemsFormArray build a form array group
    ***********************************************************/
   private addItemsFormArray(items: any[]) {
     let formArrayGroup = this._formBuilder.array([], [Validators.required, Validators.minLength(1)]);
@@ -153,8 +153,12 @@ export class DisambiguateComponent implements OnInit {
    * Update organizations with new information
    ***********************************************************/
   goDisambiguate() {
+    console.log('EDITAR LA ORGANIZACION PRIONCIPA GOOOO DESAMBIGUATE.....')
     // editar la organizacion principal
-    this._orgService.editOrganization(this.masterOrganization).subscribe({
+    this.masterOrganization.status = "active"
+    const toD = new Organization();
+    toD.deepcopy(this.masterOrganization);
+    this._orgService.editOrganization(toD).subscribe({
       next: (result: Hit<Organization>) => {
         console.log(result);
         const m = new MessageHandler(this._snackBar);
@@ -170,8 +174,10 @@ export class DisambiguateComponent implements OnInit {
 
     // cambiar el estado de las secundarias a reconect
     this.secundariesOrganizations.forEach(secOrg => {
-      secOrg.status = "reconnect";
-      this._orgService.editOrganization(secOrg).subscribe({
+      secOrg.status = "redirected";
+      let rec = new Organization();
+      rec.deepcopy(secOrg);
+      this._orgService.editOrganization(rec).subscribe({
         next: (result: Hit<Organization>) => {
           console.log(result);
         },

@@ -66,7 +66,7 @@
               "baseHref": "https://localhost:5001/",
               "deployUrl": "https://localhost:5001/static/organizations/",
               "watch": true,
-              "outputPath": "/home/craiadmin/.local/share/virtualenvs/cuor-WmaogaD7/var/instance/static/organizations",
+              "outputPath": "/Users/malayo/Documents/dev/tocororo/organizations/cuor/.venv/var/instance/static/organizations",
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": false,

@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthenticationModule, AuthenticationService, OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
+import { AuthenticationModule, SimpleAuthenticationService, OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { OrganizationsModule } from 'toco-lib';
@@ -74,7 +74,7 @@ import { InputFileComponent } from './import/input-file/input-file.component';
 		ShowOneRelationshipComponent,
 		ImportComponent,
 		InputFileComponent,
-	], 
+	],
 	imports: [
 		MatRadioModule,
 		NgxChartsModule,
@@ -86,7 +86,7 @@ import { InputFileComponent } from './import/input-file/input-file.component';
 		ReactiveFormsModule,
 		OrganizationsModule,
 		TocoFormsModule,
-		OrgRoutingModule, 
+		OrgRoutingModule,
 		SearchModule,
 		HttpClientModule,
 		MarkdownModule.forRoot({
@@ -101,7 +101,8 @@ import { InputFileComponent } from './import/input-file/input-file.component';
 	providers: [
 		SearchService,
 		EnvServiceProvider,
-		OrganizationServiceNoAuth
+    OrganizationServiceNoAuth,
+    SimpleAuthenticationService
 	],
 
 	bootstrap: [OrgRootComponent]

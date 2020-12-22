@@ -62,7 +62,7 @@ export class OrgEditComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private _activatedRoute: ActivatedRoute, 
+    private _activatedRoute: ActivatedRoute,
     private _formBuilder: FormBuilder,
     private _orgService: OrgService,
     private _dialog: MatDialog,
@@ -71,10 +71,12 @@ export class OrgEditComponent implements OnInit {
   ngOnInit() {
     this._activatedRoute.data.subscribe(
 			(data: { 'org': Hit<Organization> }) => {
+        this.org = new Organization();
+        console.log(this.org)
+        console.log('AAAAAAAA AAAAAAAA  WWWW DDDDD')
         this.org.deepcopy(data.org.metadata);
-
+        console.log(this.org)
         this.initData(this.org);
-
       }
     )
 
@@ -114,15 +116,15 @@ export class OrgEditComponent implements OnInit {
       types: this.addItemsFormArray(orgInput.types),
 
 
-      // addresses: new FormControl(orgInput.addresses, Validators.required),
+      addresses: new FormControl(orgInput.addresses, Validators.required),
 
-      // wikipedia_url: new FormControl(orgInput.wikipedia_url),
+      wikipedia_url: new FormControl(orgInput.wikipedia_url),
 
-      // email_address: new FormControl(orgInput.email_address),
+      email_address: new FormControl(orgInput.email_address),
 
-      // ip_addresses: this.addItemsFormArray(orgInput.ip_addresses),
+      ip_addresses: this.addItemsFormArray(orgInput.ip_addresses),
 
-      // links: this.addItemsFormArray(orgInput.links)
+      links: this.addItemsFormArray(orgInput.links)
     });
 
     this.identifiersControl = this.addItemsFormArrayIdentifiers(orgInput.identifiers);
@@ -138,9 +140,20 @@ export class OrgEditComponent implements OnInit {
     this.loading = true;
     // update orgFormGroup
     this.orgFormGroup.setControl('identifiers', this.identifiersControl)
-    this.orgFormGroup.setControl('relationships', this.relationshipsControl)
+    // this.orgFormGroup.setControl('relationships', this.relationshipsControl)
+    console.log(this.orgFormGroup.value, this.orgFormGroup, 'QQWQWQWWWWssssszsaW')
+    let edited = new Organization()
+    edited.deepcopy(this.orgFormGroup.value)
+    console.log(edited);
 
-    this._orgService.editOrganization(this.orgFormGroup.value).subscribe({
+    // for (let i = 0; i < edited.addresses.length; i++) {
+    //   const element = edited.addresses[i];
+    //   if(element.primary == 'True'){
+
+    //   }
+
+    // }
+    this._orgService.editOrganization(edited).subscribe({
       next: (result: Hit<Organization>) => {
 
         const m = new MessageHandler(null,this._dialog);
@@ -150,7 +163,7 @@ export class OrgEditComponent implements OnInit {
       },
       error: err => {
         console.log(err);
-        
+
         const m = new MessageHandler(this._snackBar);
         m.showMessage(StatusCode.OK, err.message)
       },
@@ -203,7 +216,7 @@ export class OrgEditComponent implements OnInit {
   }
 
   deleteAliases(pos: number){
-    
+
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '40%',
       data: { label: (this.orgFormGroup.get('aliases') as FormArray).value[pos]}
@@ -296,15 +309,30 @@ export class OrgEditComponent implements OnInit {
   /******************************************************************
    * RELATIONSHIPS FUNCTIONS
    ******************************************************************/
-  
+
    public relationshipsControl = this._formBuilder.array([]);
 
-  addItemsFormArrayRelationships(items: any[]){
+  addItemsFormArrayRelationships(items: Array<Relationship>){
     let formArrayGroup = this._formBuilder.array([]);
+    // items.forEach(element => {
+    //   console.log('AAAAAAAAAAAA QWERR')
+    //   console.log(element)
+    //   formArrayGroup.push(this._formBuilder.group(
+    //     {
+    //       id: new FormControl(element.id),
+    //       identifiers: this.addItemsFormArrayIdentifiers(element.identifiers),
+    //       label: new FormControl(element.label),
+    //       type: new FormControl(element.type)
+    //     })
+    //   );
+    // });
     for (const key in items) {
+      console.log('AAAAAAAAAAAA')
+      console.log(key)
+      console.log(items[key])
       formArrayGroup.push(this._formBuilder.group(
         {
-          // id: new FormControl(items[key].id),
+          id: new FormControl(items[key].id),
           identifiers: this.addItemsFormArrayIdentifiers(items[key].identifiers),
           label: new FormControl(items[key].label),
           type: new FormControl(items[key].type)
@@ -362,7 +390,7 @@ export class OrgEditComponent implements OnInit {
           <input matInput placeholder="Escriba el nombre de la Organización" [value]="org.name" disabled>
       </mat-form-field>
       <!-- *ngIf="org.identifiers && org.identifiers.length" -->
-      <static-table 
+      <static-table
           [desc]="'Lista de los identificadores de la organización'" [value]="org.identifiers"
           [columnsObjectProperty]="['idtype', 'value']"
           [columnsHeaderText]="['Identifier type', 'Identifier value']">

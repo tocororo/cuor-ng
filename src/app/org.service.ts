@@ -27,15 +27,17 @@ export class OrgService{
     private http: HttpClient,
     private oauthStorage: OAuthStorage,
     private handler: HttpBackend
-  ) 
-  { 
+  )
+  {
     this.newHttp = new HttpClient(handler);
   }
 
 
   public editOrganization(org: Organization): Observable<any>{
+    const payload = org.entitystringify();
+    console.log(org, payload)
     const url = this.env.cuorApi + this.prefix + "/" + org.id;
-    return this.http.put<any>(url, JSON.stringify(org), this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   public fileUpload(formData: FormData) {
