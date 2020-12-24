@@ -44,6 +44,7 @@ import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disa
 import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
+import { OrgFooterComponent } from './org-footer/org-footer.component';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -73,7 +74,8 @@ import { InputFileComponent } from './import/input-file/input-file.component';
 		DisambiguateRelationshipsComponent,
 		ShowOneRelationshipComponent,
 		ImportComponent,
-		InputFileComponent,
+    InputFileComponent,
+    OrgFooterComponent
 	],
 	imports: [
 		MatRadioModule,

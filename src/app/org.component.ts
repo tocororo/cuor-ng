@@ -44,8 +44,8 @@ export class OrgRootComponent
         this.footerSites.push({ name: "ROR", url: "https://ror.org/", useRouterLink: false});
         this.footerSites.push({ name: "Wikidata", url: "https://www.wikidata.org/wiki/Wikidata:Main_Page", useRouterLink: false});
 
-        this.footerInformation.push({ name: "Términos de uso", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
-        this.footerInformation.push({ name: "Privacidad", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
+        // this.footerInformation.push({ name: "Términos de uso", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
+        // this.footerInformation.push({ name: "Privacidad", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
         this.footerInformation.push({ name: "Contacto", url: "/contact", useRouterLink: true});
         this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true});
 

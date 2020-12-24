@@ -251,8 +251,9 @@
 <router-outlet></router-outlet>
 
 <div [ngStyle]="{ 'margin-top': '2em' }">
-  <org-footer
+  <app-org-footer
     [sites]="footerSites"
     [information]="footerInformation"
-  ></org-footer>
+    [extraImagePath]="'static/organizations'"
+  ></app-org-footer>
 </div>
