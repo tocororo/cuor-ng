@@ -41,7 +41,7 @@
                 }
               ],
               "baseHref": "https://orgs.sceiba.cu",
-              "deployUrl": "https://orgs.sceiba.cu//",
+              "deployUrl": "https://orgs.sceiba.cu/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

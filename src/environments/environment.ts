@@ -11,7 +11,7 @@ export const environment = {
   appHost: 'https://192.168.1.100:4200',
   appName: 'Orgs',
   oauthRedirectUri: 'https://192.168.1.100:4200/',
-  oauthClientId: 'kjA85kXRhHgcogw38BXuiAFEXjWIey0v7XCljQQP',
+  oauthClientId: 'jrlAUANdljGrgHkkWmbcuRfPEObe1tLyJ2f7og2f',
   oauthScope: 'user:email',
   topOrganizationPID: '',
 

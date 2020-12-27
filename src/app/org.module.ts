@@ -46,6 +46,11 @@ import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
 import { OrgFooterComponent } from './org-footer/org-footer.component';
 import { OrgService, UserService } from './org.service';
+import { OAuthStorage } from 'angular-oauth2-oidc';
+
+export function storageFactory() : OAuthStorage {
+  return localStorage
+}
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -106,6 +111,7 @@ import { OrgService, UserService } from './org.service';
 		// EnvServiceProvider,
     OrganizationServiceNoAuth,
     OrgService,
+    // { provide: OAuthStorage, useFactory: storageFactory },
     // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true }
 	],
 

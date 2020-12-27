@@ -30,7 +30,7 @@ export class OrgRootComponent
 
   public oauthInfo: OauthInfo = {
     serverHost: environment.cuorHost,
-    loginUrl: environment.cuorHost + 'cuor/authorize',
+    loginUrl: environment.cuorHost + 'oauth/cuor/authorize',
     tokenEndpoint: environment.cuorHost + 'oauth/token',
     userInfoEndpoint: environment.cuorApi + 'me',
     appHost: environment.appHost,
