@@ -6,6 +6,7 @@ import { take, map } from 'rxjs/operators';
 
 import { Organization, SearchResponse } from 'toco-lib';
 import { SearchService } from 'toco-lib';
+import { OrgService } from './org.service';
 
 const orgExample: any =
 {
@@ -297,7 +298,7 @@ const orgExample: any =
 })
 export class OrganizationDetailResolverService implements Resolve<SearchResponse<Organization>>
 {
-	public constructor(private router: Router, private service: SearchService)
+	public constructor(private router: Router, private service: OrgService)
 	{ }
 
 	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchResponse<Organization>>
@@ -307,6 +308,7 @@ export class OrganizationDetailResolverService implements Resolve<SearchResponse
             take(1),
             map(hit => {
                 if (hit) {
+                  console.log(hit)
                     return hit;
 				}
 				else {

@@ -1,14 +1,14 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthenticationModule, SimpleAuthenticationService, OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
+import { AuthenticationModule, OauthAuthenticationService, OrganizationServiceNoAuth, SharedModule, StaticsModule } from 'toco-lib';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { OrganizationsModule } from 'toco-lib';
 import { TocoFormsModule } from 'toco-lib';
 import { SearchService } from 'toco-lib';
 
-import { EnvServiceProvider } from 'toco-lib';
+// import { EnvServiceProvider } from 'toco-lib';
 
 import { OrgRoutingModule } from './org-routing.module';
 import { OrgRootComponent } from './org.component';
@@ -19,7 +19,7 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { CoreModule } from 'toco-lib';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { MarkdownModule } from 'ngx-markdown';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 import { OrganizationDialogDeleteConfirm, OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -45,6 +45,7 @@ import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
 import { OrgFooterComponent } from './org-footer/org-footer.component';
+import { OrgService, UserService } from './org.service';
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -102,9 +103,10 @@ import { OrgFooterComponent } from './org-footer/org-footer.component';
 	],
 	providers: [
 		SearchService,
-		EnvServiceProvider,
+		// EnvServiceProvider,
     OrganizationServiceNoAuth,
-    SimpleAuthenticationService
+    OrgService,
+    // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true }
 	],
 
 	bootstrap: [OrgRootComponent]

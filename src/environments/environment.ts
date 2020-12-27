@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  cuorHost: 'https://192.168.1.100:5001/',
+  sceibaApi: 'https://localhost:5000/api/',
+  cuorApi: 'https://192.168.1.100:5001/api/',
+
+  appHost: 'https://192.168.1.100:4200',
+  appName: 'Orgs',
+  oauthRedirectUri: 'https://192.168.1.100:4200/',
+  oauthClientId: 'kjA85kXRhHgcogw38BXuiAFEXjWIey0v7XCljQQP',
+  oauthScope: 'user:email',
+  topOrganizationPID: '',
+
 };
 
 /*

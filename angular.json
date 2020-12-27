@@ -40,15 +40,19 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "baseHref": "https://orgs.sceiba.cu",
+              "deployUrl": "https://orgs.sceiba.cu//",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
+              "commonChunk": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "verbose": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -64,9 +68,9 @@
             },
             "tocuordev" :{
               "baseHref": "https://localhost:5001/",
-              "deployUrl": "https://localhost:5001/static/organizations/",
+              "deployUrl": "https://localhost:5001//",
               "watch": true,
-              "outputPath": "/Users/malayo/Documents/dev/tocororo/organizations/cuor/.venv/var/instance/static/organizations",
+              "outputPath": "/Users/malayo/Documents/dev/tocororo/organizations/cuor/.venv/var/instance/",
               "optimization": false,
               "outputHashing": "none",
               "sourceMap": false,

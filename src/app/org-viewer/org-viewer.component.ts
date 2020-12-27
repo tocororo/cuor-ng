@@ -1,39 +1,42 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { OAuthStorage } from 'angular-oauth2-oidc';
+// import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Organization } from 'toco-lib';
 import { Permission } from '../permission.service';
 
 @Component({
-	selector: 'app-org-view',
-	templateUrl: './org-viewer.component.html',
-	styleUrls: ['./org-viewer.component.scss']
+  selector: 'app-org-view',
+  templateUrl: './org-viewer.component.html',
+  styleUrls: ['./org-viewer.component.scss']
 })
 export class OrgViewerComponent implements OnInit {
-	public org: Organization;
+  public org: Organization;
 
-	public constructor(private oauthStorage: OAuthStorage, private _activatedRoute: ActivatedRoute) { }
+  public constructor(private _activatedRoute: ActivatedRoute) { }
+  loading = true;
 
-	public ngOnInit(): void {
-		/* Gets the `Organization` data. */
-		this._activatedRoute.data.subscribe(
-			(data) => {
-				this.org = data.org.metadata;
-				// this.org = data.org;
-			}
-		);
-	}
+  public ngOnInit(): void {
+    /* Gets the `Organization` data. */
+    
+    this._activatedRoute.data.subscribe(
+      (data) => {
+        this.org = data.org.metadata;
+        this.loading = false;
+        // this.org = data.org;
+      }
+    );
+  }
 
-	/**
-	* hasPermission return true if the user have permission
-	*/
-	public get hasPermission(): boolean {
-		let permission = new Permission(this.oauthStorage);
+  /**
+  * hasPermission return true if the user have permission
+  */
+  public get hasPermission(): boolean {
+    let permission = new Permission();
 
-		if (permission.hasPermissions("admin")) {
-			return true;
-		}
-		return false;
-	}
+    if (permission.hasPermissions("curator")) {
+      return true;
+    }
+    return false;
+  }
 }

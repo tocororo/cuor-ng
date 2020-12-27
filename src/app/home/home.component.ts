@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { SearchService } from 'toco-lib';
 import { SearchResponse, Organization } from 'toco-lib';
+import { OrgService } from "../org.service";
 
 @Component({
 	selector: "app-home",
@@ -19,12 +20,12 @@ export class HomeComponent implements OnInit {
 	}
 	loadCharts= false;
 
-	public constructor(private router: Router, private activatedRoute: ActivatedRoute, private _searchService: SearchService)
+	public constructor(private router: Router, private activatedRoute: ActivatedRoute, private _cuorService: OrgService)
 	{ }
 
 	public ngOnInit(): void
 	{
-		this._searchService.getOrganizations(null).subscribe({
+		this._cuorService.getOrganizations(null).subscribe({
 			next: (searchResponse: SearchResponse<Organization>) => {
 
 				this.organizationsTotal = searchResponse.hits.total;

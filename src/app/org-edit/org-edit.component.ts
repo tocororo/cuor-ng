@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angula
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatSelect, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Hit, Identifier, IdentifierSchemas, Organization, OrganizationService, OrganizationRelationships, Relationship, EnvService, SearchService, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
+import { Hit, Identifier, IdentifierSchemas, Organization, OrganizationService, OrganizationRelationships, Relationship, SearchService, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 import { isUndefined } from 'util';
 import { OrgService } from '../org.service';
 
@@ -59,7 +59,7 @@ export class OrgEditComponent implements OnInit {
 
   orgRelationships = OrganizationRelationships;
 
-  loading: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -77,6 +77,7 @@ export class OrgEditComponent implements OnInit {
         this.org.deepcopy(data.org.metadata);
         console.log(this.org)
         this.initData(this.org);
+        this.loading = false;
       }
     )
 

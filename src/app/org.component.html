@@ -10,7 +10,7 @@
     style="height: auto !important; min-height: 56px"
   >
     <a class="color-white" [routerLink]="['/']" style="white-space: normal">
-      <img src="/static/organizations/assets/icons/organizacion_white.svg" alt="Organizaciones" style="height: 50px; width: 50px"> Organizaciones
+      <img src="/assets/icons/organizacion_white.svg" alt="Organizaciones" style="height: 50px; width: 50px"> Organizaciones
     </a>
 
     <div
@@ -37,14 +37,14 @@
       <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
         <mat-icon>help</mat-icon>
       </button>
-      <a
+      <!-- <a
         mat-icon-button
         href="/login/?next=%2F"
         *ngIf="!user"
         matTooltip="Autenticarse"
       >
         <mat-icon>person_pin</mat-icon>
-      </a>
+      </a> -->
       <button
         mat-icon-button
         *ngIf="user"
@@ -54,14 +54,14 @@
         <mat-icon class="mat-18">person_pin</mat-icon>
       </button>
 
-      <!-- <toco-authentication
-                [authBackend]="authBackend"
+      <toco-authentication
+                [oauthInfo]="oauthInfo"
                 [isButtonLogin]="'true'"
                 [isButtonLoginIcon]="'true'"
                 [isButtonLoginText]="'Autenticarse'"
                 *ngIf="!user"
                 >
-            </toco-authentication> -->
+            </toco-authentication>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -139,22 +139,22 @@
 
   <div fxLayout="row wrap" fxLayoutAlign="space-around center">
     <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Sceiba">
-        <img  class="app-featured" src="/static/organizations/assets/icons/sceiba.svg" alt="Sceiba" style="width: 55px; height: 55px;">
+        <img  class="app-featured" src="/assets/icons/sceiba.svg" alt="Sceiba" style="width: 55px; height: 55px;">
     </a>
     <mat-divider class="w-90"></mat-divider>
 
     <a href="https://catalogo.sceiba.cu" target="__blanck" class="apps" matTooltip="Catálogo">
-      <img src="/static/organizations/assets/icons/catalog.svg" alt="Catálogo" style="width: 55px; height: 55px;">
+      <img src="/assets/icons/catalog.svg" alt="Catálogo" style="width: 55px; height: 55px;">
     </a>
     <a href="https://orgs.sceiba.cu" target="__blanck" class="apps" matTooltip="Organizaciones">
-        <img src="/static/organizations/assets/icons/organizacion.svg" alt="Organizaciones" style="width: 55px; height: 55px;">
+        <img src="/assets/icons/organizacion.svg" alt="Organizaciones" style="width: 55px; height: 55px;">
     </a>
     <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Vocabularios">
-        <img src="/static/organizations/assets/icons/vocabs.svg" alt="Vocabularios" style="width: 55px; height: 55px;">
+        <img src="/assets/icons/vocabs.svg" alt="Vocabularios" style="width: 55px; height: 55px;">
     </a>
     <mat-divider class="w-90"></mat-divider>
     <a href="https://sceiba.cu" target="__blanck" class="apps"  matTooltip="Registro de Revistas Científicas del MES">
-        <img class="app-featured" src="/static/organizations/assets/icons/mes.svg" alt="Registro de Revistas Científicas del MES" style="width: 55px; height: 55px;">
+        <img class="app-featured" src="/assets/icons/mes.svg" alt="Registro de Revistas Científicas del MES" style="width: 55px; height: 55px;">
     </a>
 </div>
 
@@ -169,7 +169,7 @@
         matTooltip="Sceiba"
       >
         <img
-          src="/static/organizations/assets/icons/sceiba.svg"
+          src="/assets/icons/sceiba.svg"
           alt="Sceiba"
           style="height: 50px; width: 50px"
         />
@@ -184,7 +184,7 @@
         matTooltip="Catálogo"
       >
         <img
-          src="/static/organizations/assets/icons/catalog.svg"
+          src="/assets/icons/catalog.svg"
           alt="Catálogo"
           style="height: 50px; width: 50px"
         />
@@ -199,7 +199,7 @@
         matTooltip="Organizaciones"
       >
         <img
-          src="/static/organizations/assets/icons/organizacion.svg"
+          src="/assets/icons/organizacion.svg"
           alt="Organizaciones"
           style="height: 50px; width: 50px"
         />
@@ -213,7 +213,7 @@
         matTooltip="Vocabularios"
       >
         <img
-          src="/static/organizations/assets/icons/vocabs.svg"
+          src="/assets/icons/vocabs.svg"
           alt="Vocabularios"
           style="height: 50px; width: 50px"
         />
@@ -224,7 +224,7 @@
       <a href="https://sceiba.cu" target="_blank" class="apps">
         <img
           class="MES"
-          src="/static/organizations/assets/icons/mes.svg"
+          src="/assets/icons/mes.svg"
           alt="Registro de Revistas Científicas del MES"
           matTooltip="Registro de Revistas Científicas del MES"
           style="height: 50px; width: 50px"
@@ -254,6 +254,6 @@
   <app-org-footer
     [sites]="footerSites"
     [information]="footerInformation"
-    [extraImagePath]="'static/organizations'"
+    [extraImagePath]="''"
   ></app-org-footer>
 </div>
