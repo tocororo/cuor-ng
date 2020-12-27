@@ -9,9 +9,22 @@
     fxLayoutAlign="space-between center"
     style="height: auto !important; min-height: 56px"
   >
-    <a class="color-white" [routerLink]="['/']" style="white-space: normal">
-      <img src="/assets/icons/organizacion_white.svg" alt="Organizaciones" style="height: 50px; width: 50px"> Organizaciones
-    </a>
+  <div
+      appearance="legacy"
+      aria-label="Menu de Inicio"
+      fxLayout="row wrap"
+      fxLayoutGap="15px"
+    >
+    <img src="/assets/icons/sceiba_white.svg" alt="Organizaciones" style="height: 40px; width: 40px" matTooltip="Sceiba">
+    <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuApps"
+        matTooltip="Aplicaciones"
+      >
+        <mat-icon>apps</mat-icon>
+      </button>
+  </div>
+    
 
     <div
       appearance="legacy"
@@ -19,13 +32,18 @@
       fxLayout="row wrap"
       fxLayoutGap="15px"
     >
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menuApps"
-        matTooltip="Aplicaciones"
-      >
-        <mat-icon>apps</mat-icon>
-      </button>
+    <img src="/assets/icons/organizacion_white.svg" alt="Organizaciones" style="height: 40px; width: 40px">
+    <a class="color-white" [routerLink]="['/']" style="white-space: normal">
+       Organizaciones
+       
+    </a>
+    </div>
+    <div
+    appearance="legacy"
+    aria-label="Menu de Inicio"
+    fxLayout="row wrap"
+    fxLayoutGap="15px"
+  >
       <button
         mat-icon-button
         [matMenuTriggerFor]="menuNetwork"

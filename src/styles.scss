@@ -137,15 +137,47 @@ $md-greylight: (
         A700 : #000000,
     )
 );
+$md-redlight: (
+  50 : #f0e7e6,
+  100 : #d9c3c1,
+  200 : #c09c98,
+  300 : #a6746f,
+  400 : #935650,
+  500 : #803831,
+  600 : #78322c,
+  700 : #6d2b25,
+  800 : #63241f,
+  900 : #501713,
+  A100 : #ff918b,
+  A200 : #ff6158,
+  A400 : #ff3025,
+  A700 : #ff180b,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #ffffff,
+      A700 : #ffffff,
+  )
+);
 
 
 
 
 /* - colors - */
-$toco-primary: mat-palette($md-grey);
-$toco-accent: mat-palette($mat-grey);
+$toco-primary: mat-palette($md-redlight);
+$toco-accent: mat-palette($md-redlight);
 //$toco-warn: mat-palette($mat-grey, 200, 100, 900);
-$toco-warn: mat-palette($mat-deep-orange, A700);
+$toco-warn: mat-palette($md-redlight);
 
 $toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
 
