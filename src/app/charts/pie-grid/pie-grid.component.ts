@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pie-grid',
@@ -62,7 +62,7 @@ export class PieGridComponent implements OnInit{
 
   ngOnInit() {
     //Object.assign(this, this.dataChild );
-  
+
   }
 
   onSelect(event) {

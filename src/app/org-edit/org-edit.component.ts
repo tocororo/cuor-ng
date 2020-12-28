@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MatSelect, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Hit, Identifier, IdentifierSchemas, Organization, OrganizationService, OrganizationRelationships, Relationship, SearchService, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
+import { HandlerComponent, Hit, Identifier, IdentifierSchemas, MessageHandler, Organization, OrganizationRelationships, Relationship, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
 import { OrgService } from '../org.service';
 

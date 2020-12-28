@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
-import { Hit, Organization, MessageHandler, StatusCode } from 'toco-lib';
-import { MatSnackBar, MatDialog } from '@angular/material';
-
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
-import { OrgService } from '../org.service';
 import { OrganizationDialogDeleteConfirm } from '../org-edit/org-edit.component';
-import { OrgSearchComponent } from 'toco-lib/lib/organizations/org-search/org-search.component';
+import { OrgService } from '../org.service';
+
 
 
 @Component({

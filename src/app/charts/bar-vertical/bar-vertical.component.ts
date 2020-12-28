@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { AggregationsSelection } from 'toco-lib';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
   selector: 'app-bar-vertical',
@@ -78,7 +77,7 @@ export class BarVerticalComponent implements OnInit{
 
   ngOnInit(): void{
     this.xAxisLabel = this._yAxisLabel
-    
+
   }
 
   onSelect(e) {

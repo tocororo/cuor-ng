@@ -2,20 +2,27 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
-  cuorHost: 'https://192.168.1.100:5001/',
-  sceibaApi: 'https://localhost:5000/api/',
-  cuorApi: 'https://192.168.1.100:5001/api/',
+import { Environment } from 'toco-lib';
 
-  appHost: 'https://192.168.1.100:4200',
-  appName: 'Orgs',
-  oauthRedirectUri: 'https://192.168.1.100:4200/',
-  oauthClientId: 'jrlAUANdljGrgHkkWmbcuRfPEObe1tLyJ2f7og2f',
-  oauthScope: 'user:email',
-  topOrganizationPID: '',
+class EnvironmentImpl implements Environment {
+  production = false;
+  sceibaHost = 'https://sceiba.cu';
+  cuorHost = 'https://orgs.sceiba.cu/';
+  sceibaApi = 'https://sceiba.cu/api/';
+  cuorApi = 'https://orgs.sceiba.cu/api/';
 
-};
+  appHost = 'https://192.168.1.100:4200';
+  appName = 'Orgs';
+  oauthRedirectUri = 'https://192.168.1.100:4200/';
+  oauthClientId = 'jrlAUANdljGrgHkkWmbcuRfPEObe1tLyJ2f7og2f';
+  oauthScope = 'user:email';
+  topOrganizationPID = '';
+  cachableUrls = [];
+}
+
+export const environment = new EnvironmentImpl();
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

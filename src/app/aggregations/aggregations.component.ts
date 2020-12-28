@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Aggr, AggrBucket } from 'toco-lib';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Aggr } from 'toco-lib';
 
 export interface AggregationsSelection{
-  [id: string]: string[] 
+  [id: string]: string[]
 }
 
 @Component({
@@ -12,11 +12,11 @@ export interface AggregationsSelection{
 })
 export class AggregationsComponent implements OnInit {
   @Input()
-  aggregations: { [id: string]: Aggr } = {}; 
+  aggregations: { [id: string]: Aggr } = {};
 
   @Input()
   typeChart:string
-  
+
   /***
    * {
    *  'country': ['Cuba','Peru'],
@@ -53,26 +53,26 @@ export class AggregationsComponent implements OnInit {
 
   //aqui se agregan los casos que puedan haber en las agregaciones para q salgan siempre en español
   private _translate(key){
-    switch (key) 
+    switch (key)
     {
       case "status": {
-        return "Estado";        
+        return "Estado";
       }
       case "country": {
-        return "País";        
+        return "País";
       }
       case "state": {
-        return "Provincia (Estado)";        
+        return "Provincia (Estado)";
       }
       case "types": {
-        return "Tipos";        
+        return "Tipos";
       }
-      
+
     }
-     
-    return key;   
+
+    return key;
   }
-    
+
 
   /* isSelected(aggrKey, bucket: AggrBucket) {
 
@@ -82,7 +82,7 @@ export class AggregationsComponent implements OnInit {
         if (element == bucket.key) {
           // console.log(this.selectedAggr, aggrKey, bucket);
           // console.log("--------------------");
-          
+
           return true;
         }
       }
@@ -90,28 +90,28 @@ export class AggregationsComponent implements OnInit {
       //   if (key == bucket.key) {
       //     console.log(this.selectedAggr, aggrKey, bucket);
       //     console.log("--------------------");
-          
+
       //     return true;
       //   }
       // });
     }
     // console.log("FALSE");
-    
+
     return false;
   } */
 
   selectionChange(new_aggr) {
-    
+
     if (!this.selectedAggr.hasOwnProperty(new_aggr.key)){
       this.selectedAggr[new_aggr.key] = [];
     }
-    
+
       if (this.selectedAggr[new_aggr.key].find(k => k == new_aggr.bucket.name)){
         this.selectedAggr[new_aggr.key] = this.selectedAggr[new_aggr.key].filter(k => k != new_aggr.bucket.name);
       } else{
         this.selectedAggr[new_aggr.key].push(new_aggr.bucket.name)
       }
-     
+
 
     this.keySelect.emit(this.selectedAggr);
   }

@@ -1,12 +1,11 @@
 
 import { Injectable } from '@angular/core';
-import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { take, map } from 'rxjs/operators';
-
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { Organization, SearchResponse } from 'toco-lib';
-import { SearchService } from 'toco-lib';
 import { OrgService } from './org.service';
+
 
 const orgExample: any =
 {

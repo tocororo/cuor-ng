@@ -1,14 +1,13 @@
 
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { AuthBackend, OauthAuthenticationService, OauthInfo, SimpleAuthenticationService, User } from 'toco-lib';
-import { OrgService, UserService } from './org.service';
+import { AuthBackend, Environment, OauthAuthenticationService, OauthInfo, User } from 'toco-lib';
+import { UserService } from './org.service';
 import { Permission } from './permission.service';
 
-import { environment } from 'src/environments/environment';
-import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+
 @Component({
 	selector: 'toco-org-root',
 	templateUrl: './org.component.html',
@@ -29,15 +28,15 @@ export class OrgRootComponent
   public authBackend: AuthBackend;
 
   public oauthInfo: OauthInfo = {
-    serverHost: environment.cuorHost,
-    loginUrl: environment.cuorHost + 'oauth/cuor/authorize',
-    tokenEndpoint: environment.cuorHost + 'oauth/token',
-    userInfoEndpoint: environment.cuorApi + 'me',
-    appHost: environment.appHost,
-    appName: environment.appName,
-    oauthRedirectUri: environment.oauthRedirectUri,
-    oauthClientId: environment.oauthClientId,
-    oauthScope: environment.oauthScope,
+    serverHost: this.environment.cuorHost,
+    loginUrl: this.environment.cuorHost + 'oauth/cuor/authorize',
+    tokenEndpoint: this.environment.cuorHost + 'oauth/token',
+    userInfoEndpoint: this.environment.cuorApi + 'me',
+    appHost: this.environment.appHost,
+    appName: this.environment.appName,
+    oauthRedirectUri: this.environment.oauthRedirectUri,
+    oauthClientId: this.environment.oauthClientId,
+    oauthScope: this.environment.oauthScope,
   }
 
 	public constructor(
@@ -47,14 +46,14 @@ export class OrgRootComponent
     private oauthService: OAuthService,
     protected http: HttpClient,
     // private router: Router
-    // private env: EnvService
+    private environment: Environment
     ) {
 
     }
 
     public ngOnInit(): void
     {
-        this.cuorHost = environment.cuorHost;
+        this.cuorHost = this.environment.cuorHost;
         this.footerSites =  Array();
         this.footerInformation =  Array();
 

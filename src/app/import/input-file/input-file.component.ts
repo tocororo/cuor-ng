@@ -30,7 +30,7 @@ export class InputFileComponent implements OnInit {
   @Output()
   public file = new EventEmitter<File>();
 
-  @ViewChild("inputElement", {static: true}) 
+  @ViewChild("inputElement", {static: true})
   public inputElement: ElementRef
 
   constructor() { }

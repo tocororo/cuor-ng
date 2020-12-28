@@ -3,9 +3,9 @@
  *   All rights reserved.
  */
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MetadataService } from 'toco-lib';
-import { ActivatedRoute, Data, RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'toco-static-pages',

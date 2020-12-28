@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Organization } from 'toco-lib';
 import { Permission } from '../permission.service';
@@ -18,7 +18,7 @@ export class OrgViewerComponent implements OnInit {
 
   public ngOnInit(): void {
     /* Gets the `Organization` data. */
-    
+
     this._activatedRoute.data.subscribe(
       (data) => {
         this.org = data.org.metadata;

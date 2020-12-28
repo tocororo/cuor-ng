@@ -1,20 +1,19 @@
 
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-// import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
-
-import { OrganizationDetailResolverService } from './organization-detail-resolver.service.ts';
+import { RouterModule, Routes } from '@angular/router';
+import { OauthAuthenticationService } from 'toco-lib';
+import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 import { HomeComponent } from './home/home.component';
+import { ImportComponent } from './import/import.component';
+import { OrgEditComponent } from './org-edit/org-edit.component';
+import { OrgViewerComponent } from './org-viewer/org-viewer.component';
+import { UserService } from './org.service';
+// import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
+import { OrganizationDetailResolverService } from './organization-detail-resolver.service.ts';
+import { AdminPermissionService, CuratorPermissionService } from './permission.service';
 import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { OrgViewerComponent } from './org-viewer/org-viewer.component';
-import { OrgEditComponent } from './org-edit/org-edit.component';
-import { DisambiguateComponent } from './disambiguate/disambiguate.component';
-import { AdminPermissionService, CuratorPermissionService } from './permission.service';
-import { ImportComponent } from './import/import.component';
-import { UserService } from './org.service';
-import { OauthAuthenticationService } from 'toco-lib';
+
 
 
 const routes: Routes = [

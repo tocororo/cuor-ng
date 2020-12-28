@@ -28,7 +28,7 @@ export class ImportComponent implements OnInit {
       dpa: new FormControl(null, this.isFile)
     });
   }
-  
+
   private isFile(control: AbstractControl): {[key: string]: any} | null{
     if ( control.value instanceof File) return null
     return {invalid: 'El valor no es un fichero'};
@@ -44,7 +44,7 @@ export class ImportComponent implements OnInit {
   //     case "GRID":
   //       this.fileUploadGRID = file;
   //       console.log(file);
-        
+
   //       break;
 
   //     default:
@@ -57,7 +57,7 @@ export class ImportComponent implements OnInit {
    */
   public import(){
     console.log(this.importFormGroup);
-    
+
     if (this.importFormGroup.valid){
       const formData = new FormData();
       formData.append("grid",(this.importFormGroup.value.grid as File), (this.importFormGroup.value.grid as File).name);

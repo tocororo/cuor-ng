@@ -1,13 +1,11 @@
 import { HttpBackend, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subject } from 'rxjs';
-import { MessageHandler, Organization, Params, SearchResponse, StatusCode, User } from 'toco-lib';
+import { Environment, Organization, SearchResponse, User } from 'toco-lib';
 
 
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +25,8 @@ export class OrgService {
   constructor(
     private http: HttpClient,
     // private oauthStorage: OAuthStorage,
-    private handler: HttpBackend
+    private handler: HttpBackend,
+    private environment: Environment
   ) {
     this.newHttp = new HttpClient(handler);
   }
@@ -35,12 +34,12 @@ export class OrgService {
   public editOrganization(org: Organization): Observable<any> {
     const payload = org.entitystringify();
     console.log(org, payload)
-    const url = environment.cuorApi + this.prefix + "/" + org.id;
+    const url = this.environment.cuorApi + this.prefix + "/" + org.id;
     return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   public fileUpload(formData: FormData) {
-    const url = environment.cuorHost + "import";
+    const url = this.environment.cuorHost + "import";
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -62,13 +61,13 @@ export class OrgService {
       // headers: this.headers
     };
     // console.log(params);
-    const req = environment.cuorApi + 'organizations/';
+    const req = this.environment.cuorApi + 'organizations/';
     // console.log(req);
 
     return this.http.get<SearchResponse<Organization>>(req, options);
   }
   getOrganizationById(id: string): Observable<SearchResponse<Organization>> {
-    const req = environment.cuorApi + 'organizations/' + id ;
+    const req = this.environment.cuorApi + 'organizations/' + id ;
     // console.log(req);
 
     return this.newHttp.get<SearchResponse<Organization>>(req);
@@ -86,10 +85,11 @@ export class UserService implements CanActivate {
 
   constructor(
     protected http: HttpClient,
-    private _router: Router) { }
+    private _router: Router,
+    private environment: Environment) { }
 
   public getUserLogin(){
-    this.http.get<any>(environment.cuorApi + 'me').subscribe(
+    this.http.get<any>(this.environment.cuorApi + 'me').subscribe(
       (user) => {
         this.user = user;
         this.loginChange()

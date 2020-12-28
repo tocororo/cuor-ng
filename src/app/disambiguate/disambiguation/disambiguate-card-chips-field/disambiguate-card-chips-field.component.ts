@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class DisambiguateCardChipsFieldComponent implements OnInit {
 
-  @Input() isMaster: boolean = true; 
+  @Input() isMaster: boolean = true;
   @Input() chipsTitle: string = null;
   @Input() subtitlesList: string[] = null;
   @Input() contentList: string[] = null;
@@ -16,13 +16,13 @@ export class DisambiguateCardChipsFieldComponent implements OnInit {
   @Input() valueName: string = null;
 
   @Output() propagate = new EventEmitter<string[]>();
-  
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  onPropagate(message){    
+  onPropagate(message){
     this.propagate.emit(message)
   }
 

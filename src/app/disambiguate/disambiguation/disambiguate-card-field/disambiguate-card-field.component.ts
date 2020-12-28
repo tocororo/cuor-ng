@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 
 @Component({
@@ -8,16 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DisambiguateCardFieldComponent implements OnInit {
 
-  @Input() isMaster: boolean = true; 
+  @Input() isMaster: boolean = true;
   @Input() cardTitle: string = null;
   @Input() cardSubtitles: string[] = null;
   @Input() cardContent: string = null;
-  
+
   constructor() { }
 
   ngOnInit() {
     //console.log(" aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiii     ", this.title, this.subtitles);
-    
+
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-disambiguate-text-field',
@@ -9,7 +9,7 @@ export class DisambiguateTextFieldComponent implements OnInit {
 
   @Input() isMaster: boolean = true;
   @Input() textLabel: string = null;
-  @Input() textContent: string = null; 
+  @Input() textContent: string = null;
 
   @Output() propagate = new EventEmitter<string[]>();
 
@@ -18,7 +18,7 @@ export class DisambiguateTextFieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  onPropagate(message){    
+  onPropagate(message){
     this.propagate.emit(message)
   }
 

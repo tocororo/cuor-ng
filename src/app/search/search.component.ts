@@ -1,14 +1,13 @@
-import { Component, Inject, OnInit } from "@angular/core";
 import { HttpParams } from "@angular/common/http";
-import { SearchResponse, Organization, AggregationsSelection } from "toco-lib";
-import { SearchService } from "toco-lib";
-import {  PageEvent } from "@angular/material";
+import { Component, OnInit } from "@angular/core";
+import { PageEvent } from "@angular/material";
 import {
   ActivatedRoute,
-  Router,
+
   NavigationExtras,
-  Params,
+  Params, Router
 } from "@angular/router";
+import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
 import { OrgService } from "../org.service";
 
 @Component({

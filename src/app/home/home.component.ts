@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { SearchService } from 'toco-lib';
-import { SearchResponse, Organization } from 'toco-lib';
+import { ActivatedRoute, Router } from "@angular/router";
+import { Organization, SearchResponse } from 'toco-lib';
 import { OrgService } from "../org.service";
 
 @Component({
