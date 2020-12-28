@@ -46,70 +46,70 @@ export function storageFactory() : OAuthStorage {
   return localStorage
 }
 @NgModule({
-	declarations: [
-		OrgRootComponent,
-		HomeComponent,
-		SearchComponent,
-		SearchListComponent,
-		StaticPagesComponent,
-		OrgViewerComponent,
-		OrgEditComponent,
-		OrganizationDialogRelasionship,
-		DatepickerYearComponent,
-		OrganizationDialogDeleteConfirm,
-		// testing charts organizations
-		ChartsComponent,
-		PolarChartComponent,
-		BarVerticalComponent,
-		PieGridComponent,
-		AggregationsComponent,
-		GaugeChartComponent,
-		//DialogChartComponent
-		DisambiguateComponent,
-		DisambiguationComponent,
-		DisambiguateCardFieldComponent,
-		DisambiguateCardChipsFieldComponent,
-		DisambiguateAccordChipsFieldComponent,
-		DisambiguateTextFieldComponent,
-		DisambiguateRelationshipsComponent,
-		ShowOneRelationshipComponent,
-		ImportComponent,
+  declarations: [
+    OrgRootComponent,
+    HomeComponent,
+    SearchComponent,
+    SearchListComponent,
+    StaticPagesComponent,
+    OrgViewerComponent,
+    OrgEditComponent,
+    OrganizationDialogRelasionship,
+    DatepickerYearComponent,
+    OrganizationDialogDeleteConfirm,
+    // testing charts organizations
+    ChartsComponent,
+    PolarChartComponent,
+    BarVerticalComponent,
+    PieGridComponent,
+    AggregationsComponent,
+    GaugeChartComponent,
+    //DialogChartComponent
+    DisambiguateComponent,
+    DisambiguationComponent,
+    DisambiguateCardFieldComponent,
+    DisambiguateCardChipsFieldComponent,
+    DisambiguateAccordChipsFieldComponent,
+    DisambiguateTextFieldComponent,
+    DisambiguateRelationshipsComponent,
+    ShowOneRelationshipComponent,
+    ImportComponent,
     InputFileComponent,
     OrgFooterComponent
-	],
-	imports: [
-		MatRadioModule,
-		NgxChartsModule,
+  ],
+  imports: [
+    MatRadioModule,
+    NgxChartsModule,
 
-		BrowserAnimationsModule,
-		SharedModule,
-		CoreModule,
-		StaticsModule,
-		ReactiveFormsModule,
-		OrganizationsModule,
-		TocoFormsModule,
-		OrgRoutingModule,
-		SearchModule,
-		HttpClientModule,
-		MarkdownModule.forRoot({
-			loader: HttpClient
-		  }),
-		AuthenticationModule
-	],
-	entryComponents: [
-		OrganizationDialogRelasionship,
-		OrganizationDialogDeleteConfirm
-	],
-	providers: [
-		SearchService,
-		// EnvServiceProvider,
+    BrowserAnimationsModule,
+    SharedModule,
+    CoreModule,
+    StaticsModule,
+    ReactiveFormsModule,
+    OrganizationsModule,
+    TocoFormsModule,
+    OrgRoutingModule,
+    SearchModule,
+    HttpClientModule,
+    MarkdownModule.forRoot({
+      loader: HttpClient
+      }),
+    AuthenticationModule
+  ],
+  entryComponents: [
+    OrganizationDialogRelasionship,
+    OrganizationDialogDeleteConfirm
+  ],
+  providers: [
+    SearchService,
+    // EnvServiceProvider,
     OrganizationServiceNoAuth,
     OrgService,
     { provide: Environment, useValue: environment }
     // { provide: OAuthStorage, useFactory: storageFactory },
     // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true }
-	],
+  ],
 
-	bootstrap: [OrgRootComponent]
+  bootstrap: [OrgRootComponent]
 })
 export class OrgModule { }
