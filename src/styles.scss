@@ -208,32 +208,64 @@ $toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
 
 /* autoprefixer grid: autoplace */
 
+
+.custom {
+  a{
+      color: mat-color($toco-primary);
+  }
+}
+/* autoprefixer grid: autoplace */
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 
 .m-1{
-    margin: 1em;
+  margin: 1em;
+}
+.mb-1{
+  margin-bottom: 2em;
 }
 .m-2{
-    margin: 2em;
+  margin: 2em;
+}
+.mt-2{
+  margin-top: 2em;
 }
 .p-1{
-    padding: 16px;
+  padding: 16px;
+}
+.pt-1{
+  padding-top: 8px;
 }
 .query-input .mat-form-field-wrapper{
-    padding-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 .my-outline{
-    border: 2px solid mat-color($toco-primary, 50);
-    border-radius: 4px;
-    padding: 8px;
-    padding-bottom: 0px;
-    margin-bottom: 24px;
- }
- .my-outline:hover{
-    border: 2px solid mat-color($toco-primary);
- }
- .tooltip-red{
-    // background: #b71c1c !important;
-     background: mat-color($toco-primary, A700);
- }
+  border: 2px solid mat-color($toco-primary, 50);
+  border-radius: 4px;
+  padding: 8px;
+  padding-bottom: 0px;
+  margin-bottom: 24px;
+}
+.my-outline:hover{
+  border: 2px solid mat-color($toco-primary);
+}
+.tooltip-red{
+  // background: #b71c1c !important;
+   background: mat-color($toco-warn, A700);
+}
+
+.tooltip-beta-red{
+  background: mat-color($toco-warn, A700);
+  font-size: larger;
+}
+.triangle{
+  border-left: 80px solid mat-color($toco-warn, A700) !important;
+}
+.primary-color{
+   background-color: mat-color($toco-primary);
+   color: #fff;
+   padding: 16px;
+   margin: 16px;
+   border-radius: 4px;
+}

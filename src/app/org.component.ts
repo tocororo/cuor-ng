@@ -15,7 +15,7 @@ import { Permission } from './permission.service';
 })
 export class OrgRootComponent
 {
-  public title = "Catálogo de Organizaciones Cubanas";
+  public title = "Sistema de identificación de Organizaciones Cubanas";
 
   public footerSites: Array< { name: string, url: string, useRouterLink: boolean } >;
 
