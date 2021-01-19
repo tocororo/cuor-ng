@@ -54,4 +54,9 @@ export class HomeComponent implements OnInit {
 			queryParamsHandling: "",
 		});
 	}
+
+	goAbout(){
+		this.router.navigate(['about']);
+	}
+	
 }
