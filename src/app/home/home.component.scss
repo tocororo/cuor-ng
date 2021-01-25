@@ -5,3 +5,94 @@
 .a-grey:hover{
     text-decoration: underline;
 }
+.w-100{
+    width: 100%;
+}
+.w-70{
+    width: 70%;
+}
+.w-50{
+    width: 50%;
+}
+.buble{
+    position: relative;
+
+    h1{
+        position: absolute;
+        text-align: center;
+        right: 80px;
+        top: 35px;
+        // border-style: solid;
+        background: white;
+        border-radius: 10px;
+        padding: 11px;
+        box-shadow: 3px 4px 8px 3px rgba(0, 0, 0, 0.4), 8px 10px 16px 6px rgba(0, 0, 0, 0.19), 0px 0px 0px 0px rgba(0, 0, 0, 0.26);
+    }
+}
+.card-triangle{
+    position: relative;
+    width: 25%;
+    margin: 1em;
+    margin-right: 40px;
+    padding: 16px;
+    // color cambiado en el style global
+    // border-color: blue;
+    border-style: solid;
+    border-radius: 6px;
+}
+.triangle-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 75px solid transparent;
+    // color cambiado en el style global
+    // border-left: 25px solid #be1c1c;
+    border-bottom: 75px solid transparent;
+    right: -28px;
+    top: 0px;
+}
+@media (max-width: 599px){
+    .triangle-right{
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 160px solid transparent;
+        border-bottom: 160px solid transparent;
+        bottom: -176px;
+        right: 47%;
+        top: auto;
+        transform: rotate(90deg);
+    }
+}
+
+.prefooter{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    .info-card{
+        position: relative;
+        margin: 76px 16px 16px 16px;
+        // width: 27%;
+        // min-width: 18em;
+        padding: 16px;
+        border-radius: 6px;
+        background-color: whitesmoke;
+        box-shadow: 5px 5px 7px #efefef;
+
+        img{
+            position: absolute;
+            top: -60px;
+            left: 8px;
+            width: 130px;
+            padding: 4px;
+            background: whitesmoke;
+            border-radius: 50%;
+        }
+        p{
+            margin: 0;
+            margin-left: 146px;
+        }
+    }
+}
