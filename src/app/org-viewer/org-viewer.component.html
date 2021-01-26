@@ -4,14 +4,14 @@
 <div
 fxLayout="row wrap"
 fxLayout.xs="column"
-fxLayoutAlign="space-between center"
+fxLayoutAlign="start center"
 style="height: 80px; padding: 0 16px;"
     >
 
     <button mat-icon-button *ngIf="hasPermission" routerLink="/{{org.id}}/edit" matTooltip="Editar la Organización">
         <mat-icon class="mat-18">mode_edit</mat-icon>
     </button>
-    <span class="mat-h2">{{org.name}}</span>
+    <span class="mat-h2" style="margin: 0;">{{org.name}}</span>
     <!-- <mat-toolbar-row></mat-toolbar-row>
     <mat-toolbar-row></mat-toolbar-row>
     <mat-toolbar-row></mat-toolbar-row> -->

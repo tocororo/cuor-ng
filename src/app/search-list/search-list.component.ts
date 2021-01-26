@@ -28,7 +28,7 @@ export class SearchListComponent implements OnInit
 	public get hasPermission(): boolean {
 		let permission = new Permission();
 
-		if (permission.hasPermissions("curator")) {
+		if (permission.hasPermissions("curator")|| permission.hasPermissions("admin")) {
 			return true;
 		}
 		return false;
