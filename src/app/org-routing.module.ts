@@ -30,7 +30,7 @@ const routes: Routes = [
 		resolve: {
 			'org': OrganizationDetailResolverService
 		},
-		canActivate: [OauthAuthenticationService, CuratorPermissionService]
+		canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
     },
     // {
     //     path: 'add',
@@ -43,7 +43,7 @@ const routes: Routes = [
 	{
 		path: 'disambiguate',
 		component: DisambiguateComponent,
-		canActivate: [OauthAuthenticationService, CuratorPermissionService]
+		canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
 	},
 	{
 		path: 'import',

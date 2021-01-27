@@ -3,13 +3,13 @@
 <div
     fxLayout="row wrap"
     fxLayout.xs="column"
-    fxLayoutAlign="space-between center"
+    fxLayoutAlign="start center"
     style="height: 80px; padding: 0 16px;"
   >
     <button mat-icon-button routerLink="/{{org.id}}/view" matTooltip="Ver la Organización">
         <mat-icon class="mat-18">visibility</mat-icon>
     </button>
-    <span class="mat-h2">Editando: {{org.name}}</span>
+    <span class="mat-h2" style="margin: 0;">Editando: {{org.name}}</span>
   </div>
 
   <!-- <toco-progress [loading]="loading"></toco-progress> -->

@@ -1,4 +1,4 @@
-<mat-card *ngIf="hitList && hitList.hits.length > 0; else templateNotInfo">
+<mat-card class="mat-elevation-z0" *ngIf="hitList && hitList.hits.length > 0; else templateNotInfo">
     <mat-card-content>
       <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
 
