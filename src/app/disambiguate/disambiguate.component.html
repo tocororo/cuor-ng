@@ -1,11 +1,11 @@
-<mat-toolbar color="accent"
+<div
     fxLayout="row wrap"
     fxLayout.xs="column"
     fxLayoutAlign="space-between center"
-    style="height: 80px;"
+    style="height: 80px; padding: 0 16px;"
 > 
-    <span>Desambiguación</span>  
-</mat-toolbar>
+    <span class="mat-h2">Desambiguación</span>  
+</div>
 <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="masterFormControl">
         <ng-template matStepLabel>Seleccione una Organización</ng-template>

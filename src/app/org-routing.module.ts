@@ -58,6 +58,16 @@ const routes: Routes = [
         path: 'faq',
         component: StaticPagesComponent,
         data: {src: '/assets/markdown/faq.md', title: 'FAQ'}
+	},
+	{
+        path: 'terms',
+        component: StaticPagesComponent,
+        data: {src: '/assets/markdown/terms.md', title: 'Términos de uso'}
+	},
+	{
+        path: 'privacy',
+        component: StaticPagesComponent,
+        data: {src: '/assets/markdown/privacy.md', title: 'Políticas de privacidad'}
     },
     {
         path: 'about',

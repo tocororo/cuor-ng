@@ -37,6 +37,9 @@ import { OrgService } from './org.service';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
+import { CardSvgComponent } from './home/card-svg/card-svg.component';
+import { CardItemInfoComponent } from './home/card-item-info/card-item-info.component';
+import { CardsSliderComponent } from './home/cards-slider/cards-slider.component';
 
 
 
@@ -75,7 +78,10 @@ export function storageFactory() : OAuthStorage {
     ShowOneRelationshipComponent,
     ImportComponent,
     InputFileComponent,
-    OrgFooterComponent
+    OrgFooterComponent,
+    CardSvgComponent,
+    CardItemInfoComponent,
+    CardsSliderComponent
   ],
   imports: [
     MatRadioModule,

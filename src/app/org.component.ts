@@ -1,6 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { AuthBackend, Environment, OauthAuthenticationService, OauthInfo, User } from 'toco-lib';
@@ -45,7 +46,7 @@ export class OrgRootComponent
     private oauthStorage: OAuthStorage,
     private oauthService: OAuthService,
     protected http: HttpClient,
-    // private router: Router
+    private router: Router,
     private environment: Environment
     ) {
 
@@ -58,13 +59,15 @@ export class OrgRootComponent
         this.footerInformation =  Array();
 
         this.footerSites.push({ name: "MES", url: "https://www.mes.gob.cu", useRouterLink: false});
+        this.footerSites.push({ name: "Sceiba", url: "https://sceiba.cu", useRouterLink: false});
         this.footerSites.push({ name: "ONEI", url: "http://www.onei.gob.cu/", useRouterLink:false});
         this.footerSites.push({ name: "GRID", url: "https://www.grid.ac", useRouterLink: false});
         this.footerSites.push({ name: "ROR", url: "https://ror.org/", useRouterLink: false});
         this.footerSites.push({ name: "Wikidata", url: "https://www.wikidata.org/wiki/Wikidata:Main_Page", useRouterLink: false});
+        this.footerSites.push({ name: "ISSN", url: "https://isni.org/", useRouterLink: false});
 
-        // this.footerInformation.push({ name: "Términos de uso", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
-        // this.footerInformation.push({ name: "Privacidad", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
+        this.footerInformation.push({ name: "Términos de uso", url: "/terms", useRouterLink: true});
+        this.footerInformation.push({ name: "Privacidad", url: "/privacy", useRouterLink: true});
         this.footerInformation.push({ name: "Contacto", url: "/contact", useRouterLink: true});
         this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true});
 
@@ -176,5 +179,9 @@ export class OrgRootComponent
       return true;
     }
     return false;
+  }
+
+  public get isHome(){
+    return this.router.url == '/';
   }
 }
