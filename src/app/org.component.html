@@ -7,10 +7,21 @@
         fxLayoutAlign="space-between center"
         style="height: auto !important; min-height: 56px;"
     >
-        <a class="color-white" [routerLink]="['/']" style="white-space: normal;">
-            <!-- <img src="assets/images/logo_mes.png" alt="MES" width="140"> -->
-            Organizaciones
-        </a>
+        <div
+            appearance="legacy"
+            aria-label="Menu de Inicio"
+            fxLayout="row wrap"
+            fxLayoutGap="15px"
+        >
+            <a class="color-white" [routerLink]="['/']" style="white-space: normal;">
+                <!-- <img src="assets/images/logo_mes.png" alt="MES" width="140"> -->
+                Organizaciones
+            </a>
+            <a class="color-white" [routerLink]="['/wiki-organizations']" style="white-space: normal;">
+                <!-- <img src="assets/images/logo_mes.png" alt="MES" width="140"> -->
+                Pérfiles
+            </a>
+        </div>
         
         <div
             appearance="legacy"

@@ -1,0 +1,58 @@
+<a *ngIf="filtro == false" 
+      (click)="displayFiltro()"
+      class="link"
+      >
+      Filtar Organizaciones Internacionales
+</a>
+
+<section *ngIf="filtro == true" class="example-section">
+  <label class="example-margin" style="font-size: small;">Filtro:</label>
+  <mat-radio-group style="font-size: small;">
+    <mat-radio-button class="example-margin" value="false1" [checked]="checkedAll" [ngStyle]="{'color':'#6f6f6f'}"
+      (click)="changeAll()">Todos.
+    </mat-radio-button>
+    <mat-radio-button class="example-margin" value="false" [checked]="checkedCuba" [ngStyle]="{'color':'#6f6f6f'}"
+      (click)="defaultCountry()">Cuba.
+    </mat-radio-button>
+    <mat-radio-button class="example-margin" value="true" [checked]="checkedOne" [ngStyle]="{'color':'#6f6f6f'}"
+      (click)="changeOne()">Seleccione un pais:
+    </mat-radio-button>
+  </mat-radio-group>
+</section>
+
+
+<mat-form-field *ngIf="autocompleteFilter == true" appearance="{{appearance}}" [ngStyle]="{'width.%': 30}" class="example-full-width">
+  <mat-label>Buscar un pais</mat-label>
+  <input matInput [matAutocomplete]="autoFilter" [formControl]=countryCtrl>
+  <mat-autocomplete #autoFilter="matAutocomplete" [displayWith]="displayFn">
+    <mat-option (click)="chooseCountry(country.QID)" *ngFor="let country of filteredOptions | async" [value]="country">
+      {{country.label}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field [ngStyle]="{'width.%': 100}" appearance="{{appearance}}">
+  <mat-label>{{label}}</mat-label>
+  <input matInput placeholder="{{placeholder}}" aria-label="Buscar" [matAutocomplete]="autoSearch"
+    [matAutocompletePosition]=position [formControl]=orgCtrl (keyup.enter)="searchOrg()">
+  <mat-autocomplete #autoSearch="matAutocomplete" >
+    <mat-option *ngFor="let org of filteredOrg" [value]="org.label" (click)="redirectProfile (org.QID, org.label, org.lang )">
+      <div style="overflow: auto;"><span>{{org.label}}</span></div>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<br>
+
+<mat-list *ngIf="filteredSimilarsOrg.length > 0 && search === true" >
+  <h3 mat-subheader > Resltados de Busqueda para <b><i>"{{searchLabel}}"</i></b>.</h3> 
+  <mat-list-item class="searchLinkBox" *ngFor="let orgSim of filteredSimilarsOrg" (click)="redirectProfile (orgSim.QID, orgSim.label, orgSim.lang )">
+    <h4 class="searchLink" mat-line  ><b>{{orgSim.label}}</b></h4>
+    <p class="searchLink" mat-line  >{{orgSim.description}}</p>
+    <!-- <mat-divider></mat-divider> -->
+  </mat-list-item>
+</mat-list>
+
+<mat-list *ngIf="filteredSimilarsOrg.length == 0 && search === false" >
+  <h3 mat-mat-subheader > No se encontraron resltados de busqueda para <strong><i>"{{orgCtrl.value}}"</i></strong>.</h3> 
+</mat-list>

@@ -44,6 +44,19 @@ import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disa
 import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
+
+import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
+import { WikiOrgEmployesProfileComponent } from './wiki-organizations/profiles/wiki-org-employes-profile/wiki-org-employes-profile.component';
+import { TableLayoutComponent } from './wiki-organizations/profile-layouts/table-layout/table-layout.component';
+import { OrgSearchWikiComponent } from './wiki-organizations/wiki-org-search/wiki-org-search.component';
+import { WikiAuthorProfileComponent } from './wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
+import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
+import { WikiTopicProfileComponent } from './wiki-organizations/profiles/wiki-topic-profile/wiki-topic-profile.component';
+import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
+import { WikiAuthorsProfileComponent } from './wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
+import { ExpansionPanelLayoutComponent } from './wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component';
+import { WikiTopicsProfileComponent } from './wiki-organizations/profiles/wiki-topics-profile/wiki-topics-profile.component';
+
 @NgModule({
 	declarations: [
 		OrgRootComponent,
@@ -74,6 +87,18 @@ import { InputFileComponent } from './import/input-file/input-file.component';
 		ShowOneRelationshipComponent,
 		ImportComponent,
 		InputFileComponent,
+
+		WikiOrganizationsComponent,
+		WikiOrgEmployesProfileComponent,
+		TableLayoutComponent,
+		OrgSearchWikiComponent,
+		WikiAuthorProfileComponent,
+		WikiWorkProfileComponent,
+		WikiTopicProfileComponent,
+		WikiVenueProfileComponent,
+		WikiAuthorsProfileComponent,
+		ExpansionPanelLayoutComponent,
+		WikiTopicsProfileComponent,
 	], 
 	imports: [
 		MatRadioModule,

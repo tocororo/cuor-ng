@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <br>
+    <br>
+    <h1 class="mat-display-3" style="text-align: center; width: 90%;">{{title}}</h1>
+    <ng-container *ngIf="content != undefined " >
+      <div id="divContent" style="text-align: justify; width: 90%; "> </div>
+      <a  class="link" (click)="goWikipedia()" >ver mas en wikipedia</a>
+    </ng-container>
+     
+    <br>
+    <wiki-org-search style="width: 70%;"></wiki-org-search>
+      
+    <mat-chip-list  style="width: 95%;" aria-label="org selection" >
+        <span>Similares: </span>
+        <ng-container *ngFor="let sim of similars">
+          <mat-chip class="linkSimilars" *ngIf="this.title != sim.label" matTooltip={{sim.description}}> 
+            {{sim.label}} 
+          </mat-chip>
+        </ng-container>
+    </mat-chip-list>
+    <br>
+    <br>
+    <br>
+    <expansion-panel-layout [services]="services"></expansion-panel-layout>
+</div>
