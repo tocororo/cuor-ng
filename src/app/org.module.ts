@@ -25,6 +25,9 @@ import { DisambiguateRelationshipsComponent } from './disambiguate/disambiguatio
 import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component';
 import { DisambiguateTextFieldComponent } from './disambiguate/disambiguation/disambiguate-text-field/disambiguate-text-field.component';
 import { DisambiguationComponent } from './disambiguate/disambiguation/disambiguation.component';
+import { CardItemInfoComponent } from './home/card-item-info/card-item-info.component';
+import { CardSvgComponent } from './home/card-svg/card-svg.component';
+import { CardsSliderComponent } from './home/cards-slider/cards-slider.component';
 import { HomeComponent } from './home/home.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
@@ -37,18 +40,27 @@ import { OrgService } from './org.service';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { CardSvgComponent } from './home/card-svg/card-svg.component';
-import { CardItemInfoComponent } from './home/card-item-info/card-item-info.component';
-import { CardsSliderComponent } from './home/cards-slider/cards-slider.component';
 import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 
 
+import { ExpansionPanelLayoutComponent } from './wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component';
+import { TableLayoutComponent } from './wiki-organizations/profile-layouts/table-layout/table-layout.component';
+import { WikiAuthorProfileComponent } from './wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
+import { WikiAuthorsProfileComponent } from './wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
+import { WikiOrgEmployesProfileComponent } from './wiki-organizations/profiles/wiki-org-employes-profile/wiki-org-employes-profile.component';
+import { WikiTopicProfileComponent } from './wiki-organizations/profiles/wiki-topic-profile/wiki-topic-profile.component';
+import { WikiTopicsProfileComponent } from './wiki-organizations/profiles/wiki-topics-profile/wiki-topics-profile.component';
+import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
+import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
+import { OrgSearchWikiComponent } from './wiki-organizations/wiki-org-search/wiki-org-search.component';
+import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
 
 
 
 export function storageFactory() : OAuthStorage {
   return localStorage
 }
+
 @NgModule({
   declarations: [
     OrgRootComponent,
@@ -85,7 +97,19 @@ export function storageFactory() : OAuthStorage {
     CardSvgComponent,
     CardItemInfoComponent,
     CardsSliderComponent,
-    EditAddressComponent
+    EditAddressComponent,
+    
+    WikiOrganizationsComponent,
+		WikiOrgEmployesProfileComponent,
+		TableLayoutComponent,
+		OrgSearchWikiComponent,
+		WikiAuthorProfileComponent,
+		WikiWorkProfileComponent,
+		WikiTopicProfileComponent,
+		WikiVenueProfileComponent,
+		WikiAuthorsProfileComponent,
+		ExpansionPanelLayoutComponent,
+		WikiTopicsProfileComponent,
   ],
   imports: [
     MatRadioModule,
