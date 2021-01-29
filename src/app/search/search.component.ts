@@ -1,14 +1,14 @@
-import { Component, Inject, OnInit } from "@angular/core";
 import { HttpParams } from "@angular/common/http";
-import { SearchResponse, Organization, AggregationsSelection } from "toco-lib";
-import { SearchService } from "toco-lib";
-import {  PageEvent } from "@angular/material";
+import { Component, OnInit } from "@angular/core";
+import { PageEvent } from "@angular/material";
 import {
   ActivatedRoute,
-  Router,
+
   NavigationExtras,
-  Params,
+  Params, Router
 } from "@angular/router";
+import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
+import { OrgService } from "../org.service";
 
 @Component({
   selector: "app-search",
@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
   aggr_keys:Array<any>
   search_type:Boolean = true
   typeChart: "Polar Chart" | "Vertical Bar" | /* "Pie Grid" | */ "Gauge Chart"= "Polar Chart"
-  
+
   layoutPosition = [
     {
       name: "Derecha",
@@ -70,7 +70,7 @@ export class SearchComponent implements OnInit {
   loading: boolean = true;
 
   public constructor(
-    private _searchService: SearchService,
+    private _cuorService: OrgService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
 
@@ -78,7 +78,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    
+
     this.query = "";
 
     this.activatedRoute.queryParamMap.subscribe({
@@ -109,15 +109,15 @@ export class SearchComponent implements OnInit {
               break;
           }
         }
-        
+
         this.updateFetchParams();
         this.fetchSearchRequest();
 
-       
+
       },
 
       error: (e) => {},
-      
+
       complete: () => {},
     });
   }
@@ -143,7 +143,7 @@ export class SearchComponent implements OnInit {
   }
 
   public fetchSearchRequest() {
-    this._searchService.getOrganizations(this.params).subscribe(
+    this._cuorService.getOrganizations(this.params).subscribe(
       (response: SearchResponse<Organization>) => {
 
         // this.pageEvent.length = response.hits.total;

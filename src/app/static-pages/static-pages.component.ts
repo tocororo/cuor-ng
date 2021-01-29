@@ -3,9 +3,9 @@
  *   All rights reserved.
  */
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MetadataService } from 'toco-lib';
-import { ActivatedRoute, Data, RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'toco-static-pages',
@@ -23,14 +23,14 @@ export class StaticPagesComponent implements OnInit {
     ngOnInit() {
         if (this.src == undefined) this.src = '';
         if (this.title == undefined) this.title = '';
-        this.metadata.setTitleDescription(this.title, '');
+        // this.metadata.setTitleDescription(this.title, '');
 
         this.activatedRoute.data.subscribe({
             next: (data) => {
                 if (data) {
                     this.src = data['src'];
                     this.title = data['title'];
-                    this.metadata.setTitleDescription(this.title, '');
+                    // this.metadata.setTitleDescription(this.title, '');
                 }
 
             },

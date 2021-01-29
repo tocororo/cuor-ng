@@ -1,146 +1,147 @@
+<mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2;">
+  <mat-toolbar-row
+      fxLayout="row wrap"
+      fxLayoutAlign="space-between center"
+      style="height: auto !important; min-height: 80px;"
+  >
+    <div style="width: 330px; display: flex; align-items: center;">
+        <div class="triangle">
+            <span matTooltipClass="tooltip-beta-red" matTooltip="Este es un producto BETA configurado con propósitos de prueba.
+            Algunas características pueden no funcionar correctamente."> <strong> BETA </strong> </span>
+        </div>
+        <a mat-button [routerLink]="['/']" style="white-space: normal; display: flex; align-items: center;">
+            <img src="/assets/icons/organizacion.svg" alt="Sceiba" style="height: 50px; margin-right: 6px;">
+            Sceiba Organizaciones
+        </a>
+    </div>
 
-<mat-toolbar class="mat-elevation-z6" color="primary" style="position: relative; z-index: 2;">
-
-    <mat-toolbar-row
+    <div
+        class="center-elements"
+        appearance="legacy"
+        aria-label="Menu de Inicio"
         fxLayout="row wrap"
-        fxLayout.xs="column"
-        fxLayoutAlign="space-between center"
-        style="height: auto !important; min-height: 56px;"
+        fxLayoutAlign="center"
+        fxLayoutGap="15px"
     >
-        <div
-            appearance="legacy"
-            aria-label="Menu de Inicio"
-            fxLayout="row wrap"
-            fxLayoutGap="15px"
-        >
-            <a class="color-white" [routerLink]="['/']" style="white-space: normal;">
-                <!-- <img src="assets/images/logo_mes.png" alt="MES" width="140"> -->
-                Organizaciones
-            </a>
-            <a class="color-white" [routerLink]="['/wiki-organizations']" style="white-space: normal;">
-                <!-- <img src="assets/images/logo_mes.png" alt="MES" width="140"> -->
-                Pérfiles
-            </a>
-        </div>
-        
-        <div
-            appearance="legacy"
-            aria-label="Menu de Inicio"
-            fxLayout="row wrap"
-            fxLayoutGap="15px"
-        >
 
-            <button mat-icon-button [matMenuTriggerFor]="menuNetwork" matTooltip="Redes Sociales">
-                <mat-icon>share</mat-icon>
-            </button>
+      <button mat-icon-button [matMenuTriggerFor]="menuApps" matTooltip="Aplicaciones">
+        <mat-icon>apps</mat-icon>
+      </button>
 
-            <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
-                <mat-icon>help</mat-icon>
-            </button>
+      <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
+          <mat-icon class="mat-18">help</mat-icon>
+      </button>
 
-            <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{user.email}}">
-                <mat-icon class="mat-18">person_pin</mat-icon>
-            </button>
+      <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{ user.email }}">
+        <mat-icon class="mat-18">person_pin</mat-icon>
+      </button>
 
-            <toco-authentication 
-                [authBackend]="authBackend"
-                [isButtonLogin]="'true'"
-                [isButtonLoginIcon]="'true'"
-                [isButtonLoginText]="'Autenticarse'"
-                *ngIf="!user"
-                >
-            </toco-authentication>
+      <toco-authentication [oauthInfo]="oauthInfo" [isButtonLogin]="'true'" [isButtonLoginIcon]="'true'"
+        [isButtonLoginText]="'Autenticarse'" *ngIf="!user">
+      </toco-authentication>
 
-        </div>
+    </div>
 
-    </mat-toolbar-row>
-
+  </mat-toolbar-row>
 </mat-toolbar>
 
-
-<mat-menu #menuNetwork="matMenu">
-    <a mat-menu-item href="https://www.facebook.com/" target="_blank">
-        <!-- <mat-icon>info</mat-icon> -->
-        Facebook
-    </a>
-    <a mat-menu-item href="https://twitter.com/" target="_blank">
-        <!-- <mat-icon>question_answer</mat-icon> -->
-        Twitter
-    </a>
-</mat-menu>
-
 <mat-menu #menuHelp="matMenu">
-    <!-- <a mat-menu-item [routerLink]="['/help']">
+  <!-- <a mat-menu-item [routerLink]="['/help']">
         <mat-icon>help_outline</mat-icon>
         Ayuda
     </a> -->
-    <a mat-menu-item [routerLink]="['/faq']">
-        <mat-icon>question_answer</mat-icon>
-        FAQs
-    </a>
-    <a mat-menu-item [routerLink]="['/about']">
-        <mat-icon>info</mat-icon>
-        Acerca de
-    </a>
-    <a mat-menu-item [routerLink]="['/contact']">
-        <mat-icon>contacts</mat-icon>
-        Contactos
-    </a>
+  <a mat-menu-item [routerLink]="['/faq']">
+    <mat-icon>question_answer</mat-icon>
+    FAQs
+  </a>
+  <a mat-menu-item [routerLink]="['/about']">
+    <mat-icon>info</mat-icon>
+    Acerca de
+  </a>
+  <a mat-menu-item [routerLink]="['/contact']">
+    <mat-icon>contacts</mat-icon>
+    Contactos
+  </a>
 </mat-menu>
 
 <mat-menu #menuUser="matMenu">
-
-    <a mat-menu-item [routerLink]="['/disambiguate']" *ngIf="hasPermission">
-        <mat-icon>mode_edit</mat-icon>
-        Desambiguar Organizaciones
-    </a>
-    <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
-        <mat-icon>file_upload</mat-icon>
-        Importar
-    </a>
-    <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
-        <mat-icon>account_circle</mat-icon>
-        Perfil de usuario
-    </a>
-    <a mat-menu-item href="{{ cuorHost }}account/settings/password/">
-        <mat-icon>vpn_key</mat-icon>
-        Cambiar contraseña
-    </a>
-    <a mat-menu-item href="{{ cuorHost }}account/settings/security/">
-        <mat-icon>security</mat-icon>
-        Seguridad
-    </a>
-    <a mat-menu-item href="{{ cuorHost }}account/settings/applications/">
-        <mat-icon>settings_applications</mat-icon>
-        Aplicaciones
-    </a>
-    <a mat-menu-item href="{{ cuorHost }}admin/" *ngIf="hasPermissionAdmin">
-        <mat-icon>settings</mat-icon>
-        Administración
-    </a>
-    <button mat-menu-item (click)="logout()">
+  <a mat-menu-item [routerLink]="['/disambiguate']" *ngIf="hasPermission">
+    <mat-icon>mode_edit</mat-icon>
+    Desambiguar Organizaciones
+  </a>
+  <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
+    <mat-icon>file_upload</mat-icon>
+    <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after"> Importar </span>
+  </a>
+  <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
+    <mat-icon>account_circle</mat-icon>
+    Perfil de usuario
+  </a>
+  <a mat-menu-item href="{{ cuorHost }}account/settings/password/">
+    <mat-icon>vpn_key</mat-icon>
+    Cambiar contraseña
+  </a>
+  <a mat-menu-item href="{{ cuorHost }}account/settings/security/">
+    <mat-icon>security</mat-icon>
+    Seguridad
+  </a>
+  <a mat-menu-item href="{{ cuorHost }}account/settings/applications/">
+    <mat-icon>settings_applications</mat-icon>
+    Aplicaciones
+  </a>
+  <a mat-menu-item href="{{ cuorHost }}admin/" *ngIf="hasPermissionAdmin">
+    <mat-icon>settings</mat-icon>
+    Administración
+  </a>
+  <a mat-menu-item  (click)="logout()"> 
+    <!-- href="{{ cuorHost }}logout/" -->
+    <mat-icon>exit_to_app</mat-icon>
+    Salir
+  </a>
+  <!-- <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         Salir
-    </button>
+    </button> -->
 </mat-menu>
 
-<!-- <mat-menu #menuLogin="matMenu">
-    <button mat-menu-item (click)="loginClick()">
-        <mat-icon>lock_open</mat-icon>
-        Action
-    </button>
-    <a mat-menu-item href="{{ cuorHost }}login" c>
-        <mat-icon>lock_open</mat-icon>
-        Autenticarse
-    </a>
-    <a mat-menu-item href="{{ cuorHost }}signup">
-        <mat-icon>assignment_ind</mat-icon>
-        Registarse
-    </a>
-</mat-menu> -->
+<mat-menu #menuApps="matMenu">
 
-<router-outlet></router-outlet> 
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Sceiba">
+      <img class="app-featured" src="/assets/icons/sceiba.svg" alt="Sceiba" style="width: 55px; height: 55px;">
+    </a>
+    <mat-divider class="w-90"></mat-divider>
 
-<div  [ngStyle]="{'margin-top': '2em'}">
-    <org-footer [sites]="footerSites" [information]="footerInformation"></org-footer>
+    <a href="https://catalogo.sceiba.cu" target="__blanck" class="apps" matTooltip="Catálogo">
+      <img src="/assets/icons/catalog.svg" alt="Catálogo" style="width: 55px; height: 55px;">
+    </a>
+    <a href="https://orgs.sceiba.cu" target="__blanck" class="apps" matTooltip="Organizaciones">
+      <img src="/assets/icons/organizacion.svg" alt="Organizaciones" style="width: 55px; height: 55px;">
+    </a>
+    <a href="https://vocs.sceiba.cu" target="__blanck" class="apps" matTooltip="Vocabularios">
+      <img src="/assets/icons/vocabs.svg" alt="Vocabularios" style="width: 55px; height: 55px;">
+    </a>
+    <mat-divider class="w-90"></mat-divider>
+    <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Registro de Revistas Científicas del MES">
+      <img class="app-featured" src="/assets/icons/mes.svg" alt="Registro de Revistas Científicas del MES"
+        style="width: 55px; height: 55px;">
+    </a>
+  </div>
+</mat-menu>
+
+<div *ngIf="!isHome" style="height: 200px; width: 100%; background: linear-gradient(to right, #007e3e, #373131);">
+
 </div>
+<div *ngIf="!isHome; else outHome" fxLayout="row" fxLayoutAlign="center center" style="border-radius: 40px 40px 0 0;">
+  <div [ngStyle.xs]="{width: '95%'}" style="margin-top: -100px; width: 90%; background-color: white; border-radius: 40px 40px 0 0; box-shadow: 0px 5px 15px rgb(0,0,0,0.088)">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<ng-template #outHome>
+  <router-outlet></router-outlet>
+</ng-template>
+
+
+<!-- <div [ngStyle]="{ 'margin-top': '2em' }"> -->
+  <app-org-footer [sites]="footerSites" [information]="footerInformation" [extraImagePath]="''"></app-org-footer>
+<!-- </div> -->

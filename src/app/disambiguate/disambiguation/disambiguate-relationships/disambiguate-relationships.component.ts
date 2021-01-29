@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { Identifier, IdentifierSchemas, Relationship } from 'toco-lib';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Relationship } from 'toco-lib';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class DisambiguateRelationshipsComponent implements OnInit, OnChanges {
       this.separatingRelationships();
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.separatingRelationships();
   }
 
@@ -34,7 +34,7 @@ export class DisambiguateRelationshipsComponent implements OnInit, OnChanges {
     this.children = new Array<Relationship>()
     this.parents = new Array<Relationship>()
     this.others = new Array<Relationship>()
-    
+
     for (let item of this.contentList) {
       switch (item.type) {
         case 'parent':

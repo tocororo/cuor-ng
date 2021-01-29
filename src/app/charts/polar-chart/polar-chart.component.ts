@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { domain } from 'process';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-polar-chart',
@@ -61,13 +60,13 @@ export class PolarChartComponent implements OnInit {
 
   constructor() {
     //console.log(this.dataChild);
-    
+
     //Object.assign(this, {data:this.dataChild});
   }
 
 
   ngOnInit(): void{
-    
+
     this.xAxisLabel = this._yAxisLabel
   }
 

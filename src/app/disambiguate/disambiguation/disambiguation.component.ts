@@ -1,9 +1,7 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { Organization, Hit, MessageHandler, StatusCode, Relationship, Address, Identifier } from 'toco-lib';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { PartialObserver, Subscription, timer } from 'rxjs';
-import { OrgService } from 'src/app/org.service';
-
+import { Hit, MessageHandler, Organization, Relationship, StatusCode } from 'toco-lib';
+import { OrgService } from '../../org.service';
 @Component({
   selector: 'app-disambiguation',
   templateUrl: './disambiguation.component.html',
@@ -15,7 +13,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
   @Input() secundariesOrganizations: Organization[];
 
   posSecundaryOrg: number = -1;
-  selectedsecundaryOrganization: Organization;  
+  selectedsecundaryOrganization: Organization;
   isDisabledNavigatePrevious: boolean;
   isDisabledNavigateNext: boolean;
   showSecundaries = false;
@@ -32,27 +30,27 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     // var master = localStorage.getItem('master')
     // this.masterOrganization = JSON.parse(master)
     // console.log("masterrrrrrrrrrr: ", master, this.masterOrganization);
-    
+
     // this.secundariesOrganizations = JSON.parse(localStorage.getItem('secundaries'))
-    
+
     if (this.masterOrganization && this.secundariesOrganizations && this.secundariesOrganizations.length > 0) {
-      //console.log("cargo las cosas", this.loaded);      
+      //console.log("cargo las cosas", this.loaded);
       this.posSecundaryOrg = 0;
       this.SelectSecundaryOrganization()
     }
-    
+
 
     //localStorage.removeItem('master');
     //localStorage.removeItem('secundaries');
 
-    //console.log("la seleccionada: ", this.selectedsecundaryOrganization, this.secundariesOrganizations);    
-    
+    //console.log("la seleccionada: ", this.selectedsecundaryOrganization, this.secundariesOrganizations);
+
   }
 
   ngOnChanges(){
     if (this.masterOrganization)
       console.log("changes ", this.masterOrganization.relationships);
-    
+
   }
 
   loaded(){
@@ -61,17 +59,17 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   changingShowSecundaries(){
     if(!this.showSecundaries){
-      this.posSecundaryOrg = 0; 
+      this.posSecundaryOrg = 0;
       this.SelectSecundaryOrganization();
     }
     this.showSecundaries = !this.showSecundaries;
 
   }
-  
+
 
   // public ngOnChanges(): void{
   //   console.log("entro a ONCHANGES *************************************");
-    
+
 
   // }
 
@@ -91,7 +89,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
       this.isDisabledNavigateNext = true;
     }
   }
-  
+
   previousOrg(){
     if (this.posSecundaryOrg > 0) {
       this.isDisabledNavigatePrevious = false;
@@ -115,7 +113,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   SelectSecundaryOrganization() {
     //console.log("estamos dento de select secundary: ", this.posSecundaryOrg, this.secundariesOrganizations);
-    
+
     if (this.secundariesOrganizations.length >= 0 &&
         this.posSecundaryOrg >= 0 &&
         this.posSecundaryOrg < this.secundariesOrganizations.length) {
@@ -124,14 +122,14 @@ export class DisambiguationComponent implements OnInit, OnChanges {
         let version = new Hit<Organization>();
         //console.log("antes de copiar: ", this.secundariesOrganizations[this.posSecundaryOrg]);
         //console.log("----------------------------------------");
-        
+
         //version.deepcopy(this.secundariesOrganizations[this.posSecundaryOrg]);
         //console.log("despues: ", version);
         //this.selectedsecundaryOrganization = version;
 
         this.selectedsecundaryOrganization = this.secundariesOrganizations[this.posSecundaryOrg];
         //console.log("seleccionando la secundary org ---->>>>>", this.selectedsecundaryOrganization, this.posSecundaryOrg);
-        
+
     }
   }
 
@@ -144,11 +142,11 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
-    }   
+    }
   }
 
   mergeAcronyms(acronyms:[]){
-    //console.log(acronyms);    
+    //console.log(acronyms);
     var oldAcronyms = this.masterOrganization.acronyms;
     var newOnes = acronyms.filter(a => {return !oldAcronyms.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
@@ -157,7 +155,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
-    }   
+    }
     //console.log(" nuevos acronimossssssssssssssssssssssss", this.masterOrganization);
 
   }
@@ -171,7 +169,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
-    }   
+    }
 
   }
 
@@ -184,19 +182,19 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
-    }   
+    }
 
   }
 
   mergeEstablished(newEstablished){
-    var old = this.masterOrganization.established;  
+    var old = this.masterOrganization.established;
     if(newEstablished && newEstablished !== old) {
       this.masterOrganization.established = newEstablished;
     }
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "El año es coincidente con el de la organziación principal");
-    }   
+    }
   }
 
 
@@ -208,7 +206,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "La URL es coincidente con el de la organziación principal");
-    }   
+    }
   }
 
 
@@ -220,27 +218,27 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "El correo electrónico es coincidente con el de la organziación principal");
-    }   
+    }
   }
 
   mergeRelationships(newRelationships){
-    if(newRelationships != undefined){    
-      //console.log(newRelationships);    
-      var orgPrincipal = new Organization();  
+    if(newRelationships != undefined){
+      //console.log(newRelationships);
+      var orgPrincipal = new Organization();
       orgPrincipal.deepcopy(this.masterOrganization)
       var realOnes = new Array<Relationship>();
-      
+
       for(let newR of newRelationships){ //por cada nueva relacion que se quiere agregar reviso los pids
-        var newPids = newR.identifiers; //asumo q inicialmente son todos  
-        let addThisOne = true;   
+        var newPids = newR.identifiers; //asumo q inicialmente son todos
+        let addThisOne = true;
         for (let index = 0; index < orgPrincipal.relationships.length; index++) { //recorro todas las que ya tiene
           //tomo los pids de cada una para ver si ya tiene relacion con la org
           var oldPids = orgPrincipal.relationships[index].identifiers;
           var realNewPids = newPids.filter(a => {return !oldPids.some(x => x.value == a.value) })
           //console.log("revisando pids", oldPids, newPids, realNewPids);
-          
+
           //sacando los nuevos que no estan, se compara la longitud y ya se ve si es diferente es que alguno esta
-          //y la organizacion existe pero faltan id por poner si queda alguno 
+          //y la organizacion existe pero faltan id por poner si queda alguno
           // o ya estan todos si esta vacio
           //si es 0 es que todos estan en esta instancia, o sea, es la misma org que ya esta presente
           //si devuelve < que la q habia, la org es esta misma, ya esta presente en la principal, pero faltan pids porponer
@@ -250,9 +248,9 @@ export class DisambiguationComponent implements OnInit, OnChanges {
             addThisOne = false;
             index = orgPrincipal.relationships.length;
 
-            const m = new MessageHandler(this._snackBar);                        
+            const m = new MessageHandler(this._snackBar);
             m.showMessage(
-                StatusCode.serverError, 
+                StatusCode.serverError,
                 "Organización principal ya tiene registrada la relación."
                 );
           }
@@ -260,25 +258,25 @@ export class DisambiguationComponent implements OnInit, OnChanges {
             addThisOne = false;
             orgPrincipal.relationships[index].identifiers = oldPids.concat(realNewPids);
             if(orgPrincipal.relationships[index].type !== newR.type){
-              const m = new MessageHandler(this._snackBar);                        
+              const m = new MessageHandler(this._snackBar);
               m.showMessage(
-                StatusCode.serverError, 
+                StatusCode.serverError,
                 "Se encontraron relaciones entre organizaciones con tipos diferentes de relación, se mantiene el tipo registrado en la organziación principal."
                 );
             }
             index = orgPrincipal.relationships.length;
           }
-          
+
         }//segundo for
 
         //si llega aqui sin haber interceociones es que despues de recorrerlas todas no hubo coincidencias
         //entonces se agrega desde cero
-        if(addThisOne){          
-          realOnes.push(newR)    
+        if(addThisOne){
+          realOnes.push(newR)
           //console.log("revisando problema---> ", realOnes);
         }
       }//primer for
-      
+
       //console.log("nuevas finalmente puestas: ", realOnes, " antes ", orgPrincipal.relationships);
       this.masterOrganization.relationships = realOnes.concat(orgPrincipal.relationships)
       //console.log("Finalmenteeeeeeee : ", this.masterOrganization.relationships);
@@ -291,13 +289,13 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     var oldlinks = this.masterOrganization.links;
     var newOnes = links.filter(a => {return !oldlinks.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
-      this.masterOrganization.links = oldlinks.concat(newOnes);    
+      this.masterOrganization.links = oldlinks.concat(newOnes);
     }
     else {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.serverError, "Ya existen en la organización principal");
     }
   }
-  
+
 
 }

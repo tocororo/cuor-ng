@@ -1,13 +1,13 @@
-<mat-toolbar color="accent"
+<div
     fxLayout="row wrap"
     fxLayout.xs="column"
     fxLayoutAlign="space-between center"
-    style="height: 80px;"
+    style="height: 80px; padding: 0 16px;"
   >
 
-    <span>Importar ficheros de GRID y la ONEI</span>
+    <span class="mat-h2">Importar ficheros de GRID y la ONEI</span>
 
-  </mat-toolbar>
+  </div>
 
   <mat-card>
       <mat-card-header>
@@ -93,6 +93,6 @@
       </mat-card-content>
       <mat-card-actions align="start">
           <button mat-stroked-button (click)="import()" color="primary">Importar</button>
-          <button mat-stroked-button (click)="eject" color="warn">Ejecutar</button>
+          <!-- <button mat-stroked-button (click)="eject" color="warn">Ejecutar</button> -->
       </mat-card-actions>
   </mat-card>

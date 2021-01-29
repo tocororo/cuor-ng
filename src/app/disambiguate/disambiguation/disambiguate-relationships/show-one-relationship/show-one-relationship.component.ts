@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Relationship, Hit, Organization } from 'toco-lib';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Relationship } from 'toco-lib';
 
 @Component({
   selector: 'app-show-one-relationship',
@@ -8,20 +8,20 @@ import { Relationship, Hit, Organization } from 'toco-lib';
 })
 export class ShowOneRelationshipComponent implements OnInit {
 
-  @Input() isMaster: boolean = true; 
+  @Input() isMaster: boolean = true;
   @Input() accordionTitle: string = '';
   @Input() contentList: Relationship[] = null;
   //@Input() editingOrg: Hit<Organization> = null;
 
   @Output() propagate = new EventEmitter<Relationship[]>();
-  
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  onPropagate(message){    
-    this.propagate.emit(message)        
+  onPropagate(message){
+    this.propagate.emit(message)
   }
 
   chageHere(){

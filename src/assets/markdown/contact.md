@@ -1,5 +1,5 @@
 ## Información de Contactos
-**Email:** <tocororo@upr.edu.cu>
+**Email:** <sceiba.cu@gmail.com>
 
 **Telefono:** (+53) 48-75-04-16
 
