@@ -107,7 +107,7 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
 
   goWikipedia() {
     var term = this.title.replace(/ /g, "%20");
-    window.open(`https://es.wikipedia.org/wiki/${term}`, '_blank');
+    return "https://es.wikipedia.org/wiki/" + term;
   };
 
   redirectProfile(QID, newlabel, lang) {

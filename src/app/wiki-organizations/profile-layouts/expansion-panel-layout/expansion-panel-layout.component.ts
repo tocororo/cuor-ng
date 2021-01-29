@@ -22,11 +22,12 @@ export class ExpansionPanelLayoutComponent implements OnInit {
 
   ngOnInit() { 
     console.log(this.services);
+    // document.getElementById("iframe").setAttribute("src", this.load(this.services[1].value));
     
   }
 
   load(value){
-      return this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(value);   
+      return this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(value);
      
   }
 

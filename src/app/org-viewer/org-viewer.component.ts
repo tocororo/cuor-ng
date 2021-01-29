@@ -1,6 +1,7 @@
 
+import { Identifiers } from '@angular/compiler/src/render3/r3_identifiers';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Organization } from 'toco-lib';
 import { Permission } from '../permission.service';
@@ -13,7 +14,7 @@ import { Permission } from '../permission.service';
 export class OrgViewerComponent implements OnInit {
   public org: Organization;
 
-  public constructor(private _activatedRoute: ActivatedRoute) { }
+  public constructor(private _activatedRoute: ActivatedRoute, private router: Router) { }
   loading = true;
 
   public ngOnInit(): void {
@@ -39,4 +40,19 @@ export class OrgViewerComponent implements OnInit {
     }
     return false;
   }
+
+  showWikidataButton(){
+    return this.org.identifiers.find(id => id.idtype === "wkdata" ) !== undefined;
+  }
+
+    /* This function redirect to the profile for employes and afiliates od the organization
+   * 
+   */
+  redirectProfile() {
+    this.router.navigate(['wiki-organizations/organization'], {
+      queryParams: { QID: this.org.identifiers.find(id => id.idtype === "wkdata" ).value, label: this.org.name, lang: "es" },
+      queryParamsHandling: 'merge'
+    })
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  };
 }

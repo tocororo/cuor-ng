@@ -22,10 +22,10 @@ export class OrgSearchWikiComponent implements OnInit {
   country: string = 'Q241';
   position: string = 'below'
   filteredOrg: any = [];
-  filteredSimilarsOrg: any = [];
-  search: boolean = null;
-  searchLabel: string = '';
+  filteredSimilarsOrg = [];
+  searchLabel = "";
   toSearch = 0;
+  search = null;
   filteredCountry: Country[] = [];
   filteredOptions: Observable<Country[]>;
   countryCtrl = new FormControl('Cuba');
@@ -80,9 +80,9 @@ export class OrgSearchWikiComponent implements OnInit {
             //this.filteredOrg =  queryOrganizations(orgValueChanges, this.country)
             this.queryQueryOrgSearch.queryOrganizations(orgValueChanges, this.country).subscribe({
               next: res => {
-                this.filteredOrg = res;                
+                this.filteredOrg = res;
               },
-              error: err => console.log(err)              
+              error: err => console.log(err)
             });
 
           }
@@ -120,7 +120,7 @@ export class OrgSearchWikiComponent implements OnInit {
               }     
         }      
       },
-      error: err => console.log(err)              
+      error: err => console.log(err)
     });      
   }
   }
