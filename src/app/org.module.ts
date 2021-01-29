@@ -28,7 +28,7 @@ import { DisambiguationComponent } from './disambiguate/disambiguation/disambigu
 import { HomeComponent } from './home/home.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
-import { OrganizationDialogDeleteConfirm, OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
+import { OrganizationDialogDeleteConfirm, OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress, OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
 import { OrgFooterComponent } from './org-footer/org-footer.component';
 import { OrgRoutingModule } from './org-routing.module';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
@@ -40,6 +40,7 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { CardSvgComponent } from './home/card-svg/card-svg.component';
 import { CardItemInfoComponent } from './home/card-item-info/card-item-info.component';
 import { CardsSliderComponent } from './home/cards-slider/cards-slider.component';
+import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 
 
 
@@ -60,6 +61,8 @@ export function storageFactory() : OAuthStorage {
     OrganizationDialogRelasionship,
     DatepickerYearComponent,
     OrganizationDialogDeleteConfirm,
+    OrganizationDialogInfoConfirm,
+    OrganizationDialogorgEditAddress,
     // testing charts organizations
     ChartsComponent,
     PolarChartComponent,
@@ -81,7 +84,8 @@ export function storageFactory() : OAuthStorage {
     OrgFooterComponent,
     CardSvgComponent,
     CardItemInfoComponent,
-    CardsSliderComponent
+    CardsSliderComponent,
+    EditAddressComponent
   ],
   imports: [
     MatRadioModule,
@@ -104,7 +108,9 @@ export function storageFactory() : OAuthStorage {
   ],
   entryComponents: [
     OrganizationDialogRelasionship,
-    OrganizationDialogDeleteConfirm
+    OrganizationDialogDeleteConfirm,
+    OrganizationDialogInfoConfirm,
+    OrganizationDialogorgEditAddress
   ],
   providers: [
     SearchService,

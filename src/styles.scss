@@ -190,7 +190,11 @@ ngx-charts-pie-chart.home-charts{
   }
 }
  
-  
+.mymatBadge  .mat-badge-content{
+  width: auto !important;
+  right: -30px !important;
+  padding: 0 4px;
+}
 
 .home-charts .chart-legend .legend-labels{
   white-space: normal;

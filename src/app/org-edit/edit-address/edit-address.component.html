@@ -1,0 +1,58 @@
+<form [formGroup]="formGroup.controls.addresses" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <!-- Start Country -->
+    <mat-form-field appearance="outline" class="w-70">
+        <mat-label>País</mat-label>
+        <input matInput placeholder="Escriba el nombre del País" [value]="address.country" formControlName="country">
+    </mat-form-field>
+    <!-- Start Country -->
+
+    <!-- Start Country_Code -->
+    <mat-form-field appearance="outline" class="w-25">
+        <mat-label>Código del País</mat-label>
+        <input matInput placeholder="Escriba el Código del País" [value]="address.country_code" formControlName="country_code">
+    </mat-form-field>
+    <!-- End Country_Code -->
+
+    <!-- Start State -->
+    <!-- <mat-form-field appearance="outline" class="w-100">
+        <mat-select class="w-100" placeholder="Seleccione la provincia" [value]="address.state"
+            formControlName="state">
+            <mat-option *ngFor="let item of dpa" [value]="item.iso">
+                {{ item.name }}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+    <!-- End State -->
+
+    <!-- Start Line_2 -->
+    <!-- <mat-form-field appearance="outline" class="w-100">
+        <mat-select class="w-100" placeholder="Seleccione la provincia" [value]="address.line_2"
+            formControlName="line_2">
+            <mat-option *ngFor="let item of municipalities" [value]="item.iso">
+                {{ item.name }}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+    <mat-form-field appearance="outline" class="w-100">
+        <input type="text"
+               placeholder="Seleccione un minicipio"
+               aria-label="municipio"
+               matInput
+               [formControl]="formGroup.controls['line_2']"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-optgroup *ngFor="let group of filteredOptions | async" [label]="group.name"
+                  [disabled]="group.disabled">
+            <mat-option *ngFor="let municipality of group.municipalities" [value]="municipality.dpa">
+                {{municipality.name}}
+            </mat-option>
+            </mat-optgroup>
+        </mat-autocomplete>
+    </mat-form-field>
+    <!-- End Line_2 -->
+
+    <!-- Start City -->
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Ciudad</mat-label>
+        <input matInput placeholder="Escriba la ciudad del País" [value]="address.city" formControlName="city">
+    </mat-form-field>
+    <!-- End City -->
+</form>

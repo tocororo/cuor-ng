@@ -71,7 +71,7 @@
   </a>
   <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
     <mat-icon>file_upload</mat-icon>
-    Importar (beta)
+    <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after"> Importar </span>
   </a>
   <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
     <mat-icon>account_circle</mat-icon>
@@ -93,7 +93,8 @@
     <mat-icon>settings</mat-icon>
     Administración
   </a>
-  <a mat-menu-item href="{{ cuorHost }}logout/" (click)="logout()">
+  <a mat-menu-item  (click)="logout()"> 
+    <!-- href="{{ cuorHost }}logout/" -->
     <mat-icon>exit_to_app</mat-icon>
     Salir
   </a>
