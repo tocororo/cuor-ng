@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <br>
+    <br>
+    <h1 class="mat-display-3" style="text-align: center; width: 90%;">{{title}}</h1>
+    <br> 
+    <div id="divContent" style="text-align: justify; width: 90%; display: inline;"> </div>
+    <a *ngIf="content != '' "  class="link" (click)="goWikipedia()" >ver mas en wikipedia</a>
+    
+    <br>
+    <wiki-org-search style="width: 70%;"></wiki-org-search>
+    <br>
+    <br>
+
+    <expansion-panel-layout [services]="services"></expansion-panel-layout>
+</div>

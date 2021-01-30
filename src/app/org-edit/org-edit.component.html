@@ -22,8 +22,10 @@
             <!-- Start Name -->
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Escriba el nombre de la Organización" [value]="org.name" disabled>
-                <!-- formControlName="name" -->
+                <input matInput placeholder="Escriba el nombre de la Organización" [value]="org.name" formControlName="name">
+                <button mat-button matSuffix mat-icon-button aria-label="Editar nombre" (click)="editInputName()">
+                    <mat-icon>mode_edit</mat-icon>
+                  </button>
             </mat-form-field>
             <!-- End Name -->
 
@@ -41,6 +43,16 @@
                  [label]="'Fundada en'"
                  [touchUi]="false">
             </cuor-datepicker-year>
+
+            <!-- Start Email -->
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput type="email" placeholder="Correo electrónico de la Organización" [value]="org.email_address" formControlName="email_address">
+                <mat-error *ngIf="orgFormGroup.hasError('email_address')">
+                    Por favor entre un correo válido
+                </mat-error>
+            </mat-form-field>
+            <!-- End Email -->
 
             <!-- Start Identifiers -->
             <mat-card class="mb-2">
@@ -79,6 +91,44 @@
                 </mat-card-actions>
             </mat-card>
             <!-- End Identifiers -->
+
+            <!-- Start labels -->
+            <mat-card class="mb-2">
+                <mat-card-content formArrayName="labels">
+                    <p>
+                        <mat-label>Labels</mat-label>
+                    </p>
+
+                    <div class="w-100 my-outline" *ngFor="let label of labelsControl.controls; let pos = index"
+                        [formGroup]="labelsControl.controls[pos]" fxLayout="row wrap"
+                        fxLayoutAlign="space-between center">
+
+                        <mat-form-field class="w-45">
+                            <mat-select class="w-100" placeholder="Seleccione el iso639" [value]="label.value.iso639"
+                                formControlName="iso639">
+                                <mat-option *ngFor="let item of iso639" [value]="item.label">
+                                    {{ item.value }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+
+                        <mat-form-field class="w-45">
+                            <input matInput placeholder="Label" [value]="label.value.label" formControlName="label">
+                        </mat-form-field>
+
+                        <button mat-icon-button matSuffix class="mat-18" (click)="deleteLabels(pos)"
+                            matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+
+                    </div>
+
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-stroked-button color="primary" (click)="addLabels()">Adicionar</button>
+                </mat-card-actions>
+            </mat-card>
+            <!-- End labels -->
 
             <!-- Start Acronyms -->
             <mat-card class="mb-2">
@@ -223,11 +273,62 @@
             </mat-accordion>
             <!-- End Relationships -->
 
+            <!-- Start wikipedia_url -->
+            <mat-form-field appearance="outline" class="w-100 mt-2 mb-2">
+                <mat-label>URL de Wikipedia</mat-label>
+                <input matInput type="url" placeholder="URL de wikipedia de la Organización" [value]="org.wikipedia_url" formControlName="wikipedia_url">
+                <mat-error *ngIf="orgFormGroup.hasError('wikipedia_url')">
+                    Por favor entre una url válida
+                </mat-error>
+            </mat-form-field>
+            <!-- End wikipedia_url -->
+
+            <!-- Start links -->
+            <mat-card class="mb-2">
+                <mat-card-content formArrayName="links">
+                    <mat-label>Links</mat-label>
+                    <mat-form-field appearance="outline" class="w-100"
+                        *ngFor="let link of org.links; let pos = index">
+                        <mat-label>Link {{pos + 1}}</mat-label>
+                        <input matInput type="url" placeholder="Links de la Organización" [value]="link"
+                            [formControlName]="pos">
+                        <button mat-icon-button matSuffix class="mat-18" (click)="deletelinks(pos)"
+                            matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-stroked-button color="primary" (click)="addlinks()">Adicionar</button>
+                </mat-card-actions>
+            </mat-card>
+            <!-- End links -->
+
+            <!-- Start address -->
+            <mat-card class="mb-2">
+                <mat-card-content formArrayName="addresses">
+                    <mat-label>Direcciones</mat-label>
+                    <mat-action-list>
+                        <button mat-list-item *ngFor="let address of org.addresses; let pos = index" (click)="editaddress(pos)" matTooltip="Click para editar"> {{ address.city }} </button>
+                        
+                      </mat-action-list>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-stroked-button color="primary" (click)="addaddress()">Adicionar</button>
+                </mat-card-actions>
+            </mat-card>
+            <!-- End address -->
         </form>
 
     </mat-card-content>
     <mat-card-actions align="start">
-        <button mat-button (click)="update()">Guardar</button>
+        <ng-container *ngIf="orgFormGroup.valid;else templateButtonUpdate">
+            <button mat-raised-button color="primary" (click)="update()">Guardar</button>
+        </ng-container>
+        <ng-template #templateButtonUpdate>
+            <button mat-raised-button color="primary" disabled>Guardar</button>
+        </ng-template>
 
     </mat-card-actions>
 </mat-card>
