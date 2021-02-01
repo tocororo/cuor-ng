@@ -1,57 +1,45 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row></mat-toolbar-row>
-    <mat-toolbar-row fxLayoutAlign="center center" style="height: auto; white-space: normal;">
-        <div fxLayout="column" fxLayoutAlign="center center" class="w-70">
-            <toco-search-query-input [buttonColor]="'accent'" [query]="''" (queryChange)="queryChange($event)" class="w-100"></toco-search-query-input>
-            <p class="w-100" style="margin: 0;">
-                <a [routerLink]="['/search']" class="a-grey">
-                    Incluir Organizaciones Internacionales
-                </a>
-            </p>
-        </div>
-    </mat-toolbar-row>
-</mat-toolbar>
+<div fxLayout="column" fxLayoutAlign="center center">
+    <br>
+    <br>
+    <h1 class="mat-display-3" style="text-align: center;">Sistema de identificación de Organizaciones Cubanas</h1>
+    <br>
+    <br>
+    <toco-search-query-input [query]="''" (queryChange)="queryChange($event)" style="width: 70%;"></toco-search-query-input>
+    <p  style="text-align: start; width: 70%; margin: 0;">
+        <a [routerLink]="['/search']" class="a-grey">
+            Incluir Organizaciones Internacionales
+        </a>
+    </p>
+    <br>
+    <br>
+    <mat-card class="w-80 mb-2">
+        <mat-card-content>
+            <div markdown [src]="abstract" style="margin: 2em;"></div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="goAbout()" >Conocer más del proyecto</button>
+        </mat-card-actions>
 
-<img src="assets/icons/getwaves.io.top1.svg" alt="" style="margin-top: -4px; width: 100%;">
+    </mat-card>
+    <!-- <mat-chip-list>
+        <mat-chip [routerLink]="['/search']">
+            {{organizationsTotal}} Organizaciones
+        </mat-chip>
+        <mat-chip [routerLink]="['/search']" [queryParams]="{country: 'Cuba'}">
+            {{cubanOrganizationTotal}} Organizaciones Cubanas
+        </mat-chip>
+    </mat-chip-list> -->
 
-<div fxLayout="column">
-    <ngx-charts-pie-chart 
-        class="home-charts"
-        *ngIf="loadCharts"
-        [view]="view" 
-        [scheme]="colorScheme" 
-        [results]="homeCharts.total" 
-        [gradient]="gradient"
-        [legend]="showLegend" 
-        [legendPosition]="legendPosition" 
-        [labels]="showLabels" 
-        [doughnut]="isDoughnut"
-        style="margin-left: 2.5em;">
-    </ngx-charts-pie-chart>
-    <div class="w-70" style="margin-top: 3em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em'}">
-        <div markdown [src]="'/assets/markdown/home-about.md'" class="mat-h2 text-format"></div>
-        <div fxLayout="row" fxLayoutAlign="end" class="w-100">
-            <a mat-stroked-button [routerLink]="['/about']">Conozca más de nosotros</a>
-        </div>
-    </div>
-</div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <app-polar-chart *ngIf="loadCharts"
+            [dataChild]="homeCharts.total"
+            [_yAxisLabel]="'Total de Organizaciones'">
+        </app-polar-chart>
 
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center end" class="w-100">
-    <app-card-svg [title]="'Captura datos con precisión'" [text]="'Se colectan datos de diversas fuentes autorizadas usando los identificadores persistentes en pos de aminorar duplicidad o desambiguación de los datos. El uso de nuestros identificadores persistentes aseguran la consistencia de los datos.'"></app-card-svg>
-
-    <app-card-svg [title]="'Enriquecemos y desambiguamos los datos'" [text]="'Nosotros limpiamos los datos por usted, con los permisos adecuados es posible asegurar los identificadores de las organizaciones y la validez de sus datos, así como actualizarlos o agregar nueva información que no esté pública en estos sistemas de identificación.'"></app-card-svg>
-
-    <app-card-svg [title]="'Se exponen datos y estadísticas de las organizaciones'" [text]="'Ofrecemos datos consistentes y de valor por diferentes vías para usuarios del sistema por html y promovemos la interoperatividad de otros sistemas que usan información de organizaciones.'"></app-card-svg>
-</div>
-
-<br>
-<br>
-<div class="w-100 " fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="10%" fxLayoutGap.md="6%" fxLayoutGap.xs="16px">
-    <p class="w-50 mat-h2" [ngStyle.xs]="{width: '80%'}" style="margin-left: 4em;">Ofrecemos servicios de API-REST así como OAI-IPMH donde puede ineterconectar sus sistemas con PIDCuba Organizaciones asegurando la veracidad y consistencia del los datos que estará usando en sus sistemas de las organizaciones cubanas y puede incluir las internacionales. 
-    <a [routerLink]="['/contact']">Contáctenos</a> para establecer las pautas necesarias para ello.</p>
-    <div class="buble" [ngStyle.xs]="{width: '100%'}">
-        <h1 class="mat-h1">Servicios de Interoperabilidad</h1>
-        <img src="assets/icons/buble.svg" alt="" style="width: 18em;" [ngStyle.xs]="{width: '100%'}">
+        <app-polar-chart *ngIf="loadCharts"
+            [dataChild]="homeCharts.type"
+            [_yAxisLabel]="'Tipo de Organizaciones'">
+        </app-polar-chart>
     </div>
 </div>
 
@@ -61,12 +49,12 @@
     <ngx-charts-bar-vertical
         class="home-charts"
         *ngIf="loadCharts"
-        [view]="barView" 
-        [scheme]="colorScheme" 
-        [results]="homeCharts.type" 
+        [view]="barView"
+        [scheme]="colorScheme"
+        [results]="homeCharts.type"
         [gradient]="gradient"
-        [legend]="showLegend" 
-        [legendPosition]="legendPosition" 
+        [legend]="showLegend"
+        [legendPosition]="legendPosition"
         [xAxisLabel]="''"
         [yAxisLabel]="''"
         style="margin-left: 2.5em;">
