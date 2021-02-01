@@ -13,31 +13,38 @@ import { Address, Organization } from 'toco-lib';
 export class EditAddressComponent implements OnInit {
 
   @Input()
-  public org : Organization; 
-  
-  @Input()
-  public formGroup : FormGroup;
-
-  @Input()
-  public addressesControl : FormArray;
-
   public address: Address;
 
-  public dpa = [];
+  @Output()
+  public addressEmiter : EventEmitter<FormGroup> ;
 
-  filteredOptions: Observable<any>;
+  public formGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private _orgService: OrgService) { }
+  public autocompleteFormControl: FormControl;
+
+  public dpa: DPA[] = [];
+
+  public municipalities = [];
+
+  public state;
+
+  constructor(private _formBuilder: FormBuilder, private _orgService: OrgService) {
+    this.addressEmiter = new EventEmitter<FormGroup>(true);
+   }
 
   ngOnInit() {
-    this.address = new Address();
-    this.address.country = "Cuba";
-    this.address.country_code = "CU";
+    if (this.address == undefined){
+      this.address = new Address();
+      this.address.country = "Cuba";
+      this.address.country_code = "CU";
+    }
+
+    this.autocompleteFormControl = new FormControl("");
 
     this.formGroup = this._formBuilder.group({
       city: new FormControl(this.address.city),
-      country: new FormControl({value: this.address.country, disabled: true}),
-      country_code: new FormControl({value: this.address.country_code, disabled: true}),
+      country: new FormControl(this.address.country),
+      country_code: new FormControl(this.address.country_code),
       lat: new FormControl(this.address.lat),
       lng: new FormControl(this.address.lng),
       line_1: new FormControl(this.address.line_1),
@@ -52,30 +59,29 @@ export class EditAddressComponent implements OnInit {
 
     this.dpa = this._orgService.getDPA();
 
-    this.filteredOptions = this.formGroup.get('line_2').valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+    this.formGroup.valueChanges.subscribe({
+      next: ( ) =>{
+        if( this.formGroup.valid ){
+          this.addressEmiter.emit(this.formGroup);
+        }
+      }
+    });
 
-    // this.formGroup.valueChanges.subscribe({
-    //   next: ( ) =>{
-    //     if( this.formGroup.valid ){
-    //       this.addressEmiter.emit(this.formGroup);
-    //     }
-    //   }
-    // })
-    console.log(this.formGroup);
-    
-  }
+    this.formGroup.controls["state_code"].valueChanges.subscribe({
+      next: selectedState => {
+        const state =  this.dpa.find((option : DPA) =>  option.iso == selectedState);
 
-  private _filter(value: string ): string[] {
-    console.log(value);
-    return this.dpa.filter((option : DPA) =>  option.name.toLocaleLowerCase().indexOf(value) === 0 || 
-      ( option.municipalities != undefined  && option.municipalities.filter(municipality => municipality.name.toLocaleLowerCase().indexOf(value) === 0 ) ) );
-  }
+        if(state != undefined){
+          this.formGroup.controls["state"].setValue(state.name);
+          this.municipalities = state.municipalities;
+        }
+        // if state or municipalities are undefined, means some error or `Isla de la Juventud` is selected and not has municipalities, then clean `line_2`
+        if( state == undefined || state.municipalities == undefined){
+          this.formGroup.controls["line_2"].setValue("");
+        }
 
-  displayFn(municipality: { dpa: string, name: string  }): string {
-    return municipality && municipality.name ? municipality.name : '';
+      }
+    })
   }
 
 }
@@ -84,5 +90,5 @@ export class DPA{
   name: string;
   iso: string;
   dpa: string;
-  municipalities?: [ { dpa: string, name: string  } ];
+  municipalities?: Array<{ dpa: string, name: string  }> = [];
 }

@@ -309,10 +309,31 @@
             <mat-card class="mb-2">
                 <mat-card-content formArrayName="addresses">
                     <mat-label>Direcciones</mat-label>
-                    <mat-action-list>
-                        <button mat-list-item *ngFor="let address of org.addresses; let pos = index" (click)="editaddress(pos)" matTooltip="Click para editar"> {{ address.city }} </button>
-                        
-                      </mat-action-list>
+                    <mat-list>
+                        <mat-list-item mat-list-item class="mat-list-option" *ngFor="let address of org.addresses; let pos = index" fxLayout="row wrap" fxLayoutAlign="space-between center"> 
+                            <div>
+                                <ng-container *ngIf="address.country">
+                                    {{ address.country }}, 
+                                </ng-container>
+                                <ng-container *ngIf="address.state">
+                                    {{ address.state }}, 
+                                </ng-container>
+                                <ng-container *ngIf="address.city">
+                                    {{ address.city }}, 
+                                </ng-container>
+                            </div>
+                            <div>
+                                <button mat-icon-button matSuffix class="mat-18" (click)="editaddress(pos)"
+                                    matTooltip="Click para Editar">
+                                    <mat-icon>mode_edit</mat-icon>
+                                </button>
+                                <button mat-icon-button matSuffix class="mat-18" (click)="deleteaddress(pos)"
+                                    matTooltip="Click para Eliminar" matTooltipClass="tooltip-red">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </mat-list-item>
+                      </mat-list>
                 </mat-card-content>
                 <mat-card-actions align="end">
                     <button mat-stroked-button color="primary" (click)="addaddress()">Adicionar</button>
