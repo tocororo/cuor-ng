@@ -85,4 +85,12 @@ export class HomeComponent implements OnInit {
 			queryParamsHandling: "",
 		});
 	}
+
+	public goAbout(){
+		this.router.navigate(["about"],  {
+			relativeTo: this.activatedRoute,
+			queryParams: { q: event, country: 'Cuba', status: 'active' },
+			queryParamsHandling: "",
+		})
+	}
 }

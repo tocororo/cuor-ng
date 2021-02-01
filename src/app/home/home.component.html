@@ -1,196 +1,98 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row></mat-toolbar-row>
-  <mat-toolbar-row
-    fxLayoutAlign="center center"
-    style="height: auto; white-space: normal"
-  >
-    <div fxLayout="column" fxLayoutAlign="center center" class="w-70">
-      <toco-search-query-input
-        [buttonColor]="'accent'"
-        [query]="''"
-        (queryChange)="queryChange($event)"
-        class="w-100"
-      ></toco-search-query-input>
-      <p class="w-100" style="margin: 0">
-        <a [routerLink]="['/search']" class="a-grey">
-          Incluir Organizaciones Internacionales
-        </a>
-      </p>
-    </div>
-  </mat-toolbar-row>
+    <mat-toolbar-row fxHide.xs="true"></mat-toolbar-row>
+    <mat-toolbar-row fxLayoutAlign="center center" style="height: auto; white-space: normal;">
+        <div fxLayout="column" fxLayoutAlign="center center" fxFlex="70%" fxFlex.lt-sm="100%">
+            <toco-search-query-input [buttonColor]="'accent'" [query]="''" (queryChange)="queryChange($event)" class="w-100"></toco-search-query-input>
+            <p class="w-100" style="margin: 0;">
+                <a [routerLink]="['/search']" class="a-grey mat-h4">
+                    Incluir Organizaciones Internacionales
+                </a>
+            </p>
+        </div>
+    </mat-toolbar-row>
 </mat-toolbar>
 
-<img
-  src="assets/icons/getwaves.io.top1.svg"
-  alt=""
-  style="margin-top: -4px; width: 100%"
-/>
+<img src="assets/icons/getwaves.io.top1.svg" alt="" style="margin-top: -4px; width: 100%;">
 
 <div fxLayout="column">
-  <ngx-charts-pie-chart
-    class="home-charts"
-    *ngIf="loadCharts"
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="homeCharts.total"
-    [gradient]="gradient"
-    [legend]="showLegend"
-    [legendPosition]="legendPosition"
-    [labels]="showLabels"
-    [doughnut]="isDoughnut"
-    style="margin-left: 2.5em"
-  >
-  </ngx-charts-pie-chart>
-  <div
-    class="w-70"
-    style="margin-top: 3em; margin-left: 4em"
-    [ngStyle.xs]="{ width: '90%', 'margin-left': '1em' }"
-  >
-    <div
-      markdown
-      [src]="'/assets/markdown/home-about.md'"
-      class="mat-h2 text-format"
-    ></div>
-    <div fxLayout="row" fxLayoutAlign="end" class="w-100">
-      <a mat-stroked-button [routerLink]="['/about']"
-        >Conozca más de nosotros</a
-      >
+    <ngx-charts-pie-chart 
+        class="home-charts"
+        *ngIf="loadCharts"
+        [view]="view" 
+        [scheme]="colorScheme" 
+        [results]="homeCharts.total" 
+        [gradient]="gradient"
+        [legend]="showLegend" 
+        [legendPosition]="legendPosition" 
+        [labels]="showLabels" 
+        [doughnut]="isDoughnut"
+        style="margin-left: 2.5em;">
+    </ngx-charts-pie-chart>
+    <div class="w-70" style="margin-top: 3em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em'}">
+        <div markdown [src]="'/assets/markdown/home-about.md'" class="mat-h2 text-format"></div>
+        <div fxLayout="row" fxLayoutAlign="start" class="w-100 pt20">
+            <button mat-raised-button color="primary" (click)="goAbout()">Conozca más de nosotros</button>            
+        </div>
     </div>
-  </div>
 </div>
 
-<div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutAlign="center end"
-  class="w-100"
->
-  <app-card-svg
-    [title]="'Captura datos con precisión'"
-    [text]="
-      'Se colectan datos de diversas fuentes autorizadas usando los identificadores persistentes en pos de aminorar duplicidad o desambiguación de los datos. El uso de nuestros identificadores persistentes aseguran la consistencia de los datos.'
-    "
-  ></app-card-svg>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center end" class="w-100">
+    <app-card-svg [title]="'Captura datos con precisión'" [text]="'Se colectan datos de diversas fuentes autorizadas usando los identificadores persistentes en pos de aminorar duplicidad o desambiguación de los datos. El uso de nuestros identificadores persistentes aseguran la consistencia de los datos.'"></app-card-svg>
 
-  <app-card-svg
-    [title]="'Enriquecemos y desambiguamos los datos'"
-    [text]="
-      'Nosotros limpiamos los datos por usted, con los permisos adecuados es posible asegurar los identificadores de las organizaciones y la validez de sus datos, así como actualizarlos o agregar nueva información que no esté pública en estos sistemas de identificación.'
-    "
-  ></app-card-svg>
+    <app-card-svg [title]="'Enriquecemos y desambiguamos los datos'" [text]="'Nosotros limpiamos los datos por usted, con los permisos adecuados es posible asegurar los identificadores de las organizaciones y la validez de sus datos, así como actualizarlos o agregar nueva información que no esté pública en estos sistemas de identificación.'"></app-card-svg>
 
-  <app-card-svg
-    [title]="'Se exponen datos y estadísticas de las organizaciones'"
-    [text]="
-      'Ofrecemos datos consistentes y de valor por diferentes vías para usuarios del sistema por html y promovemos la interoperatividad de otros sistemas que usan información de organizaciones.'
-    "
-  ></app-card-svg>
+    <app-card-svg [title]="'Se exponen datos y estadísticas de las organizaciones'" [text]="'Ofrecemos datos consistentes y de valor por diferentes vías para usuarios del sistema por html y promovemos la interoperatividad de otros sistemas que usan información de organizaciones.'"></app-card-svg>
 </div>
 
-<br />
-<br />
-<div
-  class="w-100"
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutAlign="end center"
-  fxLayoutGap="10%"
-  fxLayoutGap.md="6%"
-  fxLayoutGap.xs="16px"
->
-  <p
-    class="w-50 mat-h2"
-    [ngStyle.xs]="{ width: '80%' }"
-    style="margin-left: 4em"
-  >
-    Ofrecemos servicios de API-REST así como OAI-IPMH donde puede ineterconectar
-    sus sistemas con PIDCuba Organizaciones asegurando la veracidad y
-    consistencia del los datos que estará usando en sus sistemas de las
-    organizaciones cubanas y puede incluir las internacionales.
-    <a [routerLink]="['/contact']">Contáctenos</a> para establecer las pautas
-    necesarias para ello.
-  </p>
-  <div class="buble" [ngStyle.xs]="{ width: '100%' }">
-    <h1 class="mat-h1">Servicios de Interoperabilidad</h1>
-    <img
-      src="assets/icons/buble.svg"
-      alt=""
-      style="width: 18em"
-      [ngStyle.xs]="{ width: '100%' }"
-    />
-  </div>
+<br>
+<br>
+<div class="w-100 " fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="10%" fxLayoutGap.md="6%" fxLayoutGap.xs="16px">
+    <p class="w-50 mat-h3" [ngStyle.xs]="{width: '80%'}" style="margin-left: 4em;">Ofrecemos servicios de API-REST así como OAI-IPMH donde puede ineterconectar sus sistemas con PIDCuba Organizaciones asegurando la veracidad y consistencia del los datos que estará usando en sus sistemas de las organizaciones cubanas y puede incluir las internacionales. 
+    <a [routerLink]="['/contact']">Contáctenos</a> para establecer las pautas necesarias para ello.</p>
+    <div class="buble" [ngStyle.xs]="{width: '100%'}">
+        <h1 class="mat-h1">Servicios de Interoperabilidad</h1>
+        <img src="assets/icons/buble.svg" alt="" style="width: 18em;" [ngStyle.xs]="{width: '100%'}">
+    </div>
 </div>
 
-<app-card-item-info
-  class="w-100"
-  [title]="'¿De dónde salen los datos?'"
-  [info]="harvesterInfo"
-></app-card-item-info>
+<app-card-item-info class="w-100" [title]="'¿De dónde salen los datos?'" [info]="harvesterInfo"></app-card-item-info>
 
-<div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutAlign="center center"
-  fxLayoutGap="10%"
-  style="margin-top: 2em"
->
-  <ngx-charts-bar-vertical
-    class="home-charts"
-    *ngIf="loadCharts"
-    [view]="barView"
-    [scheme]="colorScheme"
-    [results]="homeCharts.type"
-    [gradient]="gradient"
-    [legend]="showLegend"
-    [legendPosition]="legendPosition"
-    [xAxisLabel]="''"
-    [yAxisLabel]="''"
-    style="margin-left: 2.5em"
-  >
-  </ngx-charts-bar-vertical>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10%" style="margin-top: 2em;">
+    <ngx-charts-bar-vertical
+        class="home-charts"
+        *ngIf="loadCharts"
+        [view]="barView" 
+        [scheme]="colorScheme" 
+        [results]="homeCharts.type" 
+        [gradient]="gradient"
+        [legend]="showLegend" 
+        [legendPosition]="legendPosition" 
+        [xAxisLabel]="''"
+        [yAxisLabel]="''"
+        style="margin-left: 2.5em;">
+    </ngx-charts-bar-vertical>
 </div>
-<br />
-<br />
+<br>
+<br>
 
 <!-- <hr style="width: 96%; box-shadow: 2px 1px 14px #00000033;"> -->
 
 <!-- <app-cards-slider></app-cards-slider> -->
 
 <div class="prefooter">
-  <div style="width: 32%; min-width: 22em">
-    <div class="info-card">
-      <img src="assets/icons/sceiba.svg" alt="" />
-      <p class="mat-h3">
-        Sceiba busca mantener datos estandarizados, validados y por tanto
-        confiables sobre los resultados de investigación en Cuba, de diferentes
-        organizaciones de investigación, mayormente académicas.
-      </p>
+    <div style="width: 32%; min-width: 22em;">
+        <div class="info-card">
+            <img src="assets/icons/sceiba.svg" alt="">
+            <p class="mat-h3">Sceiba: Portal de publicaciones científicas cubanas.</p>
+        </div>
+        <div class="info-card">
+            <img src="assets/images/tocororo.png" alt="">
+            <p class="mat-h3">Proyecto Tocororo: un esfuerzo por la comunicación científica en Cuba.</p>
+        </div>
     </div>
-    <div class="info-card">
-      <img src="assets/images/tocororo.png" alt="" />
-      <p class="mat-h3">
-        Proyecto Tocororo, un esfuerzo por la comunicación científica en Cuba.
-      </p>
+    <div style="width: 50%; margin-bottom: -70px; padding: 16px;" [ngStyle.xs]="{width: '100%'}">
+        <p class="mat-h3">Este sistema solo incluye organizaciones registradas oficialmente según listado de la Oficina Nacional de Estadística e Información (ONEI).</p>
+        <p class="mat-h3">Si crees que tu organización debe estar o ya está en el listado oficial pero no aparece en este sistema de identificación por favor envíanos un correo a la información de contacto.</p>
+        <p class="mat-h3">Si piensas que estarás próximamente en el listado oficial de la ONEI pues entonces estarás próximamente en este sistema de identificación, una vez se actualicen como está programado nuestro listado desde la publicación oficial de la ONEI.</p>
     </div>
-  </div>
-  <div
-    style="width: 50%; margin-bottom: -70px; padding: 16px"
-    [ngStyle.xs]="{ width: '100%' }"
-  >
-    <p class="mat-h3">
-      Este sistema solo incluye organizaciones registradas oficialmente según
-      listado de la Oficina Nacional de Estadística e Información (ONEI).
-    </p>
-    <p class="mat-h3">
-      Si crees que tu organización debe estar o ya está en el listado oficial
-      pero no aparece en este sistema de identificación por favor envíanos un
-      correo a la información de contacto.
-    </p>
-    <p class="mat-h3">
-      Si piensas que estarás próximamente en el listado oficial de la ONEI pues
-      entonces estarás próximamente en este sistema de identificación, una vez
-      se actualicen como está programado nuestro listado desde la publicación
-      oficial de la ONEI.
-    </p>
-  </div>
 </div>
