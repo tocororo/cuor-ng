@@ -152,6 +152,7 @@ export class OrgEditComponent implements OnInit {
     console.log(this.orgFormGroup.value, this.orgFormGroup, 'QQWQWQWWWWssssszsaW')
     let edited = new Organization()
     edited.deepcopy(this.orgFormGroup.value)
+    edited.name = this.orgFormGroup.controls['name'].value;
     console.log(edited);
 
     // for (let i = 0; i < edited.addresses.length; i++) {
@@ -361,58 +362,36 @@ export class OrgEditComponent implements OnInit {
       data: { }
     });
 
-    dialogRef.afterClosed().subscribe((result: Relationship) => {
-      if (result) {
-        this.org.addresses.push(new Address());
-        this.orgFormGroup.setControl("addresses", this.addItemsFormArrayAddresses(this.org.addresses))
-        this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
+    dialogRef.afterClosed().subscribe({
+      next: (result: Address) => {
+        if (result && dialogRef.componentInstance.data.address) {
+          console.log("result", result, dialogRef.componentInstance.data);
+          this.org.addresses.push((dialogRef.componentInstance.data.address as FormGroup).value);
+          // changes other as `primary`
+          if (this.org.addresses[this.org.addresses.length -1].primary){
+          this.changeAddresPrimary(this.org.addresses.length -1)
+          }
+          this.orgFormGroup.setControl("addresses", this.addItemsFormArrayAddresses(this.org.addresses))
+          this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
+          console.log(this.org, this.orgFormGroup, this.addressesControl);
+        }
       }
     });
-
-    
-    // (this.orgFormGroup.get('addresses') as FormArray).push(this._formBuilder.group({
-    //   city: new FormControl(""),
-    //   country: new FormControl(""),
-    //   country_code: new FormControl(""),
-    //   lat: new FormControl(""),
-    //   lng: new FormControl(""),
-    //   line_1: new FormControl(""),
-    //   line_2: new FormControl(""),
-    //   line_3: new FormControl(""),
-    //   postcode: new FormControl(""),
-    //   primary: new FormControl(false),
-    //   state: new FormControl(""),
-    //   state_code: new FormControl(""),
-    //   })
-    // );
-    // this.addressesControl.push(this._formBuilder.group({
-    //     city: new FormControl(""),
-    //     country: new FormControl(""),
-    //     country_code: new FormControl(""),
-    //     lat: new FormControl(""),
-    //     lng: new FormControl(""),
-    //     line_1: new FormControl(""),
-    //     line_2: new FormControl(""),
-    //     line_3: new FormControl(""),
-    //     postcode: new FormControl(""),
-    //     primary: new FormControl(false),
-    //     state: new FormControl(""),
-    //     state_code: new FormControl("")
-    //     //TODO: falta agregar GeoNamesCity... pero eso junto a `lat` y `lng` deben salir cuando se muestre un mapa para que el usuario seleccione
-    //   })
-    // );
-    console.log(this.org, this.orgFormGroup, this.addressesControl);
   }
 
-  editaddress(){
+  editaddress(pos: number){
     const dialogRef = this._dialog.open(OrganizationDialogorgEditAddress, {
       width: '60%',
-      data: { org: this.org, formGroup: this.orgFormGroup, addressesControl: this.addressesControl }
+      data: { address: (this.orgFormGroup.get("addresses") as FormArray).value[pos] }
     });
 
     dialogRef.afterClosed().subscribe((result: Relationship) => {
       if (result) {
-        this.org.addresses.push(new Address());
+        this.org.addresses[pos] = (dialogRef.componentInstance.data.address as FormGroup).value;
+        // changes other as `primary`
+        if (this.org.addresses[pos].primary){
+          this.changeAddresPrimary(pos);
+        }
         this.orgFormGroup.setControl("addresses", this.addItemsFormArrayAddresses(this.org.addresses))
         this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
       }
@@ -456,6 +435,15 @@ export class OrgEditComponent implements OnInit {
       );
     }
     return formArrayGroup
+  }
+
+  changeAddresPrimary(primaryPos: number){
+    for (let index = 0; index < this.org.addresses.length; index++) {
+      const element = this.org.addresses[index];
+      if ( index != primaryPos){
+        element.primary = false;
+      }
+    }
   }
 
   /******************************************************************
@@ -678,31 +666,35 @@ export class OrganizationDialogInfoConfirm {
 @Component({
   selector: 'org-edit-address-dialog',
   template: `
-    <h1 mat-dialog-title> Adicionar nueva Dirección</h1>
+    <h1 mat-dialog-title *ngIf="data.address != undefined"> Editar la dirección</h1>
+    <h1 mat-dialog-title *ngIf="data.address == undefined"> Adicionar nueva dirección</h1>
     <div mat-dialog-content>
-      <app-edit-address [org]="data.org" [formGroup]="data.formGroup" [addressesControl]="data.addressesControl"
+      <app-edit-address [address]="data.address"
        (addressEmiter)="addAddress($event)"></app-edit-address>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="onNoClick()">Cancelar</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Adicionar</button>
+      <button mat-button *ngIf="data.address == undefined" [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="saveData()">Adicionar</button>
+      <button mat-button *ngIf="data.address != undefined" [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="saveData()">Editar</button>
     </div>
   `,
   styleUrls: ['./org-edit.component.scss']
 })
 export class OrganizationDialogorgEditAddress{
-  
+  private temporalAddress: Address;
+
   constructor(
     public dialogRef: MatDialogRef<OrganizationDialogorgEditAddress>,
-    @Inject(MAT_DIALOG_DATA) public data: Address, private _dialog: MatDialog) {}
+    @Inject(MAT_DIALOG_DATA) public data, private _dialog: MatDialog) {}
 
     addAddress(event: Address){
-      this.data = event;
-      console.log("addAddress event", event);
-      
+      this.temporalAddress = event;
     }
     onNoClick(): void {
       this.dialogRef.close();
+    }
+    saveData(){
+      this.data.address = this.temporalAddress;
     }
 
     deleteaddress(pos){

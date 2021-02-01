@@ -4,6 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subject } from 'rxjs';
 import { Environment, Organization, SearchResponse, User } from 'toco-lib';
+import { DPA } from './org-edit/edit-address/edit-address.component';
 
 
 
@@ -338,7 +339,7 @@ export class OrgService {
   }
 
   /**
-   * getISO639
+   * getDPA
    */
   public getDPA() {
     return this.dpa;

@@ -1,58 +1,78 @@
-<form [formGroup]="formGroup.controls.addresses" fxLayout="row wrap" fxLayoutAlign="space-between center">
+<form [formGroup]="formGroup" fxLayout="row wrap" fxLayoutAlign="space-between center">
     <!-- Start Country -->
     <mat-form-field appearance="outline" class="w-70">
         <mat-label>País</mat-label>
-        <input matInput placeholder="Escriba el nombre del País" [value]="address.country" formControlName="country">
+        <input matInput placeholder="Escriba el nombre del País" [value]="formGroup.controls.country.value" formControlName="country" readonly>
     </mat-form-field>
     <!-- Start Country -->
 
     <!-- Start Country_Code -->
     <mat-form-field appearance="outline" class="w-25">
         <mat-label>Código del País</mat-label>
-        <input matInput placeholder="Escriba el Código del País" [value]="address.country_code" formControlName="country_code">
+        <input matInput placeholder="Escriba el Código del País" [value]="formGroup.controls.country_code.value" formControlName="country_code" readonly>
     </mat-form-field>
     <!-- End Country_Code -->
 
     <!-- Start State -->
-    <!-- <mat-form-field appearance="outline" class="w-100">
-        <mat-select class="w-100" placeholder="Seleccione la provincia" [value]="address.state"
-            formControlName="state">
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-select class="w-100" placeholder="Seleccione la provincia" [value]="formGroup.controls.state_code.value"
+            formControlName="state_code">
             <mat-option *ngFor="let item of dpa" [value]="item.iso">
                 {{ item.name }}</mat-option>
         </mat-select>
-    </mat-form-field> -->
+    </mat-form-field>
     <!-- End State -->
 
-    <!-- Start Line_2 -->
-    <!-- <mat-form-field appearance="outline" class="w-100">
-        <mat-select class="w-100" placeholder="Seleccione la provincia" [value]="address.line_2"
-            formControlName="line_2">
-            <mat-option *ngFor="let item of municipalities" [value]="item.iso">
-                {{ item.name }}</mat-option>
-        </mat-select>
-    </mat-form-field> -->
+    <!-- Start Line_1 -->
     <mat-form-field appearance="outline" class="w-100">
-        <input type="text"
-               placeholder="Seleccione un minicipio"
-               aria-label="municipio"
-               matInput
-               [formControl]="formGroup.controls['line_2']"
-               [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-optgroup *ngFor="let group of filteredOptions | async" [label]="group.name"
-                  [disabled]="group.disabled">
-            <mat-option *ngFor="let municipality of group.municipalities" [value]="municipality.dpa">
-                {{municipality.name}}
-            </mat-option>
-            </mat-optgroup>
-        </mat-autocomplete>
+        <mat-select class="w-100" placeholder="Seleccione el municipio" [value]="formGroup.controls.line_1.value"
+            formControlName="line_1">
+            <mat-option *ngFor="let item of municipalities" [value]="item.dpa" >{{ item.name }}</mat-option>
+        </mat-select>
     </mat-form-field>
     <!-- End Line_2 -->
 
     <!-- Start City -->
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Ciudad</mat-label>
-        <input matInput placeholder="Escriba la ciudad del País" [value]="address.city" formControlName="city">
+        <input matInput placeholder="Escriba la ciudad" [value]="formGroup.controls.city.value" formControlName="city">
     </mat-form-field>
     <!-- End City -->
+
+    <!-- Start Line_1 -->
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Número, calle...</mat-label>
+        <input matInput placeholder="Escriba el #, calle, edificio, apartamento... " [value]="formGroup.controls.line_2.value" formControlName="line_2">
+    </mat-form-field>
+    <!-- End Line_1 -->
+
+    <!-- Start Line_1 -->
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Adicionales</mat-label>
+        <input matInput placeholder="Escriba datos adicionales" [value]="formGroup.controls.line_3.value" formControlName="line_2">
+    </mat-form-field>
+    <!-- End Line_1 -->
+
+    <!-- Start Lat -->
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Latitud</mat-label>
+        <input matInput type="number" placeholder="Escriba la latitud" [value]="formGroup.controls.lat.value" formControlName="lat">
+    </mat-form-field>
+    <!-- End Lat -->
+
+    <!-- Start lng -->
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Longitud</mat-label>
+        <input matInput type="number" placeholder="Escriba la longitud" [value]="formGroup.controls.lng.value" formControlName="lng">
+    </mat-form-field>
+    <!-- End lng -->
+
+    <!-- Start postcode -->
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Código postal</mat-label>
+        <input matInput placeholder="Escriba el código postal" [value]="formGroup.controls.postcode.value" formControlName="postcode">
+    </mat-form-field>
+    <!-- End postcode -->
+
+    <mat-checkbox [value]="formGroup.controls.primary.value" formControlName="primary">Es la dirección principal</mat-checkbox>
 </form>
