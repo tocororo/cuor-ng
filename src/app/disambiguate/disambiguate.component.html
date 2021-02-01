@@ -6,6 +6,9 @@
 > 
     <span class="mat-h2">Desambiguación</span>  
 </div>
+
+<toco-progress [loading]="loading"></toco-progress>
+
 <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="masterFormControl">
         <ng-template matStepLabel>Seleccione una Organización</ng-template>
@@ -15,7 +18,8 @@
           [label]="'Organización que se considera original o principal'"
           [cleaning]="'false'"
           [appearance]="'outline'"
-          (selectedOrg)="receivingMaster($event)">
+          (selectedOrg)="receivingMaster($event)"
+          (keyup)="loading = true">
         </toco-org-search>
 
         <toco-org-view 
@@ -35,7 +39,8 @@
         [label]="'Seleccionando organizaciones que son análogas'"
         [cleaning]="'true'"
         [appearance]="'outline'"
-        (selectedOrg)="receivingSecundaries($event)">
+        (selectedOrg)="receivingSecundaries($event)"
+        (keyup)="loading = true">
       </toco-org-search>
 
       <!-- <mat-action-list *ngIf="secundaryFormGroup">
@@ -47,7 +52,7 @@
         </ng-container>
       </mat-action-list>    -->
 
-      <mat-accordion class="example-headers-align">
+      <mat-accordion>
         <mat-expansion-panel 
           *ngFor="let org of secundariesOrganizations; let pos = index"
           [expanded]="step === pos"

@@ -27,6 +27,8 @@ export class DisambiguateComponent implements OnInit {
 
   orgFilter = { type: "country", value: "Cuba" };
 
+  loading: boolean = false;
+
   constructor(
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -103,11 +105,14 @@ export class DisambiguateComponent implements OnInit {
    ***********************************************************/
 
   receivingMaster(master: Organization) {
-    this.masterOrganization = master
+    this.loading = false;
+    this.masterOrganization = new Organization();
+    this.masterOrganization.deepcopy(master);
     this.masterFormControl.setValue(master)
   }
 
   receivingSecundaries(secundaryOrg: Organization) {
+    this.loading = false;
     const m = new MessageHandler(this._snackBar);
     if (secundaryOrg.id == this.masterOrganization.id) {
       m.showMessage(StatusCode.OK, "Ya esta organización fue seleccionada como principal.");
