@@ -32,12 +32,12 @@
           <mat-icon class="mat-18">help</mat-icon>
       </button>
 
-      <button mat-icon-button *ngIf="userProfile" [matMenuTriggerFor]="menuUser" matTooltip="{{ user.email }}">
+      <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{ user.email }}">
         <mat-icon class="mat-18">person_pin</mat-icon>
       </button>
 
       <toco-authentication [oauthInfo]="oauthInfo" [isButtonLogin]="'true'" [isButtonLoginIcon]="'true'"
-        [isButtonLoginText]="'Autenticarse'" *ngIf="!userProfile">
+        [isButtonLoginText]="'Autenticarse'" *ngIf="!user">
       </toco-authentication>
 
     </div>

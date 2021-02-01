@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { AuthBackend, Environment, OauthAuthenticationService, OauthInfo, User, UserProfile } from 'toco-lib';
+import { AuthBackend, Environment, OauthAuthenticationService, OauthInfo, User } from 'toco-lib';
 import { UserService } from './org.service';
 import { Permission } from './permission.service';
 
@@ -22,7 +22,7 @@ export class OrgRootComponent
 
   public footerInformation: Array< { name: string, url: string, useRouterLink: boolean } >;
 
-  public userProfile: UserProfile;
+  public user: User;
 
   public cuorHost: string;
 
@@ -71,21 +71,25 @@ export class OrgRootComponent
         this.footerInformation.push({ name: "Contacto", url: "/contact", useRouterLink: true});
         this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true});
 
-        this.userProfile = JSON.parse(this.oauthStorage.getItem('user'))
-        if(this.userProfile != undefined){
+        this.user = JSON.parse(this.oauthStorage.getItem('user'))
+        if(this.user != undefined){
           this.configRoles();
         }
+        console.log("this.userProfile", this.user);
+        
         this.authenticationService.authenticationSubjectObservable.subscribe(
           (user) => {
+            console.log("user", user);
+            
             if (user != null) {
-              this.userProfile = user;
+              this.user = user;
               this.configRoles();
             } else {
               this.logout();
             }
           },
           (error: any) => {
-            this.userProfile = null;
+            this.user = null;
           },
           () => {
           }
@@ -127,8 +131,8 @@ export class OrgRootComponent
     }
   private configRoles(){
     let roles = '';
-    for (const rol in this.userProfile.user.roles) {
-      const element = this.userProfile.user.roles[rol];
+    for (const rol in this.user.roles) {
+      const element = this.user.roles[rol];
       roles += "," + element.name;
     }
     this.oauthStorage.setItem("roles", roles)
@@ -140,7 +144,7 @@ export class OrgRootComponent
     this.oauthService.logOut();
     this.oauthStorage.removeItem("user");
     this.oauthStorage.removeItem("roles");
-    this.userProfile = undefined;
+    this.user = undefined;
     // this.router.navigateByUrl(this.cuorHost + 'logout/');
     // this.http.get<any>(environment.cuorHost + 'logout/').subscribe({
     //   next: (response) => {

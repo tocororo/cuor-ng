@@ -162,6 +162,9 @@ export class DisambiguateComponent implements OnInit {
     this.masterOrganization.status = "active"
     const toD = new Organization();
     toD.deepcopy(this.masterOrganization);
+    
+    console.log("this.masterOrganization, toD ----------------------", this.masterOrganization, toD);
+    
     this._orgService.editOrganization(toD).subscribe({
       next: (result: Hit<Organization>) => {
         console.log(result);
