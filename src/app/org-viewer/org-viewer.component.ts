@@ -1,6 +1,8 @@
 
 import { Identifiers } from '@angular/compiler/src/render3/r3_identifiers';
 import { Component, OnInit } from '@angular/core';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Organization } from 'toco-lib';
@@ -14,10 +16,12 @@ import { Permission } from '../permission.service';
 export class OrgViewerComponent implements OnInit {
   public org: Organization;
 
-  public constructor(private _activatedRoute: ActivatedRoute, private router: Router) { }
+  public constructor(private _activatedRoute: ActivatedRoute, private router: Router, public iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) { }
   loading = true;
 
   public ngOnInit(): void {
+
+    this.iconRegistry.addSvgIcon('wikidata',this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/Wikidata-logo.svg'));
     /* Gets the `Organization` data. */
 
     this._activatedRoute.data.subscribe(

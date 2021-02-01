@@ -15,8 +15,8 @@ style="height: 80px; padding: 0 16px;"
         <span class="mat-h2" style="margin: 0;">{{org.name}}</span>
     </div>
 
-    <button mat-icon-button *ngIf="showWikidataButton()" (click)="redirectProfile()" matTooltip="Editar la Organización">
-        <mat-icon class="mat-18">mode_edit</mat-icon>
+    <button mat-icon-button *ngIf="showWikidataButton()" (click)="redirectProfile()" matTooltip="Ver información de Wikidata">
+        <mat-icon svgIcon="wikidata" class="mat-18"></mat-icon>
     </button>
 </div>
 <toco-org-view [org]="org"></toco-org-view>
