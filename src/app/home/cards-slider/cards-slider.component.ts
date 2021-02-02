@@ -8,19 +8,28 @@ import { timer } from 'rxjs';
 })
 export class CardsSliderComponent implements OnInit {
 
+  title1 = "El titulo de la primera ves qu ibas a venis";
+  content1 = "This is the content of the card que can prove enbasd ghuiad ojsdf khjxdgf xkfg lkjh lfhxkc gfkxhcvb xjhbc vkjxhcxc bxlkjch bxhv zdfgdsfg  fg dfvh dsgfh fghj dzfgd fg dgfh hfdzf fgh dfgh zdfgdfgg d fdf hfhjxcv gfhg hdvhg";
+
+  title2 = "El titulo de la primera ves qu ibas a venis";
+  content2 = "This is the content of the card que can prove enbasd ghuiad ojsdf khjxdgf xkfg lkjh lfhxkc gfkxhcvb xjhbc vkjxhcxc bxlkjch bxhv zdfgdsfg  fg dfvh dsgfh fghj dzfgd fg dgfh hfdzf fgh dfgh zdfgdfgg d fdf hfhjxcv gfhg hdvhg";
+  
+  title3 = "El titulo de la primera ves qu ibas a venis";
+  content3 = "This is the content of the card que can prove enbasd ghuiad ojsdf khjxdgf xkfg lkjh lfhxkc gfkxhcvb xjhbc vkjxhcxc bxlkjch bxhv zdfgdsfg  fg dfvh dsgfh fghj dzfgd fg dgfh hfdzf fgh dfgh zdfgdfgg d fdf hfhjxcv gfhg hdvhg";
+  
   slideIndex = 1;
   centralPos = 8;
   constructor() { }
 
   ngOnInit() {
-    this.showSlides(this.slideIndex);
-    timer(10000,10000).subscribe(x => {
-      if (this.slideIndex > 3){
-        this.slideIndex = 0
-      }
-      this.slideIndex += 1;
-      this.showSlides(this.slideIndex);
-    });
+    // this.showSlides(this.slideIndex);
+    // timer(10000,10000).subscribe(x => {
+    //   if (this.slideIndex > 3){
+    //     this.slideIndex = 0
+    //   }
+    //   this.slideIndex += 1;
+    //   this.showSlides(this.slideIndex);
+    // });
   }
 
 

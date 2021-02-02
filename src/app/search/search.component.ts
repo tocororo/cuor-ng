@@ -1,6 +1,6 @@
 import { HttpParams } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { PageEvent } from "@angular/material";
+import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
+import { MatDrawer, PageEvent } from "@angular/material";
 import {
   ActivatedRoute,
 
@@ -69,6 +69,8 @@ export class SearchComponent implements OnInit {
 
   loading: boolean = true;
 
+  @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
+  
   public constructor(
     private _cuorService: OrgService,
     private activatedRoute: ActivatedRoute,
@@ -208,4 +210,13 @@ export class SearchComponent implements OnInit {
     this.router.navigate(["."], this.navigationExtras);
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event){
+    // console.log("window:resize", window.innerWidth);
+    if (window.innerWidth <= 740){
+      this.drawer.opened = false;
+    } else {
+      this.drawer.opened = true;
+    }
+  }
 }

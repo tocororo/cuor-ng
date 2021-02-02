@@ -1,47 +1,49 @@
 <!-- SLIDES -->
-<div style="width: 55%; max-width: 700px; overflow: hidden; margin: auto; background-image: url('/assets/icons/back.svg');background-repeat: no-repeat; background-size: contain; background-position-x: center;">
+<div fxLayoutAlign="center"  style="margin-bottom: -60px;">
+    <img src="assets/icons/prueba2.svg" width="90%" alt="">
+</div>
+<div style="align-items: center;" width="80">
+    <!-- <div fxFlexAlign="center" fxLayoutAlign="start">
+        <button mat-icon-button 
+            aria-label="Anterior plan" 
+            matTooltip="Anterior" 
+        >
+            <mat-icon color="warn">merge_type_left</mat-icon>
+        </button>   
+    </div> -->
+    <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="20px">
+        <div fxFlex=25%>
+            <mat-card class="secondarySlides mat-elevation-z4" style="transform: scale(0.9);">
+                <mat-card-header>
+                    <mat-card-title>{{title1}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    {{content1}}
+                </mat-card-content>
+            </mat-card>
+        </div>
 
-    <div id="container" class="container" [ngStyle.md]="{width: '70%'}" [ngStyle.sm]="{width: '90%'}" [ngStyle.xs]="{width: '95%'}">
-        <mat-card class="mySlides mat-elevation-z8">
-            <mat-card-title>Vincular los datos con sistemas de identificación internacionales </mat-card-title>
-            <!-- <mat-card-content>
-                Entre nuestros objetivos está el promover el uso de los identificadores persistentes para las organizaciones cubanas asegurando la consistencia en sus datos en cualquier sistema de identificación en Cuba o Internacionalmente y así en otros sistemas que aprovechen esta potencialidad.
-            </mat-card-content> -->
-        </mat-card>
+        <div fxFlex=25%>
+            <mat-card class="mat-elevation-z4">
+                <mat-card-header>
+                    <mat-card-title>{{title2}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    {{content2}}
+                </mat-card-content>
+            </mat-card>
+        </div>
 
-        <mat-card class="mySlides mat-elevation-z8">
-            <mat-card-title>Extender fuentes de datos</mat-card-title>
-            <!-- <mat-card-content>
-                Es de interés del grupo permitir extraer datos de las organizaciones de fuentes que puedan enriquecer y validar los datos que tenemos. Permitiendo más actualidad y consistencia de los mismos.
-            </mat-card-content>-->
-        </mat-card> 
-
-        <mat-card class="mySlides mat-elevation-z8">
-            <mat-card-title>Gestionar las estructuras de las organizaciones</mat-card-title>
-            <!-- <mat-card-content>
-                Creemos que es una meta de valor pues la estructura de las organizaciones en departamentos y áreas pueden ofrecer información de interés a los usuarios del sistema, permitiendo un control y monitoreo a niveles más bajos para múltiples fines.
-            </mat-card-content> -->
-        </mat-card>
-
-        <mat-card class="mySlides mat-elevation-z8">
-            <mat-card-title>Interoperabilidad con VIVO</mat-card-title>
-            <!-- <mat-card-content>
-                Especialmente entre nuestros objetivos para el enriquecimiento y trabajo de las estructuras de las organizaciones establecemos una comunicación directa con sistemas VIVO, pues especialmente en las organizaciones académicas se están usando y pueden ofrecer información valiosa de ellas.
-            </mat-card-content> -->
-        </mat-card>
-
-
-        <!-- <a class="prev" (click)="plusSlides(-1)">
-            <mat-icon class="mat-18">navigate_before</mat-icon>
-        </a>
-        <a class="next" (click)="plusSlides(1)">
-            <mat-icon class="mat-18">navigate_next</mat-icon>
-        </a>
-        <div style="text-align:center; margin-top: -20px;">
-          <span class="dot" (click)="currentSlide(1)"></span>
-          <span class="dot" (click)="currentSlide(2)"></span>
-          <span class="dot" (click)="currentSlide(3)"></span>
-          <span class="dot" (click)="currentSlide(4)"></span>
-        </div> -->
+        <div fxFlex=25%>
+            <mat-card class="secondarySlides mat-elevation-z4" style="transform: scale(0.9);">
+                <mat-card-header>
+                    <mat-card-title>{{title3}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    {{content3}}
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
+    
 </div>
