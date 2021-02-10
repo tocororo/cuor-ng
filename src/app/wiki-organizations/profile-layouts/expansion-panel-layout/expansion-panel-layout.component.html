@@ -1,0 +1,36 @@
+<mat-accordion style="width: 95%;" class="example-headers-align">
+    <mat-expansion-panel  *ngFor="let service of services" [expanded]="step === service.key" (opened)="setStep(service.key)" >
+
+        <mat-expansion-panel-header >
+            <mat-panel-title>
+                <mat-icon style="margin-right: 5vh;">{{service.icon}}</mat-icon>
+                {{service.label}}
+            </mat-panel-title>
+            
+            <mat-panel-description>
+                
+            </mat-panel-description>
+
+        <!-- Content -->           
+        </mat-expansion-panel-header>  
+        <div  *ngIf="service.key == 1">
+            <button mat-button (click)="nextStep()">Siguiente</button>
+            
+        </div>
+
+        <div  *ngIf="service.key > 1 && service.key < services.length" >
+            <button mat-button (click)="prevStep()">Anterior</button>
+            <button mat-button (click)="nextStep()">Siguiente</button>
+        </div>
+
+        <div  *ngIf="service.key == services.length">
+            <button mat-button (click)="prevStep()">Anterior</button>
+        </div>
+
+        <table-layout *ngIf="service.type == 'table'" [queryService]="service.value "></table-layout>
+        
+        <iframe id="iframe" *ngIf="service.type != 'table' " style="width: 80vw; height: 50vh; border: none;" [src]="load(service.value)" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-popups" ></iframe>
+    </mat-expansion-panel>
+
+</mat-accordion>
+

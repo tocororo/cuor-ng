@@ -75,8 +75,12 @@ export class OrgRootComponent
         if(this.user != undefined){
           this.configRoles();
         }
+        console.log("this.userProfile", this.user);
+        
         this.authenticationService.authenticationSubjectObservable.subscribe(
           (user) => {
+            console.log("user", user);
+            
             if (user != null) {
               this.user = user;
               this.configRoles();
@@ -184,5 +188,4 @@ export class OrgRootComponent
   public get isHome(){
     return this.router.url == '/';
   }
-  
 }

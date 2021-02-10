@@ -71,7 +71,7 @@
   </a>
   <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
     <mat-icon>file_upload</mat-icon>
-    Importar (beta)
+    <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after"> Importar </span>
   </a>
   <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
     <mat-icon>account_circle</mat-icon>
@@ -93,7 +93,8 @@
     <mat-icon>settings</mat-icon>
     Administración
   </a>
-  <a mat-menu-item href="{{ cuorHost }}logout/" (click)="logout()">
+  <a mat-menu-item  (click)="logout()"> 
+    <!-- href="{{ cuorHost }}logout/" -->
     <mat-icon>exit_to_app</mat-icon>
     Salir
   </a>
@@ -131,14 +132,14 @@
 <div *ngIf="!isHome" style="height: 200px; width: 100%; background: linear-gradient(to right, #007e3e, #373131);">
 
 </div>
-<div *ngIf="!isHome" fxLayout="row" fxLayoutAlign="center center" style="border-radius: 40px 40px 0 0;">
+<div *ngIf="!isHome; else outHome" fxLayout="row" fxLayoutAlign="center center" style="border-radius: 40px 40px 0 0;">
   <div [ngStyle.xs]="{width: '95%'}" style="margin-top: -100px; width: 90%; background-color: white; border-radius: 40px 40px 0 0; box-shadow: 0px 5px 15px rgb(0,0,0,0.088)">
     <router-outlet></router-outlet>
   </div>
 </div>
-
-<router-outlet *ngIf="isHome"></router-outlet>
-
+<ng-template #outHome>
+  <router-outlet></router-outlet>
+</ng-template>
 
 
 <!-- <div [ngStyle]="{ 'margin-top': '2em' }"> -->

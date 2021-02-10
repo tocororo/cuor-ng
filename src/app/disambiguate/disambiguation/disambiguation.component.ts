@@ -174,6 +174,8 @@ export class DisambiguationComponent implements OnInit, OnChanges {
   }
 
   mergeTypes(types:[]){
+    console.log(this.masterOrganization);
+    
     var oldTypes = this.masterOrganization.types;
     var newOnes = types.filter(a => {return !oldTypes.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
