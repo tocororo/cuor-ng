@@ -8,8 +8,10 @@ class EnvironmentImpl implements Environment {
   production = false;
   sceibaHost = 'https://sceiba.cu';
   cuorHost = 'https://127.0.0.1:5001/';
+  //cuorHost = 'http://localhost:3000/';
   sceibaApi = 'https://sceiba.cu/api/';
-  cuorApi = 'https://127.0.0.1:5001/api/';
+  //cuorApi = 'https://127.0.0.1:5001/api/';
+  cuorApi = 'http://localhost:3000/';
 
   appHost = 'https://localhost:4200';
   appName = 'Orgs';

@@ -1,5 +1,7 @@
-<mat-accordion style="width: 95%;" class="example-headers-align">
-    <mat-expansion-panel  *ngFor="let service of services" [expanded]="step === service.key" (opened)="setStep(service.key)" >
+<toco-progress [loading]="loading"></toco-progress>
+
+<mat-accordion *ngIf="loading != true " style="width: 95%;" class="example-headers-align">
+    <mat-expansion-panel  *ngFor="let service of _services" [expanded]="step === service.key" (opened)="setStep(service.key)" >
 
         <mat-expansion-panel-header >
             <mat-panel-title>
@@ -13,19 +15,19 @@
 
         <!-- Content -->           
         </mat-expansion-panel-header>  
-        <div  *ngIf="service.key == 1">
+        <!-- <div  *ngIf="service.key == 1">
             <button mat-button (click)="nextStep()">Siguiente</button>
             
         </div>
 
-        <div  *ngIf="service.key > 1 && service.key < services.length" >
+        <div  *ngIf="service.key > 1 && service.key < _services.length" >
             <button mat-button (click)="prevStep()">Anterior</button>
             <button mat-button (click)="nextStep()">Siguiente</button>
         </div>
 
-        <div  *ngIf="service.key == services.length">
+        <div  *ngIf="service.key == _services.length">
             <button mat-button (click)="prevStep()">Anterior</button>
-        </div>
+        </div> -->
 
         <table-layout *ngIf="service.type == 'table'" [queryService]="service.value "></table-layout>
         

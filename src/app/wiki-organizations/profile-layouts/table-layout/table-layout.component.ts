@@ -52,7 +52,7 @@ export class TableLayoutComponent implements OnInit, OnChanges {
     }
   }
 
-  authorProfile(QID, newlabel) {
+  /* authorProfile(QID, newlabel) {
     //localStorage.setItem('localParams',JSON.stringify({QID: QID, label: newlabel}))
     this.router.navigate(['wiki-organizations/author'], {
       queryParams: { QID: QID, label: newlabel },
@@ -106,7 +106,7 @@ export class TableLayoutComponent implements OnInit, OnChanges {
   redirectOrcid(url) {
     //window.location.href = (`https://orcid.org/${url}`);
     window.open(`https://orcid.org/${url}`, '_blank');
-  }
+  } */
 
 
 }

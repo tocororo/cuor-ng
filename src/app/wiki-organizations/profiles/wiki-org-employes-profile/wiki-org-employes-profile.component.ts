@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,7 +19,6 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
   lang: any = '';
   content = '';
   url = '';
-
   localParams: any = JSON.parse(localStorage.getItem('localParams'));
   services: any = [];
   similars: Array<any> = [];
@@ -27,6 +26,9 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  @Input() data_viewer:any ;
+  
 
   constructor(
     private router: Router,
@@ -42,24 +44,32 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
 
     /* this.QID = this.localParams.QID
     this.title = this.localParams.label
-    this.lang = this.localParams.lang */
-    this.route.queryParams.subscribe( {
-      next:(params) => {
-      this.QID = params['QID'];
-      this.title = params['label'];
-      this.lang = params['lang'];
-     },
-     error: err => console.log(err)      
-    })
+    this.lang = this.localParams.lang */ 
+    
+    if (this.data_viewer) {      
+      this.QID = this.data_viewer.QID;
+      this.title = this.data_viewer.label
+      this.lang = this.data_viewer.label
+    }
+    else{
+      this.route.queryParams.subscribe( {
+        next:(params) => {
+        this.QID = params['QID'];
+        this.title = params['label'];
+        this.lang = params['lang'];
+      },
+      error: err => console.log(err)      
+      })
+    }
     
     /* this.router.navigate(['.'], {
       relativeTo:this.route, queryParams: {  } ,
       queryParamsHandling: 'merge'
     }) */
-
+        
     var term = this.title.replace(/ /g, "%20");
     //console.log(term);
-    this.lang == 'es' ?
+    this.data_viewer.lang == 'es' ?
       this.url = `https://es.wikipedia.org/w/api.php?origin=*&action=query&titles=${term}&prop=extracts&format=json&exintro=1`
       :
       this.url = `https://en.wikipedia.org/w/api.php?origin=*&action=query&titles=${term}&prop=extracts&format=json&exintro=1`;
@@ -110,13 +120,22 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
     return "https://es.wikipedia.org/wiki/" + term;
   };
 
-  redirectProfile(QID, newlabel, lang) {
+  redirectHere(newQID, newlabel, newlang) {
     //localStorage.setItem('localParams',JSON.stringify({QID:QID, label:newlabel, lang:lang}))
-    this.router.navigate(['wiki-organizations/organization'], {
-      queryParams: { QID: QID, label: newlabel, lang: lang },
+    /* this.router.navigate(['wiki-organizations/organization'], {
+      queryParams: { QID: newQID, label: newlabel, lang: newlang },
       queryParamsHandling: 'merge'
-    })/* .then( () => window.location.reload) */
-this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    }) *//* .then( () => window.location.reload) */
+    this.services = [];
+    this.data_viewer = {
+      QID: newQID,
+      label: newlabel,
+      lang: newlang
+    }
+    console.log(this.data_viewer);
+    this.getSimilars();
+    this.getServices();
+    /* this.router.routeReuseStrategy.shouldReuseRoute = () => false; */
   };
 
   sortArray(arr) {
@@ -126,7 +145,7 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   getServices() {
-    this.queryQueryOrgEmployes.employes(this.QID).subscribe({
+    this.queryQueryOrgEmployes.employes(this.data_viewer.QID).subscribe({
       next: res => {
         this.services.push({
           key: 1,
@@ -140,9 +159,19 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       error: err => console.log(err)
     })
 
-    this.queryQueryOrgEmployes.coAuthorGraph(this.QID).subscribe(res => {
+    this.queryQueryOrgEmployes.coAuthorGraph(this.data_viewer.QID).subscribe(res => {
       this.services.push({
         key: 2,
+        value: res,
+        type: 'graph',
+        icon: 'share',
+        label: 'Gráfico de coautor'
+      })
+    })
+
+    this.queryQueryOrgEmployes.advisorGraph(this.data_viewer.QID).subscribe(res => {
+      this.services.push({
+        key: 3,
         value: res,
         type: 'graph',
         icon: 'share',
@@ -150,31 +179,21 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       })
     })
 
-    this.queryQueryOrgEmployes.advisorGraph(this.QID).subscribe(res => {
-      this.services.push({
-        key: 3,
-        value: res,
-        type: 'graph',
-        icon: 'share',
-        label: 'Temas sobre los que trabajadores y afiliados han trabajado'
-      })
-    })
-
-    this.queryQueryOrgEmployes.topicsPublished(this.QID).subscribe({
+    this.queryQueryOrgEmployes.topicsPublished(this.data_viewer.QID).subscribe({
       next: res => {
         this.services.push({
           key: 4,
           value: res,
           type: 'table',
           icon: 'view_week',
-          label: 'Gráfico de coautor'
+          label: 'Temas sobre los que trabajadores y afiliados han trabajado'
         })
         this.sortArray(this.services)
       },
       error: err => console.log(err)
     })
 
-    this.queryQueryOrgEmployes.recentPublications(this.QID).subscribe({
+    this.queryQueryOrgEmployes.recentPublications(this.data_viewer.QID).subscribe({
       next: res => {
         this.services.push({
           key: 5,
@@ -188,7 +207,7 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       error: err => console.log(err)
     })
 
-    this.queryQueryOrgEmployes.pageProduction(this.QID).subscribe(res => {
+    this.queryQueryOrgEmployes.pageProduction(this.data_viewer.QID).subscribe(res => {
       this.services.push({
         key: 6,
         value: res,
@@ -198,7 +217,7 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       })
     })
 
-    this.queryQueryOrgEmployes.recentCitations(this.QID).subscribe({
+    this.queryQueryOrgEmployes.recentCitations(this.data_viewer.QID).subscribe({
       next: res => {
         this.services.push({
           key: 7,
@@ -212,7 +231,7 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       error: err => console.log(err)
     })
 
-    this.queryQueryOrgEmployes.citedWorks(this.QID).subscribe(res => {
+    this.queryQueryOrgEmployes.citedWorks(this.data_viewer.QID).subscribe(res => {
       this.services.push({
         key: 8,
         value: res,
@@ -222,7 +241,7 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       })
     })
 
-    this.queryQueryOrgEmployes.coAuthorCitations(this.QID).subscribe(res => {
+    this.queryQueryOrgEmployes.coAuthorCitations(this.data_viewer.QID).subscribe(res => {
       this.services.push({
         key: 9,
         value: res,
@@ -232,7 +251,7 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       })
     })
 
-    this.queryQueryOrgEmployes.awards(this.QID).subscribe({
+    this.queryQueryOrgEmployes.awards(this.data_viewer.QID).subscribe({
       next: res => {
         this.services.push({
           key: 10,
@@ -246,7 +265,7 @@ this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       error: err => console.log(err)
     })
 
-    this.queryQueryOrgEmployes.genderDistribution(this.QID).subscribe({
+    this.queryQueryOrgEmployes.genderDistribution(this.data_viewer.QID).subscribe({
       next: res => {
         this.services.push({
           key: 11,

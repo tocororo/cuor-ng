@@ -199,7 +199,7 @@ return of ( endpointUrl + encodeURIComponent(query));
   var rowColum: Array<Object> = [
     { key: 'researcher', label: 'No. Investigadores' },
     { key: 'topic', label: 'Tema' },
-    { key: 'zoom', label: 'Zoom' },
+    //{ key: 'zoom', label: 'Zoom' },
     { key: 'topicDescription', label: 'Descripcion del Tema' },
     { key: 'samplework', label: 'Muestra de Trabajo' }
   ]
@@ -215,11 +215,11 @@ return of ( endpointUrl + encodeURIComponent(query));
         label: element.topicLabel ? element.topicLabel.value : '',
         QID: element.topic ? _topic[_topic.length - 1] : ''
       },
-      zoom: {
+     /*  zoom: {
         type: 'URL',
         label: element.zoom ? element.zoom.value : '',
         URL: element.zoomUrl ? element.zoomUrl.value : ''
-      },
+      }, */
       topicDescription: element.topicDescription ? element.topicDescription.value : '',
       samplework: {
         type: 'work',
