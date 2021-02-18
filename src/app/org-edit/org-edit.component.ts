@@ -78,6 +78,8 @@ export class OrgEditComponent implements OnInit {
 
   loading: boolean = true;
 
+  urlRegExpression = '(https?://)?([\\da-z@:%=?$#._\+~#=.-]+)\\.([a-z@:%=?$#._\+~#=.]{2,6})[/\\w .-]*/?';
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _formBuilder: FormBuilder,
@@ -146,7 +148,7 @@ export class OrgEditComponent implements OnInit {
 
       addresses: this.addItemsFormArrayAddresses(orgInput.addresses),
 
-      wikipedia_url: new FormControl(orgInput.wikipedia_url, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')),
+      wikipedia_url: new FormControl(orgInput.wikipedia_url, Validators.pattern(this.urlRegExpression)),
 
       email_address: new FormControl(orgInput.email_address, Validators.email),
 
@@ -248,11 +250,11 @@ export class OrgEditComponent implements OnInit {
   addItemsFormArray(items: any[]){
     let formArrayGroup = this._formBuilder.array([]);
     if (isUndefined(items)){
-      formArrayGroup.push(this._formBuilder.control(''));
+      formArrayGroup.push(this._formBuilder.control('', Validators.pattern(this.urlRegExpression)));
     }
     else {
       for (const key in items) {
-        formArrayGroup.push(this._formBuilder.control(items[key]));
+        formArrayGroup.push(this._formBuilder.control(items[key], Validators.pattern(this.urlRegExpression)));
       }
     }
     return formArrayGroup
@@ -262,9 +264,9 @@ export class OrgEditComponent implements OnInit {
    * LINKS FUNCTIONS
    ******************************************************************/
   addlinks(){
-    const regUrl = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    //const regUrl = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';    
     this.org.links.push("");
-    (this.orgFormGroup.get('links') as FormArray).push(this._formBuilder.control('', Validators.pattern(regUrl)));
+    (this.orgFormGroup.get('links') as FormArray).push(this._formBuilder.control('', Validators.pattern(this.urlRegExpression)));
   }
 
   deletelinks(pos: number){

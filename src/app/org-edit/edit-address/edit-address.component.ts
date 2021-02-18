@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { OrgService } from 'src/app/org.service';
@@ -27,6 +27,9 @@ export class EditAddressComponent implements OnInit {
   public municipalities = []; //En este modelo la ciudad seria el municipio
 
   public state;
+
+  postalRegExpression = '\\d{5}([-]\\d{4})?';
+  coordinatesRegExpression = '^[+-]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?,\\s*[-+]?(180(\\.0+)?|((1]0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$';
 
   constructor(private _formBuilder: FormBuilder, private _orgService: OrgService) {
     this.addressEmiter = new EventEmitter<FormGroup>(true);
@@ -64,7 +67,7 @@ export class EditAddressComponent implements OnInit {
       line_1: new FormControl(this.address.line_1),
       line_2: new FormControl(this.address.line_2),
       line_3: new FormControl(this.address.line_3),
-      postcode: new FormControl(this.address.postcode),
+      postcode: new FormControl(this.address.postcode, Validators.pattern(this.postalRegExpression)),
       primary: new FormControl(this.address.primary),
       state: new FormControl(this.address.state),
       state_code: new FormControl(this.address.state_code),
