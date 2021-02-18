@@ -184,6 +184,14 @@ body { margin: 0; }
   border-left: 25px solid mat-color($toco-primary);
 }
 
+.sceiba-a{
+  color: mat-color($toco-primary);
+  text-decoration: none;
+}
+.sceiba-a:hover{
+  text-decoration: underline;
+}
+
 ngx-charts-pie-chart.home-charts{
   svg.ngx-charts{
     margin-top: -11em;

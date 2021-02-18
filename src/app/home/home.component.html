@@ -14,7 +14,37 @@
 
 <img src="assets/icons/getwaves.io.top1.svg" alt="" style="margin-top: -4px; width: 100%;">
 
-<div fxLayout="column">
+
+<div class="w-70" style="margin-top: -3em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em'}">
+    <div markdown [src]="'/assets/markdown/home-about.md'" class="mat-h2 text-format"></div>
+    <div fxLayout="row" fxLayoutAlign="start" class="w-100 pt-20">
+        <button mat-raised-button color="primary" (click)="goAbout()">Conozca más de nosotros</button>            
+    </div>
+</div>
+
+
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center end" class="w-100">
+    <app-card-svg [title]="'Captura datos con precisión'" [text]="'Se colectan datos de diversas fuentes autorizadas usando los identificadores persistentes en pos de aminorar duplicidad o desambiguación de los datos. El uso de nuestros identificadores persistentes aseguran la consistencia de los datos.'"></app-card-svg>
+
+    <app-card-svg [title]="'Enriquecemos y desambiguamos los datos'" [text]="'Nosotros limpiamos los datos por usted, con los permisos adecuados es posible asegurar los identificadores de las organizaciones y la validez de sus datos, así como actualizarlos o agregar nueva información que no esté pública en estos sistemas de identificación.'"></app-card-svg>
+
+    <app-card-svg [title]="'Se exponen datos y estadísticas de las organizaciones'" [text]="'Ofrecemos datos consistentes y de valor por diferentes vías para usuarios del sistema por html y promovemos la interoperatividad de otros sistemas que usan información de organizaciones.'"></app-card-svg>
+</div>
+
+<br>
+<br>
+<div class="w-100 " fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="10%" fxLayoutGap.md="6%" fxLayoutGap.xs="16px">
+    <p class="w-50 mat-h3" [ngStyle.xs]="{width: '70%'}" style="margin-left: 4em;">Ofrecemos servicios de API-REST así como OAI-IPMH donde puede ineterconectar sus sistemas con PIDCuba Organizaciones asegurando la veracidad y consistencia del los datos que estará usando en sus sistemas de las organizaciones cubanas y puede incluir las internacionales. 
+    <a class="sceiba-a" [routerLink]="['/contact']">Contáctenos</a> para establecer las pautas necesarias para ello.</p>
+    <div class="buble" [ngStyle.xs]="{width: '100%'}">
+        <h1 class="mat-h1">Servicios de Interoperabilidad</h1>
+        <img src="assets/icons/buble.svg" alt="" style="width: 18em;" [ngStyle.xs]="{width: '100%'}">
+    </div>
+</div>
+
+<app-card-item-info class="w-100" [title]="'¿De dónde salen los datos?'" [info]="harvesterInfo"></app-card-item-info>
+
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10%" style="padding-top: 4em;">
     <ngx-charts-pie-chart 
         class="home-charts"
         *ngIf="loadCharts"
@@ -28,36 +58,7 @@
         [doughnut]="isDoughnut"
         style="margin-left: 2.5em;">
     </ngx-charts-pie-chart>
-    <div class="w-70" style="margin-top: 3em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em'}">
-        <div markdown [src]="'/assets/markdown/home-about.md'" class="mat-h2 text-format"></div>
-        <div fxLayout="row" fxLayoutAlign="start" class="w-100 pt20">
-            <button mat-raised-button color="primary" (click)="goAbout()">Conozca más de nosotros</button>            
-        </div>
-    </div>
-</div>
 
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center end" class="w-100">
-    <app-card-svg [title]="'Captura datos con precisión'" [text]="'Se colectan datos de diversas fuentes autorizadas usando los identificadores persistentes en pos de aminorar duplicidad o desambiguación de los datos. El uso de nuestros identificadores persistentes aseguran la consistencia de los datos.'"></app-card-svg>
-
-    <app-card-svg [title]="'Enriquecemos y desambiguamos los datos'" [text]="'Nosotros limpiamos los datos por usted, con los permisos adecuados es posible asegurar los identificadores de las organizaciones y la validez de sus datos, así como actualizarlos o agregar nueva información que no esté pública en estos sistemas de identificación.'"></app-card-svg>
-
-    <app-card-svg [title]="'Se exponen datos y estadísticas de las organizaciones'" [text]="'Ofrecemos datos consistentes y de valor por diferentes vías para usuarios del sistema por html y promovemos la interoperatividad de otros sistemas que usan información de organizaciones.'"></app-card-svg>
-</div>
-
-<br>
-<br>
-<div class="w-100 " fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="10%" fxLayoutGap.md="6%" fxLayoutGap.xs="16px">
-    <p class="w-50 mat-h3" [ngStyle.xs]="{width: '80%'}" style="margin-left: 4em;">Ofrecemos servicios de API-REST así como OAI-IPMH donde puede ineterconectar sus sistemas con PIDCuba Organizaciones asegurando la veracidad y consistencia del los datos que estará usando en sus sistemas de las organizaciones cubanas y puede incluir las internacionales. 
-    <a [routerLink]="['/contact']">Contáctenos</a> para establecer las pautas necesarias para ello.</p>
-    <div class="buble" [ngStyle.xs]="{width: '100%'}">
-        <h1 class="mat-h1">Servicios de Interoperabilidad</h1>
-        <img src="assets/icons/buble.svg" alt="" style="width: 18em;" [ngStyle.xs]="{width: '100%'}">
-    </div>
-</div>
-
-<app-card-item-info class="w-100" [title]="'¿De dónde salen los datos?'" [info]="harvesterInfo"></app-card-item-info>
-
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10%" style="margin-top: 2em;">
     <ngx-charts-bar-vertical
         class="home-charts"
         *ngIf="loadCharts"

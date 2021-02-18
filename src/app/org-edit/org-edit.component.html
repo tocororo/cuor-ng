@@ -78,10 +78,19 @@
                             <input matInput placeholder="Valor" [value]="identifier.value.value" formControlName="value">
                         </mat-form-field>
 
-                        <button mat-icon-button matSuffix class="mat-18" (click)="deleteidentifiers(pos)"
-                            matTooltip="Eliminar" matTooltipClass="tooltip-red">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        <ng-container *ngIf="identifierCanBeDeleted(identifier.value.idtype);else templateReportError">
+                            <button mat-icon-button matSuffix class="mat-18" (click)="deleteidentifiers(pos)"
+                                matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </ng-container>
+                        <ng-template #templateReportError>
+                            <button mat-icon-button matSuffix class="mat-18" (click)="reportIdentifiersError(pos)"
+                                matTooltip="Reportar error" matTooltipClass="tooltip-red">
+                                <mat-icon>error</mat-icon>
+                            </button>
+                        </ng-template>
+                        
 
                     </div>
 
@@ -255,7 +264,7 @@
                         <mat-panel-title>
                             Organizaciones Relacionadas
                         </mat-panel-title>
-                        <mat-panel-description></mat-panel-description>
+                        <mat-panel-description>Relación en lo económico, intelectual, colaboración o proyectos en común, clientes, proveedores entre otros. </mat-panel-description>
                     </mat-expansion-panel-header>
 
                     <mat-action-list>
@@ -319,7 +328,7 @@
                                     {{ address.state }}, 
                                 </ng-container>
                                 <ng-container *ngIf="address.city">
-                                    {{ address.city }}, 
+                                    {{ address.municipality }}, 
                                 </ng-container>
                             </div>
                             <div>
@@ -343,12 +352,14 @@
         </form>
 
     </mat-card-content>
-    <mat-card-actions align="start">
+    <mat-card-actions align="start" *ngIf="!disambiguating">
         <ng-container *ngIf="orgFormGroup.valid;else templateButtonUpdate">
-            <button mat-raised-button color="primary" (click)="update()">Guardar</button>
+            <button mat-raised-button color="primary" (click)="update(true)">Guardar</button>
+            <button mat-raised-button color="accent" (click)="update()">Guardar y seguir editando</button>
         </ng-container>
         <ng-template #templateButtonUpdate>
             <button mat-raised-button color="primary" disabled>Guardar</button>
+            <button mat-raised-button color="accent" disabled>Guardar y seguir editando</button>
         </ng-template>
 
     </mat-card-actions>

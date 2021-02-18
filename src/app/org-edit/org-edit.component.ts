@@ -1,10 +1,21 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatFormField, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
-import { Address, HandlerComponent, Hit, Identifier, IdentifierSchemas, LabelDiffLang, MessageHandler, Organization, OrganizationRelationships, Relationship, StatusCode } from 'toco-lib';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Address, HandlerComponent, Hit, Identifier, LabelDiffLang, MessageHandler, Organization, OrganizationRelationships, Relationship, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
 import { OrgService } from '../org.service';
+import { OrgViewerComponent } from '../org-viewer/org-viewer.component';
+
+export declare enum IdentifierOrgSchemas {
+  grid = "grid",
+  wkdata = "wkdata",
+  ror = "ror",
+  isni = "isni",
+  fudref = "fudref",
+  orgref = "orgref",
+  reup = "reup"
+}
 
 
 @Component({
@@ -18,6 +29,8 @@ export class OrgEditComponent implements OnInit {
   org: Organization = new Organization();
 
   public orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
+
+  @Input() disambiguating: boolean = false;
 
   // TODO: pasar para organization.entity, es similar a organizationRelationship
   selectOptions = [
@@ -55,6 +68,8 @@ export class OrgEditComponent implements OnInit {
     }
   ];
 
+  idtypes = ["grid","wkdata","ror","isni","fudref","orgref","reup"];
+
   iso639;
 
   selectOptionsIdType = [];
@@ -68,23 +83,23 @@ export class OrgEditComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _orgService: OrgService,
     private _dialog: MatDialog,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private _router: Router) { }
 
   ngOnInit() {
     this._activatedRoute.data.subscribe(
 			(data: { 'org': Hit<Organization> }) => {
         this.org = new Organization();
         this.org.deepcopy(data.org.metadata);
-        console.log(this.org)
-        this.initData(this.org);
+        this.initData(this.org);                
         this.loading = false;
       }
     );
 
     this.iso639 = this._orgService.getISO639();
 
-    for (const key in IdentifierSchemas) {
-      this.selectOptionsIdType.push({ idtype: IdentifierSchemas[key], value: IdentifierSchemas[key]})
+    for (let key of this.idtypes) {
+      this.selectOptionsIdType.push({ idtype: key, value: key})
     }
     // console.log('Data got for editing: ', this.org, this.orgFormGroup);
   }
@@ -93,7 +108,17 @@ export class OrgEditComponent implements OnInit {
   /******************************************************************
    * UPDATE FUNCTIONS
    ******************************************************************/
+
+  private identifierCanBeDeleted(idType:string) {
+    return (idType != 'reup');
+  }
+
+  reportIdentifiersError(pos){
+
+  }
+
   private initData(orgInput: Organization){
+        
     this.orgFormGroup = this._formBuilder.group({},[]);
     /* Gets the `Organization` data. */
 
@@ -143,17 +168,20 @@ export class OrgEditComponent implements OnInit {
   /******************************************************************
    * UPDATE FUNCTIONS
    ******************************************************************/
-  update(){
+  update(leave:boolean = false){
     this.loading = true;
+    if (leave){
+      this._router.navigate(["/"+this.orgFormGroup.controls['id'].value+"/view"]);
+    }
     // update orgFormGroup
     this.orgFormGroup.setControl('identifiers', this.identifiersControl);
     this.orgFormGroup.setControl('labels', this.labelsControl)
     // this.orgFormGroup.setControl('relationships', this.relationshipsControl)
-    console.log(this.orgFormGroup.value, this.orgFormGroup, 'QQWQWQWWWWssssszsaW')
+    //console.log(this.orgFormGroup.value, this.orgFormGroup, 'QQWQWQWWWWssssszsaW')
     let edited = new Organization()
     edited.deepcopy(this.orgFormGroup.value)
     edited.name = this.orgFormGroup.controls['name'].value;
-    console.log(edited);
+    //console.log(edited);
 
     // for (let i = 0; i < edited.addresses.length; i++) {
     //   const element = edited.addresses[i];
@@ -320,7 +348,7 @@ export class OrgEditComponent implements OnInit {
         iso639: new FormControl("")
       })
     );
-    console.log(this.org, this.orgFormGroup, this.labelsControl);
+    //console.log(this.org, this.orgFormGroup, this.labelsControl);
   }
 
   deleteLabels(pos){
@@ -365,7 +393,7 @@ export class OrgEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (result: Address) => {
         if (result && dialogRef.componentInstance.data.address) {
-          console.log("result", result, dialogRef.componentInstance.data);
+          //console.log("result", result, dialogRef.componentInstance.data);
           this.org.addresses.push((dialogRef.componentInstance.data.address as FormGroup).value);
           // changes other as `primary`
           if (this.org.addresses[this.org.addresses.length -1].primary){
@@ -373,13 +401,14 @@ export class OrgEditComponent implements OnInit {
           }
           this.orgFormGroup.setControl("addresses", this.addItemsFormArrayAddresses(this.org.addresses))
           this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
-          console.log(this.org, this.orgFormGroup, this.addressesControl);
+          //console.log("despues de ADDRESS", this.org, this.orgFormGroup, this.addressesControl);
         }
       }
     });
   }
 
   editaddress(pos: number){
+    //console.log("ANTES de editar ADDRESS", this.org, this.orgFormGroup, this.addressesControl, " --------- ", (this.orgFormGroup.get("addresses") as FormArray).value[pos]);
     const dialogRef = this._dialog.open(OrganizationDialogorgEditAddress, {
       width: '60%',
       data: { address: (this.orgFormGroup.get("addresses") as FormArray).value[pos] }
@@ -396,7 +425,7 @@ export class OrgEditComponent implements OnInit {
         this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
       }
     });
-    console.log(this.org, this.orgFormGroup, this.addressesControl);
+    //console.log("Despues de editar ADDRESS", this.org, this.orgFormGroup, this.addressesControl);
   }
 
   deleteaddress(pos){
@@ -430,7 +459,9 @@ export class OrgEditComponent implements OnInit {
           postcode: new FormControl(items[key].postcode),
           primary: new FormControl(items[key].primary),
           state: new FormControl(items[key].state),
-          state_code: new FormControl(items[key].state_code)
+          state_code: new FormControl(items[key].state_code),
+          municipality: new FormControl(items[key].municipality),
+          municipality_dpa: new FormControl(items[key].municipality_dpa)
         })
       );
     }
@@ -515,9 +546,9 @@ export class OrgEditComponent implements OnInit {
     //   );
     // });
     for (const key in items) {
-      console.log('AAAAAAAAAAAA')
-      console.log(key)
-      console.log(items[key])
+      //console.log('AAAAAAAAAAAA')
+      //console.log(key)
+      //console.log(items[key])
       formArrayGroup.push(this._formBuilder.group(
         {
           id: new FormControl(items[key].id),
@@ -604,7 +635,7 @@ export class OrganizationDialogRelasionship {
   }
   selectedOrg(event){
     this.org.deepcopy(event)
-    console.log(event);
+    //console.log(event);
     this.data.identifiers = this.org.identifiers;
     this.data.label = this.org.name;
   }

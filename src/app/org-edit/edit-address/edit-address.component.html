@@ -15,6 +15,7 @@
 
     <!-- Start State -->
     <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Provincia</mat-label>
         <mat-select class="w-100" placeholder="Seleccione la provincia" [value]="formGroup.controls.state_code.value"
             formControlName="state_code">
             <mat-option *ngFor="let item of dpa" [value]="item.iso">
@@ -23,33 +24,41 @@
     </mat-form-field>
     <!-- End State -->
 
-    <!-- Start Line_1 -->
+    <!-- Start municipality -->
     <mat-form-field appearance="outline" class="w-100">
-        <mat-select class="w-100" placeholder="Seleccione el municipio" [value]="formGroup.controls.line_1.value"
-            formControlName="line_1">
+        <mat-label>Municipio</mat-label>
+        <mat-select class="w-100" placeholder="Seleccione el municipio" [value]="formGroup.controls.municipality_dpa.value"
+            formControlName="municipality_dpa">            
             <mat-option *ngFor="let item of municipalities" [value]="item.dpa" >{{ item.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-    <!-- End Line_2 -->
+    <!-- End municipality -->
 
-    <!-- Start City -->
+    <!-- Start city -->
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Ciudad</mat-label>
-        <input matInput placeholder="Escriba la ciudad" [value]="formGroup.controls.city.value" formControlName="city">
+        <input matInput placeholder="Escriba el nombre de la ciudad... " [value]="formGroup.controls.city.value" formControlName="city">
     </mat-form-field>
-    <!-- End City -->
+    <!-- End city -->
+
+    <!-- Start line_1 -->
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Reparto, calle, edificio, número...</mat-label>
+        <input matInput placeholder="Escriba el #, calle, edificio, apartamento... " [value]="formGroup.controls.line_1.value" formControlName="line_1">
+    </mat-form-field>
+    <!-- End line_1 -->
 
     <!-- Start Line_1 -->
     <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Número, calle...</mat-label>
-        <input matInput placeholder="Escriba el #, calle, edificio, apartamento... " [value]="formGroup.controls.line_2.value" formControlName="line_2">
+        <mat-label>Entre calles</mat-label>
+        <input matInput placeholder="Escriba los entre calles" [value]="formGroup.controls.line_2.value" formControlName="line_2">
     </mat-form-field>
     <!-- End Line_1 -->
 
     <!-- Start Line_1 -->
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Adicionales</mat-label>
-        <input matInput placeholder="Escriba datos adicionales" [value]="formGroup.controls.line_3.value" formControlName="line_2">
+        <input matInput placeholder="Escriba datos adicionales de la dirección" [value]="formGroup.controls.line_3.value" formControlName="line_2">
     </mat-form-field>
     <!-- End Line_1 -->
 
