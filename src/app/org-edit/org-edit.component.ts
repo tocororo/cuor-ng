@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation, Input, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatFormField, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,13 +24,15 @@ export declare enum IdentifierOrgSchemas {
   styleUrls: ['./org-edit.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class OrgEditComponent implements OnInit {
+export class OrgEditComponent implements OnInit, OnChanges {
 
-  org: Organization = new Organization();
+  @Input() org: Organization = new Organization();
 
   public orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
 
   @Input() disambiguating: boolean = false;
+
+  @Input() loading: boolean = true;
 
   // TODO: pasar para organization.entity, es similar a organizationRelationship
   selectOptions = [
@@ -74,9 +76,7 @@ export class OrgEditComponent implements OnInit {
 
   selectOptionsIdType = [];
 
-  orgRelationships = OrganizationRelationships;
-
-  loading: boolean = true;
+  orgRelationships = OrganizationRelationships;  
 
   urlRegExpression = '(https?://)?([\\da-z@:%=?$#._\+~#=.-]+)\\.([a-z@:%=?$#._\+~#=.]{2,6})[/\\w .-]*/?';
 
@@ -89,14 +89,21 @@ export class OrgEditComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    this._activatedRoute.data.subscribe(
-			(data: { 'org': Hit<Organization> }) => {
-        this.org = new Organization();
-        this.org.deepcopy(data.org.metadata);
-        this.initData(this.org);                
-        this.loading = false;
-      }
-    );
+    if(this.disambiguating && this.org){
+      this.initData(this.org);                
+      this.loading = false;
+    }
+    else
+    {
+      this._activatedRoute.data.subscribe(
+        (data: { 'org': Hit<Organization> }) => {
+          this.org = new Organization();
+          this.org.deepcopy(data.org.metadata);
+          this.initData(this.org);                
+          this.loading = false;
+        }
+      );
+    }
 
     this.iso639 = this._orgService.getISO639();
 
@@ -104,6 +111,17 @@ export class OrgEditComponent implements OnInit {
       this.selectOptionsIdType.push({ idtype: key, value: key})
     }
     // console.log('Data got for editing: ', this.org, this.orgFormGroup);
+  }
+
+  ngOnChanges(): void{
+    console.log(" entrando al onChanges ", this.org);
+    console.log(" ----- formulario ----- ", this.orgFormGroup, '***********************')
+
+    // if(this.disambiguating && this.org){
+    //   this.initData(this.org);                
+    //   this.loading = false;
+    // }
+    
   }
 
 
@@ -154,7 +172,7 @@ export class OrgEditComponent implements OnInit {
 
       ip_addresses: this.addItemsFormArray(orgInput.ip_addresses),
 
-      links: this.addItemsFormArray(orgInput.links)
+      links: this.addItemsFormArray(orgInput.links, this.urlRegExpression)
     });
 
     this.identifiersControl = this.addItemsFormArrayIdentifiers(orgInput.identifiers);
@@ -171,10 +189,7 @@ export class OrgEditComponent implements OnInit {
    * UPDATE FUNCTIONS
    ******************************************************************/
   update(leave:boolean = false){
-    this.loading = true;
-    if (leave){
-      this._router.navigate(["/"+this.orgFormGroup.controls['id'].value+"/view"]);
-    }
+    this.loading = true;    
     // update orgFormGroup
     this.orgFormGroup.setControl('identifiers', this.identifiersControl);
     this.orgFormGroup.setControl('labels', this.labelsControl)
@@ -208,6 +223,11 @@ export class OrgEditComponent implements OnInit {
       },
       complete: () => this.loading = false
     })
+
+    if (leave){
+      this._router.navigate(["/"+this.orgFormGroup.controls['id'].value+"/view"]);
+    }
+
   }
 
   editInputName(){
@@ -247,14 +267,14 @@ export class OrgEditComponent implements OnInit {
     });
   }
 
-  addItemsFormArray(items: any[]){
+  addItemsFormArray(items: any[], pattern: string = ""){
     let formArrayGroup = this._formBuilder.array([]);
     if (isUndefined(items)){
-      formArrayGroup.push(this._formBuilder.control('', Validators.pattern(this.urlRegExpression)));
+      formArrayGroup.push(this._formBuilder.control('', Validators.pattern(pattern)));
     }
     else {
       for (const key in items) {
-        formArrayGroup.push(this._formBuilder.control(items[key], Validators.pattern(this.urlRegExpression)));
+        formArrayGroup.push(this._formBuilder.control(items[key], Validators.pattern(pattern)));
       }
     }
     return formArrayGroup
@@ -403,7 +423,7 @@ export class OrgEditComponent implements OnInit {
           }
           this.orgFormGroup.setControl("addresses", this.addItemsFormArrayAddresses(this.org.addresses))
           this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
-          //console.log("despues de ADDRESS", this.org, this.orgFormGroup, this.addressesControl);
+          console.log("despues de ADDRESS", this.org, this.orgFormGroup, this.addressesControl);
         }
       }
     });
@@ -427,7 +447,7 @@ export class OrgEditComponent implements OnInit {
         this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
       }
     });
-    //console.log("Despues de editar ADDRESS", this.org, this.orgFormGroup, this.addressesControl);
+    console.log("Despues de editar ADDRESS", this.org, this.orgFormGroup, this.addressesControl);
   }
 
   deleteaddress(pos){
@@ -708,7 +728,7 @@ export class OrganizationDialogInfoConfirm {
     <div mat-dialog-actions align="end">
       <button mat-button (click)="onNoClick()">Cancelar</button>
       <button mat-button *ngIf="data.address == undefined" [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="saveData()">Adicionar</button>
-      <button mat-button *ngIf="data.address != undefined" [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="saveData()">Editar</button>
+      <button mat-button *ngIf="data.address != undefined" [mat-dialog-close]="true" cdkFocusInitial color="primary" (click)="saveData()">Guardar</button>
     </div>
   `,
   styleUrls: ['./org-edit.component.scss']

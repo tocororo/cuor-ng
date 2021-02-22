@@ -103,6 +103,17 @@ export class EditAddressComponent implements OnInit {
 
       }
     })
+
+    this.formGroup.controls["municipality_dpa"].valueChanges.subscribe({
+      next: selectedMunicpality => {
+        for (let index = 0; index < this.municipalities.length; index++) {
+          if(this.municipalities[index]["dpa"] == selectedMunicpality) {
+            this.formGroup.controls["municipality"].setValue(this.municipalities[index]["name"]);
+            index = this.municipalities.length;
+          }
+        }
+      }
+    })
   }
 
 

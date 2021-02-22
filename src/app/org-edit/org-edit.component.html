@@ -144,9 +144,9 @@
                 <mat-card-content formArrayName="acronyms">
                     <mat-label>Acrónimos</mat-label>
                     <mat-form-field appearance="outline" class="w-100"
-                        *ngFor="let acronymo of org.acronyms; let pos = index">
+                        *ngFor="let acronym of org.acronyms; let pos = index">
                         <mat-label>Acrónimo {{pos + 1}}</mat-label>
-                        <input matInput placeholder="Acrónimo de la Organización" [value]="acronymo"
+                        <input matInput placeholder="Acrónimo de la Organización" [value]="acronym"
                             [formControlName]="pos">
                         <button mat-icon-button matSuffix class="mat-18" (click)="deleteAcronyms(pos)"
                             matTooltip="Eliminar" matTooltipClass="tooltip-red">
@@ -166,9 +166,9 @@
                 <mat-card-content formArrayName="aliases">
                     <mat-label>Alias</mat-label>
                     <mat-form-field appearance="outline" class="w-100"
-                        *ngFor="let acronymo of org.aliases; let pos = index">
+                        *ngFor="let alias of org.aliases; let pos = index">
                         <mat-label>Alias {{pos + 1}}</mat-label>
-                        <input matInput placeholder="Alias de la Organización" [value]="acronymo"
+                        <input matInput placeholder="Alias de la Organización" [value]="alias"
                             [formControlName]="pos">
                         <button mat-icon-button matSuffix class="mat-18" (click)="deleteAliases(pos)"
                             matTooltip="Eliminar" matTooltipClass="tooltip-red">
@@ -223,16 +223,22 @@
                             Organizaciones Padres
                         </mat-panel-title>
                         <mat-panel-description></mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <mat-action-list>
+                    </mat-expansion-panel-header>                   
+                    <mat-list role="list">
                         <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
-                            <button mat-list-item *ngIf="orgRelationships.PARENT.value == relation.value.type"
-                                (click)="deleteRelationship(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
-                                {{ relation.value.label }}
-                            </button>
-                        </ng-container>
-                    </mat-action-list>
+                            <mat-list-item *ngIf="orgRelationships.PARENT.value == relation.value.type" role="listitem">
+                                {{ relation.value.label }}                                
+                                <button mat-icon-button matSuffix
+                                    class="mat-18"
+                                    (click)="deleteRelationship(pos)"
+                                    matTooltip="Eliminar"
+                                    matTooltipClass="tooltip-red"
+                                    style="margin-left: -39px;top: 8px">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </mat-list-item>      
+                        </ng-container>             
+                    </mat-list>
                     <mat-action-row>
                         <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.PARENT.value)">Adicionar</button>
                     </mat-action-row>
@@ -246,14 +252,22 @@
                         <mat-panel-description></mat-panel-description>
                     </mat-expansion-panel-header>
 
-                    <mat-action-list>
+                    <mat-list role="list">
                         <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
-                            <button mat-list-item *ngIf="orgRelationships.CHILD.value == relation.value.type"
-                                (click)="deleteRelationship(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
-                                {{ relation.value.label }}
-                            </button>
-                        </ng-container>
-                    </mat-action-list>
+                            <mat-list-item *ngIf="orgRelationships.CHILD.value == relation.value.type" role="listitem">
+                                {{ relation.value.label }}                                
+                                <button mat-icon-button matSuffix
+                                    class="mat-18"
+                                    (click)="deleteRelationship(pos)"
+                                    matTooltip="Eliminar"
+                                    matTooltipClass="tooltip-red"
+                                    style="margin-left: -39px;top: 8px">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </mat-list-item>      
+                        </ng-container>             
+                    </mat-list>                   
+
                     <mat-action-row>
                         <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.CHILD.value)">Adicionar</button>
                     </mat-action-row>
@@ -267,14 +281,22 @@
                         <mat-panel-description>Relación en lo económico, intelectual, colaboración o proyectos en común, clientes, proveedores entre otros. </mat-panel-description>
                     </mat-expansion-panel-header>
 
-                    <mat-action-list>
+                    <mat-list role="list">
                         <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
-                            <button mat-list-item *ngIf="orgRelationships.RELATED.value == relation.value.type"
-                                (click)="deleteRelationship(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
-                                {{ relation.value.label }}
-                            </button>
-                        </ng-container>
-                    </mat-action-list>
+                            <mat-list-item *ngIf="orgRelationships.RELATED.value == relation.value.type" role="listitem">
+                                {{ relation.value.label }}                                
+                                <button mat-icon-button matSuffix
+                                    class="mat-18"
+                                    (click)="deleteRelationship(pos)"
+                                    matTooltip="Eliminar"
+                                    matTooltipClass="tooltip-red"
+                                    style="margin-left: -39px;top: 8px">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </mat-list-item>      
+                        </ng-container>             
+                    </mat-list>  
+                   
                     <mat-action-row>
                         <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.RELATED.value)">Adicionar</button>
                     </mat-action-row>
@@ -322,13 +344,13 @@
                         <mat-list-item mat-list-item class="mat-list-option" *ngFor="let address of org.addresses; let pos = index" fxLayout="row wrap" fxLayoutAlign="space-between center"> 
                             <div>
                                 <ng-container *ngIf="address.country">
-                                    {{ address.country }}, 
+                                    {{ address.country }}
                                 </ng-container>
                                 <ng-container *ngIf="address.state">
-                                    {{ address.state }}, 
+                                    , {{ address.state }} 
                                 </ng-container>
-                                <ng-container *ngIf="address.city">
-                                    {{ address.municipality }}, 
+                                <ng-container *ngIf="address.municipality">
+                                    , {{ address.municipality }}
                                 </ng-container>
                             </div>
                             <div>
