@@ -11,8 +11,8 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   @Input() masterOrganization: Organization;
   @Input() secundariesOrganizations: Organization[];
-
-  posSecundaryOrg: number = -1;
+  @Input() posSecundaryOrg: number;
+  
   selectedsecundaryOrganization: Organization;
   isDisabledNavigatePrevious: boolean;
   isDisabledNavigateNext: boolean;
@@ -73,41 +73,57 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   // }
 
+  canGoNext(){
+    //console.log("pos: ", this.posSecundaryOrg, " ------- lenght: ", this.secundariesOrganizations.length);
+    
+    if (this.posSecundaryOrg < this.secundariesOrganizations.length - 1){
+      return true;
+    }
+    return false;
+  }
+
+  canGoPrevius(){
+    if (this.posSecundaryOrg > 0) {
+      return true;
+    }
+    return false;
+  }
+
   nextOrg(){
+    this.isDisabledNavigatePrevious = false;
+
     if (this.posSecundaryOrg < this.secundariesOrganizations.length - 1){
       this.isDisabledNavigateNext = false;
-      this.isDisabledNavigatePrevious = false;
+      
       this.posSecundaryOrg++;
       this.SelectSecundaryOrganization();
     }
-    else {
+    else if (this.posSecundaryOrg == this.secundariesOrganizations.length - 1) {      
       this.isDisabledNavigateNext = true;
+
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.OK, 'No hay más versiones para mostrar')
-    }
-    if (this.posSecundaryOrg == this.secundariesOrganizations.length - 1) {
-      this.isDisabledNavigateNext = true;
-    }
+    }    
+    
   }
 
   previousOrg(){
+    this.isDisabledNavigateNext = false;
+
     if (this.posSecundaryOrg > 0) {
       this.isDisabledNavigatePrevious = false;
-      this.isDisabledNavigateNext = false;
+      
       this.posSecundaryOrg--;
       this.SelectSecundaryOrganization();
 
     }
-    else {
+    else if (this.posSecundaryOrg == 0) {
+        this.isDisabledNavigatePrevious = true;        
 
-        this.isDisabledNavigatePrevious = true;
         const m = new MessageHandler(this._snackBar);
         m.showMessage(StatusCode.OK, 'No hay más organizaciones para mostrar')
 
-    }
-    if (this.posSecundaryOrg == 0) {
-        this.isDisabledNavigatePrevious = true;
-    }
+    }    
 
   }
 

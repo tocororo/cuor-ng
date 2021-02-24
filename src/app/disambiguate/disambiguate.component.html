@@ -27,7 +27,7 @@
           [org]="masterOrganization">
         </toco-org-view>
 
-        <button mat-stroked-button matStepperNext color="primary" class="mt-1">Siguiente</button>
+        <button mat-raised-button matStepperNext color="primary" class="mt-1">Siguiente</button>
  
     </mat-step>
 
@@ -107,20 +107,35 @@
         </mat-expansion-panel>
       </mat-accordion>
 
-      <button mat-stroked-button matStepperPrevious class="mt-1 mx-1">Anterior</button>
-      <button mat-stroked-button matStepperNext class="mt-1 mx-1">Siguiente</button>
+      <button mat-raised-button matStepperPrevious color="accent" class="mt-1 mx-1">Anterior</button>
+      <button mat-raised-button matStepperNext color="primary" class="mt-1 mx-1">Siguiente</button>
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Desambiguar</ng-template>
+      <ng-template matStepLabel>Desambiguar metadatos</ng-template>
   
       <app-disambiguation
         [masterOrganization]="masterOrganization"
-        [secundariesOrganizations]="secundariesOrganizations">
-      </app-disambiguation>
-  
-      <button mat-button matStepperPrevious class="mt-1 mx-1">Anterior</button>
-      <button mat-stroked-button color="warn" class="mt-1 mx-1" (click)="goDisambiguate()">Guardar Desambiguación</button>
+        [secundariesOrganizations]="secundariesOrganizations"
+        [posSecundaryOrg]="newPosSecundaryOrg"
+      ></app-disambiguation>
+
+      <button mat-raised-button matStepperPrevious color="accent" class="mt-1 mx-1">Anterior</button>
+      <button mat-raised-button matStepperNext color="primary" class="mt-1 mx-1">Siguiente</button>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Editar y/o Finalizar</ng-template>
+
+      <app-org-edit #orgeditcomp *ngIf="masterOrganization"
+      [org]="masterOrganization"
+      [disambiguating]="'true'"
+      [loading]="'false'"
+      ></app-org-edit>
+
+      <button mat-raised-button color="accent" matStepperPrevious class="mt-1 mx-1">Anterior</button>
+      <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)">Finalizar</button>
+      <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()">Guardar y seguir desambiguando</button>
 
     </mat-step>
   </mat-horizontal-stepper>

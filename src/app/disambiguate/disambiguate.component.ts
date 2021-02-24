@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
-import { OrganizationDialogDeleteConfirm } from '../org-edit/org-edit.component';
+import { OrganizationDialogDeleteConfirm, OrgEditComponent } from '../org-edit/org-edit.component';
 import { OrgService } from '../org.service';
+import { Router } from '@angular/router';
 
 
 
@@ -15,6 +16,8 @@ import { OrgService } from '../org.service';
 })
 export class DisambiguateComponent implements OnInit {
 
+  @ViewChild('orgeditcomp', { static: false }) private _orgEdit: OrgEditComponent;
+
   masterOrganization: Organization;
   secundariesOrganizations: Organization[];
 
@@ -22,6 +25,8 @@ export class DisambiguateComponent implements OnInit {
 
   secundaryFormGroup: FormGroup;
   orgMasterCtrl: FormControl;
+
+  newPosSecundaryOrg: number = 0;
 
   step = -1;
 
@@ -33,7 +38,8 @@ export class DisambiguateComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     private _dialog: MatDialog,
-    private _orgService: OrgService
+    private _orgService: OrgService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -52,26 +58,26 @@ export class DisambiguateComponent implements OnInit {
   /***********************************************************
    * Stepper work
    ***********************************************************/
-  public setStep(index: number) {
-    this.step = index;
-  }
+  // public setStep(index: number) {
+  //   this.step = index;
+  // }
 
-  public nextStep() {
-    if (this.step < this.secundariesOrganizations.length) {
-      this.step++;
-    }
-    else {
-      this.step = 0;
-    }
-  }
+  // public nextStep() {
+  //   if (this.step < this.secundariesOrganizations.length) {
+  //     this.step++;
+  //   }
+  //   else {
+  //     this.step = 0;
+  //   }
+  // }
 
-  public prevStep() {
-    if (this.step > 0) {
-      this.step--;
-    } else {
-      this.step = this.secundariesOrganizations.length - 1;
-    }
-  }
+  // public prevStep() {
+  //   if (this.step > 0) {
+  //     this.step--;
+  //   } else {
+  //     this.step = this.secundariesOrganizations.length - 1;
+  //   }
+  // }
 
 
   /***********************************************************
@@ -109,6 +115,8 @@ export class DisambiguateComponent implements OnInit {
     this.masterOrganization = new Organization();
     this.masterOrganization.deepcopy(master);
     this.masterFormControl.setValue(master)
+    console.log(" Reciving master ********** ", master, "*******", this.masterOrganization, " ****** ", this.masterFormControl);
+    
   }
 
   receivingSecundaries(secundaryOrg: Organization) {
@@ -140,7 +148,7 @@ export class DisambiguateComponent implements OnInit {
    ***********************************************************/
   deleteSecundaryOrg(pos) {
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
-      width: '40%',
+      width: '60%',
       data: { label: (this.secundaryFormGroup.get('analogas') as FormArray).value[pos].name }
     });
 
@@ -148,6 +156,7 @@ export class DisambiguateComponent implements OnInit {
       if (isDeleted) {
         this.secundariesOrganizations.splice(pos, 1);
         (this.secundaryFormGroup.get('analogas') as FormArray).removeAt(pos);
+        this.newPosSecundaryOrg = 0;
       }
     });
 
@@ -156,15 +165,13 @@ export class DisambiguateComponent implements OnInit {
   /***********************************************************
    * Update organizations with new information
    ***********************************************************/
-  goDisambiguate() {
-    console.log('EDITAR LA ORGANIZACION PRIONCIPA GOOOO DESAMBIGUATE.....')
-    // editar la organizacion principal
-    this.masterOrganization.status = "active"
+  goDisambiguate(leave:boolean = false) {
+    //console.log('EDITAR LA ORGANIZACION PRIONCIPA GOOOO DESAMBIGUATE.....')
+    // editar la organizacion principal    
     const toD = new Organization();
-    toD.deepcopy(this.masterOrganization);
-    
-    console.log("this.masterOrganization, toD ----------------------", this.masterOrganization, toD);
-    
+    toD.deepcopy(this._orgEdit.orgFormGroup.value);
+    toD.status = "active"       
+        
     this._orgService.editOrganization(toD).subscribe({
       next: (result: Hit<Organization>) => {
         console.log(result);
@@ -186,13 +193,18 @@ export class DisambiguateComponent implements OnInit {
       rec.deepcopy(secOrg);
       this._orgService.editOrganization(rec).subscribe({
         next: (result: Hit<Organization>) => {
-          console.log(result);
+          console.log("sec org ", result);
         },
         error: err => {
           console.log("reconnect", err);
         }
       })
     });
+
+    if (leave){
+      this._router.navigate(["/"]);
+    }
+
   }
 
 }

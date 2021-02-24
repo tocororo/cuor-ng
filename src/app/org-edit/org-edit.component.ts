@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewEncapsulation, Input, OnChanges } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation, Input, OnChanges, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatFormField, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,11 +24,11 @@ export declare enum IdentifierOrgSchemas {
   styleUrls: ['./org-edit.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class OrgEditComponent implements OnInit, OnChanges {
+export class OrgEditComponent implements OnInit {
 
-  @Input() org: Organization = new Organization();
+  @Input() org: Organization;
 
-  public orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
+  orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
 
   @Input() disambiguating: boolean = false;
 
@@ -91,7 +91,7 @@ export class OrgEditComponent implements OnInit, OnChanges {
   ngOnInit() {
     if(this.disambiguating && this.org){
       this.initData(this.org);                
-      this.loading = false;
+      this.loading = false;      
     }
     else
     {
@@ -113,18 +113,7 @@ export class OrgEditComponent implements OnInit, OnChanges {
     // console.log('Data got for editing: ', this.org, this.orgFormGroup);
   }
 
-  ngOnChanges(): void{
-    console.log(" entrando al onChanges ", this.org);
-    console.log(" ----- formulario ----- ", this.orgFormGroup, '***********************')
-
-    // if(this.disambiguating && this.org){
-    //   this.initData(this.org);                
-    //   this.loading = false;
-    // }
-    
-  }
-
-
+  
   /******************************************************************
    * UPDATE FUNCTIONS
    ******************************************************************/
@@ -139,7 +128,7 @@ export class OrgEditComponent implements OnInit, OnChanges {
 
   private initData(orgInput: Organization){
         
-    this.orgFormGroup = this._formBuilder.group({},[]);
+    //this.orgFormGroup = this._formBuilder.group({},[]);
     /* Gets the `Organization` data. */
 
     this.orgFormGroup = this._formBuilder.group({

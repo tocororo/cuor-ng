@@ -14,6 +14,11 @@ class EnvironmentImpl implements Environment {
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
+
+  //Variables para poner los usuarios del sistema en twitter y en facebook
+  websiteUsername_Twitter = '@SceibaCuba';
+  websiteUsername_Facebook = '@sceiba';
+  
 }
 
 export const environment = new EnvironmentImpl();

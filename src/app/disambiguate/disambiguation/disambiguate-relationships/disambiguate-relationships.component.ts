@@ -21,6 +21,7 @@ export class DisambiguateRelationshipsComponent implements OnInit, OnChanges {
   others: Relationship[];
 
   constructor() { }
+  
   ngOnChanges(): void {
     if (this.parents != undefined && this.children != undefined && this.others != undefined )
       this.separatingRelationships();

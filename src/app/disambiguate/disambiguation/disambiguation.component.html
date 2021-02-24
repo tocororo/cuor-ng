@@ -3,16 +3,19 @@
     <mat-toolbar>
       
       <mat-toolbar-row fxLayoutGap="1em" fxLayoutAlign="end center">        
-        <div>
-          <mat-slide-toggle (change)="changingShowSecundaries()" color="primary">           
+        <div>         
+          <mat-slide-toggle 
+          (change)="changingShowSecundaries()" 
+          matTooltip="Mostrar organizaciones análogas"
+          color="primary">           
             Organizaciones análogas
-          </mat-slide-toggle>
+          </mat-slide-toggle>          
           <ng-container *ngIf="showSecundaries&&secundariesOrganizations&&secundariesOrganizations.length>1">
             <button
               mat-icon-button
               aria-label="Organización Anterior"
               matTooltip="Organización Anterior"
-              [disabled]="isDisabledNavigatePrevious"
+              [disabled]="!canGoPrevius()"
               (click)="previousOrg()"
             >
               <mat-icon>navigate_before</mat-icon>
@@ -21,7 +24,7 @@
               mat-icon-button
               aria-label="Próxima Organización"
               matTooltip="Próxima Organización"
-              [disabled]="isDisabledNavigateNext"
+              [disabled]="!canGoNext()"
               (click)="nextOrg()"
             >
               <mat-icon>navigate_next</mat-icon>
@@ -32,7 +35,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
     <div
-      fxLAyout="column"
+      fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
     >
@@ -289,6 +292,15 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  
+  <div class="floating-container">
+    <button class="botonF1" mat-mini-fab color="warn"
+    matTooltip="¿Cómo usar metadatos de las organizaciones análogas?"
+    aria-label="Ayuda para usar metadatos de las organizaciones análogas">
+      <mat-icon>help</mat-icon>
+    </button>  
+   </div>
   
   <mat-card *ngIf="!loaded()" style="margin: 1em;">
     <mat-card-content>
