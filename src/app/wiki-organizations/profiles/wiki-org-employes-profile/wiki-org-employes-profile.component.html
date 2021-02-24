@@ -4,6 +4,7 @@
         <mat-icon class="mat-18">visibility</mat-icon>
     </a>
 </div>
+
 <div style="padding: 16px;">
   <!-- <a  class="link" href="goWikipedia()" target="_blank" >ver mas en wikipedia</a> -->
   <ng-container *ngIf="content != undefined " >
@@ -11,12 +12,23 @@
   </ng-container>
    
   <br>
+  <mat-card 
+        style= "background-color: #fff3cd; 
+                color: #85694b;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                letter-spacing: 0.5px;"
+    >
+        Este servicio esta basado en <a href="https://scholia.toolforge.org/">SCHOLIA</a>  para proveer pérfiles sobre trabajos investigativos, asi como de los autores, citaciones, temas y de las organizaciones deonde se relizan.
+    </mat-card>
+    <br>
+    <br>
   <!-- <wiki-org-search style="width: 70%;"></wiki-org-search> -->
     
   <mat-chip-list aria-label="org selection" >
       <span>Similares: </span>
       <ng-container *ngFor="let sim of similars">
-        <mat-chip class="linkSimilars" *ngIf="this.title != sim.label" matTooltip={{sim.description}}> 
+        <mat-chip class="linkSimilars" *ngIf="this.title != sim.label" matTooltip={{sim.description}} (click)="redirectHere(sim.QID, sim.label, sim.lang)"> 
           {{sim.label}} 
         </mat-chip>
       </ng-container>

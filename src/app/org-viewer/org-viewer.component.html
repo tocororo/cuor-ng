@@ -8,15 +8,36 @@ fxLayoutAlign="space-between center"
 style="height: 80px; padding: 0 16px;"
     >
 
-    <div>
-        <button mat-icon-button *ngIf="hasPermission" routerLink="/{{org.id}}/edit" matTooltip="Editar la Organización">
-            <mat-icon class="mat-18">mode_edit</mat-icon>
-        </button>
-        <span class="mat-h2" style="margin: 0;">{{org.name}}</span>
-    </div>
+    
 
-    <button mat-icon-button *ngIf="showWikidataButton()" (click)="redirectProfile()" matTooltip="Ver información de Wikidata">
-        <mat-icon svgIcon="wikidata" class="mat-18"></mat-icon>
-    </button>
+    <div *ngIf="view_type; then view_cuor_button else view_wikidata_button"></div>
+
+    <ng-template #view_wikidata_button>      
+        <button mat-icon-button  (click)="changeView()" matTooltip="Regresar">
+            <mat-icon class="mat-18">exit_to_app</mat-icon>
+        </button>
+    </ng-template>
+
+    <ng-template #view_cuor_button>
+        <div>
+            <button mat-icon-button *ngIf="hasPermission" routerLink="/{{org.id}}/edit" matTooltip="Editar la Organización">
+                <mat-icon class="mat-18">mode_edit</mat-icon>
+            </button>
+            <span class="mat-h2" style="margin: 0;">{{org.name}}</span>
+        </div>
+
+        <button mat-icon-button  *ngIf="showWikidataButton()" (click)="changeView()" matTooltip="Ver información de Wikidata">
+            <mat-icon svgIcon="wikidata" class="mat-18"></mat-icon>
+        </button>
+    </ng-template>
 </div>
-<toco-org-view [org]="org"></toco-org-view>
+
+<div *ngIf="view_type; then view_cuor else view_wikidata"></div>
+
+<ng-template #view_wikidata>
+    <wiki-org-employes-profile  [data_viewer]="data"></wiki-org-employes-profile>
+</ng-template>
+
+<ng-template #view_cuor>
+    <toco-org-view [org]="org"></toco-org-view>
+</ng-template>

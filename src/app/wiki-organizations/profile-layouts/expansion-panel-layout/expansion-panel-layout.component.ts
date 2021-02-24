@@ -10,6 +10,8 @@ export class ExpansionPanelLayoutComponent implements OnInit {
   step = 1;
   @Input()
   services: any ;
+  _services: any;
+  loading = true;
   /* @Input()
   services$: Observable<Array<any>> ; */
   /* @Input()
@@ -21,7 +23,10 @@ export class ExpansionPanelLayoutComponent implements OnInit {
   }
 
   ngOnInit() { 
-    console.log(this.services);
+    setTimeout(() => {
+      this._services = this.services;
+      this.loading = false;
+    }, 4000);
     // document.getElementById("iframe").setAttribute("src", this.load(this.services[1].value));
     
   }

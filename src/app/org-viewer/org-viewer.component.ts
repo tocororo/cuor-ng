@@ -1,5 +1,4 @@
 
-import { Identifiers } from '@angular/compiler/src/render3/r3_identifiers';
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -18,6 +17,8 @@ export class OrgViewerComponent implements OnInit {
 
   public constructor(private _activatedRoute: ActivatedRoute, private router: Router, public iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) { }
   loading = true;
+  view_type:boolean = true;
+  data:any = '';
 
   public ngOnInit(): void {
 
@@ -52,11 +53,27 @@ export class OrgViewerComponent implements OnInit {
     /* This function redirect to the profile for employes and afiliates od the organization
    * 
    */
-  redirectProfile() {
+  /* redirectProfile() {
     this.router.navigate(['wiki-organizations/organization'], {
       queryParams: { QID: this.org.identifiers.find(id => id.idtype === "wkdata" ).value, label: this.org.name, lang: "es" },
       queryParamsHandling: 'merge'
     })
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }; */
+
+  changeView(): void {
+    this.view_type = !this.view_type;
+    this.showWikidata();
+  }
+
+  showWikidata() {  
+    this.data = { 
+      QID: this.org.identifiers.find(id => id.idtype === "wkdata" ).value,
+      //label: this.org.name,
+      label: this.org.labels.find(id => id.iso639 === "es" ).label,
+      lang: this.org.labels.find(id => id.iso639 === "es" ).iso639
+    }
+    console.log( this.data);
   };
+  
 }
