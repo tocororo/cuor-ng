@@ -78,7 +78,7 @@ export class OrgEditComponent implements OnInit {
 
   orgRelationships = OrganizationRelationships;  
 
-  urlRegExpression = '(https?://)?([\\da-z@:%=?$#._\+~#=.-]+)\\.([a-z@:%=?$#._\+~#=.]{2,6})[/\\w .-]*/?';
+  urlRegExpression = '(https?://)?([\\da-z@:%=?$#._\+~#=.-]+)\\.([a-z@:%=?$#._\+~#=.]{2,6})[/\\w\\da-z@:%=?$#._\+~#= .-]*/?';
 
   constructor(
     private _activatedRoute: ActivatedRoute,
