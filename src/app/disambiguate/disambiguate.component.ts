@@ -58,26 +58,26 @@ export class DisambiguateComponent implements OnInit {
   /***********************************************************
    * Stepper work
    ***********************************************************/
-  // public setStep(index: number) {
-  //   this.step = index;
-  // }
+  public setStep(index: number) {
+    this.step = index;
+  }
 
-  // public nextStep() {
-  //   if (this.step < this.secundariesOrganizations.length) {
-  //     this.step++;
-  //   }
-  //   else {
-  //     this.step = 0;
-  //   }
-  // }
+  public nextStep() {
+    if (this.step < this.secundariesOrganizations.length) {
+      this.step++;
+    }
+    else {
+      this.step = 0;
+    }
+  }
 
-  // public prevStep() {
-  //   if (this.step > 0) {
-  //     this.step--;
-  //   } else {
-  //     this.step = this.secundariesOrganizations.length - 1;
-  //   }
-  // }
+  public prevStep() {
+    if (this.step > 0) {
+      this.step--;
+    } else {
+      this.step = this.secundariesOrganizations.length - 1;
+    }
+  }
 
 
   /***********************************************************

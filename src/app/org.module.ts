@@ -54,6 +54,7 @@ import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-ve
 import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { OrgSearchWikiComponent } from './wiki-organizations/wiki-org-search/wiki-org-search.component';
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
+import { MatomoModule } from 'ngx-matomo';
 
 
 
@@ -128,7 +129,8 @@ export function storageFactory() : OAuthStorage {
     MarkdownModule.forRoot({
       loader: HttpClient
       }),
-    AuthenticationModule
+    AuthenticationModule,
+    MatomoModule
   ],
   entryComponents: [
     OrganizationDialogRelasionship,

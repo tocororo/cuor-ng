@@ -19,6 +19,8 @@ class EnvironmentImpl implements Environment {
   websiteUsername_Twitter = '@SceibaCuba';
   websiteUsername_Facebook = '@sceiba';
   
+  matomoUrl = 'https://crai-stats.upr.edu.cu/';
+  matomoSiteId = 7;
 }
 
 export const environment = new EnvironmentImpl();

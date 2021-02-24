@@ -118,7 +118,7 @@ export class OrgEditComponent implements OnInit {
    * UPDATE FUNCTIONS
    ******************************************************************/
 
-  private identifierCanBeDeleted(idType:string) {
+  public identifierCanBeDeleted(idType:string) {
     return (idType != 'reup');
   }
 

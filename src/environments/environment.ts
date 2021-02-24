@@ -11,10 +11,10 @@ class EnvironmentImpl implements Environment {
   sceibaApi = 'https://sceiba.cu/api/';
   cuorApi = 'https://orgs.sceiba.cu/api/';
 
-  appHost = 'https://localhost:4200';
+  appHost = 'https://127.0.0.1:4200';
   appName = 'Orgs';
-  oauthRedirectUri = 'https://localhost:4200/';
-  oauthClientId = 'I8wktQLfssUUsch9g7v7cTjahmegXeiz5suZy0Cl';
+  oauthRedirectUri = 'https://127.0.0.1:4200/';
+  oauthClientId = 'bh9bv1TXPH7HO8ulSgVUs8rBknmEn5xlH6kDdKqH';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
@@ -23,6 +23,8 @@ class EnvironmentImpl implements Environment {
   websiteUsername_Twitter = '@SceibaCuba';
   websiteUsername_Facebook = '@sceiba';
   
+  matomoUrl = 'https://crai-stats.upr.edu.cu/';
+  matomoSiteId = 7;
 }
 
 export const environment = new EnvironmentImpl();
