@@ -31,7 +31,6 @@ import { CardsSliderComponent } from './home/cards-slider/cards-slider.component
 import { HomeComponent } from './home/home.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
-import { OrganizationDialogDeleteConfirm, OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress, OrganizationDialogRelasionship, OrgEditComponent } from './org-edit/org-edit.component';
 import { OrgFooterComponent } from './org-footer/org-footer.component';
 import { OrgRoutingModule } from './org-routing.module';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
@@ -54,6 +53,8 @@ import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-ve
 import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { OrgSearchWikiComponent } from './wiki-organizations/wiki-org-search/wiki-org-search.component';
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
+import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm, OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
+import { OrgEditComponent } from './org-edit/org-edit.component';
 
 
 
@@ -110,6 +111,7 @@ export function storageFactory() : OAuthStorage {
 		WikiAuthorsProfileComponent,
 		ExpansionPanelLayoutComponent,
 		WikiTopicsProfileComponent,
+		OrgEditFormComponent,
   ],
   imports: [
     MatRadioModule,
