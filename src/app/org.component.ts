@@ -7,7 +7,7 @@ import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { AuthBackend, Environment, OauthAuthenticationService, OauthInfo, User } from 'toco-lib';
 import { UserService } from './org.service';
 import { Permission } from './permission.service';
-
+import { MatomoInjector } from 'ngx-matomo';
 
 @Component({
 	selector: 'toco-org-root',
@@ -47,9 +47,10 @@ export class OrgRootComponent
     private oauthService: OAuthService,
     protected http: HttpClient,
     private router: Router,
-    private environment: Environment
+    private environment: Environment,
+    private matomoInjector: MatomoInjector
     ) {
-
+      this.matomoInjector.init( environment.matomoUrl, environment.matomoSiteId);
     }
 
     public ngOnInit(): void

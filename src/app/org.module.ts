@@ -55,7 +55,7 @@ import { OrgSearchWikiComponent } from './wiki-organizations/wiki-org-search/wik
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
 import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm, OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
-
+import { MatomoModule } from 'ngx-matomo';
 
 
 export function storageFactory() : OAuthStorage {
@@ -130,7 +130,8 @@ export function storageFactory() : OAuthStorage {
     MarkdownModule.forRoot({
       loader: HttpClient
       }),
-    AuthenticationModule
+    AuthenticationModule,
+    MatomoModule
   ],
   entryComponents: [
     OrganizationDialogRelasionship,

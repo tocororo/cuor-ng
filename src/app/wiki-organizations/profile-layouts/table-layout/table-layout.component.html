@@ -17,10 +17,10 @@
                 class="link"> {{row[colum.key].label}}
             </a>
 
-            <a *ngIf="row[colum.key] && row[colum.key].type == 'venue' "
+            <!-- <a *ngIf="row[colum.key] && row[colum.key].type == 'venue' "
                 (click)="venueProfile (row[colum.key].QID, row[colum.key].label )" 
                 class="link"> {{row[colum.key].label}}
-            </a>
+            </a> -->
 
             <a *ngIf="row[colum.key] && row[colum.key].type == 'topic' "
                > {{row[colum.key].label}}
@@ -28,12 +28,12 @@
             <!-- (click)="topicProfile (row[colum.key].QID, row[colum.key].label )" 
             class="link" -->
 
-            <a *ngIf="row[colum.key] && row[colum.key].type == 'topics' "
+            <!-- <a *ngIf="row[colum.key] && row[colum.key].type == 'topics' "
                 (click)="topicsProfile (row[colum.key].QID, row[colum.key].label )" 
                 class="link"> {{row[colum.key].label}}
-            </a>
+            </a> -->
 
-            <a *ngIf="row[colum.key] && row[colum.key].type === 'author' "
+            <!-- <a *ngIf="row[colum.key] && row[colum.key].type === 'author' "
                 (click)="authorProfile (row[colum.key].QID, row[colum.key].label )" 
                 class="link"> {{row[colum.key].label}}
             </a>
@@ -53,7 +53,7 @@
             <a *ngIf="row[colum.key] && row[colum.key].type == 'orcid' " 
                 (click)="redirectOrcid (row[colum.key].value )"
                 class="link"> {{row[colum.key].value}}
-            </a>
+            </a> -->
             <a *ngIf="row[colum.key] && row[colum.key].type == 'URL' " 
                 
                 class="link"> {{row[colum.key].label}}
