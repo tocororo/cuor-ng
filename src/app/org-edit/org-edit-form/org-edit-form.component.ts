@@ -82,7 +82,15 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     private _snackBar: MatSnackBar,
     private _orgService: OrgService) { }
 
+  copyOrg(){
+    let newOrg = new Organization();
+    newOrg.deepcopy(this.org);
+    this.org = newOrg;
+  }
+
   ngOnInit() {
+    
+    this.copyOrg();
     this.initData();                
     this.loading = false;  
 
@@ -94,15 +102,12 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     // console.log('Data got for editing: ', this.org, this.orgFormGroup);
   }
 
-  ngOnChanges(){
-    // if(this.disambiguating && this.org){
-    //   this.initData(this.org);                
-    //   this.loading = false;      
-      
-    //   console.log("entro a el onchanges ", this.org);
-      
-    // }
+  ngOnChanges(){   
 
+    this.copyOrg();
+    this.initData();                
+    this.loading = false;      
+    
     console.log("entro a el onchanges ", this.org);
 
   }

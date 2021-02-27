@@ -9,7 +9,9 @@
 
 <toco-progress [loading]="loading"></toco-progress>
 
-<mat-horizontal-stepper linear #stepper>
+<mat-horizontal-stepper linear #stepper
+(selectionChange)="changingStep($event)"
+>
     <mat-step [stepControl]="masterFormControl">
         <ng-template matStepLabel>Seleccione una Organización</ng-template>
 
@@ -114,10 +116,9 @@
     <mat-step>
       <ng-template matStepLabel>Desambiguar metadatos</ng-template>
   
-      <app-disambiguation
+      <app-disambiguation #disambiguatecomp
         [masterOrganization]="masterOrganization"
-        [secundariesOrganizations]="secundariesOrganizations"
-        [posSecundaryOrg]="newPosSecundaryOrg"
+        [secundariesOrganizations]="secundariesOrganizations"        
       ></app-disambiguation>
 
       <button mat-raised-button matStepperPrevious color="accent" class="mt-1 mx-1">Anterior</button>
@@ -127,15 +128,21 @@
     <mat-step>
       <ng-template matStepLabel>Editar y/o Finalizar</ng-template>
 
-      <app-org-edit #orgeditcomp *ngIf="masterOrganization"
-      [org]="masterOrganization"
-      [disambiguating]="'true'"
-      [loading]="'false'"
-      ></app-org-edit>
+      <org-edit-form #orgeditcomp *ngIf="masterOrganization"
+          [org]="masterOrganization"            
+          [loading]="'false'"
+      ></org-edit-form>
 
       <button mat-raised-button color="accent" matStepperPrevious class="mt-1 mx-1">Anterior</button>
-      <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)">Finalizar</button>
-      <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()">Guardar y seguir desambiguando</button>
+      <ng-container *ngIf="masterOrganization&&isValidForm();else templateButtonUpdate">
+        <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)">Finalizar</button>
+        <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()">Guardar y seguir desambiguando</button>
+      </ng-container>
+      <ng-template #templateButtonUpdate>
+        <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)" disabled>Finalizar</button>
+        <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()" disabled>Guardar y seguir desambiguando</button>          
+      </ng-template>
+      
 
     </mat-step>
   </mat-horizontal-stepper>

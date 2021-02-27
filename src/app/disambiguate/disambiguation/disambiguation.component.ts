@@ -66,6 +66,17 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   }
 
+  changingSecundaryPos(deletedPos:number){
+    //console.log("*-*-*-*-*-*-*-*-*-*-*-*", deletedPos, this.posSecundaryOrg, this.secundariesOrganizations.length);
+    //en este caso length ya tiene rebajado un elemento, pues se llama despues de eliminar para estar seguros 
+    //de no cambiar por gusto, por eso el tratamiento es diferente
+    if(deletedPos > 0 && (deletedPos < this.posSecundaryOrg||deletedPos==this.secundariesOrganizations.length)){
+      this.posSecundaryOrg = this.posSecundaryOrg - 1;      
+      //console.log("*-*-*-*-*-*-*-*-*-*-*-*", deletedPos, this.posSecundaryOrg, this.secundariesOrganizations.length);              
+    }
+    this.SelectSecundaryOrganization();
+  }
+
 
   // public ngOnChanges(): void{
   //   console.log("entro a ONCHANGES *************************************");

@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MatStepper } from '@angular/material';
 import { Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
-import { OrganizationDialogDeleteConfirm, OrgEditComponent } from '../org-edit/org-edit.component';
 import { OrgService } from '../org.service';
 import { Router } from '@angular/router';
+import { OrgEditFormComponent, OrganizationDialogDeleteConfirm } from '../org-edit/org-edit-form/org-edit-form.component';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { DisambiguationComponent } from './disambiguation/disambiguation.component';
 
 
 
@@ -16,7 +18,10 @@ import { Router } from '@angular/router';
 })
 export class DisambiguateComponent implements OnInit {
 
-  @ViewChild('orgeditcomp', { static: false }) private _orgEdit: OrgEditComponent;
+  @ViewChild('orgeditcomp', { static: false }) private _orgEdit: OrgEditFormComponent;
+  @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
+  @ViewChild('disambiguatecomp', {static: false}) private _disambiguateComp: DisambiguationComponent;
+
 
   masterOrganization: Organization;
   secundariesOrganizations: Organization[];
@@ -25,8 +30,6 @@ export class DisambiguateComponent implements OnInit {
 
   secundaryFormGroup: FormGroup;
   orgMasterCtrl: FormControl;
-
-  newPosSecundaryOrg: number = 0;
 
   step = -1;
 
@@ -58,26 +61,26 @@ export class DisambiguateComponent implements OnInit {
   /***********************************************************
    * Stepper work
    ***********************************************************/
-  // public setStep(index: number) {
-  //   this.step = index;
-  // }
+  public setStep(index: number) {
+    this.step = index;
+  }
 
-  // public nextStep() {
-  //   if (this.step < this.secundariesOrganizations.length) {
-  //     this.step++;
-  //   }
-  //   else {
-  //     this.step = 0;
-  //   }
-  // }
+  public nextStep() {
+    if (this.step < this.secundariesOrganizations.length) {
+      this.step++;
+    }
+    else {
+      this.step = 0;
+    }
+  }
 
-  // public prevStep() {
-  //   if (this.step > 0) {
-  //     this.step--;
-  //   } else {
-  //     this.step = this.secundariesOrganizations.length - 1;
-  //   }
-  // }
+  public prevStep() {
+    if (this.step > 0) {
+      this.step--;
+    } else {
+      this.step = this.secundariesOrganizations.length - 1;
+    }
+  }
 
 
   /***********************************************************
@@ -115,7 +118,7 @@ export class DisambiguateComponent implements OnInit {
     this.masterOrganization = new Organization();
     this.masterOrganization.deepcopy(master);
     this.masterFormControl.setValue(master)
-    console.log(" Reciving master ********** ", master, "*******", this.masterOrganization, " ****** ", this.masterFormControl);
+    //console.log(" Reciving master ********** ", master, "*******", this.masterOrganization, " ****** ", this.masterFormControl);
     
   }
 
@@ -147,6 +150,7 @@ export class DisambiguateComponent implements OnInit {
    * delete element in formarray
    ***********************************************************/
   deleteSecundaryOrg(pos) {
+        
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '60%',
       data: { label: (this.secundaryFormGroup.get('analogas') as FormArray).value[pos].name }
@@ -156,7 +160,8 @@ export class DisambiguateComponent implements OnInit {
       if (isDeleted) {
         this.secundariesOrganizations.splice(pos, 1);
         (this.secundaryFormGroup.get('analogas') as FormArray).removeAt(pos);
-        this.newPosSecundaryOrg = 0;
+        
+        this._disambiguateComp.changingSecundaryPos(pos);
       }
     });
 
@@ -169,8 +174,12 @@ export class DisambiguateComponent implements OnInit {
     //console.log('EDITAR LA ORGANIZACION PRIONCIPA GOOOO DESAMBIGUATE.....')
     // editar la organizacion principal    
     const toD = new Organization();
+    this._orgEdit.fillObjectControls(); //esto debe hacerlo el form por el mismo
     toD.deepcopy(this._orgEdit.orgFormGroup.value);
-    toD.status = "active"       
+    toD.status = "active"    
+    
+    console.log("go disambiguate ", toD, this.secundariesOrganizations);
+    
         
     this._orgService.editOrganization(toD).subscribe({
       next: (result: Hit<Organization>) => {
@@ -201,10 +210,47 @@ export class DisambiguateComponent implements OnInit {
       })
     });
 
+    this._resetStepper();
+
     if (leave){
       this._router.navigate(["/"]);
     }
 
+  }
+
+  changingStep(stepVar:StepperSelectionEvent){
+    //console.log(" changing stepper ", stepVar);
+    if (stepVar.selectedIndex == 3 && stepVar.previouslySelectedIndex == 2) {
+      let newOrg = new Organization();
+      newOrg.deepcopy(this.masterOrganization);
+      this.masterOrganization = newOrg;
+    }
+
+    if (stepVar.selectedIndex == 2 && stepVar.previouslySelectedIndex == 3) {
+      let newOrg = new Organization();
+      newOrg.deepcopy(this._orgEdit.orgFormGroup.value);
+      this.masterOrganization = newOrg;
+    }
+    
+  }
+
+  private _resetStepper(){
+    this.masterOrganization = undefined;
+    this.myStepper.reset();
+    this.ngOnInit();
+  }
+
+  isValidForm(){
+    try {      
+        if(this._orgEdit) {
+          return this._orgEdit.isValidForm();       
+        }
+    } catch(err) {
+      console.log(err);
+      
+    }
+
+    return false;
   }
 
 }
