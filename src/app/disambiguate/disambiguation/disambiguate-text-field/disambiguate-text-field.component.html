@@ -1,12 +1,33 @@
+<mat-card *ngIf="textContent">    
+    <mat-card-content>        
+        <mat-label *ngIf="textLabel">{{textLabel}}:</mat-label>
+        <span *ngIf="textContent">{{textContent}}</span> 
+        <button *ngIf="!isMaster && textContent" mat-icon-button 
+        aria-label="Cambiar en la organización principal" 
+        matTooltip="Cambiar en la organizacion principal" 
+        (click)="onPropagate(textContent)">
+            <mat-icon color="warn">merge_type</mat-icon>
+        </button> 
+    </mat-card-content>
+    <mat-card-footer *ngIf="isMaster">            
+        &nbsp;
+        &nbsp;
+    </mat-card-footer>
+</mat-card> 
 
-<mat-label *ngIf="textLabel">{{textLabel}}:</mat-label>
-<mat-label *ngIf="textContent">{{textContent}}</mat-label> 
-<button *ngIf="!isMaster && textContent" mat-icon-button 
-aria-label="Cambiar en la organización principal" 
-matTooltip="Cambiar en la organizacion principal" 
-(click)="onPropagate(textContent)">
-    <mat-icon color="warn">merge_type</mat-icon>
-</button> 
+<mat-card *ngIf="!textContent">    
+    <mat-card-content>        
+        <mat-label *ngIf="textLabel">{{textLabel}}:</mat-label>
+        <mat-label *ngIf="!textContent" class="text-muted text-through">Vacío</mat-label>
+    </mat-card-content>
+    <mat-card-footer *ngIf="isMaster">            
+        &nbsp;
+        &nbsp;
+    </mat-card-footer>    
+</mat-card>
 
-<mat-label *ngIf="!textContent" class="text-muted text-through">Vacío</mat-label>
+
+
+
+
 

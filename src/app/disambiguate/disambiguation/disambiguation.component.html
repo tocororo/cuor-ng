@@ -34,16 +34,20 @@
         
       </mat-toolbar-row>
     </mat-toolbar>
+    
     <div
-      fxLAyout="row"
+      fxLAyout="row"      
       fxLayoutAlign="space-between start"
       fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
     
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-card-field
           [cardTitle]="masterOrganization.name"
           [cardSubtitles]="['UUID Organización:' + masterOrganization.id, masterOrganization.status]"
+          fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-card-field>
       </ng-container> 
@@ -51,15 +55,20 @@
         <app-disambiguate-card-field
           [cardTitle]="selectedsecundaryOrganization.name"
           [cardSubtitles]="['UUID Organización:' + selectedsecundaryOrganization.id, selectedsecundaryOrganization.status]"
+          fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-card-field>
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-card-chips-field
@@ -85,10 +94,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-accord-chips-field
@@ -110,10 +123,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill     
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-accord-chips-field
@@ -135,10 +152,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill     
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-accord-chips-field
@@ -160,10 +181,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-text-field
@@ -185,10 +210,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill     
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-text-field
@@ -210,10 +239,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-text-field
@@ -235,10 +268,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-relationships
@@ -258,10 +295,14 @@
       </ng-container>
     </div>
 
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+    
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
     >
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-accord-chips-field

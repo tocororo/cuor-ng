@@ -1,13 +1,13 @@
 <mat-card *ngIf="contentList && contentList.length">
     <mat-card-header>            
         <mat-card-subtitle>
+            {{chipsTitle}}
             <button *ngIf="!isMaster" mat-icon-button 
             aria-label="Incluir todos los elementos" 
             matTooltip="Agregar todos a la organizacion principal" 
             (click)="onPropagate(contentList)">
                 <mat-icon color="warn">merge_type_left</mat-icon>
-            </button> 
-            {{chipsTitle}}
+            </button>             
         </mat-card-subtitle>                       
     </mat-card-header>
     <mat-card-content>        
