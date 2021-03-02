@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
 import { Hit, MessageHandler, Organization, Relationship, StatusCode } from 'toco-lib';
 import { OrgService } from '../../org.service';
+
+
 @Component({
   selector: 'app-disambiguation',
   templateUrl: './disambiguation.component.html',
@@ -20,7 +22,8 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   constructor(
     private _snackBar: MatSnackBar,
-    private _orgService: OrgService
+    private _orgService: OrgService,
+    private _dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -326,5 +329,41 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     }
   }
 
+  /***********************************************************
+   * help for step 3
+   ***********************************************************/
+  openHelpStep3() {
+        
+    const dialogRef = this._dialog.open(Step3DisambiguateHelp, {
+      width: '80%',      
+    });  
 
+  }
+
+
+}
+
+
+@Component({
+  selector: 'disambiguate-step3-help',
+  template: `
+    <h1 mat-dialog-title> Ayuda para la desambiguación de metadatos </h1>
+    <div mat-dialog-content>
+      <div markdown [src]="'/assets/markdown/help.step3.disambiguation.md'"></div>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="onNoClick()" cdkFocusInitial color="primary">Cerrar</button>      
+    </div>
+  `,
+  styleUrls: ['./disambiguation.component.scss']
+})
+export class Step3DisambiguateHelp {
+
+  constructor(
+    public dialogRef: MatDialogRef<Step3DisambiguateHelp>) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  
 }

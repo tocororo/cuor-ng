@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="font-size: initial;">
+<mat-toolbar color="primary" style="font-size: initial;" [ngStyle.xs]="{'padding-top':'20px'}">
     <mat-toolbar-row fxHide.xs="true"></mat-toolbar-row>
     <mat-toolbar-row fxLayoutAlign="center center" style="height: auto; white-space: normal;">
         <div fxLayout="column" fxLayoutAlign="center center" fxFlex="70%" fxFlex.lt-sm="100%">
@@ -15,7 +15,7 @@
 <img src="assets/icons/getwaves.io.top1.svg" alt="" style="margin-top: -4px; width: 100%;">
 
 
-<div class="w-70" style="margin-top: -3em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em'}">
+<div class="w-70" style="margin-top: -3em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em', 'padding-top':'60px'}">
     <div markdown [src]="'/assets/markdown/home-about.md'" class="mat-h2 text-format"></div>
     <div fxLayout="row" fxLayoutAlign="start" class="w-100 pt-20">
         <button mat-raised-button color="primary" (click)="goAbout()">Conozca más de nosotros</button>            
@@ -80,7 +80,7 @@
 
 <!-- <app-cards-slider></app-cards-slider> -->
 
-<div class="prefooter">
+<div class="prefooter" [ngStyle.xs]="{'padding-bottom':'60px'}">
     <div style="width: 32%; min-width: 22em;">
         <div class="info-card">
             <img src="assets/icons/sceiba.svg" alt="">

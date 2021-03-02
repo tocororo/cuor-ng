@@ -24,7 +24,7 @@ import { DisambiguateCardFieldComponent } from './disambiguate/disambiguation/di
 import { DisambiguateRelationshipsComponent } from './disambiguate/disambiguation/disambiguate-relationships/disambiguate-relationships.component';
 import { ShowOneRelationshipComponent } from './disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component';
 import { DisambiguateTextFieldComponent } from './disambiguate/disambiguation/disambiguate-text-field/disambiguate-text-field.component';
-import { DisambiguationComponent } from './disambiguate/disambiguation/disambiguation.component';
+import { DisambiguationComponent, Step3DisambiguateHelp } from './disambiguate/disambiguation/disambiguation.component';
 import { CardItemInfoComponent } from './home/card-item-info/card-item-info.component';
 import { CardSvgComponent } from './home/card-svg/card-svg.component';
 import { CardsSliderComponent } from './home/cards-slider/cards-slider.component';
@@ -111,7 +111,9 @@ export function storageFactory() : OAuthStorage {
 		WikiAuthorsProfileComponent,
 		ExpansionPanelLayoutComponent,
 		WikiTopicsProfileComponent,
-		OrgEditFormComponent,
+    OrgEditFormComponent,
+    
+    Step3DisambiguateHelp
   ],
   imports: [
     MatRadioModule,
@@ -137,7 +139,8 @@ export function storageFactory() : OAuthStorage {
     OrganizationDialogRelasionship,
     OrganizationDialogDeleteConfirm,
     OrganizationDialogInfoConfirm,
-    OrganizationDialogorgEditAddress
+    OrganizationDialogorgEditAddress,
+    Step3DisambiguateHelp
   ],
   providers: [
     SearchService,
