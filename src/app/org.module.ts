@@ -6,10 +6,10 @@ import { MatRadioModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // testing charts organizations
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { OAuthStorage } from 'angular-oauth2-oidc';
+import { OAuthStorage, OAuthModule } from 'angular-oauth2-oidc';
 import { MarkdownModule } from 'ngx-markdown';
 import { environment } from 'src/environments/environment';
-import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule, TocoFormsModule } from 'toco-lib';
+import { CoreModule, Environment, OrganizationServiceNoAuth, OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule, TocoFormsModule, AuthenticationModule } from 'toco-lib';
 import { AggregationsComponent } from './aggregations/aggregations.component';
 import { BarVerticalComponent } from './charts/bar-vertical/bar-vertical.component';
 import { ChartsComponent } from './charts/charts.component';
@@ -59,7 +59,7 @@ import { MatomoModule } from 'ngx-matomo';
 
 
 export function storageFactory() : OAuthStorage {
-  return localStorage
+  return sessionStorage
 }
 
 @NgModule({
@@ -132,7 +132,7 @@ export function storageFactory() : OAuthStorage {
     MarkdownModule.forRoot({
       loader: HttpClient
       }),
-    AuthenticationModule,
+    OAuthModule.forRoot(),
     MatomoModule
   ],
   entryComponents: [
@@ -144,12 +144,10 @@ export function storageFactory() : OAuthStorage {
   ],
   providers: [
     SearchService,
-    // EnvServiceProvider,
     OrganizationServiceNoAuth,
     OrgService,
-    { provide: Environment, useValue: environment }
-    // { provide: OAuthStorage, useFactory: storageFactory },
-    // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true }
+    { provide: Environment, useValue: environment },
+    { provide: OAuthStorage, useFactory: storageFactory },
   ],
 
   bootstrap: [OrgRootComponent]

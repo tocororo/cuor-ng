@@ -11,9 +11,9 @@ class EnvironmentImpl implements Environment {
   sceibaApi = 'https://sceiba.cu/api/';
   cuorApi = 'https://orgs.sceiba.cu/api/';
 
-  appHost = 'https://127.0.0.1:4200';
+  appHost = 'https://localhost:4200';
   appName = 'Orgs';
-  oauthRedirectUri = 'https://127.0.0.1:4200/';
+  oauthRedirectUri = 'https://localhost:4200/';
   oauthClientId = 'bh9bv1TXPH7HO8ulSgVUs8rBknmEn5xlH6kDdKqH';
   oauthScope = 'user:email';
   topOrganizationPID = '';

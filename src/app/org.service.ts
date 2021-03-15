@@ -406,26 +406,26 @@ export class UserService implements CanActivate {
     this.http.get<any>(this.environment.cuorApi + 'me').subscribe(
       (user) => {
         this.user = user;
-        this.loginChange()
+        // this.loginChange()
       },
       (error: any) => {
         this.user = null;
-        this.loginChange()
+        // this.loginChange()
       },
       () => {
       }
     );
   }
-  private authenticationSubject: Subject<User> = new Subject();
-  /**
-   * Observer to handles the behavior when a user authenticates
-   */
-  public authenticationSubjectObservable = this.authenticationSubject.asObservable();
+  // private authenticationSubject: Subject<User> = new Subject();
+  // /**
+  //  * Observer to handles the behavior when a user authenticates
+  //  */
+  // public authenticationSubjectObservable = this.authenticationSubject.asObservable();
 
 
-  loginChange() {
-    this.authenticationSubject.next(this.user);
-  }
+  // loginChange() {
+  //   this.authenticationSubject.next(this.user);
+  // }
   /**
    * gives information about an user authenticated
    */
