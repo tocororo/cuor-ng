@@ -25,7 +25,7 @@ export class OrgRootComponent
 
   public cuorHost: string;
 
-  public authBackend: AuthBackend;
+  public urlSignUp = 'https://personas.sceiba.cu/auth/realms/sceiba/clients-registrations/openid-connect/sceiba-angular-dev';
 
   public constructor(
     private _userService: UserService,
