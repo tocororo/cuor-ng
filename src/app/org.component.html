@@ -1,28 +1,31 @@
 <mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2;">
   <mat-toolbar-row
-      fxLayout="row wrap"
-      fxLayoutAlign="space-between center"
-      style="height: auto !important; min-height: 80px;"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between center"
+    style="height: auto !important; min-height: 80px;"
   >
     <div style="width: 330px; display: flex; align-items: center;">
-        <div class="triangle">
-            <span matTooltipClass="tooltip-beta-red" matTooltip="Este es un producto BETA configurado con propósitos de prueba.
-            Algunas características pueden no funcionar correctamente."> <strong> BETA </strong> </span>
-        </div>
-        <a mat-button [routerLink]="['/']" style="white-space: normal; display: flex; align-items: center;" title="Ir al inicio de Sceiba Organizaciones">
-            <img src="/assets/icons/organizacion.svg" alt="Sceiba Organizaciones" title="Sceiba Organizaciones" style="height: 50px; margin-right: 6px;">
-            <span class="mat-h3">Sceiba Organizaciones</span>
-        </a>
+      <div class="triangle">
+        <span 
+          matTooltipClass="tooltip-beta-red"
+          matTooltip="{{ 'BETA_TOOLTIP' | translate }}"
+        >
+          <strong>{{ 'BETA' | translate }}</strong>
+        </span>
+      </div>
+      <a
+        mat-button
+        [routerLink]="['/']"
+        style="white-space: normal; display: flex; align-items: center;"
+        title="Ir al inicio de Sceiba Organizaciones">
+        <img src="/assets/icons/organizacion.svg" alt="Sceiba Organizaciones" title="Sceiba Organizaciones"
+          style="height: 50px; margin-right: 6px;">
+        <span class="mat-h3">Sceiba Organizaciones</span>
+      </a>
     </div>
 
-    <div
-        class="center-elements"
-        appearance="legacy"
-        aria-label="Menu de Inicio"
-        fxLayout="row wrap"
-        fxLayoutAlign="center"
-        fxLayoutGap="15px"
-    >
+    <div class="center-elements" appearance="legacy" aria-label="Menu de Inicio" fxLayout="row wrap"
+      fxLayoutAlign="center" fxLayoutGap="15px">
 
 
       <button mat-icon-button [matMenuTriggerFor]="menuApps" matTooltip="Aplicaciones">
@@ -30,7 +33,7 @@
       </button>
 
       <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
-          <mat-icon class="mat-18">help</mat-icon>
+        <mat-icon class="mat-18">help</mat-icon>
       </button>
 
       <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{ user.email }}">
@@ -48,9 +51,9 @@
 
 <mat-menu #menuHelp="matMenu">
   <!-- <a mat-menu-item [routerLink]="['/help']">
-        <mat-icon>help_outline</mat-icon>
-        Ayuda
-    </a> -->
+    <mat-icon>help_outline</mat-icon>
+    Ayuda
+  </a> -->
   <a mat-menu-item [routerLink]="['/faq']">
     <mat-icon>question_answer</mat-icon>
     FAQs
@@ -94,15 +97,15 @@
     <mat-icon>settings</mat-icon>
     Administración
   </a>
-  <a mat-menu-item  (click)="logout()">
+  <a mat-menu-item (click)="logout()">
     <!-- href="{{ cuorHost }}logout/" -->
     <mat-icon>exit_to_app</mat-icon>
     Salir
   </a>
   <!-- <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        Salir
-    </button> -->
+    <mat-icon>exit_to_app</mat-icon>
+    Salir
+  </button> -->
 </mat-menu>
 
 <mat-menu #menuApps="matMenu">
@@ -134,7 +137,8 @@
 
 </div>
 <div *ngIf="!isHome; else outHome" fxLayout="row" fxLayoutAlign="center center" style="border-radius: 40px 40px 0 0;">
-  <div [ngStyle.xs]="{width: '95%'}" style="margin-top: -100px; width: 90%; background-color: white; border-radius: 40px 40px 0 0; box-shadow: 0px 5px 15px rgb(0,0,0,0.088)">
+  <div [ngStyle.xs]="{width: '95%'}"
+    style="margin-top: -100px; width: 90%; background-color: white; border-radius: 40px 40px 0 0; box-shadow: 0px 5px 15px rgb(0,0,0,0.088)">
     <router-outlet></router-outlet>
   </div>
 </div>
@@ -144,5 +148,5 @@
 
 
 <!-- <div [ngStyle]="{ 'margin-top': '2em' }"> -->
-  <app-org-footer [sites]="footerSites" [information]="footerInformation" [extraImagePath]="''"></app-org-footer>
+<app-org-footer [sites]="footerSites" [information]="footerInformation" [extraImagePath]="''"></app-org-footer>
 <!-- </div> -->
