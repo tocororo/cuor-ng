@@ -49,7 +49,6 @@ import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 
-
 import { ExpansionPanelLayoutComponent } from './wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component';
 import { TableLayoutComponent } from './wiki-organizations/profile-layouts/table-layout/table-layout.component';
 import { WikiAuthorProfileComponent } from './wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
