@@ -1,5 +1,40 @@
 {
     "CONJUNCION_Y": "y",
     "BETA": "BETA",
-    "BETA_TOOLTIP": "Este es un producto BETA configurado con propósitos de prueba. Algunas características pueden no funcionar correctamente."
+    "BETA_TOOLTIP": "Este es un producto BETA configurado con propósitos de prueba. Algunas características pueden no funcionar correctamente.",
+    "SCEIBA_ORGANIZACIONES": "Sceiba Organizaciones",
+    "SCEIBA_ORGANIZACIONES_TOOLTIP": "Ir al inicio de Sceiba Organizaciones",
+    "MENU_INICIO": "Menu de inicio",
+    "IDIOMA": "Idioma",
+    "REDES_SOC": "Redes sociales",
+    "APLICACIONES": "Aplicaciones",
+    "AYUDA": "Ayuda",
+    "USUARIO": "Usuario",
+    "AUTENTICARSE": "Autenticarse",
+    "REGISTRARSE": "Registrarse",
+    "ACERCA_DE": "Acerca de",
+    "FAQS": "FAQs",
+    "CONTACTOS": "Contactos",
+    "DES_ORGANIZACIONES": "Desambiguar organizaciones",
+    "IMPORT": "Importar",
+    "PERFIL_USUARIO": "Perfil de usuario",
+    "CAMBIAR_CONTRASEÑA": "Cambiar contraseña",
+    "SEGURIDAD": "Seguridad",
+    "ADMINISTRACION": "Administración",
+    "SALIR": "Salir",
+    "CATALOGO": "Catálogo",
+    "ORGANIZACIONES": "Organizaciones",
+    "VOCABULARIOS": "Vocabularios",
+    "REVISTAS_MES": "Revistas MES",
+    "TOCO_SEARCH_QUERY_INPUT": {
+        "INPUT_SEARCH_LABEL": "Buscar",
+        "INPUT_SEARCH_PLACEHOLDER": "Escriba un criterio y presione Enter",
+        "BUTTON_SEARCH": "Buscar"
+    },
+    "TOCO_AUTHENTICATION": {
+        "MAT_CARD_TITLE_AUTH": "Autenticación con",
+        "AUTENTICARSE": "Autenticarse",
+        "H1_HOLA": "Hola",
+        "BUTTON_SALIR": "Salir"
+    }
 }

@@ -17,136 +17,276 @@
         mat-button
         [routerLink]="['/']"
         style="white-space: normal; display: flex; align-items: center;"
-        title="Ir al inicio de Sceiba Organizaciones">
-        <img src="/assets/icons/organizacion.svg" alt="Sceiba Organizaciones" title="Sceiba Organizaciones"
-          style="height: 50px; margin-right: 6px;">
-        <span class="mat-h3">Sceiba Organizaciones</span>
+        matTooltip="{{ 'SCEIBA_ORGANIZACIONES_TOOLTIP' | translate}}">
+        <img
+          src="/assets/icons/organizacion.svg"
+          [alt]="'SCEIBA_ORGANIZACIONES' | translate"
+          style="height: 50px; margin-right: 6px;"
+        />
+        <span class="mat-h3">{{ 'SCEIBA_ORGANIZACIONES' | translate }}</span>
       </a>
     </div>
 
-    <div class="center-elements" appearance="legacy" aria-label="Menu de Inicio" fxLayout="row wrap"
-      fxLayoutAlign="center" fxLayoutGap="15px">
+    <div
+      class="center-elements"
+      appearance="legacy"
+      aria-label="'MENU_INICIO' | translate"
+      fxLayout="row wrap"
+      fxLayoutAlign="center"
+      fxLayoutGap="15px"
+    >
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuLanguages"
+        matTooltip="{{ 'IDIOMA' | translate }}"
+      >
+        <mat-icon class="mat-18">translate</mat-icon>
+      </button>
 
+      <!-- <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuNetwork"
+        matTooltip="{{ 'REDES_SOC' | translate }}"
+      >
+        <mat-icon>share</mat-icon>
+      </button> -->
 
-      <button mat-icon-button [matMenuTriggerFor]="menuApps" matTooltip="Aplicaciones">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuApps"
+        matTooltip="{{ 'APLICACIONES' | translate }}"
+      >
         <mat-icon>apps</mat-icon>
       </button>
 
-      <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuHelp"
+        matTooltip="{{ 'AYUDA' | translate }}"
+      >
         <mat-icon class="mat-18">help</mat-icon>
       </button>
 
-      <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{ user.email }}">
+      <!-- <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuLogin"
+        matTooltip="{{ 'USUARIO' | translate }}"
+      >
+        <mat-icon class="mat-18">account_circle</mat-icon>
+      </button> -->
+
+      <button *ngIf="user"
+        mat-icon-button
+        [matMenuTriggerFor]="menuUser"
+        matTooltip="{{ user.email }}"
+      >
         <mat-icon class="mat-18">person_pin</mat-icon>
       </button>
 
-      <toco-authentication [oauthInfo]="oauthInfo" [isButtonLogin]="'true'" [isButtonLoginIcon]="'true'"
-        [isButtonLoginText]="'Autenticarse'" *ngIf="!user">
+      <toco-authentication *ngIf="!user"
+        [oauthInfo]="oauthInfo"
+        [isButtonLogin]="'true'"
+        [isButtonLoginIcon]="'true'"
+        [isButtonLoginText]="'TOCO_AUTHENTICATION.AUTENTICARSE' | translate"
+      >
       </toco-authentication>
-
     </div>
-
   </mat-toolbar-row>
 </mat-toolbar>
 
+<mat-menu #menuLanguages="matMenu">
+  <a *ngFor="let lang of languageTexts; let i=index" mat-menu-item (click)="setLanguage(i)">
+    <mat-icon *ngIf="i == languageSelected; else elseTemplate_radio_button_unchecked">radio_button_checked</mat-icon>
+    {{ lang }}
+  </a>
+
+  <ng-template #elseTemplate_radio_button_unchecked>
+    <mat-icon>radio_button_unchecked</mat-icon>
+  </ng-template>
+</mat-menu>
+
+<!-- <mat-menu #menuNetwork="matMenu">
+  <a mat-menu-item href="https://www.facebook.com/sceiba/" target="_blank">
+      Facebook
+  </a>
+  <a mat-menu-item href="https://twitter.com/SceibaCu" target="_blank">
+      Twitter
+  </a>
+  <a mat-menu-item href="https://github.com/tocororo" target="_blank">
+      GitHub
+  </a>
+</mat-menu> -->
+
 <mat-menu #menuHelp="matMenu">
   <!-- <a mat-menu-item [routerLink]="['/help']">
-    <mat-icon>help_outline</mat-icon>
-    Ayuda
+      <mat-icon>help_outline</mat-icon>
+      {{ 'AYUDA' | translate }}
   </a> -->
+
   <a mat-menu-item [routerLink]="['/faq']">
     <mat-icon>question_answer</mat-icon>
-    FAQs
+    {{ 'FAQS' | translate }}
   </a>
   <a mat-menu-item [routerLink]="['/about']">
     <mat-icon>info</mat-icon>
-    Acerca de
+    {{ 'ACERCA_DE' | translate }}
   </a>
   <a mat-menu-item [routerLink]="['/contact']">
     <mat-icon>contacts</mat-icon>
-    Contactos
+    {{ 'CONTACTOS' | translate }}
   </a>
 </mat-menu>
 
 <mat-menu #menuUser="matMenu">
   <a mat-menu-item [routerLink]="['/disambiguate']" *ngIf="hasPermission">
     <mat-icon>mode_edit</mat-icon>
-    Desambiguar Organizaciones
+    {{ 'DES_ORGANIZACIONES' | translate }}
   </a>
   <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
     <mat-icon>file_upload</mat-icon>
-    <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after"> Importar </span>
+    <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after">{{ 'IMPORT' | translate }}</span>
   </a>
   <a mat-menu-item href="{{ cuorHost }}account/settings/profile/">
     <mat-icon>account_circle</mat-icon>
-    Perfil de usuario
+    {{ 'PERFIL_USUARIO' | translate }}
   </a>
   <a mat-menu-item href="{{ cuorHost }}account/settings/password/">
     <mat-icon>vpn_key</mat-icon>
-    Cambiar contraseña
+    {{ 'CAMBIAR_CONTRASEÑA' | translate }}
   </a>
   <a mat-menu-item href="{{ cuorHost }}account/settings/security/">
     <mat-icon>security</mat-icon>
-    Seguridad
+    {{ 'SEGURIDAD' | translate }}
   </a>
   <a mat-menu-item href="{{ cuorHost }}account/settings/applications/">
     <mat-icon>settings_applications</mat-icon>
-    Aplicaciones
+    {{ 'APLICACIONES' | translate }}
   </a>
   <a mat-menu-item href="{{ cuorHost }}admin/" *ngIf="hasPermissionAdmin">
     <mat-icon>settings</mat-icon>
-    Administración
+    {{ 'ADMINISTRACION' | translate }}
   </a>
   <a mat-menu-item (click)="logout()">
     <!-- href="{{ cuorHost }}logout/" -->
     <mat-icon>exit_to_app</mat-icon>
-    Salir
+    {{ 'SALIR' | translate }}
   </a>
   <!-- <button mat-menu-item (click)="logout()">
     <mat-icon>exit_to_app</mat-icon>
-    Salir
+    {{ 'SALIR' | translate }}
   </button> -->
 </mat-menu>
 
 <mat-menu #menuApps="matMenu">
-
   <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-    <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Sceiba">
-      <img class="app-featured" src="/assets/icons/sceiba.svg" alt="Sceiba" style="width: 55px; height: 55px;">
+    <a
+      href="https://sceiba.cu"
+      target="_blank"
+      class="apps"
+      matTooltip="Sceiba"
+    >
+      <img
+        class="app-featured"
+        src="/assets/icons/sceiba.svg"
+        alt="Sceiba"
+        style="width: 55px; height: 55px"
+      />
     </a>
     <mat-divider class="w-90"></mat-divider>
 
-    <a href="https://catalogo.sceiba.cu" target="__blanck" class="apps" matTooltip="Catálogo">
-      <img src="/assets/icons/catalog.svg" alt="Catálogo" style="width: 55px; height: 55px;">
+    <a
+      href="https://catalogo.sceiba.cu"
+      target="_blank"
+      class="apps"
+      matTooltip="{{ 'CATALOGO' | translate }}"
+    >
+      <img
+        src="/assets/icons/catalog.svg"
+        [alt]="'CATALOGO' | translate"
+        style="width: 55px; height: 55px"
+      />
     </a>
-    <a href="https://orgs.sceiba.cu" target="__blanck" class="apps" matTooltip="Organizaciones">
-      <img src="/assets/icons/organizacion.svg" alt="Organizaciones" style="width: 55px; height: 55px;">
+
+    <a
+      href="https://orgs.sceiba.cu"
+      target="_blank"
+      class="apps"
+      matTooltip="{{ 'ORGANIZACIONES' | translate }}"
+    >
+      <img
+        src="/assets/icons/organizacion.svg"
+        [alt]="'ORGANIZACIONES' | translate"
+        style="width: 55px; height: 55px"
+      />
     </a>
-    <a href="https://vocs.sceiba.cu" target="__blanck" class="apps" matTooltip="Vocabularios">
-      <img src="/assets/icons/vocabs.svg" alt="Vocabularios" style="width: 55px; height: 55px;">
+
+    <a
+      href="https://vocabularios.sceiba.cu"
+      target="_blank"
+      class="apps"
+      matTooltip="{{ 'VOCABULARIOS' | translate }}"
+    >
+      <img
+        src="/assets/icons/vocabs.svg"
+        [alt]="'VOCABULARIOS' | translate"
+        style="width: 55px; height: 55px"
+      />
     </a>
     <mat-divider class="w-90"></mat-divider>
-    <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Registro de Revistas Científicas del MES">
-      <img class="app-featured" src="/assets/icons/mes.svg" alt="Registro de Revistas Científicas del MES"
-        style="width: 55px; height: 55px;">
+
+    <a
+      href="https://revistasmes.sceiba.cu"
+      target="_blank"
+      class="apps"
+      matTooltip="{{ 'REVISTAS_MES' | translate }}"
+    >
+      <img
+        class="app-featured"
+        src="/assets/icons/mes.svg"
+        [alt]="'REVISTAS_MES' | translate"
+        style="width: 55px; height: 55px"
+      />
     </a>
   </div>
 </mat-menu>
 
-<div *ngIf="!isHome" style="height: 200px; width: 100%; background: linear-gradient(to right, #007e3e, #373131);">
+<div
+  *ngIf="!isHome"
+  style="
+    height: 200px;
+    width: 100%;
+    background: linear-gradient(to right, #007e3e, #373131);
+  "
+></div>
 
-</div>
-<div *ngIf="!isHome; else outHome" fxLayout="row" fxLayoutAlign="center center" style="border-radius: 40px 40px 0 0;">
-  <div [ngStyle.xs]="{width: '95%'}"
-    style="margin-top: -100px; width: 90%; background-color: white; border-radius: 40px 40px 0 0; box-shadow: 0px 5px 15px rgb(0,0,0,0.088)">
+<div *ngIf="!isHome; else outHome"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  style="border-radius: 40px 40px 0 0"
+>
+  <div
+    [ngStyle.xs]="{ width: '95%' }"
+    style="
+      margin-top: -100px;
+      width: 90%;
+      background-color: white;
+      border-radius: 40px 40px 0 0;
+      box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.088);
+    "
+  >
     <router-outlet></router-outlet>
   </div>
 </div>
+
 <ng-template #outHome>
   <router-outlet></router-outlet>
 </ng-template>
 
-
-<!-- <div [ngStyle]="{ 'margin-top': '2em' }"> -->
-<app-org-footer [sites]="footerSites" [information]="footerInformation" [extraImagePath]="''"></app-org-footer>
+<!--<div [ngStyle]="{'margin-top': '2em'}"> -->
+<app-org-footer
+  [sites]="footerSites"
+  [information]="footerInformation"
+  [extraImagePath]="''"
+>
+</app-org-footer>
 <!-- </div> -->
