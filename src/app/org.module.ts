@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material';
 // testing charts organizations
@@ -132,7 +132,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     NgxChartsModule,
 
     BrowserAnimationsModule,
-    HttpClientModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -141,7 +141,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
       }
     }),
     ReactiveFormsModule,
-    SharedModule,
     CoreModule,
     StaticsModule,
     OrganizationsModule,
