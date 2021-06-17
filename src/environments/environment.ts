@@ -7,9 +7,9 @@ import { Environment } from 'toco-lib';
 class EnvironmentImpl implements Environment {
   production = false;
   sceibaHost = 'https://sceiba.cu';
-  cuorHost = 'https://orgs.sceiba.cu/';
+  cuorHost = 'https://organizaciones.sceiba.cu/';
   sceibaApi = 'https://sceiba.cu/api/';
-  cuorApi = 'https://orgs.sceiba.cu/api/';
+  cuorApi = 'https://organizaciones.sceiba.cu/api/';
 
   appHost = 'https://127.0.0.1:4200';
   appName = 'Orgs';
@@ -22,7 +22,7 @@ class EnvironmentImpl implements Environment {
   //Variables para poner los usuarios del sistema en twitter y en facebook
   websiteUsername_Twitter = '@SceibaCuba';
   websiteUsername_Facebook = '@sceiba';
-  
+
   matomoUrl = 'https://crai-stats.upr.edu.cu/';
   matomoSiteId = 7;
 }
