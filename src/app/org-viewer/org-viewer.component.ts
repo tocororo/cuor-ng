@@ -13,7 +13,7 @@ import { Permission } from '../permission.service';
   styleUrls: ['./org-viewer.component.scss']
 })
 export class OrgViewerComponent implements OnInit {
-  public org: Organization;
+  public org: Organization = null;
 
   public constructor(private _activatedRoute: ActivatedRoute, private router: Router, public iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) { }
   loading = true;
@@ -51,7 +51,7 @@ export class OrgViewerComponent implements OnInit {
   }
 
     /* This function redirect to the profile for employes and afiliates od the organization
-   * 
+   *
    */
   /* redirectProfile() {
     this.router.navigate(['wiki-organizations/organization'], {
@@ -66,8 +66,8 @@ export class OrgViewerComponent implements OnInit {
     this.showWikidata();
   }
 
-  showWikidata() {  
-    this.data = { 
+  showWikidata() {
+    this.data = {
       QID: this.org.identifiers.find(id => id.idtype === "wkdata" ).value,
       //label: this.org.name,
       label: this.org.labels.find(id => id.iso639 === "es" ).label,
@@ -75,5 +75,5 @@ export class OrgViewerComponent implements OnInit {
     }
     console.log( this.data);
   };
-  
+
 }

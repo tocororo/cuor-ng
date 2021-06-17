@@ -1,5 +1,5 @@
 <!-- <h1>{{ org.name }}</h1> -->
-<toco-progress [loading]="loading"></toco-progress>
+<toco-progress [loading]="!org"></toco-progress>
 
 <div
 fxLayout="row wrap"
@@ -8,11 +8,11 @@ fxLayoutAlign="space-between center"
 style="height: 80px; padding: 0 16px;"
     >
 
-    
+
 
     <div *ngIf="view_type; then view_cuor_button else view_wikidata_button"></div>
 
-    <ng-template #view_wikidata_button>      
+    <ng-template #view_wikidata_button>
         <button mat-icon-button  (click)="changeView()" matTooltip="Regresar">
             <mat-icon class="mat-18">exit_to_app</mat-icon>
         </button>
