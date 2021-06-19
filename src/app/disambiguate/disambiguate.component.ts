@@ -1,7 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar, MatStepper, MatDialogRef } from '@angular/material';
-import { Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
+import { Hit, MessageHandler, Organization, StatusCode, MetadataService } from 'toco-lib';
 import { isUndefined } from 'util';
 import { OrgService } from '../org.service';
 import { Router } from '@angular/router';
@@ -42,7 +43,9 @@ export class DisambiguateComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _dialog: MatDialog,
     private _orgService: OrgService,
-    private _router: Router
+    private _router: Router,
+    private activatedRoute: ActivatedRoute,
+    private metadata: MetadataService
   ) { }
 
   ngOnInit() {
@@ -55,6 +58,16 @@ export class DisambiguateComponent implements OnInit {
     this.secundaryFormGroup = this._formBuilder.group({
       analogas: this.addItemsFormArray(null)
     })
+
+    this.activatedRoute.data.subscribe(
+      (data) => {
+        this.metadata.meta.updateTag({name:"DC.title", content:this.masterOrganization.name});
+        this.metadata.meta.updateTag({name:"description", content:"Desambiguando organizaciones: " + this.masterOrganization.name});
+        this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Proyecto Vlir Joint"});
+        this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
+        this.metadata.meta.updateTag({name:"robots", content:"index,nofollow"});
+
+      })
 
   }
 
@@ -119,7 +132,7 @@ export class DisambiguateComponent implements OnInit {
     this.masterOrganization.deepcopy(master);
     this.masterFormControl.setValue(master)
     //console.log(" Reciving master ********** ", master, "*******", this.masterOrganization, " ****** ", this.masterFormControl);
-    
+
   }
 
   receivingSecundaries(secundaryOrg: Organization) {
@@ -150,7 +163,7 @@ export class DisambiguateComponent implements OnInit {
    * delete element in formarray
    ***********************************************************/
   deleteSecundaryOrg(pos) {
-        
+
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '60%',
       data: { label: (this.secundaryFormGroup.get('analogas') as FormArray).value[pos].name }
@@ -160,7 +173,7 @@ export class DisambiguateComponent implements OnInit {
       if (isDeleted) {
         this.secundariesOrganizations.splice(pos, 1);
         (this.secundaryFormGroup.get('analogas') as FormArray).removeAt(pos);
-        
+
         this._disambiguateComp.changingSecundaryPos(pos);
       }
     });
@@ -172,15 +185,15 @@ export class DisambiguateComponent implements OnInit {
    ***********************************************************/
   goDisambiguate(leave:boolean = false) {
     //console.log('EDITAR LA ORGANIZACION PRIONCIPA GOOOO DESAMBIGUATE.....')
-    // editar la organizacion principal    
+    // editar la organizacion principal
     const toD = new Organization();
     this._orgEdit.fillObjectControls(); //esto debe hacerlo el form por el mismo
     toD.deepcopy(this._orgEdit.orgFormGroup.value);
-    toD.status = "active"    
-    
+    toD.status = "active"
+
     console.log("go disambiguate ", toD, this.secundariesOrganizations);
-    
-        
+
+
     this._orgService.editOrganization(toD).subscribe({
       next: (result: Hit<Organization>) => {
         console.log(result);
@@ -231,7 +244,7 @@ export class DisambiguateComponent implements OnInit {
       newOrg.deepcopy(this._orgEdit.orgFormGroup.value);
       this.masterOrganization = newOrg;
     }
-    
+
   }
 
   private _resetStepper(){
@@ -241,17 +254,17 @@ export class DisambiguateComponent implements OnInit {
   }
 
   isValidForm(){
-    try {      
+    try {
         if(this._orgEdit) {
-          return this._orgEdit.isValidForm();       
+          return this._orgEdit.isValidForm();
         }
     } catch(err) {
       console.log(err);
-      
+
     }
 
     return false;
   }
 
-  
+
 }

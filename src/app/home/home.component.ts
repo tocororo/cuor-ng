@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Organization, SearchResponse } from 'toco-lib';
+import { Organization, SearchResponse, MetadataService } from 'toco-lib';
 import { OrgService } from "../org.service";
 
 @Component({
@@ -50,7 +50,12 @@ export class HomeComponent implements OnInit {
 		{ label: "Wikidata", icon: "assets/images/wikidatawiki.png", text : "Wikidata: Es una base de conocimientos editada en colaboración y alojada por la Fundación Wikimedia. Tiene el objetivo de proporcionar una fuente común de datos, en nuestro caso de organizaciones cubanas, que pueden ser utilizados por cualquier proyecto bajo licencia de dominio público."},
 	];
 
-	public constructor(private router: Router, private activatedRoute: ActivatedRoute, private _cuorService: OrgService)
+	public constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private _cuorService: OrgService,
+    private metadata: MetadataService
+    )
 	{ }
 
 	public ngOnInit(): void
@@ -75,6 +80,17 @@ export class HomeComponent implements OnInit {
 				this.loadCharts = true;
 			}
 		})
+
+    // this.activatedRoute.data.subscribe(
+    //   (data) => {
+    //     this.metadata.meta.updateTag({name:"DC.title", content:"Sistema de identificación de Organizaciones Cubanas"});
+    //     this.metadata.meta.updateTag({name:"description", content:"Sistema de para la Identificación unequívoca y persistente de Organizaciones y es una de las herramientas de Sceiba en el marco del Proyecto VLIR-Joint"});
+    //     this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Proyecto Vlir Joint"});
+    //     this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
+    //     this.metadata.meta.updateTag({name:"robots", content:"index,follow"});
+
+    //   })
+
 	}
 
 	public queryChange(event?: string): void
