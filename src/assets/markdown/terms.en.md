@@ -1,0 +1,3 @@
+## Terms of Service
+
+Put the text here...

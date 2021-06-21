@@ -1,0 +1,3 @@
+## Términos de servicio
+
+Poner el texto aquí...

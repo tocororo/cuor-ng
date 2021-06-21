@@ -90,10 +90,11 @@ export class OrgRootComponent {
 		this.footerSites.push({ name: "Wikidata", url: "https://www.wikidata.org/wiki/Wikidata:Main_Page", useRouterLink: false });
 		this.footerSites.push({ name: "ISSN", url: "https://isni.org/", useRouterLink: false });
 
-		this.footerInformation.push({ name: "Términos de uso", url: "/terms", useRouterLink: true });
-		this.footerInformation.push({ name: "Privacidad", url: "/privacy", useRouterLink: true });
-		this.footerInformation.push({ name: "Contacto", url: "/contact", useRouterLink: true });
-		this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true });
+		this.footerInformation.push({ name: "FAQS", url: "/faq", useRouterLink: true });
+		this.footerInformation.push({ name: "ACERCA_DE", url: "/about", useRouterLink: true });
+		this.footerInformation.push({ name: "TERMINOS_DE_USO", url: "/terms", useRouterLink: true });
+		this.footerInformation.push({ name: "PRIVACIDAD", url: "/privacy", useRouterLink: true });
+		this.footerInformation.push({ name: "CONTACTOS", url: "/contact", useRouterLink: true });
 
 		this.user = JSON.parse(this.oauthStorage.getItem('user'))
 		if (this.user != undefined) {

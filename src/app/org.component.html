@@ -131,6 +131,14 @@
     <mat-icon>info</mat-icon>
     {{ 'ACERCA_DE' | translate }}
   </a>
+  <a mat-menu-item [routerLink]="['/terms']">
+    <mat-icon>info</mat-icon>
+    {{ 'TERMINOS_DE_USO' | translate }}
+  </a>
+  <a mat-menu-item [routerLink]="['/privacy']">
+    <mat-icon>security</mat-icon>
+    {{ 'PRIVACIDAD' | translate }}
+  </a>
   <a mat-menu-item [routerLink]="['/contact']">
     <mat-icon>contacts</mat-icon>
     {{ 'CONTACTOS' | translate }}
@@ -286,7 +294,6 @@
 <app-org-footer
   [sites]="footerSites"
   [information]="footerInformation"
-  [extraImagePath]="''"
 >
 </app-org-footer>
 <!-- </div> -->
