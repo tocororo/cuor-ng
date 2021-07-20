@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, OnChanges, Inject } from '@angular/core';
-import { Address, Identifier, LabelDiffLang, Organization, OrganizationRelationships, Relationship, StatusCode } from 'toco-lib';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { isUndefined } from 'util';
+import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 import { OrgService } from 'src/app/org.service';
+import { Address, Identifier, LabelDiffLang, Organization, OrganizationRelationships, Relationship } from 'toco-lib';
+import { isUndefined } from 'util';
 
 
 export declare enum IdentifierOrgSchemas {
@@ -116,7 +116,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
    * UPDATE FUNCTIONS
    ******************************************************************/
 
-  private identifierCanBeDeleted(idType:string) {
+  public identifierCanBeDeleted(idType:string) {
     return (idType != 'reup');
   }
 
@@ -136,8 +136,11 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
         established: new FormControl( this.org.established, Validators.required),
 
+<<<<<<< HEAD
         onei_registry: new FormControl( this.org.onei_registry),
 
+=======
+>>>>>>> 6dccf154b9446a8c1b83b222f015708f99d28f15
         identifiers: this.addItemsFormArrayIdentifiers(this.org.identifiers),
 
         labels: this.addItemsFormArrayLabels(this.org.labels),
