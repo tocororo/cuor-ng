@@ -3,8 +3,8 @@
     fxLayout.xs="column"
     fxLayoutAlign="space-between center"
     style="height: 80px; padding: 0 16px;"
-> 
-    <span class="mat-h2">Desambiguación</span>  
+>
+    <span class="mat-h2">Desambiguación</span>
 </div>
 
 <toco-progress [loading]="loading"></toco-progress>
@@ -24,17 +24,17 @@
           (keyup)="loading = true">
         </toco-org-search>
 
-        <toco-org-view 
+        <toco-org-view
           *ngIf="masterOrganization"
           [org]="masterOrganization">
         </toco-org-view>
 
         <button mat-raised-button matStepperNext color="primary" class="mt-1">Siguiente</button>
- 
+
     </mat-step>
 
     <mat-step [stepControl]="secundaryFormGroup">
-      <ng-template matStepLabel>Seleccione organizaciones análogas</ng-template>        
+      <ng-template matStepLabel>Seleccione organizaciones análogas</ng-template>
 
       <toco-org-search
         [orgFilter]="orgFilter"
@@ -55,7 +55,7 @@
       </mat-action-list>    -->
 
       <mat-accordion>
-        <mat-expansion-panel 
+        <mat-expansion-panel
           *ngFor="let org of secundariesOrganizations; let pos = index"
           [expanded]="step === pos"
           (opened)="setStep(pos)"
@@ -85,14 +85,14 @@
               fxLAyout="row"
               fxLayoutAlign="space-between start"
               fxFlexFill>
-        
+
               <app-disambiguate-card-chips-field
                 chipsTitle="Identificadores"
                 [contentList]="org.identifiers"
                 idName="idtype"
                 valueName="value"
                 style="margin: .5em;">
-              </app-disambiguate-card-chips-field>  
+              </app-disambiguate-card-chips-field>
 
               <app-disambiguate-accord-chips-field
                 accordionChipsTitle="Acrónimos con que se conoce la Organización"
@@ -104,7 +104,7 @@
                 accordionChipsTitle="Otros nombres con los que se conoce la Organización"
                 [contentList]="org.aliases"
                 style="margin: .5em;">
-              </app-disambiguate-accord-chips-field> 
+              </app-disambiguate-accord-chips-field>
             </div> -->
         </mat-expansion-panel>
       </mat-accordion>
@@ -115,10 +115,10 @@
 
     <mat-step>
       <ng-template matStepLabel>Desambiguar metadatos</ng-template>
-  
+
       <app-disambiguation #disambiguatecomp
         [masterOrganization]="masterOrganization"
-        [secundariesOrganizations]="secundariesOrganizations"        
+        [secundariesOrganizations]="secundariesOrganizations"
       ></app-disambiguation>
 
       <button mat-raised-button matStepperPrevious color="accent" class="mt-1 mx-1">Anterior</button>
@@ -129,20 +129,20 @@
       <ng-template matStepLabel>Editar y/o Finalizar</ng-template>
 
       <org-edit-form #orgeditcomp *ngIf="masterOrganization"
-          [org]="masterOrganization"            
+          [org]="masterOrganization"
           [loading]="'false'"
       ></org-edit-form>
 
       <button mat-raised-button color="accent" matStepperPrevious class="mt-1 mx-1">Anterior</button>
-      <ng-container *ngIf="masterOrganization&&isValidForm();else templateButtonUpdate">
+      <ng-container *ngIf="isValidForm();else templateButtonUpdate">
         <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)">Finalizar</button>
         <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()">Guardar y seguir desambiguando</button>
       </ng-container>
       <ng-template #templateButtonUpdate>
         <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)" disabled>Finalizar</button>
-        <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()" disabled>Guardar y seguir desambiguando</button>          
+        <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()" disabled>Guardar y seguir desambiguando</button>
       </ng-template>
-      
+
 
     </mat-step>
   </mat-horizontal-stepper>

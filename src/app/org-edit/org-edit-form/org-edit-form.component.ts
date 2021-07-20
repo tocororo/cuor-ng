@@ -71,13 +71,13 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
   selectOptionsIdType = [];
 
-  orgRelationships = OrganizationRelationships;  
+  orgRelationships = OrganizationRelationships;
 
   urlRegExpression = '(https?://)?([\\da-z@:%=?$#._\+~#=.-]+)\\.([a-z@:%=?$#._\+~#=.]{2,6})[/\\w\\da-z@:%=?$#._\+~#= .-]*/?';
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _formBuilder: FormBuilder,    
+    private _formBuilder: FormBuilder,
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _orgService: OrgService) { }
@@ -89,10 +89,10 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    
+
     this.copyOrg();
-    this.initData();                
-    this.loading = false;  
+    this.initData();
+    this.loading = false;
 
     this.iso639 = this._orgService.getISO639();
 
@@ -102,12 +102,12 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     // console.log('Data got for editing: ', this.org, this.orgFormGroup);
   }
 
-  ngOnChanges(){   
+  ngOnChanges(){
 
     this.copyOrg();
-    this.initData();                
-    this.loading = false;      
-    
+    this.initData();
+    this.loading = false;
+
     console.log("entro a el onchanges ", this.org);
 
   }
@@ -125,51 +125,53 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   }
 
   initData(){
-        
+
     if(this.org){
       this.orgFormGroup = this._formBuilder.group({
         id: new FormControl(this.org.id, Validators.required),
-  
+
         acronyms: this.addItemsFormArray(this.org.acronyms),
-  
+
         aliases: this.addItemsFormArray(this.org.aliases),
-  
+
         established: new FormControl( this.org.established, Validators.required),
-  
+
+        onei_registry: new FormControl( this.org.onei_registry),
+
         identifiers: this.addItemsFormArrayIdentifiers(this.org.identifiers),
-  
+
         labels: this.addItemsFormArrayLabels(this.org.labels),
-  
+
         name: new FormControl({value: this.org.name, disabled: true}, Validators.required),
-  
+
         relationships: this.addItemsFormArrayRelationships(this.org.relationships),
-  
+
         status: new FormControl(this.org.status? this.org.status : "" ),
-  
+
         types: this.addItemsFormArray(this.org.types),
-  
-  
+
+
         addresses: this.addItemsFormArrayAddresses(this.org.addresses),
-  
+
         wikipedia_url: new FormControl(this.org.wikipedia_url, Validators.pattern(this.urlRegExpression)),
-  
+
         email_address: new FormControl(this.org.email_address, Validators.email),
-  
+
         ip_addresses: this.addItemsFormArray(this.org.ip_addresses),
-  
+
         links: this.addItemsFormArray(this.org.links, this.urlRegExpression)
       });
-  
+
       this.identifiersControl = this.addItemsFormArrayIdentifiers(this.org.identifiers);
-  
+
       this.labelsControl = this.addItemsFormArrayLabels(this.org.labels);
-  
+
       this.relationshipsControl = this.addItemsFormArrayRelationships(this.org.relationships);
-  
+
       this.addressesControl = this.addItemsFormArrayAddresses(this.org.addresses);
 
     }
-    
+
   }
 
   fillObjectControls(){
@@ -231,7 +233,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
    * LINKS FUNCTIONS
    ******************************************************************/
   addlinks(){
-    //const regUrl = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';    
+    //const regUrl = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
     this.org.links.push("");
     (this.orgFormGroup.get('links') as FormArray).push(this._formBuilder.control('', Validators.pattern(this.urlRegExpression)));
   }
@@ -249,7 +251,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
       }
     });
   }
-  
+
   /******************************************************************
    * ALIASES FUNCTIONS
    ******************************************************************/
@@ -566,7 +568,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
       return this.orgFormGroup.valid;
     } catch(err) {
       console.log(err);
-      
+
     }
 
     return false;
@@ -718,7 +720,7 @@ export class OrganizationDialogorgEditAddress{
         width: '40%',
         data: { label: ""}
       });
-  
+
       dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
         if(isDeleted){
           // this.org.addresses.splice(pos,1);
@@ -726,6 +728,6 @@ export class OrganizationDialogorgEditAddress{
           // this.addressesControl.removeAt(pos);
         }
       });
-    }    
+    }
 
 }

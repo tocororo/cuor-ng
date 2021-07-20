@@ -119,7 +119,7 @@ export class DisambiguateComponent implements OnInit {
     this.masterOrganization.deepcopy(master);
     this.masterFormControl.setValue(master)
     //console.log(" Reciving master ********** ", master, "*******", this.masterOrganization, " ****** ", this.masterFormControl);
-    
+
   }
 
   receivingSecundaries(secundaryOrg: Organization) {
@@ -150,7 +150,7 @@ export class DisambiguateComponent implements OnInit {
    * delete element in formarray
    ***********************************************************/
   deleteSecundaryOrg(pos) {
-        
+
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '60%',
       data: { label: (this.secundaryFormGroup.get('analogas') as FormArray).value[pos].name }
@@ -160,7 +160,7 @@ export class DisambiguateComponent implements OnInit {
       if (isDeleted) {
         this.secundariesOrganizations.splice(pos, 1);
         (this.secundaryFormGroup.get('analogas') as FormArray).removeAt(pos);
-        
+
         this._disambiguateComp.changingSecundaryPos(pos);
       }
     });
@@ -172,15 +172,15 @@ export class DisambiguateComponent implements OnInit {
    ***********************************************************/
   goDisambiguate(leave:boolean = false) {
     //console.log('EDITAR LA ORGANIZACION PRIONCIPA GOOOO DESAMBIGUATE.....')
-    // editar la organizacion principal    
+    // editar la organizacion principal
     const toD = new Organization();
     this._orgEdit.fillObjectControls(); //esto debe hacerlo el form por el mismo
     toD.deepcopy(this._orgEdit.orgFormGroup.value);
-    toD.status = "active"    
-    
+    toD.status = "active"
+
     console.log("go disambiguate ", toD, this.secundariesOrganizations);
-    
-        
+
+
     this._orgService.editOrganization(toD).subscribe({
       next: (result: Hit<Organization>) => {
         console.log(result);
@@ -231,7 +231,7 @@ export class DisambiguateComponent implements OnInit {
       newOrg.deepcopy(this._orgEdit.orgFormGroup.value);
       this.masterOrganization = newOrg;
     }
-    
+
   }
 
   private _resetStepper(){
@@ -241,17 +241,17 @@ export class DisambiguateComponent implements OnInit {
   }
 
   isValidForm(){
-    try {      
-        if(this._orgEdit) {
-          return this._orgEdit.isValidForm();       
+    try {
+        if(this.masterOrganization) {
+          return this._orgEdit.isValidForm();
         }
     } catch(err) {
       console.log(err);
-      
+
     }
 
     return false;
   }
 
-  
+
 }
