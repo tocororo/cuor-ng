@@ -13,7 +13,7 @@ import { Permission } from '../permission.service';
   styleUrls: ['./org-viewer.component.scss']
 })
 export class OrgViewerComponent implements OnInit {
-  public org: Organization;
+  public org: Organization = null;
 
   public constructor(
     private _activatedRoute: ActivatedRoute,
