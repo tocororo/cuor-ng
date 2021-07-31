@@ -61,11 +61,14 @@ export class DisambiguateComponent implements OnInit {
 
     this.activatedRoute.data.subscribe(
       (data) => {
-        this.metadata.meta.updateTag({name:"DC.title", content:this.masterOrganization.name});
-        this.metadata.meta.updateTag({name:"description", content:"Desambiguando organizaciones: " + this.masterOrganization.name});
-        this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Proyecto Vlir Joint"});
-        this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
-        this.metadata.meta.updateTag({name:"robots", content:"index,nofollow"});
+        if(this.masterOrganization) {
+          this.metadata.meta.updateTag({name:"DC.title", content:this.masterOrganization.name});
+          this.metadata.meta.updateTag({name:"description", content:"Desambiguando organizaciones: " + this.masterOrganization.name});
+          this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Proyecto Vlir Joint"});
+          this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
+          this.metadata.meta.updateTag({name:"robots", content:"index,nofollow"});
+        }
+
 
       })
 
