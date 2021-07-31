@@ -136,11 +136,8 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
         established: new FormControl( this.org.established, Validators.required),
 
-<<<<<<< HEAD
         onei_registry: new FormControl( this.org.onei_registry),
 
-=======
->>>>>>> 6dccf154b9446a8c1b83b222f015708f99d28f15
         identifiers: this.addItemsFormArrayIdentifiers(this.org.identifiers),
 
         labels: this.addItemsFormArrayLabels(this.org.labels),

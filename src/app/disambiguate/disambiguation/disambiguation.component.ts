@@ -14,7 +14,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
   @Input() masterOrganization: Organization;
   @Input() secundariesOrganizations: Organization[];
   @Input() posSecundaryOrg: number;
-  
+
   selectedsecundaryOrganization: Organization;
   isDisabledNavigatePrevious: boolean;
   isDisabledNavigateNext: boolean;
@@ -71,11 +71,11 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   changingSecundaryPos(deletedPos:number){
     //console.log("*-*-*-*-*-*-*-*-*-*-*-*", deletedPos, this.posSecundaryOrg, this.secundariesOrganizations.length);
-    //en este caso length ya tiene rebajado un elemento, pues se llama despues de eliminar para estar seguros 
+    //en este caso length ya tiene rebajado un elemento, pues se llama despues de eliminar para estar seguros
     //de no cambiar por gusto, por eso el tratamiento es diferente
     if(deletedPos > 0 && (deletedPos < this.posSecundaryOrg||deletedPos==this.secundariesOrganizations.length)){
-      this.posSecundaryOrg = this.posSecundaryOrg - 1;      
-      //console.log("*-*-*-*-*-*-*-*-*-*-*-*", deletedPos, this.posSecundaryOrg, this.secundariesOrganizations.length);              
+      this.posSecundaryOrg = this.posSecundaryOrg - 1;
+      //console.log("*-*-*-*-*-*-*-*-*-*-*-*", deletedPos, this.posSecundaryOrg, this.secundariesOrganizations.length);
     }
     this.SelectSecundaryOrganization();
   }
@@ -89,7 +89,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   canGoNext(){
     //console.log("pos: ", this.posSecundaryOrg, " ------- lenght: ", this.secundariesOrganizations.length);
-    
+
     if (this.posSecundaryOrg < this.secundariesOrganizations.length - 1){
       return true;
     }
@@ -108,17 +108,17 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
     if (this.posSecundaryOrg < this.secundariesOrganizations.length - 1){
       this.isDisabledNavigateNext = false;
-      
+
       this.posSecundaryOrg++;
       this.SelectSecundaryOrganization();
     }
-    else if (this.posSecundaryOrg == this.secundariesOrganizations.length - 1) {      
+    else if (this.posSecundaryOrg == this.secundariesOrganizations.length - 1) {
       this.isDisabledNavigateNext = true;
 
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.OK, 'No hay más versiones para mostrar')
-    }    
-    
+    }
+
   }
 
   previousOrg(){
@@ -126,18 +126,18 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
     if (this.posSecundaryOrg > 0) {
       this.isDisabledNavigatePrevious = false;
-      
+
       this.posSecundaryOrg--;
       this.SelectSecundaryOrganization();
 
     }
     else if (this.posSecundaryOrg == 0) {
-        this.isDisabledNavigatePrevious = true;        
+        this.isDisabledNavigatePrevious = true;
 
         const m = new MessageHandler(this._snackBar);
         m.showMessage(StatusCode.OK, 'No hay más organizaciones para mostrar')
 
-    }    
+    }
 
   }
 
@@ -205,7 +205,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   mergeTypes(types:[]){
     console.log(this.masterOrganization);
-    
+
     var oldTypes = this.masterOrganization.types;
     var newOnes = types.filter(a => {return !oldTypes.some(x => x == a) })
     if(newOnes && newOnes.length > 0) {
@@ -222,6 +222,18 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     var old = this.masterOrganization.established;
     if(newEstablished && newEstablished !== old) {
       this.masterOrganization.established = newEstablished;
+    }
+    else {
+      const m = new MessageHandler(this._snackBar);
+      m.showMessage(StatusCode.serverError, "El año es coincidente con el de la organziación principal");
+    }
+  }
+
+
+  mergeOnei(newOneiRegistry){
+    var old = this.masterOrganization.onei_registry;
+    if(newOneiRegistry && newOneiRegistry !== old) {
+      this.masterOrganization.onei_registry = newOneiRegistry;
     }
     else {
       const m = new MessageHandler(this._snackBar);
@@ -333,10 +345,10 @@ export class DisambiguationComponent implements OnInit, OnChanges {
    * help for step 3
    ***********************************************************/
   openHelpStep3() {
-        
+
     const dialogRef = this._dialog.open(Step3DisambiguateHelp, {
-      width: '80%',      
-    });  
+      width: '80%',
+    });
 
   }
 
@@ -352,7 +364,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
       <div markdown [src]="'/assets/markdown/help.step3.disambiguation.md'"></div>
     </div>
     <div mat-dialog-actions align="end">
-      <button mat-button (click)="onNoClick()" cdkFocusInitial color="primary">Cerrar</button>      
+      <button mat-button (click)="onNoClick()" cdkFocusInitial color="primary">Cerrar</button>
     </div>
   `,
   styleUrls: ['./disambiguation.component.scss']
@@ -365,5 +377,5 @@ export class Step3DisambiguateHelp {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
+
 }
