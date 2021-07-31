@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Organization, SearchResponse } from 'toco-lib';
 import { OrgService } from "../org.service";
+import { HttpClient } from "@angular/common/http";
+
 
 @Component({
 	selector: "app-home",
@@ -44,17 +46,35 @@ export class HomeComponent implements OnInit {
 	showXAxis = false;
 	showYAxis = false;
 
-	harvesterInfo = [
-		{ label: "ONEI", icon: "assets/images/logo_onei.jpg", text : "ONEI: Oficina Nacional de Estadísticas e Información constituye uno de los principales componentes del Sistema de información del Gobierno cubano y contribuye a satisfacer las necesidades informativas relacionadas con los objetivos y planes del mismo en todos los niveles de dirección, en los ámbitos económico, social, demográfico y medioambiental."},
-		{ label: "GRID", icon: "assets/images/grid.jpg", text : "GRID: De sus siglas en inglés, Global Research Identifier Database, es una base de datos global gratuita y abiertamente disponible de organizaciones relacionadas con la investigación, que cataloga organizaciones relacionadas con la investigación y proporciona a cada una un identificador único persistente. El registro de Grid selecciona cuidadosamente sus datos para identificar y distinguir instituciones relacionadas con la investigación en todo el mundo."},
-		{ label: "Wikidata", icon: "assets/images/wikidatawiki.png", text : "Wikidata: Es una base de conocimientos editada en colaboración y alojada por la Fundación Wikimedia. Tiene el objetivo de proporcionar una fuente común de datos, en nuestro caso de organizaciones cubanas, que pueden ser utilizados por cualquier proyecto bajo licencia de dominio público."},
-	];
+	// harvesterInfo = [
+	// 	{ label: "ONEI", icon: "assets/images/logo_onei.jpg", text : "ONEI: Oficina Nacional de Estadísticas e Información constituye uno de los principales componentes del Sistema de información del Gobierno cubano y contribuye a satisfacer las necesidades informativas relacionadas con los objetivos y planes del mismo en todos los niveles de dirección, en los ámbitos económico, social, demográfico y medioambiental."},
+	// 	{ label: "GRID", icon: "assets/images/grid.jpg", text : "GRID: De sus siglas en inglés, Global Research Identifier Database, es una base de datos global gratuita y abiertamente disponible de organizaciones relacionadas con la investigación, que cataloga organizaciones relacionadas con la investigación y proporciona a cada una un identificador único persistente. El registro de Grid selecciona cuidadosamente sus datos para identificar y distinguir instituciones relacionadas con la investigación en todo el mundo."},
+	// 	{ label: "Wikidata", icon: "assets/images/wikidatawiki.png", text : "Wikidata: Es una base de conocimientos editada en colaboración y alojada por la Fundación Wikimedia. Tiene el objetivo de proporcionar una fuente común de datos, en nuestro caso de organizaciones cubanas, que pueden ser utilizados por cualquier proyecto bajo licencia de dominio público."},
+	// ];
 
-	public constructor(private router: Router, private activatedRoute: ActivatedRoute, private _cuorService: OrgService)
+	public harvesterInfo: any = []
+	public apiText:string;	
+	public homeCards: any = [];
+
+	public constructor(
+		private router: Router, 
+		private activatedRoute: ActivatedRoute, 
+		private _cuorService: OrgService,
+		private httpClient: HttpClient)
 	{ }
 
 	public ngOnInit(): void
 	{
+		this.httpClient.get("assets/home-texts/es.json").subscribe(data =>{
+			console.log(data);
+			this.homeCards = data["cards"]; //cards es el key del json es.json
+			this.harvesterInfo = data["harvesterInfo"]; 	
+			this.apiText = data["apiText"];				
+			
+		  })
+		  console.log("fffff", this.harvesterInfo);
+		  
+
 		this._cuorService.getOrganizations(null).subscribe({
 			next: (searchResponse: SearchResponse<Organization>) => {
 
