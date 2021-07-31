@@ -1,15 +1,15 @@
 <div *ngIf="loaded()" fxLayout="row wrap" style="margin: 1em;">
     <!-- navigate buttons -->
     <mat-toolbar>
-      
-      <mat-toolbar-row fxLayoutGap="1em" fxLayoutAlign="end center">        
-        <div>         
-          <mat-slide-toggle 
-          (change)="changingShowSecundaries()" 
+
+      <mat-toolbar-row fxLayoutGap="1em" fxLayoutAlign="end center">
+        <div>
+          <mat-slide-toggle
+          (change)="changingShowSecundaries()"
           matTooltip="Mostrar organizaciones análogas"
-          color="primary">           
+          color="primary">
             Organizaciones análogas
-          </mat-slide-toggle>          
+          </mat-slide-toggle>
           <ng-container *ngIf="showSecundaries&&secundariesOrganizations&&secundariesOrganizations.length>1">
             <button
               mat-icon-button
@@ -31,18 +31,18 @@
             </button>
           </ng-container>
         </div>
-        
+
       </mat-toolbar-row>
     </mat-toolbar>
-    
+
     <div
-      fxLAyout="row"      
+      fxLAyout="row"
       fxLayoutAlign="space-between start"
       fxFlexFill
       fxLayout.xs="column"
       [ngClass.xs]="'displayblock'"
     >
-    
+
       <ng-container *ngIf="masterOrganization">
         <app-disambiguate-card-field
           [cardTitle]="masterOrganization.name"
@@ -50,7 +50,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-card-field>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-card-field
           [cardTitle]="selectedsecundaryOrganization.name"
@@ -79,7 +79,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-card-chips-field>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-card-chips-field
           chipsTitle="Identificadores"
@@ -110,7 +110,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-accord-chips-field>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-accord-chips-field
           accordionChipsTitle="Acrónimos con que se conoce la Organización"
@@ -128,7 +128,7 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
       fxLayout.xs="column"
       [ngClass.xs]="'displayblock'"
     >
@@ -139,7 +139,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-accord-chips-field>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-accord-chips-field
           accordionChipsTitle="Otros nombres con los que se conoce la Organización"
@@ -157,7 +157,7 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
       fxLayout.xs="column"
       [ngClass.xs]="'displayblock'"
     >
@@ -167,8 +167,8 @@
           [contentList]="masterOrganization.types"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-accord-chips-field>  
-      </ng-container> 
+        ></app-disambiguate-accord-chips-field>
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-accord-chips-field
           accordionChipsTitle="Tipos que describen a la Organización"
@@ -197,7 +197,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-text-field>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-text-field
           textLabel="Año de fundada la Organización"
@@ -215,7 +215,36 @@
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
-      fxFlexFill     
+      fxFlexFill
+      fxLayout.xs="column"
+      [ngClass.xs]="'displayblock'"
+    >
+      <ng-container *ngIf="masterOrganization">
+        <app-disambiguate-text-field
+          textLabel="Año de alta en ONEI"
+          [textContent]="masterOrganization.onei_registry"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>
+      </ng-container>
+      <ng-container *ngIf="showSecundaries">
+        <app-disambiguate-text-field
+          textLabel="Año de alta en ONEI"
+          [isMaster]="false"
+          [textContent]="selectedsecundaryOrganization.onei_registry"
+          (propagate)="mergeOnei($event)"
+          fxFlex="1 2 calc(15em + 20px)"
+          style="margin: .5em;"
+        ></app-disambiguate-text-field>
+      </ng-container>
+    </div>
+
+    <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
+
+    <div
+      fxLAyout="row"
+      fxLayoutAlign="space-between start"
+      fxFlexFill
       fxLayout.xs="column"
       [ngClass.xs]="'displayblock'"
     >
@@ -226,7 +255,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-text-field>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-text-field
           textLabel="URL de la página de Wikipedia de la Organización"
@@ -255,7 +284,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-text-field>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-text-field
           textLabel="Correo electrónico de contacto de la Organización"
@@ -283,7 +312,7 @@
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-relationships>
-      </ng-container> 
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-relationships
           [isMaster]="false"
@@ -296,7 +325,7 @@
     </div>
 
     <hr *ngIf="showSecundaries" width="70%" size="8px" color="primary" fxHide fxShow.xs>
-    
+
     <div
       fxLAyout="row"
       fxLayoutAlign="space-between start"
@@ -310,8 +339,8 @@
           [contentList]="masterOrganization.links"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
-        ></app-disambiguate-accord-chips-field>  
-      </ng-container> 
+        ></app-disambiguate-accord-chips-field>
+      </ng-container>
       <ng-container *ngIf="showSecundaries">
         <app-disambiguate-accord-chips-field
           accordionChipsTitle="Enlaces conocidos de la Organización"
@@ -324,9 +353,9 @@
       </ng-container>
     </div>
 
-    
-    
-  
+
+
+
     <mat-card *ngIf="!secundariesOrganizations" style="margin: 1em;">
       <mat-card-content>
         <h1>Este componente necesita datos de otras organizaciones.</h1>
@@ -334,21 +363,21 @@
     </mat-card>
   </div>
 
-  
+
   <div class="floating-container">
     <button class="botonF1" mat-mini-fab color="warn"
     matTooltip="¿Cómo usar metadatos de las organizaciones análogas?"
     aria-label="Ayuda para usar metadatos de las organizaciones análogas"
     (click)="openHelpStep3()">
       <mat-icon>help</mat-icon>
-    </button>  
+    </button>
    </div>
-  
+
   <mat-card *ngIf="!loaded()" style="margin: 1em;">
     <mat-card-content>
       <h1>No se encontraron los datos de las organziaciones para desambiguar</h1>
     </mat-card-content>
   </mat-card>
-  
+
 
 

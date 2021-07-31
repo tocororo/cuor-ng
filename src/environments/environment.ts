@@ -22,7 +22,7 @@ class EnvironmentImpl implements Environment {
   //Variables para poner los usuarios del sistema en twitter y en facebook
   websiteUsername_Twitter = '@SceibaCuba';
   websiteUsername_Facebook = '@sceiba';
-  
+
   matomoUrl = 'https://crai-stats.upr.edu.cu/';
   matomoSiteId = 7;
 }
