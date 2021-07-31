@@ -4,7 +4,7 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
-import { Organization } from 'toco-lib';
+import { Organization, MetadataService } from 'toco-lib';
 import { Permission } from '../permission.service';
 
 @Component({
@@ -15,7 +15,13 @@ import { Permission } from '../permission.service';
 export class OrgViewerComponent implements OnInit {
   public org: Organization = null;
 
-  public constructor(private _activatedRoute: ActivatedRoute, private router: Router, public iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) { }
+  public constructor(
+    private _activatedRoute: ActivatedRoute,
+    private router: Router,
+    public iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
+    private metadata: MetadataService
+    ) { }
   loading = true;
   view_type:boolean = true;
   data:any = '';
@@ -32,6 +38,18 @@ export class OrgViewerComponent implements OnInit {
         // this.org = data.org;
       }
     );
+
+    this._activatedRoute.data.subscribe(
+      (data) => {
+        this.metadata.meta.updateTag({name:"DC.title", content:this.org.name});
+        this.metadata.meta.updateTag({name:"description", content:"Metadatos de organización en Sistema de identificación de Organizaciones Cubanas"});
+        this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Organizaciones Cubanas Proyecto Vlir Joint"});
+        this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
+        this.metadata.meta.updateTag({name:"robots", content:"index,follow"});
+        console.log("entrando en metadata");
+
+      })
+
   }
 
   /**

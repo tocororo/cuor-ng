@@ -31,6 +31,12 @@ export class StaticPagesComponent implements OnInit {
                     this.src = data['src'];
                     this.title = data['title'];
                     // this.metadata.setTitleDescription(this.title, '');
+
+                    this.metadata.meta.updateTag({name:"DC.title", content:data['title']});
+                    this.metadata.meta.updateTag({name:"DC.description", content:data['src'].substring(0,160)});
+                    this.metadata.meta.updateTag({name:"generator", content:"Sceiba Organizaciones Cubanas en Proyecto Vlir Joint"});
+                    this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba, " + data['title'] });
+                    this.metadata.meta.updateTag({name:"robots", content:"index,follow"});
                 }
 
             },

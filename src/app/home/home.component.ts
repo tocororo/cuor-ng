@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Organization, SearchResponse } from 'toco-lib';
+import { Organization, SearchResponse, MetadataService } from 'toco-lib';
 import { OrgService } from "../org.service";
 import { HttpClient } from "@angular/common/http";
 
@@ -53,14 +53,16 @@ export class HomeComponent implements OnInit {
 	// ];
 
 	public harvesterInfo: any = []
-	public apiText:string;	
+	public apiText:string;
 	public homeCards: any = [];
 
 	public constructor(
-		private router: Router, 
-		private activatedRoute: ActivatedRoute, 
-		private _cuorService: OrgService,
-		private httpClient: HttpClient)
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private _cuorService: OrgService,
+    private httpClient: HttpClient,
+    private metadata: MetadataService
+    )
 	{ }
 
 	public ngOnInit(): void
@@ -68,12 +70,12 @@ export class HomeComponent implements OnInit {
 		this.httpClient.get("assets/home-texts/es.json").subscribe(data =>{
 			console.log(data);
 			this.homeCards = data["cards"]; //cards es el key del json es.json
-			this.harvesterInfo = data["harvesterInfo"]; 	
-			this.apiText = data["apiText"];				
-			
+			this.harvesterInfo = data["harvesterInfo"];
+			this.apiText = data["apiText"];
+
 		  })
 		  console.log("fffff", this.harvesterInfo);
-		  
+
 
 		this._cuorService.getOrganizations(null).subscribe({
 			next: (searchResponse: SearchResponse<Organization>) => {
@@ -95,6 +97,17 @@ export class HomeComponent implements OnInit {
 				this.loadCharts = true;
 			}
 		})
+
+    // this.activatedRoute.data.subscribe(
+    //   (data) => {
+    //     this.metadata.meta.updateTag({name:"DC.title", content:"Sistema de identificación de Organizaciones Cubanas"});
+    //     this.metadata.meta.updateTag({name:"description", content:"Sistema de para la Identificación unequívoca y persistente de Organizaciones y es una de las herramientas de Sceiba en el marco del Proyecto VLIR-Joint"});
+    //     this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Proyecto Vlir Joint"});
+    //     this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
+    //     this.metadata.meta.updateTag({name:"robots", content:"index,follow"});
+
+    //   })
+
 	}
 
 	public queryChange(event?: string): void

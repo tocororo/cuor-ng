@@ -1,7 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar, MatStepper, MatDialogRef } from '@angular/material';
-import { Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
+import { Hit, MessageHandler, Organization, StatusCode, MetadataService } from 'toco-lib';
 import { isUndefined } from 'util';
 import { OrgService } from '../org.service';
 import { Router } from '@angular/router';
@@ -42,7 +43,9 @@ export class DisambiguateComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _dialog: MatDialog,
     private _orgService: OrgService,
-    private _router: Router
+    private _router: Router,
+    private activatedRoute: ActivatedRoute,
+    private metadata: MetadataService
   ) { }
 
   ngOnInit() {
@@ -55,6 +58,16 @@ export class DisambiguateComponent implements OnInit {
     this.secundaryFormGroup = this._formBuilder.group({
       analogas: this.addItemsFormArray(null)
     })
+
+    this.activatedRoute.data.subscribe(
+      (data) => {
+        this.metadata.meta.updateTag({name:"DC.title", content:this.masterOrganization.name});
+        this.metadata.meta.updateTag({name:"description", content:"Desambiguando organizaciones: " + this.masterOrganization.name});
+        this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Proyecto Vlir Joint"});
+        this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
+        this.metadata.meta.updateTag({name:"robots", content:"index,nofollow"});
+
+      })
 
   }
 
