@@ -1,0 +1,33 @@
+{
+    "cards":[
+        {
+            "title":"Captura datos con precisión",
+            "content":"Se colectan datos de diversas fuentes autorizadas usando los identificadores persistentes en pos de aminorar duplicidad o desambiguación de los datos. El uso de nuestros identificadores persistentes aseguran la consistencia de los datos."
+        },
+        {
+            "title":"Enriquecemos y desambiguamos los datos",
+            "content":"Nosotros limpiamos los datos por usted, con los permisos adecuados es posible asegurar los identificadores de las organizaciones y la validez de sus datos, así como actualizarlos o agregar nueva información que no esté pública en estos sistemas de identificación."
+        },
+        {
+            "title":"Se exponen datos y estadísticas de las organizaciones",
+            "content":"Ofrecemos datos consistentes y de valor por diferentes vías para usuarios del sistema por html y promovemos la interoperatividad de otros sistemas que usan información de organizaciones."
+        }
+    ],
+    "harvesterInfo":[
+		{ 
+            "label": "ONEI", 
+            "icon": "assets/images/logo_onei.jpg", 
+            "text": "ONEI: Oficina Nacional de Estadísticas e Información constituye uno de los principales componentes del Sistema de información del Gobierno cubano y contribuye a satisfacer las necesidades informativas relacionadas con los objetivos y planes del mismo en todos los niveles de dirección, en los ámbitos económico, social, demográfico y medioambiental."
+        },
+		{ "label": "GRID", 
+            "icon": "assets/images/grid.jpg", 
+            "text": "GRID: De sus siglas en inglés, Global Research Identifier Database, es una base de datos global gratuita y abiertamente disponible de organizaciones relacionadas con la investigación, que cataloga organizaciones relacionadas con la investigación y proporciona a cada una un identificador único persistente. El registro de Grid selecciona cuidadosamente sus datos para identificar y distinguir instituciones relacionadas con la investigación en todo el mundo."
+        },
+		{ 
+            "label": "Wikidata", 
+            "icon": "assets/images/wikidatawiki.png", 
+            "text" : "Wikidata: Es una base de conocimientos editada en colaboración y alojada por la Fundación Wikimedia. Tiene el objetivo de proporcionar una fuente común de datos, en nuestro caso de organizaciones cubanas, que pueden ser utilizados por cualquier proyecto bajo licencia de dominio público."
+        }
+	],
+    "apiText":"Ofrecemos servicios de API-REST así como OAI-IPMH donde puede ineterconectar sus sistemas con PIDCuba Organizaciones asegurando la veracidad y consistencia del los datos que estará usando en sus sistemas de las organizaciones cubanas y puede incluir las internacionales."
+}

@@ -22,7 +22,19 @@
     <cuor-datepicker-year
          [formControl]="orgFormGroup.controls['established']"
          [label]="'Fundada en'"
-         [touchUi]="false">
+         [touchUi]="false"
+         [max]="today"
+         >
+    </cuor-datepicker-year>
+
+    <!-- Start onei_registry -->
+    <cuor-datepicker-year
+         [formControl]="orgFormGroup.controls['onei_registry']"
+         [label]="'Alta en la ONEI'"
+         [touchUi]="false"
+         [min]="dateMin"
+         [max]="today"
+         >
     </cuor-datepicker-year>
 
     <!-- Start Email -->
@@ -71,7 +83,7 @@
                         <mat-icon>error</mat-icon>
                     </button>
                 </ng-template>
-                
+
 
             </div>
 
@@ -204,11 +216,11 @@
                     Organizaciones Padres
                 </mat-panel-title>
                 <mat-panel-description></mat-panel-description>
-            </mat-expansion-panel-header>                   
+            </mat-expansion-panel-header>
             <mat-list role="list">
                 <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
                     <mat-list-item *ngIf="orgRelationships.PARENT.value == relation.value.type" role="listitem">
-                        {{ relation.value.label }}                                
+                        {{ relation.value.label }}
                         <button mat-icon-button matSuffix
                             class="mat-18"
                             (click)="deleteRelationship(pos)"
@@ -217,8 +229,8 @@
                             style="margin-left: -39px;top: 8px">
                             <mat-icon>delete</mat-icon>
                         </button>
-                    </mat-list-item>      
-                </ng-container>             
+                    </mat-list-item>
+                </ng-container>
             </mat-list>
             <mat-action-row>
                 <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.PARENT.value)">Adicionar</button>
@@ -236,7 +248,7 @@
             <mat-list role="list">
                 <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
                     <mat-list-item *ngIf="orgRelationships.CHILD.value == relation.value.type" role="listitem">
-                        {{ relation.value.label }}                                
+                        {{ relation.value.label }}
                         <button mat-icon-button matSuffix
                             class="mat-18"
                             (click)="deleteRelationship(pos)"
@@ -245,9 +257,9 @@
                             style="margin-left: -39px;top: 8px">
                             <mat-icon>delete</mat-icon>
                         </button>
-                    </mat-list-item>      
-                </ng-container>             
-            </mat-list>                   
+                    </mat-list-item>
+                </ng-container>
+            </mat-list>
 
             <mat-action-row>
                 <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.CHILD.value)">Adicionar</button>
@@ -265,7 +277,7 @@
             <mat-list role="list">
                 <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
                     <mat-list-item *ngIf="orgRelationships.RELATED.value == relation.value.type" role="listitem">
-                        {{ relation.value.label }}                                
+                        {{ relation.value.label }}
                         <button mat-icon-button matSuffix
                             class="mat-18"
                             (click)="deleteRelationship(pos)"
@@ -274,10 +286,10 @@
                             style="margin-left: -39px;top: 8px">
                             <mat-icon>delete</mat-icon>
                         </button>
-                    </mat-list-item>      
-                </ng-container>             
-            </mat-list>  
-           
+                    </mat-list-item>
+                </ng-container>
+            </mat-list>
+
             <mat-action-row>
                 <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.RELATED.value)">Adicionar</button>
             </mat-action-row>
@@ -322,13 +334,13 @@
         <mat-card-content formArrayName="addresses">
             <mat-label>Direcciones</mat-label>
             <mat-list>
-                <mat-list-item mat-list-item class="mat-list-option" *ngFor="let address of org.addresses; let pos = index" fxLayout="row wrap" fxLayoutAlign="space-between center"> 
+                <mat-list-item mat-list-item class="mat-list-option" *ngFor="let address of org.addresses; let pos = index" fxLayout="row wrap" fxLayoutAlign="space-between center">
                     <div>
                         <ng-container *ngIf="address.country">
                             {{ address.country }}
                         </ng-container>
                         <ng-container *ngIf="address.state">
-                            , {{ address.state }} 
+                            , {{ address.state }}
                         </ng-container>
                         <ng-container *ngIf="address.municipality">
                             , {{ address.municipality }}

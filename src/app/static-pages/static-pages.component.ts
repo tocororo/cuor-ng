@@ -38,7 +38,7 @@ export class StaticPagesComponent implements OnInit
                 if (data)
                 {
                     // console.log('data', data);
-                    
+
                     this.src = data.src + ((this.transServ.currentLang == 'es') ? 'es.md' : 'en.md');
                     this.title = data.title;
                     // this.metadata.setTitleDescription(this.title, '');
@@ -47,6 +47,11 @@ export class StaticPagesComponent implements OnInit
                     this.transServ.onLangChange.subscribe((params: LangChangeEvent) => {
                         this.src = data.src + ((params.lang == 'es') ? 'es.md' : 'en.md');
                     });
+                    this.metadata.meta.updateTag({name:"DC.title", content:data['title']});
+                    this.metadata.meta.updateTag({name:"DC.description", content:data['src'].substring(0,160)});
+                    this.metadata.meta.updateTag({name:"generator", content:"Sceiba Organizaciones Cubanas en Proyecto Vlir Joint"});
+                    this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba, " + data['title'] });
+                    this.metadata.meta.updateTag({name:"robots", content:"index,follow"});
                 }
 
             },
