@@ -1,32 +1,32 @@
 
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { MatomoInjector } from 'ngx-matomo';
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { AuthBackend, Environment, OauthAuthenticationService, OauthInfo, User } from 'toco-lib';
 import { UserService } from './org.service';
 import { Permission } from './permission.service';
-import { MatomoInjector } from 'ngx-matomo';
 
 @Component({
-	selector: 'toco-org-root',
-	templateUrl: './org.component.html',
-	styleUrls: ['./org.component.scss']
+  selector: 'toco-org-root',
+  templateUrl: './org.component.html',
+  styleUrls: ['./org.component.scss']
 })
 export class OrgRootComponent {
 	/**
-	 * Returns the available language texts. 
+	 * Returns the available language texts.
 	 */
 	public languageTexts: string[];
 	/**
-	 * Returns the available language abbreviations. 
+	 * Returns the available language abbreviations.
 	 */
 	public languageAbbrs: string[];
 	/**
-	 * Returns the language selected. 
-	 * The default language is Spanish; that is, the zero index. 
+	 * Returns the language selected.
+	 * The default language is Spanish; that is, the zero index.
 	 */
 	public languageSelected: number;
 
@@ -62,7 +62,7 @@ export class OrgRootComponent {
 		private oauthStorage: OAuthStorage,
 		private oauthService: OAuthService,
 		protected http: HttpClient,
-		private _transServ: TranslateService, 
+		private _transServ: TranslateService,
 		private matomoInjector: MatomoInjector
 	)
 	{
@@ -164,8 +164,8 @@ export class OrgRootComponent {
 	}
 
 	/**
-	 * Sets the current language. 
-	 * @param index Zero-based index that indicates the current language. 
+	 * Sets the current language.
+	 * @param index Zero-based index that indicates the current language.
 	 */
 	public setLanguage(index: number): void
 	{

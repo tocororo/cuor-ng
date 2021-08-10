@@ -40,8 +40,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "baseHref": "https://orgs.sceiba.cu",
-              "deployUrl": "https://orgs.sceiba.cu/",
+              "baseHref": "https://organizaciones.sceiba.cu",
+              "deployUrl": "https://organizaciones.sceiba.cu/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

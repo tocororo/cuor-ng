@@ -12,8 +12,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { MatomoModule } from 'ngx-matomo';
 
-import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, 
-  OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule, 
+import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth,
+  OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
   TocoFormsModule } from 'toco-lib';
 
 import { environment } from 'src/environments/environment';
@@ -39,6 +39,7 @@ import { CardsSliderComponent } from './home/cards-slider/cards-slider.component
 import { HomeComponent } from './home/home.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
+import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 import { OrgFooterComponent } from './org-footer/org-footer.component';
 import { OrgRoutingModule } from './org-routing.module';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
@@ -47,7 +48,6 @@ import { OrgService } from './org.service';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 
 import { ExpansionPanelLayoutComponent } from './wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component';
 import { TableLayoutComponent } from './wiki-organizations/profile-layouts/table-layout/table-layout.component';
@@ -111,7 +111,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     CardItemInfoComponent,
     CardsSliderComponent,
     EditAddressComponent,
-    
+
     WikiOrganizationsComponent,
 		WikiOrgEmployesProfileComponent,
 		TableLayoutComponent,
@@ -124,7 +124,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		ExpansionPanelLayoutComponent,
 		WikiTopicsProfileComponent,
     OrgEditFormComponent,
-    
+
     Step3DisambiguateHelp
   ],
   imports: [
@@ -151,6 +151,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     MarkdownModule.forRoot({
       loader: HttpClient
       }),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
     AuthenticationModule,
     MatomoModule
   ],
