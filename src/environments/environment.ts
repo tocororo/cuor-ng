@@ -7,14 +7,14 @@ import { Environment } from 'toco-lib';
 class EnvironmentImpl implements Environment {
   production = false;
   sceibaHost = 'https://sceiba.cu';
-  cuorHost = 'https://orgs.sceiba.cu/';
+  cuorHost = 'https://192.168.1.102:5001/';
   sceibaApi = 'https://sceiba.cu/api/';
-  cuorApi = 'https://orgs.sceiba.cu/api/';
+  cuorApi = 'https://192.168.1.102:5001/api/';
 
   appHost = 'https://127.0.0.1:4200';
   appName = 'Orgs';
-  oauthRedirectUri = 'https://127.0.0.1:4200/';
-  oauthClientId = 'bh9bv1TXPH7HO8ulSgVUs8rBknmEn5xlH6kDdKqH';
+  oauthRedirectUri = 'https://localhost:4200/';
+  oauthClientId = 'I8wktQLfssUUsch9g7v7cTjahmegXeiz5suZy0Cl';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
@@ -22,7 +22,7 @@ class EnvironmentImpl implements Environment {
   //Variables para poner los usuarios del sistema en twitter y en facebook
   websiteUsername_Twitter = '@SceibaCuba';
   websiteUsername_Facebook = '@sceiba';
-  
+
   matomoUrl = 'https://crai-stats.upr.edu.cu/';
   matomoSiteId = 7;
 }

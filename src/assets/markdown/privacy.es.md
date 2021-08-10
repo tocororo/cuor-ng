@@ -1,0 +1,3 @@
+## Políticas de privacidad
+
+Poner el texto aquí...

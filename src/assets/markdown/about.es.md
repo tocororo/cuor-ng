@@ -1,6 +1,6 @@
 ## Acerca de
 
-El Registro Nacional es la lista nacional oficial de revistas gestionadas por instituciones adscritas al Ministerio de educación de Cuba. Es mantenido por las Direcciones de Ciencia e Informatización del MES y fue desarrollado en el marco del proyecto [VLIR JOINT  2019-01-27 (SCEIBA)](https://www.vliruos.be/en/projects/project/22?pid=4202) y el proyecto nacional ramal [TOCORORO](https://tocororo.upr.edu.cu).
+El Registro Nacional es la lista nacional oficial de revistas gestionadas por instituciones adscritas al Ministerio de educación de Cuba. Es mantenido por las Direcciones de Ciencia e Informatización del MES y fue desarrollado en el marco del proyecto [VLIR JOINT 2019-01-2 (SCEIBA)](https://www.vliruos.be/en/projects/project/22?pid=4202) y el proyecto nacional ramal [TOCORORO](https://tocororo.upr.edu.cu).
 
 Esta plataforma es de acceso gratuito y se distribuyen sus contenidos bajo la Licencia Creative Commons CC by 4.0. Su objetivo está orientado a aumentar la visibilidad de las revistas científicas del sistema de educación superior cubano, así como la implementación de servicios que permitan el monitoreo y evaluación de su calidad.
 

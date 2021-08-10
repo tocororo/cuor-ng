@@ -1,15 +1,23 @@
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // testing charts organizations
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { OAuthStorage } from 'angular-oauth2-oidc';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
+import { MatomoModule } from 'ngx-matomo';
+
+import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, 
+  OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule, 
+  TocoFormsModule } from 'toco-lib';
+
 import { environment } from 'src/environments/environment';
-import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule, TocoFormsModule } from 'toco-lib';
+
 import { AggregationsComponent } from './aggregations/aggregations.component';
 import { BarVerticalComponent } from './charts/bar-vertical/bar-vertical.component';
 import { ChartsComponent } from './charts/charts.component';
@@ -41,7 +49,6 @@ import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 
-
 import { ExpansionPanelLayoutComponent } from './wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component';
 import { TableLayoutComponent } from './wiki-organizations/profile-layouts/table-layout/table-layout.component';
 import { WikiAuthorProfileComponent } from './wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
@@ -53,13 +60,18 @@ import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-ve
 import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { OrgSearchWikiComponent } from './wiki-organizations/wiki-org-search/wiki-org-search.component';
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
-import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm, OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
+import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm,
+  OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
-import { MatomoModule } from 'ngx-matomo';
 
-
-export function storageFactory() : OAuthStorage {
+export function storageFactory() : OAuthStorage
+{
   return localStorage
+}
+
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
+{
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -121,14 +133,21 @@ export function storageFactory() : OAuthStorage {
 
     BrowserAnimationsModule,
     SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
+    ReactiveFormsModule,
     CoreModule,
     StaticsModule,
-    ReactiveFormsModule,
     OrganizationsModule,
     TocoFormsModule,
     OrgRoutingModule,
     SearchModule,
-    HttpClientModule,
+
     MarkdownModule.forRoot({
       loader: HttpClient
       }),

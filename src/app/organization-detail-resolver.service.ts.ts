@@ -1,39 +1,40 @@
 
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Organization, SearchResponse } from 'toco-lib';
 import { OrgService } from './org.service';
 
 
-const orgExample: any =
-{
-	'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
-	'identifiers': [
-		{ idtype: 'reup', value: 'reup.1760' }
-	],
-	'name': 'EMPRESA LABORATORIO FARMACEUTICO ORIENTE',
-	'status': 'active',
-	'acronyms': [],
-	'established': 1977,
-	'labels': [
-		{ iso639: 'es', label: 'EMPRESA LABORATORIO FARMACEUTICO ORIENTE' }
-	],
-	'relationships': [
-		{ identifiers: [{ idtype: 'reup', value: 'reup.1760' }], label: 'Grupo de las Industrias Biotecnológica y Farmacéutica', type: 'parent' },
-		{ identifiers: [{ idtype: 'reup', value: 'reup.1760' }], label: 'GRUPO DE LAS INDUSTRIAS BIOTECNOLOGICA Y FARMACEUTICA', type: 'parent' }
-	],
-	'addresses': [
-		{
-			city: 'Santiago de Cuba',
-			country: 'Cuba',
-			country_code: 'CU',
-			primary: 'True',
-			state: 'Santiago de Cuba',
-			state_code: 'CU-13'
-		}
-	]
+const orgExample: any = {
+	'metadata': {
+		'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
+		'identifiers': [
+			{ idtype: 'reup', value: 'reup.1760' }
+		],
+		'name': 'EMPRESA LABORATORIO FARMACEUTICO ORIENTE',
+		'status': 'active',
+		'acronyms': [],
+		'established': 1977,
+		'labels': [
+			{ iso639: 'es', label: 'EMPRESA LABORATORIO FARMACEUTICO ORIENTE' }
+		],
+		'relationships': [
+			{ identifiers: [{ idtype: 'reup', value: 'reup.1760' }], label: 'Grupo de las Industrias Biotecnológica y Farmacéutica', type: 'parent' },
+			{ identifiers: [{ idtype: 'reup', value: 'reup.1760' }], label: 'GRUPO DE LAS INDUSTRIAS BIOTECNOLOGICA Y FARMACEUTICA', type: 'parent' }
+		],
+		'addresses': [
+			{
+				city: 'Santiago de Cuba',
+				country: 'Cuba',
+				country_code: 'CU',
+				primary: 'True',
+				state: 'Santiago de Cuba',
+				state_code: 'CU-13'
+			}
+		]
+	}
 };
 
 
@@ -302,19 +303,19 @@ export class OrganizationDetailResolverService implements Resolve<SearchResponse
 
 	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchResponse<Organization>>
 	{
-		let uuid = route.paramMap.get('uuid');
-		return this.service.getOrganizationById(uuid).pipe(
-            take(1),
-            map(hit => {
-                if (hit) {
-                  console.log(hit)
-                    return hit;
-				}
-				else {
-                    this.router.navigate(['/']);
-                }
-            })
-        );
-		// return of(orgExample);
+		// let uuid = route.paramMap.get('uuid');
+		// return this.service.getOrganizationById(uuid).pipe(
+        //     take(1),
+        //     map(hit => {
+        //         if (hit) {
+        //           console.log(hit)
+        //             return hit;
+		// 		}
+		// 		else {
+        //             this.router.navigate(['/']);
+        //         }
+        //     })
+        // );
+		return of(orgExample);
 	}
 }

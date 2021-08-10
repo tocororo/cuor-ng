@@ -11,16 +11,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class OrgFooterComponent implements OnInit {
 
     @Input()
-    public extraImagePath="";
-
-    @Input()
     public sites: Array< { name: string, url: string, useRouterLink: boolean } >;
 
     @Input()
     public information: Array< { name: string, url: string, useRouterLink: boolean } >;
 
-    @Input()
-    public image: string
+    // @Input()
+    // public image: string
+
+    // @Input()
+    // public extraImagePath = '';
 
     public constructor(public iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) { }
 

@@ -1,3 +1,4 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -8,13 +9,17 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardSvgComponent implements OnInit {
 
   @Input()
-  title: string = '';
+  public title: string;
 
   @Input()
-  text: string = '';
-  constructor() { }
+  public text: string;
 
-  ngOnInit() {
+  public constructor()
+  {
+    this.title = '';
+    this.text = '';
   }
 
+  public ngOnInit(): void
+  { }
 }
