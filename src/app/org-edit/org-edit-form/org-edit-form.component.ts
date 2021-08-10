@@ -75,6 +75,10 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
   urlRegExpression = '(https?://)?([\\da-z@:%=?$#._\+~#=.-]+)\\.([a-z@:%=?$#._\+~#=.]{2,6})[/\\w\\da-z@:%=?$#._\+~#= .-]*/?';
 
+  today = Date.now();
+  dateMin : Date = new Date();
+
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _formBuilder: FormBuilder,
@@ -89,10 +93,17 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
     this.copyOrg();
     this.initData();
     this.loading = false;
+    console.log("init before date inic ", this.org.established);
+
+    if(this.org.established)
+    {
+      this.setDateYearMin(this.org.established);
+      console.log("onei ", this.dateMin);
+
+    }
 
     this.iso639 = this._orgService.getISO639();
 
@@ -110,6 +121,10 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
     console.log("entro a el onchanges ", this.org);
 
+  }
+
+  setDateYearMin(newYear){
+    this.dateMin.setFullYear(newYear);
   }
 
   /******************************************************************

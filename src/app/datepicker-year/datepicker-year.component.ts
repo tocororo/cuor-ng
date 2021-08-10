@@ -54,8 +54,8 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
   }
   set max(max: number | Date) {
     if (max) {
-      const momentDate =
-        typeof max === 'number' ? moment([max, 0, 1]) : moment(max);
+      const momentDate = moment(max);
+       // typeof max === 'number' ? moment([max, 0, 1]) : moment(max);
       this._max = momentDate.isValid() ? momentDate : undefined;
     }
   }

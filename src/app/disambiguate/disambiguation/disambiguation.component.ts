@@ -14,11 +14,12 @@ export class DisambiguationComponent implements OnInit, OnChanges {
   @Input() masterOrganization: Organization;
   @Input() secundariesOrganizations: Organization[];
   @Input() posSecundaryOrg: number;
+  @Input() showSecundaries = false;
 
   selectedsecundaryOrganization: Organization;
   isDisabledNavigatePrevious: boolean;
   isDisabledNavigateNext: boolean;
-  showSecundaries = false;
+
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -165,7 +166,9 @@ export class DisambiguationComponent implements OnInit, OnChanges {
 
   mergeIdentifiers(pids){
     var oldPids = this.masterOrganization.identifiers;
-    var newOnes = pids.filter(a => {return !oldPids.some(x => x == a) })
+    var newOnes = pids.filter(a => {return !oldPids.some(x => x.value == a.value) })
+    console.log("merging pids: ", oldPids, newOnes);
+
     if(newOnes && newOnes.length > 0) {
       this.masterOrganization.identifiers = oldPids.concat(newOnes);
     }

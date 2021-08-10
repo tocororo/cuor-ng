@@ -30,11 +30,12 @@ export class DisambiguateComponent implements OnInit {
   masterFormControl: FormControl;
 
   secundaryFormGroup: FormGroup;
+  showSecundaries = false;
   orgMasterCtrl: FormControl;
 
   step = -1;
 
-  orgFilter = { type: "country", value: "Cuba" };
+  orgFilter = [{ type: "country", value: "Cuba" }, { type: "status", value: "active" }];
 
   loading: boolean = false;
 
@@ -48,7 +49,7 @@ export class DisambiguateComponent implements OnInit {
     private metadata: MetadataService
   ) { }
 
-  ngOnInit() {
+  private initFields() {
     this.secundariesOrganizations = new Array();
 
     this.orgMasterCtrl = new FormControl('', Validators.required);
@@ -58,6 +59,11 @@ export class DisambiguateComponent implements OnInit {
     this.secundaryFormGroup = this._formBuilder.group({
       analogas: this.addItemsFormArray(null)
     })
+  }
+
+  ngOnInit() {
+
+    this.initFields();
 
     this.activatedRoute.data.subscribe(
       (data) => {
@@ -193,9 +199,9 @@ export class DisambiguateComponent implements OnInit {
     this._orgEdit.fillObjectControls(); //esto debe hacerlo el form por el mismo
     toD.deepcopy(this._orgEdit.orgFormGroup.value);
     toD.status = "active"
+    toD.name = this._orgEdit.orgFormGroup.controls['name'].value;
 
     console.log("go disambiguate ", toD, this.secundariesOrganizations);
-
 
     this._orgService.editOrganization(toD).subscribe({
       next: (result: Hit<Organization>) => {
@@ -231,6 +237,11 @@ export class DisambiguateComponent implements OnInit {
     if (leave){
       this._router.navigate(["/"]);
     }
+    else {
+      this._resetStepper();
+      this.initFields()
+    }
+
 
   }
 
@@ -252,6 +263,7 @@ export class DisambiguateComponent implements OnInit {
 
   private _resetStepper(){
     this.masterOrganization = undefined;
+    this.showSecundaries = false;
     this.myStepper.reset();
     this.ngOnInit();
   }

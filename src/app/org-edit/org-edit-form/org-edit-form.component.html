@@ -22,14 +22,19 @@
     <cuor-datepicker-year
          [formControl]="orgFormGroup.controls['established']"
          [label]="'Fundada en'"
-         [touchUi]="false">
+         [touchUi]="false"
+         [max]="today"
+         >
     </cuor-datepicker-year>
 
     <!-- Start onei_registry -->
     <cuor-datepicker-year
          [formControl]="orgFormGroup.controls['onei_registry']"
          [label]="'Alta en la ONEI'"
-         [touchUi]="false">
+         [touchUi]="false"
+         [min]="dateMin"
+         [max]="today"
+         >
     </cuor-datepicker-year>
 
     <!-- Start Email -->
