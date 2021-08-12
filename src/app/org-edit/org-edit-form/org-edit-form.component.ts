@@ -65,7 +65,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     }
   ];
 
-  idtypes = ["grid","wkdata","ror","isni","fudref","orgref","reup"];
+  idtypes = ["grid","wkdata","ror","isni","fudref","orgref","reup", "orgaid"];
 
   iso639;
 
@@ -76,7 +76,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   urlRegExpression = '(https?://)?([\\da-z@:%=?$#._\+~#=.-]+)\\.([a-z@:%=?$#._\+~#=.]{2,6})[/\\w\\da-z@:%=?$#._\+~#= .-]*/?';
 
   today = Date.now();
-  dateMin : Date = new Date();
+  dateMin : Date = new Date(1900);
 
 
   constructor(
@@ -168,9 +168,9 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
         addresses: this.addItemsFormArrayAddresses(this.org.addresses),
 
-        wikipedia_url: new FormControl(this.org.wikipedia_url, Validators.pattern(this.urlRegExpression)),
+        wikipedia_url: new FormControl(this.org.wikipedia_url, [Validators.nullValidator, Validators.pattern(this.urlRegExpression)]),
 
-        email_address: new FormControl(this.org.email_address, Validators.email),
+        email_address: new FormControl(this.org.email_address, [Validators.nullValidator, Validators.email]),
 
         ip_addresses: this.addItemsFormArray(this.org.ip_addresses),
 

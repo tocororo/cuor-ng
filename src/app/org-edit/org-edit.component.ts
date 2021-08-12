@@ -29,26 +29,26 @@ export class OrgEditComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    
+
     this._activatedRoute.data.subscribe(
       (data: { 'org': Hit<Organization> }) => {
         this.org = new Organization();
         this.org.deepcopy(data.org.metadata);
-        
+
         this.loading = false;
       }
     );
-    
+
   }
 
   /******************************************************************
    * UPDATE FUNCTIONS
    ******************************************************************/
   update(leave:boolean = false){
-    this.loading = true;    
+    this.loading = true;
     // update orgFormGroup
     this._orgEditForm.fillObjectControls();
-    
+
     let edited = new Organization()
     edited.deepcopy(this._orgEditForm.orgFormGroup.value)
     edited.name = this._orgEditForm.orgFormGroup.controls['name'].value;
@@ -56,12 +56,19 @@ export class OrgEditComponent implements OnInit {
 
     this._orgService.editOrganization(edited).subscribe({
       next: (result: Hit<Organization>) => {
+        console.log(result.metadata)
+        let newOrg = new Organization();
+        newOrg.deepcopy(result.metadata);
+        this.org = newOrg;
+        this._orgEditForm.orgFormGroup.patchValue(this.org);
+        this._orgEditForm.initData();
 
         const m = new MessageHandler(null,this._dialog);
         m.showMessage(StatusCode.OK, "La Organización fue modificada correctamente", HandlerComponent.dialog, "Operación exitosa", "50%");
 
-        this._orgEditForm.orgFormGroup.setValue(result.metadata);
-        this._orgEditForm.initData();
+        if (leave){
+          this._router.navigate(["/"+this.org.id+"/view"]);
+        }
       },
       error: err => {
         console.log(err);
@@ -71,23 +78,18 @@ export class OrgEditComponent implements OnInit {
       },
       complete: () => this.loading = false
     })
-    
-    //console.log("after edit ", edited);
-    
 
-    if (leave){
-      this._router.navigate(["/"+this.org.id+"/view"]);
-    }
+    //console.log("after edit ", edited);
 
   }
 
   isValidForm(){
-    try {      
-          return this._orgEditForm.isValidForm();       
-      
+    try {
+          return this._orgEditForm.isValidForm();
+
     } catch(err) {
       console.log(err);
-      
+
     }
 
     return false;

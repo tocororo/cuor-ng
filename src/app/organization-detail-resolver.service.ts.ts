@@ -303,19 +303,19 @@ export class OrganizationDetailResolverService implements Resolve<SearchResponse
 
 	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchResponse<Organization>>
 	{
-		// let uuid = route.paramMap.get('uuid');
-		// return this.service.getOrganizationById(uuid).pipe(
-        //     take(1),
-        //     map(hit => {
-        //         if (hit) {
-        //           console.log(hit)
-        //             return hit;
-		// 		}
-		// 		else {
-        //             this.router.navigate(['/']);
-        //         }
-        //     })
-        // );
-		return of(orgExample);
+		let uuid = route.paramMap.get('uuid');
+		return this.service.getOrganizationById(uuid).pipe(
+            take(1),
+            map(hit => {
+                if (hit) {
+                  console.log(hit)
+                    return hit;
+				}
+				else {
+                    this.router.navigate(['/']);
+                }
+            })
+        );
+		// return of(orgExample);
 	}
 }
