@@ -52,6 +52,7 @@ export class AggregationsComponent implements OnInit {
   }
 
   //aqui se agregan los casos que puedan haber en las agregaciones para q salgan siempre en español
+  // o traducirse
   private _translate(key){
     switch (key)
     {

@@ -70,7 +70,7 @@ export class SearchComponent implements OnInit {
   loading: boolean = true;
 
   @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
-  
+
   public constructor(
     private _cuorService: OrgService,
     private activatedRoute: ActivatedRoute,
@@ -112,6 +112,7 @@ export class SearchComponent implements OnInit {
           }
         }
 
+        this.aggrsSelection["country"] = ["Cuba"]; //porque aun si cambian la url arriba seguira diciendo cuba
         this.updateFetchParams();
         this.fetchSearchRequest();
 
@@ -150,9 +151,9 @@ export class SearchComponent implements OnInit {
 
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
-
+        delete this.sr.aggregations["country"];
         this.aggr_keys = [
-          {value: this.sr.aggregations.country, key: 'País'},
+          //{value: this.sr.aggregations.country, key: 'País'},
           {value: this.sr.aggregations.state, key: 'Provincia'},
           {value: this.sr.aggregations.status, key: 'Estado'},
           {value: this.sr.aggregations.types, key: 'Tipo'},

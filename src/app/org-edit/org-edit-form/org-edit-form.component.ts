@@ -7,16 +7,6 @@ import { Address, Identifier, LabelDiffLang, Organization, OrganizationRelations
 import { isUndefined } from 'util';
 
 
-export declare enum IdentifierOrgSchemas {
-  grid = "grid",
-  wkdata = "wkdata",
-  ror = "ror",
-  isni = "isni",
-  fudref = "fudref",
-  orgref = "orgref",
-  reup = "reup"
-}
-
 @Component({
   selector: 'org-edit-form',
   templateUrl: './org-edit-form.component.html',
