@@ -1,3 +1,4 @@
+import { Error404Component } from './error404/error404.component';
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -63,6 +64,7 @@ import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizati
 import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm,
   OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 export function storageFactory() : OAuthStorage
 {
@@ -124,8 +126,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		ExpansionPanelLayoutComponent,
 		WikiTopicsProfileComponent,
     OrgEditFormComponent,
-
-    Step3DisambiguateHelp
+    Step3DisambiguateHelp,
+    Error404Component,
+    ErrorPageComponent
   ],
   imports: [
     MatRadioModule,
