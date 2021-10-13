@@ -347,9 +347,12 @@ export class OrgService {
 
   public editOrganization(org: Organization): Observable<any> {
     const payload = org.entitystringify();
-    console.log(org, payload)
-    const url = this.environment.cuorApi + this.prefix + "/" + org.id;
-    return this.http.put<any>(url, payload, this.httpOptions);
+    console.log("edit service org ", org);
+    const url = this.environment.cuorApi + this.prefix + "/" + org.id + "/curate";
+    let aux = this.http.post<any>(url, payload, this.httpOptions);
+    console.log("API response:", aux);
+    return aux;
+    
   }
 
   public fileUpload(formData: FormData) {

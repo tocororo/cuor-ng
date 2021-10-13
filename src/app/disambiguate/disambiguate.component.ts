@@ -213,7 +213,7 @@ export class DisambiguateComponent implements OnInit {
         console.log(err);
 
         const m = new MessageHandler(this._snackBar);
-        m.showMessage(StatusCode.OK, err.message)
+        m.showMessage(StatusCode.serverError, err.message)
       }
     })
 
