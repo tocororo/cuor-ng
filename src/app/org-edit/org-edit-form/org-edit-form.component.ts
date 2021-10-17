@@ -109,7 +109,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     this.initData();
     this.loading = false;
 
-    console.log("entro a el onchanges ", this.org);
+    //console.log("entro a el onchanges ", this.org);
 
   }
 
