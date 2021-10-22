@@ -12,9 +12,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { MatomoModule } from 'ngx-matomo';
 
-import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth,
-  OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
-  TocoFormsModule } from 'toco-lib';
+import {
+    AuthenticationModule, CoreModule, Environment, NotificationModule, OrganizationServiceNoAuth,
+    OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
+    TocoFormsModule
+} from 'toco-lib';
 
 import { environment } from 'src/environments/environment';
 
@@ -127,40 +129,41 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 
     Step3DisambiguateHelp
   ],
-  imports: [
-    MatRadioModule,
-    NgxChartsModule,
+    imports: [
+        MatRadioModule,
+        NgxChartsModule,
 
-    BrowserAnimationsModule,
-    SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
-    ReactiveFormsModule,
-    CoreModule,
-    StaticsModule,
-    OrganizationsModule,
-    TocoFormsModule,
-    OrgRoutingModule,
-    SearchModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        ReactiveFormsModule,
+        CoreModule,
+        StaticsModule,
+        OrganizationsModule,
+        TocoFormsModule,
+        OrgRoutingModule,
+        SearchModule,
 
-    MarkdownModule.forRoot({
-      loader: HttpClient
-      }),
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
-    AuthenticationModule,
-    MatomoModule
-  ],
+        MarkdownModule.forRoot({
+            loader: HttpClient
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        AuthenticationModule,
+        MatomoModule,
+        NotificationModule
+    ],
   entryComponents: [
     OrganizationDialogRelasionship,
     OrganizationDialogDeleteConfirm,
