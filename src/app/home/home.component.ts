@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
 	public organizationsTotal: number = 0;
 	public cubanOrganizationTotal: number = 0;
+	public cubanOrganizations: Organization[] = undefined;
 
 	public homeCharts = {
 		type: [],
@@ -91,6 +92,8 @@ export class HomeComponent implements OnInit {
 			next: (searchResponse: SearchResponse<Organization>) => {
 
 				this.organizationsTotal = searchResponse.hits.total;
+				this.cubanOrganizations = searchResponse.hits.hits.map( hit => hit.metadata);
+        console.log('orgs===',searchResponse.hits.hits.map( hit => hit.metadata))
 
 				searchResponse.aggregations['country'].buckets.forEach(element => {
 					if (!element.key.localeCompare('Cuba'))

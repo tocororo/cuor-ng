@@ -1,5 +1,7 @@
-import { Component, AfterViewInit } from '@angular/core';
-import {map, marker, tileLayer, control, latLng, layerGroup} from 'leaflet';
+import {Component, AfterViewInit, Input} from '@angular/core';
+import {map, marker, tileLayer, control, latLng, layerGroup, Layer} from 'leaflet';
+import {ActivatedRoute} from '@angular/router';
+import {Organization} from 'toco-lib';
 
 @Component({
   selector: 'orgs-map',
@@ -8,21 +10,23 @@ import {map, marker, tileLayer, control, latLng, layerGroup} from 'leaflet';
 })
 
 export class OrgsMapComponent implements AfterViewInit {
-
+@Input() cubanOrganizations: Organization[] = [];
   private map;
-  streetMap: any;
-  cycleMap: any;
+  public streetMap: any;
+  public cycleMap: any;
+  public states: any;
+  public baseMaps: any;
+  public overlayMaps: any;
+  public loading = true;
+  public data: any = '';
+  public organizationsMarkers: Layer[] = [];
 
-  states: any;
+  constructor( private _activatedRoute: ActivatedRoute) { }
 
-  baseMaps: any;
-
-  overlayMaps: any;
-
-constructor() { }
-
-ngAfterViewInit() {
+  ngAfterViewInit() {
     this.initMap();
+    console.log('this.cubanOrganizations===', this.cubanOrganizations)
+
   }
 
   private initMap(): void {
@@ -90,11 +94,17 @@ ngAfterViewInit() {
   this.map.on('zoomend', () => {
     const zoom = this.map.getZoom();
     if ( zoom > 6 ) {
+      this.cubanOrganizations.forEach( org => {
+        org.addresses.forEach( address => {
+          this.organizationsMarkers.push(marker([address.lat, address.lng]).bindPopup('I am a blue leaf.'));
+        });
+      });
+      console.log('this.organizationsMarkers===', this.organizationsMarkers)
       this.map.removeLayer(this.states);
-      this.map.addLayer(layerGroup( [havana]));
+      this.map.addLayer(layerGroup( this.organizationsMarkers));
     }
     if ( zoom <= 6 ) {
-      this.map.removeLayer(layerGroup( [havana]));
+      this.map.removeLayer(layerGroup( this.organizationsMarkers));
       this.map.addLayer(this.states);
     }
   });
