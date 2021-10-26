@@ -20,6 +20,7 @@ import { WikiTopicsProfileComponent } from './wiki-organizations/profiles/wiki-t
 import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
 import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
+import {NotificationsComponent} from "./notifications/notifications.component";
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 
 
@@ -98,9 +99,9 @@ const routes: Routes = [
         component: StaticPagesComponent,
         data: {src: 'assets/markdown/inclussion.', title: '¿Nueva Organización?'}
 	},
-	/* 
+	/*
 	Perfiles
-	*/	
+	*/
 	{
 		path:'wiki-organizations',
 		component: WikiOrganizationsComponent,
@@ -133,9 +134,13 @@ const routes: Routes = [
 		path:'wiki-organizations/topics',
 		component: WikiTopicsProfileComponent,
 	},
-	/* 
+	/*
 	end of Perfiles
 	*/
+  {
+    path:'notifications',
+    component: NotificationsComponent,
+  },
 	{
 		path: '**',
 		redirectTo: '',
