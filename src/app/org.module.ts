@@ -63,6 +63,8 @@ import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizati
 import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm,
   OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
+import {CommentDialogComponent, OrgReviewerComponent} from './org-reviewer/org-reviewer.component';
+import { RequestChangesListComponent } from './request-changes-list/request-changes-list.component';
 
 export function storageFactory() : OAuthStorage
 {
@@ -124,8 +126,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		ExpansionPanelLayoutComponent,
 		WikiTopicsProfileComponent,
     OrgEditFormComponent,
+    CommentDialogComponent,
 
-    Step3DisambiguateHelp
+    Step3DisambiguateHelp,
+
+    OrgReviewerComponent,
+
+    RequestChangesListComponent
   ],
   imports: [
     MatRadioModule,
@@ -166,7 +173,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     OrganizationDialogDeleteConfirm,
     OrganizationDialogInfoConfirm,
     OrganizationDialogorgEditAddress,
-    Step3DisambiguateHelp
+    Step3DisambiguateHelp,
+    CommentDialogComponent,
+
   ],
   providers: [
     SearchService,

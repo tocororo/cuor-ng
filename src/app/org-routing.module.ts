@@ -20,6 +20,8 @@ import { WikiTopicsProfileComponent } from './wiki-organizations/profiles/wiki-t
 import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
 import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
+import {OrgReviewerComponent} from "./org-reviewer/org-reviewer.component";
+import {RequestChangesListComponent} from "./request-changes-list/request-changes-list.component";
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 
 
@@ -39,8 +41,31 @@ const routes: Routes = [
 		resolve: {
 			'org': OrganizationDetailResolverService
 		},
-		canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+		// canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+  },
+  {
+    path: ':uuid/request-changes',
+    component: OrgEditComponent,
+    resolve: {
+      'org': OrganizationDetailResolverService
     },
+  },
+	{
+		path:':uuid/review-changes',
+		component: OrgReviewerComponent,
+		resolve: {
+			'org': OrganizationDetailResolverService
+		},
+		// canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+  },
+	{
+		path:'requests-list',
+		component: RequestChangesListComponent,
+		// resolve: {
+		// 	'org': OrganizationDetailResolverService
+		// },
+		// canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+  },
     // {
     //     path: 'add',
     //     component: OrgAddComponent
@@ -98,9 +123,9 @@ const routes: Routes = [
         component: StaticPagesComponent,
         data: {src: 'assets/markdown/inclussion.', title: '¿Nueva Organización?'}
 	},
-	/* 
+	/*
 	Perfiles
-	*/	
+	*/
 	{
 		path:'wiki-organizations',
 		component: WikiOrganizationsComponent,
@@ -133,7 +158,7 @@ const routes: Routes = [
 		path:'wiki-organizations/topics',
 		component: WikiTopicsProfileComponent,
 	},
-	/* 
+	/*
 	end of Perfiles
 	*/
 	{

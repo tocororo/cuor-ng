@@ -39,4 +39,12 @@
 
 <ng-template #view_cuor>
     <toco-org-view [org]="org"></toco-org-view>
+
+    <div class="request-container" >
+      <div class="request-header">
+        <mat-icon style="margin-right: 6px">report</mat-icon>
+        <span>Puedes solicitar cambios o actualización a los metadatos de esta organización.</span>
+      </div>
+      <button mat-raised-button color="accent" routerLink="/{{org.id}}/request-changes">Cambiar la ficha de la organización</button>
+    </div>
 </ng-template>

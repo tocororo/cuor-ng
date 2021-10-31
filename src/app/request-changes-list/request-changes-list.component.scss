@@ -1,0 +1,14 @@
+.empty-requests-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.empty-requests-icon {
+  color: grey;
+  font-size: 6em;
+  height: 100px;
+  width: 100px
+}

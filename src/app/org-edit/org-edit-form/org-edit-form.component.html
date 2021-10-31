@@ -1,50 +1,67 @@
 <form [formGroup]="orgFormGroup">
 
     <!-- Start Name -->
-    <mat-form-field appearance="outline" class="w-100">
+  <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
+    <mat-form-field appearance="outline" class="w-100" [ngStyle]="{borderColor: 'orange'}">
         <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Escriba el nombre de la Organización" [value]="org.name" formControlName="name">
-        <button mat-button matSuffix mat-icon-button aria-label="Editar nombre" (click)="editInputName()">
+        <input matInput placeholder="Escriba el nombre de la Organización" [value]="org.name" formControlName="name" [disabled]="editDisabled">
+        <button mat-button matSuffix mat-icon-button aria-label="Editar nombre" (click)="editInputName()" [disabled]='editDisabled'>
             <mat-icon>mode_edit</mat-icon>
           </button>
     </mat-form-field>
+    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+  </div>
     <!-- End Name -->
 
     <!-- Start Status -->
+  <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Estatus</mat-label>
         <input matInput placeholder="Estatus de la Organización" [value]="org.status" disabled>
         <!-- formControlName="status" -->
     </mat-form-field>
+    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+  </div>
     <!-- End Status -->
 
     <!-- Start Established -->
+  <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
     <cuor-datepicker-year
          [formControl]="orgFormGroup.controls['established']"
          [label]="'Fundada en'"
          [touchUi]="false"
          [max]="today"
+         [disabled]='editDisabled'
          >
     </cuor-datepicker-year>
+    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+  </div>
 
     <!-- Start onei_registry -->
+  <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
     <cuor-datepicker-year
          [formControl]="orgFormGroup.controls['onei_registry']"
          [label]="'Alta en la ONEI'"
          [touchUi]="false"
          [min]="dateMin"
          [max]="today"
-         >
+         [disabled]='editDisabled'
+    >
     </cuor-datepicker-year>
+    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+  </div>
 
     <!-- Start Email -->
+  <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Correo electrónico</mat-label>
-        <input matInput type="email" placeholder="Correo electrónico de la Organización" [value]="org.email_address" formControlName="email_address">
+        <input matInput type="email" placeholder="Correo electrónico de la Organización" [value]="org.email_address" formControlName="email_address" [readonly]='editDisabled'>
         <mat-error *ngIf="orgFormGroup.hasError('email_address')">
             Por favor entre un correo válido
         </mat-error>
     </mat-form-field>
+    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+  </div>
     <!-- End Email -->
 
     <!-- Start Identifiers -->
@@ -54,25 +71,24 @@
                 <mat-label>Identificadores</mat-label>
             </p>
 
-            <div class="w-100 my-outline" *ngFor="let identifier of identifiersControl.controls; let pos = index"
-                [formGroup]="identifiersControl.controls[pos]" fxLayout="row wrap"
+            <div [ngStyle]="{marginBottom: '24px'}" *ngFor="let identifier of identifiersControl.controls; let pos = index">
+            <div [class.my-outline]=false [class.indicator-outline]="true && pathname === 'review-changes'" class="w-100"
+                   [formGroup]="identifiersControl.controls[pos]" fxLayout="row wrap"
                 fxLayoutAlign="space-between center">
-
                 <mat-form-field class="w-45">
                     <mat-select class="w-100" placeholder="Seleccione el tipo" [value]="identifier.value.idtype"
-                        formControlName="idtype">
+                        formControlName="idtype" [disabled]='editDisabled'>
                         <mat-option *ngFor="let item of selectOptionsIdType" [value]="item.idtype">
                             {{ item.value }}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
-
                 <mat-form-field class="w-45">
-                    <input matInput placeholder="Valor" [value]="identifier.value.value" formControlName="value">
+                    <input matInput placeholder="Valor" [value]="identifier.value.value" formControlName="value" [readonly]='editDisabled'>
                 </mat-form-field>
 
                 <ng-container *ngIf="identifierCanBeDeleted(identifier.value.idtype);else templateReportError">
-                    <button mat-icon-button matSuffix class="mat-18" (click)="deleteidentifiers(pos)"
+                    <button mat-icon-button matSuffix class="mat-18" (click)="deleteidentifiers(pos)" [disabled]='editDisabled'
                         matTooltip="Eliminar" matTooltipClass="tooltip-red">
                         <mat-icon>delete</mat-icon>
                     </button>
@@ -83,13 +99,13 @@
                         <mat-icon>error</mat-icon>
                     </button>
                 </ng-template>
-
-
+            </div>
+            <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
             </div>
 
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-stroked-button color="primary" (click)="addIdentifiers()">Adicionar</button>
+            <button mat-stroked-button color="primary" (click)="addIdentifiers()" [disabled]='editDisabled'>Adicionar</button>
         </mat-card-actions>
     </mat-card>
     <!-- End Identifiers -->
@@ -101,33 +117,35 @@
                 <mat-label>Labels</mat-label>
             </p>
 
-            <div class="w-100 my-outline" *ngFor="let label of labelsControl.controls; let pos = index"
-                [formGroup]="labelsControl.controls[pos]" fxLayout="row wrap"
-                fxLayoutAlign="space-between center">
+            <div [ngStyle]="{marginBottom: '24px'}" *ngFor="let label of labelsControl.controls; let pos = index">
+              <div [class.my-outline]=true [class.indicator-outline]="true && pathname === 'review-changes'" class="w-100"
+                   [formGroup]="labelsControl.controls[pos]" fxLayout="row wrap"
+                   fxLayoutAlign="space-between center">
 
-                <mat-form-field class="w-45">
-                    <mat-select class="w-100" placeholder="Seleccione el iso639" [value]="label.value.iso639"
-                        formControlName="iso639">
-                        <mat-option *ngFor="let item of iso639" [value]="item.label">
-                            {{ item.value }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                  <mat-form-field class="w-45">
+                      <mat-select class="w-100" placeholder="Seleccione el iso639" [value]="label.value.iso639" [disabled]='editDisabled'
+                          formControlName="iso639">
+                          <mat-option *ngFor="let item of iso639" [value]="item.label">
+                              {{ item.value }}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
 
 
-                <mat-form-field class="w-45">
-                    <input matInput placeholder="Label" [value]="label.value.label" formControlName="label">
-                </mat-form-field>
+                  <mat-form-field class="w-45">
+                      <input matInput placeholder="Label" [value]="label.value.label" formControlName="label" [readonly]='editDisabled'>
+                  </mat-form-field>
 
-                <button mat-icon-button matSuffix class="mat-18" (click)="deleteLabels(pos)"
-                    matTooltip="Eliminar" matTooltipClass="tooltip-red">
-                    <mat-icon>delete</mat-icon>
-                </button>
-
+                  <button mat-icon-button matSuffix class="mat-18" (click)="deleteLabels(pos)"
+                      matTooltip="Eliminar" matTooltipClass="tooltip-red" [disabled]='editDisabled'>
+                      <mat-icon>delete</mat-icon>
+                  </button>
+              </div>
+              <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
             </div>
 
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-stroked-button color="primary" (click)="addLabels()">Adicionar</button>
+            <button mat-stroked-button color="primary" (click)="addLabels()" [disabled]='editDisabled'>Adicionar</button>
         </mat-card-actions>
     </mat-card>
     <!-- End labels -->
@@ -136,20 +154,23 @@
     <mat-card class="mb-2">
         <mat-card-content formArrayName="acronyms">
             <mat-label>Acrónimos</mat-label>
-            <mat-form-field appearance="outline" class="w-100"
-                *ngFor="let acronym of org.acronyms; let pos = index">
+          <div *ngFor="let acronym of org.acronyms; let pos = index">
+          <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
+            <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Acrónimo {{pos + 1}}</mat-label>
                 <input matInput placeholder="Acrónimo de la Organización" [value]="acronym"
-                    [formControlName]="pos">
+                    [formControlName]="pos" [readonly]='editDisabled'>
                 <button mat-icon-button matSuffix class="mat-18" (click)="deleteAcronyms(pos)"
-                    matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                    matTooltip="Eliminar" matTooltipClass="tooltip-red" [disabled]='editDisabled'>
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-form-field>
-
+            <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+          </div>
+          </div>
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-stroked-button color="primary" (click)="addAcronyms()">Adicionar</button>
+            <button mat-stroked-button color="primary" (click)="addAcronyms()" [disabled]='editDisabled'>Adicionar</button>
         </mat-card-actions>
     </mat-card>
     <!-- End Acronyms -->
@@ -158,20 +179,24 @@
     <mat-card class="mb-2">
         <mat-card-content formArrayName="aliases">
             <mat-label>Alias</mat-label>
-            <mat-form-field appearance="outline" class="w-100"
-                *ngFor="let alias of org.aliases; let pos = index">
+          <div *ngFor="let alias of org.aliases; let pos = index">
+          <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
+            <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Alias {{pos + 1}}</mat-label>
                 <input matInput placeholder="Alias de la Organización" [value]="alias"
-                    [formControlName]="pos">
+                    [formControlName]="pos" [readonly]='editDisabled'>
                 <button mat-icon-button matSuffix class="mat-18" (click)="deleteAliases(pos)"
-                    matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                    matTooltip="Eliminar" matTooltipClass="tooltip-red" [disabled]='editDisabled'>
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-form-field>
+            <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+          </div>
+          </div>
 
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-stroked-button color="primary" (click)="addAliases()">Adicionar</button>
+            <button mat-stroked-button color="primary" (click)="addAliases()" [disabled]='editDisabled'>Adicionar</button>
         </mat-card-actions>
     </mat-card>
     <!-- End aliases -->
@@ -180,30 +205,37 @@
     <mat-card class="mb-2">
         <mat-card-content formArrayName="types">
             <mat-label>Tipos</mat-label>
-            <div fxLayout="row nowrap" *ngFor="let type of org.types; let pos = index">
-                <mat-form-field appearance="outline" class="w-100">
+          <div  class="w-100 mt-2" fxLayout="column" *ngFor="let type of org.types; let pos = index">
+              <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
+                <div fxLayout="row nowrap">
+                  <mat-form-field appearance="outline" class="w-100">
                     <mat-label>Tipo {{pos + 1}}</mat-label>
                     <mat-select
-                        #typeSelect
-                        placeholder="Seleccione el tipo de Organización"
-                        [value]="type"
-                        [formControlName]="pos">
-                        <mat-option *ngFor="let item of selectOptions" [value]="item.value">{{ item.label }}
-                        </mat-option>
+                      #typeSelect
+                      placeholder="Seleccione el tipo de Organización"
+                      [value]="type"
+                      [formControlName]="pos"
+                      [disabled]='editDisabled'>
+                      <mat-option *ngFor="let item of selectOptions" [value]="item.value">{{ item.label }}
+                      </mat-option>
                     </mat-select>
-                </mat-form-field>
-                <button mat-icon-button matSuffix
-                    class="mat-18"
-                    (click)="deleteTypes(pos)"
-                    matTooltip="Eliminar"
-                    matTooltipClass="tooltip-red"
-                    style="margin-left: -39px;top: 8px">
+                  </mat-form-field>
+                  <button mat-icon-button matSuffix
+                          class="mat-18"
+                          (click)="deleteTypes(pos)"
+                          matTooltip="Eliminar"
+                          matTooltipClass="tooltip-red"
+                          style="margin-left: -39px;top: 8px"
+                          [disabled]='editDisabled'>
                     <mat-icon>delete</mat-icon>
-                </button>
+                  </button>
+                </div>
+                <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+              </div>
             </div>
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-stroked-button color="primary" (click)="addTypes()">Adicionar</button>
+            <button mat-stroked-button color="primary" (click)="addTypes()" [disabled]='editDisabled'>Adicionar</button>
         </mat-card-actions>
     </mat-card>
     <!-- End Type -->
@@ -219,6 +251,7 @@
             </mat-expansion-panel-header>
             <mat-list role="list">
                 <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
+                  <div [class.indicator-list-container]="true && pathname === 'review-changes'" class="w-100" >
                     <mat-list-item *ngIf="orgRelationships.PARENT.value == relation.value.type" role="listitem">
                         {{ relation.value.label }}
                         <button mat-icon-button matSuffix
@@ -226,14 +259,17 @@
                             (click)="deleteRelationship(pos)"
                             matTooltip="Eliminar"
                             matTooltipClass="tooltip-red"
-                            style="margin-left: -39px;top: 8px">
+                            style="margin-left: -39px;top: 8px"
+                                [disabled]='editDisabled'>
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-list-item>
+                    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+                  </div>
                 </ng-container>
             </mat-list>
             <mat-action-row>
-                <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.PARENT.value)">Adicionar</button>
+                <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.PARENT.value)" [disabled]='editDisabled'>Adicionar</button>
             </mat-action-row>
         </mat-expansion-panel>
 
@@ -247,6 +283,7 @@
 
             <mat-list role="list">
                 <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
+                  <div [class.indicator-list-container]="true && pathname === 'review-changes'" class="w-100">
                     <mat-list-item *ngIf="orgRelationships.CHILD.value == relation.value.type" role="listitem">
                         {{ relation.value.label }}
                         <button mat-icon-button matSuffix
@@ -254,15 +291,18 @@
                             (click)="deleteRelationship(pos)"
                             matTooltip="Eliminar"
                             matTooltipClass="tooltip-red"
-                            style="margin-left: -39px;top: 8px">
+                            style="margin-left: -39px;top: 8px"
+                                [disabled]='editDisabled'>
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-list-item>
+                    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+                  </div>
                 </ng-container>
             </mat-list>
 
             <mat-action-row>
-                <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.CHILD.value)">Adicionar</button>
+                <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.CHILD.value)" [disabled]='editDisabled'>Adicionar</button>
             </mat-action-row>
         </mat-expansion-panel>
 
@@ -276,6 +316,7 @@
 
             <mat-list role="list">
                 <ng-container *ngFor="let relation of relationshipsControl.controls; let pos = index">
+                  <div [class.indicator-list-container]="true && pathname === 'review-changes'" class="w-100">
                     <mat-list-item *ngIf="orgRelationships.RELATED.value == relation.value.type" role="listitem">
                         {{ relation.value.label }}
                         <button mat-icon-button matSuffix
@@ -283,48 +324,57 @@
                             (click)="deleteRelationship(pos)"
                             matTooltip="Eliminar"
                             matTooltipClass="tooltip-red"
-                            style="margin-left: -39px;top: 8px">
+                            style="margin-left: -39px;top: 8px"
+                                [disabled]='editDisabled'>
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-list-item>
+                    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+                  </div>
                 </ng-container>
             </mat-list>
 
             <mat-action-row>
-                <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.RELATED.value)">Adicionar</button>
+                <button mat-stroked-button color="primary" (click)="addToRelationship(orgRelationships.RELATED.value)" [disabled]='editDisabled'>Adicionar</button>
             </mat-action-row>
         </mat-expansion-panel>
     </mat-accordion>
     <!-- End Relationships -->
 
     <!-- Start wikipedia_url -->
-    <mat-form-field appearance="outline" class="w-100 mt-2 mb-2">
+  <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100" style="margin-top: 2em !important;">
+    <mat-form-field appearance="outline" class="w-100">
         <mat-label>URL de Wikipedia</mat-label>
-        <input matInput type="url" placeholder="URL de wikipedia de la Organización" [value]="org.wikipedia_url" formControlName="wikipedia_url">
+        <input matInput type="url" placeholder="URL de wikipedia de la Organización" [value]="org.wikipedia_url" formControlName="wikipedia_url" [readonly]='editDisabled'>
         <mat-error *ngIf="orgFormGroup.hasError('wikipedia_url')">
             Por favor entre una url válida
         </mat-error>
     </mat-form-field>
+    <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+  </div>
     <!-- End wikipedia_url -->
 
     <!-- Start links -->
     <mat-card class="mb-2">
         <mat-card-content formArrayName="links">
             <mat-label>Links</mat-label>
-            <mat-form-field appearance="outline" class="w-100"
-                *ngFor="let link of org.links; let pos = index">
+          <div *ngFor="let link of org.links; let pos = index">
+          <div [class.indicator-container]="true && pathname === 'review-changes'" class="w-100">
+            <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Link {{pos + 1}}</mat-label>
                 <input matInput type="url" placeholder="Links de la Organización" [value]="link"
-                    [formControlName]="pos">
+                    [formControlName]="pos" [readonly]='editDisabled'>
                 <button mat-icon-button matSuffix class="mat-18" (click)="deletelinks(pos)"
-                    matTooltip="Eliminar" matTooltipClass="tooltip-red">
+                    matTooltip="Eliminar" matTooltipClass="tooltip-red" [disabled]='editDisabled'>
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-form-field>
-
+            <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+          </div>
+          </div>
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-stroked-button color="primary" (click)="addlinks()">Adicionar</button>
+            <button mat-stroked-button color="primary" (click)="addlinks()" [disabled]='editDisabled'>Adicionar</button>
         </mat-card-actions>
     </mat-card>
     <!-- End links -->
@@ -334,8 +384,12 @@
         <mat-card-content formArrayName="addresses">
             <mat-label>Direcciones</mat-label>
             <mat-list>
-                <mat-list-item mat-list-item class="mat-list-option" *ngFor="let address of org.addresses; let pos = index" fxLayout="row wrap" fxLayoutAlign="space-between center">
-                    <div>
+              <div  *ngFor="let address of org.addresses; let pos = index" class="w-100">
+              <div [class.indicator-list-container]="true && pathname === 'review-changes'" class="w-100"
+                   fxLayout="column"
+                  >
+                <mat-list-item mat-list-item class="mat-list-option w-100" fxLayout="row wrap" fxLayoutAlign="space-between" >
+                    <div >
                         <ng-container *ngIf="address.country">
                             {{ address.country }}
                         </ng-container>
@@ -348,19 +402,22 @@
                     </div>
                     <div>
                         <button mat-icon-button matSuffix class="mat-18" (click)="editaddress(pos)"
-                            matTooltip="Click para Editar">
+                            matTooltip="Click para Editar" [disabled]='editDisabled'>
                             <mat-icon>mode_edit</mat-icon>
                         </button>
                         <button mat-icon-button matSuffix class="mat-18" (click)="deleteaddress(pos)"
-                            matTooltip="Click para Eliminar" matTooltipClass="tooltip-red">
+                            matTooltip="Click para Eliminar" matTooltipClass="tooltip-red" [disabled]='editDisabled'>
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
                 </mat-list-item>
+                <div *ngIf=" pathname === 'review-changes'" class="indicator"><span>{{indicator}}</span> </div>
+              </div>
+              </div>
               </mat-list>
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-stroked-button color="primary" (click)="addaddress()">Adicionar</button>
+            <button mat-stroked-button color="primary" (click)="addaddress()" [disabled]='editDisabled'>Adicionar</button>
         </mat-card-actions>
     </mat-card>
     <!-- End address -->

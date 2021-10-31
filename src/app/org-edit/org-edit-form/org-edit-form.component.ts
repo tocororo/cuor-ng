@@ -26,7 +26,9 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
   @Input() org: Organization;
   @Input() loading: boolean = true;
-
+  @Input() editDisabled: boolean = false;
+  public pathname: string;
+  public indicator: string = 'Nuevos cambios';
   orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
 
   // TODO: pasar para organization.entity, es similar a organizationRelationship
@@ -93,6 +95,10 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this._activatedRoute.url.subscribe(path => {
+      this.pathname = path[1].path;
+    });
+
     this.copyOrg();
     this.initData();
     this.loading = false;
