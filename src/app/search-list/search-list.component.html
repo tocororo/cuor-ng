@@ -1,4 +1,7 @@
 <mat-card class="mat-elevation-z0" *ngIf="hitList && hitList.hits.length > 0; else templateNotInfo">
+  <mat-card-header>
+    <app-pdf-excel [inputValue]="hitList.hits" [pdfType]="pdfType" ></app-pdf-excel>
+  </mat-card-header>
     <mat-card-content>
       <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
 
@@ -16,7 +19,7 @@
         <ul fxLayout="row wrap" *ngIf="hit.metadata.types && hit.metadata.types.length > 0">
           <span>Tipos:</span>
           <li *ngFor="let type of hit.metadata.types; let i = index" class="li-margin-style">
-            {{type}} 
+            {{type}}
             <ng-container *ngIf="i < hit.metadata.types.length - 1"> | </ng-container>
           </li>
         </ul>
@@ -24,7 +27,7 @@
         <ul fxLayout="row wrap" *ngIf="hit.metadata.acronyms && hit.metadata.acronyms.length > 0">
           <span>Acrónimos:</span>
           <li *ngFor="let acronym of hit.metadata.acronyms; let i = index" class="li-margin-style">
-            {{acronym}} 
+            {{acronym}}
             <ng-container *ngIf="i < hit.metadata.acronyms.length - 1"> | </ng-container>
           </li>
         </ul>
@@ -32,7 +35,7 @@
         <ul fxLayout="row wrap" *ngIf="hit.metadata.aliases && hit.metadata.aliases.length > 0">
           <span>Conocida como:</span>
           <li *ngFor="let alias of hit.metadata.aliases; let i = index" class="li-margin-style">
-            {{alias}} 
+            {{alias}}
             <ng-container *ngIf="i < hit.metadata.aliases.length - 1"> | </ng-container>
           </li>
         </ul>
@@ -40,7 +43,7 @@
         <ul fxLayout="row wrap" *ngIf="hit.metadata.identifiers && hit.metadata.identifiers.length > 0">
           <span>Identificadores:</span>
           <li *ngFor="let identifier of hit.metadata.identifiers; let i = index" class="li-margin-style">
-            {{identifier.idtype}}: {{identifier.value}} 
+            {{identifier.idtype}}: {{identifier.value}}
             <ng-container *ngIf="i < hit.metadata.identifiers.length - 1"> | </ng-container>
           </li>
         </ul>

@@ -29,9 +29,7 @@
           <button mat-icon-button  *ngIf="'true'" (click)="changeView()" matTooltip="Ver información de Wikidata">
               <mat-icon svgIcon="wikidata" class="mat-18"></mat-icon>
           </button>
-          <button mat-icon-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Salvar como PDF">
-              <mat-icon class="mat-18">picture_as_pdf</mat-icon>
-          </button>
+        <app-pdf-excel [inputValue]="org"></app-pdf-excel>
         </div>
     </ng-template>
 </div>
