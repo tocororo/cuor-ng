@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import * as XLSX from 'XLSX';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -14,7 +15,8 @@ export class PdfExcelComponent implements OnInit {
 
   @Input() inputValue: any = null;
   @Input() pdfType: 'list' | 'single' = 'single';
-  @Input() type: 'pdf' | 'excel' = 'pdf';
+  @Input() type: 'pdf' | 'excel' | null = null;
+  @Input() viewType: 'icon' | 'button' = 'icon';
 
   constructor() { }
 
@@ -294,5 +296,12 @@ export class PdfExcelComponent implements OnInit {
     };
 
     pdfMake.createPdf(documentDefinition).open();
+  }
+
+  saveAsEXCEL() {
+    const newBook = XLSX.utils.book_new();
+    const newSheet = XLSX.utils.json_to_sheet([this.inputValue]);
+    XLSX.utils.book_append_sheet(newBook, newSheet, 'Sheet1');
+    XLSX.writeFile(newBook, 'new-book.xlsx');
   }
 }

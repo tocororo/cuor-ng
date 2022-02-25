@@ -16,25 +16,41 @@
     </ng-template>
   </ng-template>
   <ng-template #EXCEL>
-    <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
-      Exportar resultados a EXCEL
+    <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como EXCEL">
+      <a href="https://icons8.com/icon/111774/xls"></a>
     </button>
   </ng-template>
 </ng-template>
 
 <ng-template #multipleExport>
-  <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="space-between center"
-    style="height: 80px; padding: 0 16px;"
-  >
-    <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
-      Exportar resultados a PDF
-    </button>
-    <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como EXCEL">
-      Exportar resultados a EXCEL
-    </button>
-  </div>
-
+  <div *ngIf="viewType === 'icon'; then icon else button"></div>
+  <ng-template #icon>
+<!--    <div-->
+<!--      fxLayout="row wrap"-->
+<!--      fxLayoutAlign="space-between center"-->
+<!--      style="height: 80px;"-->
+<!--    >-->
+      <button mat-icon-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+        <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+      </button>
+      <button mat-icon-button  *ngIf="'true'" (click)="saveAsEXCEL()" matTooltip="Exportar como EXCEL">
+        <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+      </button>
+<!--    </div>-->
+  </ng-template>
+  <ng-template #button>
+    <div
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutAlign="space-between center"
+      style="height: 80px;"
+    >
+      <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+        Exportar resultados a PDF
+      </button>
+      <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como EXCEL">
+        Exportar resultados a EXCEL
+      </button>
+    </div>
+  </ng-template>
 </ng-template>
