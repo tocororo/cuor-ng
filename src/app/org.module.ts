@@ -63,7 +63,7 @@ import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizati
 import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm,
   OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
-import { PdfExcelComponent } from './pdf-excel/pdf-excel.component';
+import {PdfDialogComponent, PdfExcelComponent} from './pdf-excel/pdf-excel.component';
 
 export function storageFactory() : OAuthStorage
 {
@@ -128,7 +128,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 
     Step3DisambiguateHelp,
 
-    PdfExcelComponent
+    PdfExcelComponent,
+    PdfDialogComponent
   ],
   imports: [
     MatRadioModule,
@@ -162,14 +163,15 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
       }
     }),
     AuthenticationModule,
-    MatomoModule
+    MatomoModule,
   ],
   entryComponents: [
     OrganizationDialogRelasionship,
     OrganizationDialogDeleteConfirm,
     OrganizationDialogInfoConfirm,
     OrganizationDialogorgEditAddress,
-    Step3DisambiguateHelp
+    Step3DisambiguateHelp,
+    PdfDialogComponent
   ],
   providers: [
     SearchService,

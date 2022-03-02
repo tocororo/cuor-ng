@@ -1,6 +1,6 @@
 <mat-card class="mat-elevation-z0" *ngIf="hitList && hitList.hits.length > 0; else templateNotInfo">
   <mat-card-header>
-    <app-pdf-excel [inputValue]="hitList.hits" [pdfType]="pdfType" ></app-pdf-excel>
+    <app-pdf-excel [inputValue]="hitList.hits" viewType="button" pdfType="list"></app-pdf-excel>
   </mat-card-header>
     <mat-card-content>
       <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">

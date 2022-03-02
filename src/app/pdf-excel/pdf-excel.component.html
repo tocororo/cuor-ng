@@ -10,14 +10,14 @@
       </button>
     </ng-template>
     <ng-template #listPdf>
-      <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+      <button mat-raised-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
         Exportar resultados a PDF
       </button>
     </ng-template>
   </ng-template>
   <ng-template #EXCEL>
-    <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como EXCEL">
-      <a href="https://icons8.com/icon/111774/xls"></a>
+    <button mat-raised-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+      Exportar resultados a EXCEL
     </button>
   </ng-template>
 </ng-template>
@@ -30,7 +30,7 @@
 <!--      fxLayoutAlign="space-between center"-->
 <!--      style="height: 80px;"-->
 <!--    >-->
-      <button mat-icon-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+      <button mat-icon-button *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
         <mat-icon class="mat-18">picture_as_pdf</mat-icon>
       </button>
       <button mat-icon-button  *ngIf="'true'" (click)="saveAsEXCEL()" matTooltip="Exportar como EXCEL">
@@ -45,11 +45,11 @@
       fxLayoutAlign="space-between center"
       style="height: 80px;"
     >
-      <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
-        Exportar resultados a PDF
+      <button mat-raised-button class="button"*ngIf="'true'" (click)="openDialog()" matTooltip="Exportar como PDF">
+        Exportar a PDF
       </button>
-      <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como EXCEL">
-        Exportar resultados a EXCEL
+      <button mat-raised-button *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como EXCEL">
+        Exportar a EXCEL
       </button>
     </div>
   </ng-template>

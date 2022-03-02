@@ -1,8 +1,24 @@
-import {Component, Input, OnInit} from '@angular/core';
-import * as XLSX from 'XLSX';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import * as XLSX from 'xlsx';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+const options = [ { key: 'identifiers', value: 'Lista de los identificadores de la organización'},
+  { key: 'aliases', value: 'Lista de otros nombres con los que se conoce la organización'},
+  { key: 'acronyms', value: 'Lista de los acrónimos con que se conoce la organización'},
+  { key: 'types', value: 'Lista de los tipos que describen la organización'},
+  { key: 'wikipedia_url', value: 'URL de la página de Wikipedia de la organización'},
+  { key: 'redirect', value: 'URL de la página originaria de la organización'},
+  { key: 'email_address', value: 'Correo electrónico de contacto de la organización'},
+  { key: 'established', value: 'Año de fundada la organización'},
+  { key: 'onei_registry', value:  'Número de registro en la ONEI' },
+  { key: 'links', value:  'Lista de los enlaces conocidos de la organización' },
+  {key: 'labels', value:  'Nombre de la organización en diferentes lenguajes' },
+  { key: 'addresses', value: 'Direcciones conocidas de la organización'},
+  { key: 'relationships', value: 'Relaciones con otras organizaciones'},]
 
 @Component({
   selector: 'app-pdf-excel',
@@ -18,15 +34,52 @@ export class PdfExcelComponent implements OnInit {
   @Input() type: 'pdf' | 'excel' | null = null;
   @Input() viewType: 'icon' | 'button' = 'icon';
 
-  constructor() { }
+  orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
+  keys: string[] = []
+  pdfArray: any = []
+
+  tableLayout = {
+    hLineWidth: (i, node) => {
+      return (i === 0 || i === node.table.body.length) ? 2 : 1;
+    },
+    vLineWidth: (i, node) => {
+      return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+    },
+    hLineColor: (i, node) => {
+      return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+    },
+    vLineColor: (i, node) => {
+      return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+    },
+    fillColor: (rowIndex, node, columnIndex) => {
+      return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+    }
+  };
+
+  constructor(public PdfDialog: MatDialog,
+  private _formBuilder: FormBuilder,) { }
 
   ngOnInit() {
+    this.orgFormGroup = this._formBuilder.group({
+      identifiers: new FormControl(false),
+      aliases: new FormControl(false),
+      acronyms: new FormControl(false),
+      types: new FormControl(false),
+      wikipedia_url: new FormControl(false),
+      redirect: new FormControl(false),
+      email_address: new FormControl(false),
+      established: new FormControl(false),
+      onei_registry: new FormControl(false),
+      links: new FormControl(false),
+      labels: new FormControl(false),
+      addresses: new FormControl(false),
+      relationships: new FormControl((false),)
+    })
   }
-
   identifiers(value, tableLayout) {
     const _value = value || this.inputValue.identifiers;
-    return _value && _value > 0 ? [
-      {text: 'Lista de los identificadores de la organización', style: 'header'},
+    return _value && _value.length > 0 ? [
+      {text: options[0].value, style: 'header'},
       {
         style: 'table',
         table: {
@@ -44,43 +97,43 @@ export class PdfExcelComponent implements OnInit {
 
   aliasses(value, ) {
     const _value = value || this.inputValue.aliases;
-    return _value && _value > 0 ? [
-      {text: 'Lista de otros nombres con los que se conoce la organización :', style: 'header'},
+    return _value && _value.length > 0 ? [
+      {text: options[1].value, style: 'header'},
       {text: _value.join(', '), style: 'text'}] : [null];
   }
 
   acronyms(value, ) {
     const _value = value || this.inputValue.acronyms;
-    return _value && _value > 0 ? [
-      {text: 'Lista de los acrónimos con que se conoce la organización :', style: 'header'},
+    return _value && _value.length > 0 ? [
+      {text: options[2].value, style: 'header'},
       {text: this.inputValue.acronyms.join(', '), style: 'text'}] : [null];
   }
 
   types(value, ) {
     const _value = value || this.inputValue.types;
-    return _value && _value > 0 ? [
-      {text: 'Lista de los tipos que describen la organización :', style: 'header'},
+    return _value && _value.length > 0 ? [
+      {text: options[3].value, style: 'header'},
       {text: _value.join(', '), style: 'text'}] : [null];
   }
 
   wikipedia(value, ) {
     const _value = value || this.inputValue.wikipedia_url;
     return _value ? [
-      {text: 'URL de la página de Wikipedia de la organización :', style: 'header'},
+      {text: options[4].value, style: 'header'},
       {text: _value, style: 'text'}] : [null];
   }
 
   redirect(value, ) {
     const _value = value || this.inputValue.redirect;
     return _value ? [
-      {text: 'URL de la página originaria de la organización :', style: 'header'},
+      {text: options[5].value, style: 'header'},
       {text: _value, style: 'text'}] : [null];
   }
 
   emailAddress(value, ) {
     const _value = value || this.inputValue.email_address;
     return _value ? [
-      {text: 'Correo electrónico de contacto de la organización :', style: 'header'},
+      {text: options[6].value, style: 'header'},
       {text: _value, style: 'text'}] : [null];
   }
 
@@ -90,7 +143,7 @@ export class PdfExcelComponent implements OnInit {
       columns: [
         {
           style: 'columnHeader',
-          text: 'Año de fundada la organización :'
+          text: options[7].value
         },
         {
           style: 'columnText',
@@ -106,7 +159,7 @@ export class PdfExcelComponent implements OnInit {
       columns: [
         {
           style: 'columnHeader',
-          text: 'Número de registro en la ONEI :'
+          text: options[8].value
         },
         {
           style: 'columnText',
@@ -118,14 +171,14 @@ export class PdfExcelComponent implements OnInit {
 
   links(value, ) {
     const _value = value || this.inputValue.links;
-    return _value ? [{text: 'Lista de los enlaces conocidos de la organización :', style: 'header'},
+    return _value ? [{text: options[9].value, style: 'header'},
       {text: _value, style: 'text'}] : [null];
   }
 
     labels(value, tableLayout) {
     const _value = value || this.inputValue.labels;
-    return _value && _value > 0 ? [{
-      text: 'Nombre de la organización en diferentes lenguajes :',
+    return _value && _value.length > 0 ? [{
+      text: options[10].value,
       style: 'header'
     },
       {
@@ -148,8 +201,8 @@ export class PdfExcelComponent implements OnInit {
 
   addresses(value, ) {
     const _value = value || this.inputValue.addresses;
-    return _value && _value > 0 ?
-      [{text: 'Direcciones conocidas de la organización :', style: 'header'},
+    return _value && _value.length > 0 ?
+      [{text: options[11].value, style: 'header'},
         {
           style: 'table',
           table: {
@@ -178,8 +231,8 @@ export class PdfExcelComponent implements OnInit {
 
   relationships(value, ) {
     const _value = value || this.inputValue.relationships;
-    return _value && _value > 0 ?
-      [{text: 'Relaciones con otras organizaciones :', style: 'header'},
+    return _value && _value.length > 0 ?
+      [{text: options[12].value, style: 'header'},
         {
           style: 'table',
           table: {
@@ -206,30 +259,35 @@ export class PdfExcelComponent implements OnInit {
         }] : [null];
   }
 
+  createPdfArray() {
+    this.inputValue.forEach( (val, i) => {
+      this.pdfArray.push(...[
+        { text: val.metadata.name, pageBreak: i > 0 ? 'before' : '', style: 'header'},
+        { text: `SceibaOrgID: ${ val.metadata.id }`, style: 'text'},
+        { text: `Estatus de la organización: ${ val.metadata.status }`, style: 'text'},
+        ...this.identifiers( this.keys.includes('identifiers') ? val.metadata.identifiers : null, this.tableLayout),
+        ...this.aliasses(this.keys.includes('aliasses') ? val.metadata.aliasses : null),
+        ...this.acronyms(this.keys.includes('acronyms') ? val.metadata.acronyms : null),
+        ...this.types(this.keys.includes('types') ? val.metadata.types : null),
+        ...this.wikipedia(this.keys.includes('wikipedia_url') ? val.metadata.wikipedia_url : null),
+        ...this.redirect(this.keys.includes('redirect') ? val.metadata.redirect : null),
+        ...this.emailAddress(this.keys.includes('emailAddress') ? val.metadata.emailAddress : null),
+        ...this.founded(this.keys.includes('founded') ? val.metadata.founded : null),
+        ...this.oneiRegistry(this.keys.includes('oneiRegistry') ? val.metadata.oneiRegistry : null),
+        ...this.links(this.keys.includes('links') ? val.metadata.links : null),
+        ...this.labels(this.keys.includes('labels') ? val.metadata.labels : null, this.tableLayout),
+        ...this.addresses(this.keys.includes('addresses') ? val.metadata.addresses : null)
+      ])
+    })
+  }
+
   saveAsPDF() {
-    const tableLayout = {
-      hLineWidth: (i, node) => {
-        return (i === 0 || i === node.table.body.length) ? 2 : 1;
-      },
-      vLineWidth: (i, node) => {
-        return (i === 0 || i === node.table.widths.length) ? 2 : 1;
-      },
-      hLineColor: (i, node) => {
-        return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
-      },
-      vLineColor: (i, node) => {
-        return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
-      },
-      fillColor: (rowIndex, node, columnIndex) => {
-        return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-      }
-    };
 
     const content = this.pdfType === 'single' ? [
       { text: this.inputValue.name, style: 'header'},
       { text: `SceibaOrgID: ${ this.inputValue.id }`, style: 'text'},
       { text: `Estatus de la organización: ${ this.inputValue.status }`, style: 'text'},
-      ...this.identifiers(null, tableLayout),
+      ...this.identifiers(null, this.tableLayout),
       ...this.aliasses(null),
       ...this.acronyms(null),
       ...this.types(null),
@@ -239,22 +297,10 @@ export class PdfExcelComponent implements OnInit {
       ...this.founded(null),
       ...this.oneiRegistry(null),
       ...this.links(null),
-      ...this.labels(null, tableLayout),
+      ...this.labels(null, this.tableLayout),
       ...this.addresses(null),
       // ...relationships
-    ] : [this.inputValue].map( val => (
-      this.identifiers(val.metadata, tableLayout),
-      this.aliasses(val.metadata),
-      this.acronyms(val.metadata),
-      this.types(val.metadata),
-      this.wikipedia(val.metadata),
-      this.redirect(val.metadata),
-      this.emailAddress(val.metadata),
-      this.founded(val.metadata),
-      this.oneiRegistry(val.metadata),
-      this.links(val.metadata),
-      this.labels(val.metadata, tableLayout),
-      this.addresses(val.metadata)));
+    ] : this.pdfArray
 
     const documentDefinition = {
       content,
@@ -298,10 +344,42 @@ export class PdfExcelComponent implements OnInit {
     pdfMake.createPdf(documentDefinition).open();
   }
 
+  openDialog(): void {
+    const dialogRef = this.PdfDialog.open(PdfDialogComponent, {
+      width: '600px',
+      data: this.orgFormGroup
+    });
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result) {
+        this.keys = options.filter( o => this.orgFormGroup.get(o.key).value === true ).map( o => o.key)
+        await this.createPdfArray()
+        this.saveAsPDF()
+      }
+    });
+  }
+
   saveAsEXCEL() {
     const newBook = XLSX.utils.book_new();
     const newSheet = XLSX.utils.json_to_sheet([this.inputValue]);
     XLSX.utils.book_append_sheet(newBook, newSheet, 'Sheet1');
     XLSX.writeFile(newBook, 'new-book.xlsx');
+  }
+}
+
+@Component({
+  selector: 'app-pdf-dialog',
+  templateUrl: 'pdf-dialog.component.html',
+})
+
+export class PdfDialogComponent {
+  public options = options
+
+  constructor(
+    public dialogRef: MatDialogRef<PdfExcelComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: FormGroup) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
