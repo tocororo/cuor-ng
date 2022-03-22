@@ -1,0 +1,13 @@
+<form [formGroup]="data">
+<h1 mat-dialog-title>Seleccione elementos para la exportación</h1>
+<div mat-dialog-content>
+  <mat-list *ngFor="let item of options" role="list">
+    <mat-list-item role="listitem">
+        <mat-checkbox [formControlName]="item.key">{{item.value}}</mat-checkbox>
+    </mat-list-item>
+  </mat-list>
+</div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button type="submit" [mat-dialog-close]="true" cdkFocusInitial>Exportar</button>
+  </div>

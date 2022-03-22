@@ -14,6 +14,7 @@ export class SearchListComponent implements OnInit
 
 	@Input()
 	public hitList: HitList<Organization>;
+  public pdfType: 'list' | 'single' =  'list';
 
     public constructor()
 	{ }

@@ -1,0 +1,56 @@
+<div *ngIf="type; then singleExport else multipleExport"></div>
+
+<ng-template #singleExport>
+  <div *ngIf="type === 'pdf'; then PDF else EXCEL"></div>
+  <ng-template #PDF>
+    <div *ngIf="pdfType === 'single'; then singlePdf else listPdf"></div>
+    <ng-template #singlePdf>
+      <button mat-icon-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+        <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+      </button>
+    </ng-template>
+    <ng-template #listPdf>
+      <button mat-raised-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+        Exportar resultados a PDF
+      </button>
+    </ng-template>
+  </ng-template>
+  <ng-template #EXCEL>
+    <button mat-raised-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+      Exportar resultados a EXCEL
+    </button>
+  </ng-template>
+</ng-template>
+
+<ng-template #multipleExport>
+  <div *ngIf="viewType === 'icon'; then icon else button"></div>
+  <ng-template #icon>
+<!--    <div-->
+<!--      fxLayout="row wrap"-->
+<!--      fxLayoutAlign="space-between center"-->
+<!--      style="height: 80px;"-->
+<!--    >-->
+      <button mat-icon-button *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+        <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+      </button>
+      <button mat-icon-button  *ngIf="'true'" (click)="saveAsEXCEL()" matTooltip="Exportar como EXCEL">
+        <mat-icon class="mat-18">picture_as_pdf</mat-icon>
+      </button>
+<!--    </div>-->
+  </ng-template>
+  <ng-template #button>
+    <div
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutAlign="space-between center"
+      style="height: 80px;"
+    >
+      <button mat-raised-button class="button"*ngIf="'true'" (click)="openDialog()" matTooltip="Exportar como PDF">
+        Exportar a PDF
+      </button>
+      <button mat-raised-button *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como EXCEL">
+        Exportar a EXCEL
+      </button>
+    </div>
+  </ng-template>
+</ng-template>

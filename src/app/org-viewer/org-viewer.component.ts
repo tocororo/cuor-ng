@@ -1,13 +1,16 @@
 
 import { Component, OnInit } from '@angular/core';
+// import { OAuthStorage } from 'angular-oauth2-oidc';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { OAuthStorage } from 'angular-oauth2-oidc';
-import {Organization, MetadataService, Environment} from 'toco-lib';
+import { OAuthStorage } from 'angular-oauth2-oidc';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Environment, MetadataService, Organization } from 'toco-lib';
 import { Permission } from '../permission.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {OAuthStorage} from 'angular-oauth2-oidc';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-org-view',
@@ -45,6 +48,8 @@ export class OrgViewerComponent implements OnInit {
   view_type = true;
   data: any = '';
 
+  identifiers = [];
+
   public ngOnInit(): void {
     this.user = JSON.parse(this.oauthStorage.getItem('user'));
     console.log('user===', JSON.parse(this.oauthStorage.getItem('user')));
@@ -56,6 +61,8 @@ export class OrgViewerComponent implements OnInit {
           this.org = data.org.metadata;
           this.loading = false;
           // this.org = data.org;
+
+        this.identifiers = data.org.metadata.identifiers.map( (ident) => ([{text: ident.idtype, style: 'text'}, {text: ident.value, style: 'text'}]));
       }
     );
 

@@ -24,10 +24,13 @@
             <!-- <span class="mat-h2" style="margin: 0;">{{org.name}}</span> -->
         </div>
 
-        <button mat-icon-button  *ngIf="showWikidataButton()" (click)="changeView()" matTooltip="Ver información de Wikidata">
-        <!-- <button mat-icon-button  *ngIf="'true'" (click)="changeView()" matTooltip="Ver información de Wikidata"> -->
-            <mat-icon svgIcon="wikidata" class="mat-18"></mat-icon>
-        </button>
+        <!-- <button mat-icon-button  *ngIf="showWikidataButton()" (click)="changeView()" matTooltip="Ver información de Wikidata"> -->
+        <div>
+          <button mat-icon-button  *ngIf="'true'" (click)="changeView()" matTooltip="Ver información de Wikidata">
+              <mat-icon svgIcon="wikidata" class="mat-18"></mat-icon>
+          </button>
+        <app-pdf-excel [inputValue]="org" type="pdf"></app-pdf-excel>
+        </div>
     </ng-template>
 </div>
 
@@ -37,7 +40,8 @@
     <wiki-org-employes-profile  [data_viewer]="data"></wiki-org-employes-profile>
 </ng-template>
 
-<ng-template #view_cuor>
+<ng-template #view_cuor >
+  <div id="content">
     <toco-org-view [org]="org"></toco-org-view>
 
   <section class="form-container" *ngIf="!user">
@@ -87,4 +91,5 @@
       </div>
     </form>
   </section>
+  </div>
 </ng-template>

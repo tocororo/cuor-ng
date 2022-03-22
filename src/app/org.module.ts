@@ -53,6 +53,7 @@ import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 import { OrgRootComponent } from './org.component';
 import { OrgService } from './org.service';
 import { OrgsMapComponent } from './orgs-map/orgs-map.component';
+import { PdfDialogComponent, PdfExcelComponent } from './pdf-excel/pdf-excel.component';
 import { RequestChangesListComponent } from './request-changes-list/request-changes-list.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchComponent } from './search/search.component';
@@ -141,7 +142,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     Error404Component,
     ErrorPageComponent,
     RequestChangesListComponent,
-    NotificationsComponent
+    NotificationsComponent,
+
+    PdfExcelComponent,
+    PdfDialogComponent
   ],
   imports: [
     MatRadioModule,
@@ -186,6 +190,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     Step3DisambiguateHelp,
     CommentDialogComponent,
 
+    PdfDialogComponent
   ],
   providers: [
     SearchService,
