@@ -64,15 +64,14 @@ import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizati
 import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm,
   OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
+import { OrgsMapComponent } from './orgs-map/orgs-map.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 
-export function storageFactory() : OAuthStorage
-{
-  return localStorage
+export function storageFactory(): OAuthStorage {
+  return localStorage;
 }
 
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
-{
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -97,7 +96,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     PieGridComponent,
     AggregationsComponent,
     GaugeChartComponent,
-    //DialogChartComponent
+    // DialogChartComponent
     DisambiguateComponent,
     DisambiguationComponent,
     DisambiguateCardFieldComponent,
@@ -125,10 +124,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		WikiAuthorsProfileComponent,
 		ExpansionPanelLayoutComponent,
 		WikiTopicsProfileComponent,
-    OrgEditFormComponent,
-    Step3DisambiguateHelp,
-    Error404Component,
-    ErrorPageComponent
+        OrgEditFormComponent,
+        Step3DisambiguateHelp,
+        OrgsMapComponent
+        Step3DisambiguateHelp,
+        Error404Component,
+        ErrorPageComponent
   ],
   imports: [
     MatRadioModule,
@@ -162,7 +163,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
       }
     }),
     AuthenticationModule,
-    MatomoModule
+    MatomoModule,
   ],
   entryComponents: [
     OrganizationDialogRelasionship,
