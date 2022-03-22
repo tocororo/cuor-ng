@@ -4,8 +4,10 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
-import { Organization, MetadataService } from 'toco-lib';
+import {Organization, MetadataService, Environment} from 'toco-lib';
 import { Permission } from '../permission.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {OAuthStorage} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-org-view',
@@ -15,20 +17,38 @@ import { Permission } from '../permission.service';
 export class OrgViewerComponent implements OnInit {
   public org: Organization = null;
 
+  public isAnomaly = true;
+  public isDuplicate = false;
+  public appHost: string;
+  public user: string;
+  orgFilter = [{ type: 'country', value: 'Cuba' }, { type: 'status', value: 'active' }];
+  public form = new FormGroup({
+    anomalyDescription: new FormControl('', Validators.required),
+    duplicateDescription: new FormControl(''),
+  });
+
+  masterOrganization: Organization;
+  masterFormControl: FormControl;
+
+
   public constructor(
     private _activatedRoute: ActivatedRoute,
     private router: Router,
     public iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
-    private metadata: MetadataService
-    ) { }
+    private metadata: MetadataService,
+    private env: Environment,
+    private oauthStorage: OAuthStorage,
+
+  ) { }
   loading = true;
-  view_type:boolean = true;
-  data:any = '';
+  view_type = true;
+  data: any = '';
 
   public ngOnInit(): void {
-
-    this.iconRegistry.addSvgIcon('wikidata',this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/Wikidata-logo.svg'));
+    this.user = JSON.parse(this.oauthStorage.getItem('user'));
+    console.log('user===', JSON.parse(this.oauthStorage.getItem('user')));
+    this.iconRegistry.addSvgIcon('wikidata', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/Wikidata-logo.svg'));
     /* Gets the `Organization` data. */
 
     this._activatedRoute.data.subscribe(
@@ -41,24 +61,31 @@ export class OrgViewerComponent implements OnInit {
 
     this._activatedRoute.data.subscribe(
       (data) => {
-        this.metadata.meta.updateTag({name:"DC.title", content:this.org.name});
-        this.metadata.meta.updateTag({name:"description", content:"Metadatos de organización en Sistema de identificación de Organizaciones Cubanas"});
-        this.metadata.meta.updateTag({name:"generator", content:"Sceiba en Organizaciones Cubanas Proyecto Vlir Joint"});
-        this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba"});
-        this.metadata.meta.updateTag({name:"robots", content:"index,follow"});
-        console.log("entrando en metadata");
+        this.metadata.meta.updateTag({name: 'DC.title', content: this.org.name});
+        this.metadata.meta.updateTag({name: 'description', content: 'Metadatos de organización en Sistema de identificación de Organizaciones Cubanas'});
+        this.metadata.meta.updateTag({name: 'generator', content: 'Sceiba en Organizaciones Cubanas Proyecto Vlir Joint'});
+        this.metadata.meta.updateTag({name: 'keywords', content: 'Sceiba, organizaciones, identificación persistente, Cuba'});
+        this.metadata.meta.updateTag({name: 'robots', content: 'index,follow'});
+        console.log('entrando en metadata');
 
-      })
+      });
 
+  }
+
+  receivingMaster(master: Organization) {
+    this.loading = false;
+    this.masterOrganization = new Organization();
+    this.masterOrganization.deepcopy(master);
+    this.masterFormControl.setValue(master);
   }
 
   /**
   * hasPermission return true if the user have permission
   */
   public get hasPermission(): boolean {
-    let permission = new Permission();
+    const permission = new Permission();
 
-    if (permission.hasPermissions("curator") || permission.hasPermissions("admin")) {
+    if (permission.hasPermissions('curator') || permission.hasPermissions('admin')) {
       return true;
     }
     return false;
@@ -91,12 +118,32 @@ export class OrgViewerComponent implements OnInit {
 
   showWikidata() {
     this.data = {
-      QID: this.org.identifiers.find(id => id.idtype === "wkdata" ).value,
-      //label: this.org.name,
-      label: this.org.labels.find(id => id.iso639 === "es" ).label,
-      lang: this.org.labels.find(id => id.iso639 === "es" ).iso639
-    }
+      QID: this.org.identifiers.find(id => id.idtype === 'wkdata' ).value,
+      // label: this.org.name,
+      label: this.org.labels.find(id => id.iso639 === 'es' ).label,
+      lang: this.org.labels.find(id => id.iso639 === 'es' ).iso639
+    };
     console.log( this.data);
-  };
+  }
+
+  public onAnomalyChange(e): void {
+    this.isAnomaly = e.checked;
+    this.isDuplicate = !e.checked;
+  }
+  public onDuplicateChange(e): void {
+    this.isDuplicate = e.checked;
+    this.isAnomaly = !e.checked;
+  }
+
+  public onSubmitReport(): any {
+    console.log('date===', new Date());
+    console.log('appHost===', `${this.env.appHost}/${this.org.id}/view`);
+    if (this.isAnomaly) {
+      console.log('anomalyDescription===', this.form.get('anomalyDescription').value);
+    }
+    if (this.isDuplicate) {
+      console.log('duplicateDescription===', this.form.get('duplicateDescription').value);
+    }
+  }
 
 }

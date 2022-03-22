@@ -39,4 +39,52 @@
 
 <ng-template #view_cuor>
     <toco-org-view [org]="org"></toco-org-view>
+
+  <section class="form-container" *ngIf="!user">
+    <div style="display: flex; align-items: center">
+      <span style="margin-right: 10px; color: orange; font-size: 30px" class="material-icons">report_problem</span>
+      <h2 >Reportar anomalías o posibles duplicados: </h2>
+    </div>
+    <div style="display: flex; align-items: center; padding: 0 30px; font-size: 16px">
+      <mat-checkbox style="margin: 0 10px" [checked]="isAnomaly" (change)="onAnomalyChange($event)">Anomalía</mat-checkbox>
+      <mat-checkbox style="margin: 0 10px" [checked]="isDuplicate" (change)="onDuplicateChange($event)">Posible duplicado</mat-checkbox>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmitReport()">
+      <mat-form-field  *ngIf="isAnomaly === true" style="width: 100%; margin-left: 30px; padding-top: 10px" appearance="outline" >
+        <mat-label >Descripción</mat-label>
+        <textarea
+          style="font-size: 16px"
+          matInput
+          placeholder="Describa la anomalía que desea reportar aquí"
+          formControlName="anomalyDescription"
+          rows="10"
+        >
+          </textarea>
+        <button type="submit" mat-raised-button [disabled]="!form.valid">Enviar</button>
+      </mat-form-field>
+      <div *ngIf="isDuplicate === true">
+        <toco-org-search
+          style=" margin-left: 30px"
+          [orgFilter]="orgFilter"
+          [label]="'Organización que se considera duplicado'"
+          [cleaning]="'false'"
+          [appearance]="'outline'"
+          (selectedOrg)="receivingMaster($event)"
+          (keyup)="loading = true">
+        </toco-org-search>
+        <mat-form-field style="width: 100%; margin-left: 30px; padding-top: 10px" appearance="outline" >
+          <mat-label>Descripción</mat-label>
+          <textarea
+            style="font-size: 16px"
+            matInput
+            placeholder="Describa la organización duplicada aquí (opcional)"
+            formControlName="duplicateDescription"
+            rows="10"
+          >
+          </textarea>
+          <button type="submit" mat-raised-button [disabled]="!form.valid">Enviar</button>
+        </mat-form-field>
+      </div>
+    </form>
+  </section>
 </ng-template>
