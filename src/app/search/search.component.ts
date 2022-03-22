@@ -7,7 +7,7 @@ import {
   NavigationExtras,
   Params, Router
 } from "@angular/router";
-import { Aggr, AggregationsSelection, Organization, SearchResponse } from "toco-lib";
+import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
 import { OrgService } from "../org.service";
 
 @Component({
@@ -111,6 +111,7 @@ export class SearchComponent implements OnInit {
           }
         }
 
+        this.aggrsSelection["country"] = ["Cuba"]; //porque aun si cambian la url arriba seguira diciendo cuba
         this.updateFetchParams();
         this.fetchSearchRequest();
 
@@ -152,13 +153,9 @@ export class SearchComponent implements OnInit {
 
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
-        let a: { [id: string]: Aggr } = {};
-        a['state'] = this.sr.aggregations['state'];
-        a['status'] = this.sr.aggregations['status']
-        a['types'] = this.sr.aggregations['types']
-        this.sr.aggregations = a;
-
+        delete this.sr.aggregations["country"];
         this.aggr_keys = [
+          //{value: this.sr.aggregations.country, key: 'País'},
           {value: this.sr.aggregations.state, key: 'Provincia'},
           {value: this.sr.aggregations.status, key: 'Estado'},
           {value: this.sr.aggregations.types, key: 'Tipo'},

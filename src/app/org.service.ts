@@ -4,7 +4,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subject } from 'rxjs';
 import { Environment, Organization, SearchResponse, User } from 'toco-lib';
-import { DPA } from './org-edit/edit-address/edit-address.component';
 
 
 
@@ -347,9 +346,13 @@ export class OrgService {
 
   public editOrganization(org: Organization): Observable<any> {
     const payload = org.entitystringify();
-    console.log(org, payload)
-    const url = this.environment.cuorApi + this.prefix + "/" + org.id;
-    return this.http.put<any>(url, payload, this.httpOptions);
+    console.log("payload", payload)
+    console.log("edit service org ", org);
+    const url = this.environment.cuorApi + this.prefix + "/" + org.id + "/curate";
+    let aux = this.http.post<any>(url, payload, this.httpOptions);
+    console.log("API response:", aux);
+    return aux;
+
   }
 
   public fileUpload(formData: FormData) {
@@ -380,6 +383,14 @@ export class OrgService {
 
     return this.http.get<SearchResponse<Organization>>(req, options);
   }
+
+  getActiveOrganizationById(id: string): Observable<SearchResponse<Organization>> {
+    const req = this.environment.cuorApi + 'organizations/active/' + id ;
+    // console.log(req);
+
+    return this.newHttp.get<SearchResponse<Organization>>(req);
+  }
+
   getOrganizationById(id: string): Observable<SearchResponse<Organization>> {
     const req = this.environment.cuorApi + 'organizations/' + id ;
     // console.log(req);

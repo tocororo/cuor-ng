@@ -33,9 +33,9 @@ export class OrgViewerComponent implements OnInit {
 
     this._activatedRoute.data.subscribe(
       (data) => {
-        this.org = data.org.metadata;
-        this.loading = false;
-        // this.org = data.org;
+          this.org = data.org.metadata;
+          this.loading = false;
+          // this.org = data.org;
       }
     );
 
@@ -65,7 +65,12 @@ export class OrgViewerComponent implements OnInit {
   }
 
   showWikidataButton(){
-    return this.org.identifiers.find(id => id.idtype === "wkdata" ) !== undefined;
+    if (this.org){
+      return this.org.identifiers.find(id => id.idtype === "wkdata" ) !== undefined;
+    }
+
+    return false;
+
   }
 
     /* This function redirect to the profile for employes and afiliates od the organization
