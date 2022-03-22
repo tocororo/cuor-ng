@@ -7,16 +7,6 @@ import { Address, Identifier, LabelDiffLang, Organization, OrganizationRelations
 import { isUndefined } from 'util';
 
 
-export declare enum IdentifierOrgSchemas {
-  grid = "grid",
-  wkdata = "wkdata",
-  ror = "ror",
-  isni = "isni",
-  fudref = "fudref",
-  orgref = "orgref",
-  reup = "reup"
-}
-
 @Component({
   selector: 'org-edit-form',
   templateUrl: './org-edit-form.component.html',
@@ -119,7 +109,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     this.initData();
     this.loading = false;
 
-    console.log("entro a el onchanges ", this.org);
+    //console.log("entro a el onchanges ", this.org);
 
   }
 
@@ -535,8 +525,9 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
       //console.log('AAAAAAAAAAAA')
       //console.log(key)
       //console.log(items[key])
+      //console.log("agregando de item relations", items[key])   
       formArrayGroup.push(this._formBuilder.group(
-        {
+        {                 
           id: new FormControl(items[key].id),
           identifiers: this.addItemsFormArrayIdentifiers(items[key].identifiers),
           label: new FormControl(items[key].label),
@@ -638,6 +629,7 @@ export class OrganizationDialogRelasionship {
   selectedOrg(event){
     this.org.deepcopy(event)
     //console.log(event);
+    this.data.id = this.org.id;
     this.data.identifiers = this.org.identifiers;
     this.data.label = this.org.name;
   }

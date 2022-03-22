@@ -1,12 +1,12 @@
 
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
+import { TranslateService } from '@ngx-translate/core';
 import { MetadataService, Organization, SearchResponse } from 'toco-lib';
-
-import { HttpClient } from "@angular/common/http";
 import { OrgService } from '../org.service';
+
+
 
 
 @Component({
@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
 	{
 		this.router.navigate(['search'], {
 			relativeTo: this.activatedRoute,
-			queryParams: { q: event, country: 'Cuba', status: 'active' },
+			queryParams: { q: event, status: 'active' },
 			queryParamsHandling: '',
 		});
 	}
@@ -135,7 +135,7 @@ export class HomeComponent implements OnInit {
 	public goAbout(){
 		this.router.navigate(['about'],  {
 			relativeTo: this.activatedRoute,
-			queryParams: { q: event, country: 'Cuba', status: 'active' },
+			queryParams: { q: event, status: 'active' },
 			queryParamsHandling: '',
 		})
 	}

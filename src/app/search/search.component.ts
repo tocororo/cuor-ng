@@ -1,13 +1,12 @@
+
 import { HttpParams } from "@angular/common/http";
 import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
 import { MatDrawer, PageEvent } from "@angular/material";
-import {
-  ActivatedRoute,
+import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
 
-  NavigationExtras,
-  Params, Router
-} from "@angular/router";
 import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
+
+import { ChartType } from "../charts/chart-utils";
 import { OrgService } from "../org.service";
 
 @Component({
@@ -15,11 +14,16 @@ import { OrgService } from "../org.service";
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.scss"],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit
+{
+  /**
+   * Represents the `ChartType` enum for internal use. 
+   */
+  public readonly chartType: typeof ChartType;
 
-  aggr_keys:Array<any>
-  search_type:Boolean = true
-  typeChart: "Polar Chart" | "Vertical Bar" | /* "Pie Grid" | */ "Gauge Chart"= "Polar Chart"
+  aggr_keys:Array<any>;
+  search_type:Boolean = true;
+  public currentChartType: ChartType;
 
   layoutPosition = [
     {
@@ -70,19 +74,20 @@ export class SearchComponent implements OnInit {
   loading: boolean = true;
 
   @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
-  
+
   public constructor(
     private _cuorService: OrgService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router)
+  {
+    this.chartType = ChartType;
 
-    // private dialog: MatDialog
-  ) {}
+    this.currentChartType = this.chartType.polar;
+  }
 
   public ngOnInit(): void {
 
     this.query = "";
-
     this.activatedRoute.queryParamMap.subscribe({
       next: (initQueryParams) => {
         this.aggrsSelection = {};
@@ -112,6 +117,7 @@ export class SearchComponent implements OnInit {
           }
         }
 
+        this.aggrsSelection["country"] = ["Cuba"]; //porque aun si cambian la url arriba seguira diciendo cuba
         this.updateFetchParams();
         this.fetchSearchRequest();
 
@@ -139,9 +145,12 @@ export class SearchComponent implements OnInit {
 
     for (const aggrKey in this.aggrsSelection) {
       this.aggrsSelection[aggrKey].forEach((bucketKey) => {
-        this.params = this.params.set(aggrKey, bucketKey);
+        if (aggrKey != 'country'){
+          this.params = this.params.set(aggrKey, bucketKey);
+        }
       });
     }
+    this.params = this.params.set("country", "Cuba");
   }
 
   public fetchSearchRequest() {
@@ -150,9 +159,9 @@ export class SearchComponent implements OnInit {
 
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
-
+        delete this.sr.aggregations["country"];
         this.aggr_keys = [
-          {value: this.sr.aggregations.country, key: 'País'},
+          //{value: this.sr.aggregations.country, key: 'País'},
           {value: this.sr.aggregations.state, key: 'Provincia'},
           {value: this.sr.aggregations.status, key: 'Estado'},
           {value: this.sr.aggregations.types, key: 'Tipo'},

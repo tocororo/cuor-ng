@@ -5,9 +5,9 @@
     fxLayoutAlign="space-between center"
     style="height: 80px; padding: 0 16px;"
   >
-  
+
     <span class="mat-h2">Búsqueda</span>
-  
+
     <div *ngIf="search_type; then search_list_button else search_charts_button"></div>
 
     <ng-template #search_list_button>
@@ -30,14 +30,14 @@
     <mat-drawer #drawer mode="side" opened position="start">
      <!--  <app-aggregations fxLayout="row wrap" fxLayout.xs="column wrap" fxFlex="{{ currentlayout.width }}"
         fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="1em"
-        class=" back-grey mat-elevation-z8"></app-aggregations> 
+        class=" back-grey mat-elevation-z8"></app-aggregations>
       <toco-org-search></toco-org-search>  -->
       <toco-search-aggregations
         *ngIf="sr"
         [aggregations]="sr.aggregations"
         [selectedAggr]="aggrsSelection"
         (keySelect)="aggrChange($event)"
-  
+
       ></toco-search-aggregations>
 
       <!-- <toco-search-aggregations-visual
@@ -46,7 +46,7 @@
         [selectedAggr]="aggrsSelection"
         (keySelect)="aggrChange($event)"
       ></toco-search-aggregations-visual> -->
-     
+
     </mat-drawer>
 
     <div *ngIf="search_type; then search_list else search_charts">{{search_type}}</div>
@@ -96,22 +96,22 @@
       </button>
 
       <mat-card>
-        <!-- <section class="example-section"> -->
-         <!--  <label class="example-margin">Align:</label> -->
-          <mat-radio-group [(ngModel)]="typeChart">
-            <mat-radio-button class="example-margin" value="Polar Chart">Pastel</mat-radio-button>
-            <mat-radio-button class="example-margin" value="Vertical Bar">Barra</mat-radio-button>
-            <!-- <mat-radio-button class="example-margin" value="Pie Grid">Pie Grid</mat-radio-button> -->
-            <mat-radio-button class="example-margin" value="Gauge Chart">Calibración</mat-radio-button>
+        <!-- <section class="mat-card-section"> -->
+         <!--  <label class="mat-card-margin">Align:</label> -->
+          <mat-radio-group [(ngModel)]="currentChartType">
+            <mat-radio-button class="mat-card-margin" value="chartType.polar">Pastel</mat-radio-button>
+            <mat-radio-button class="mat-card-margin" value="chartType.verticalBar">Barra</mat-radio-button>
+            <!-- <mat-radio-button class="mat-card-section" value="chartType.pieGrid">Pie Grid</mat-radio-button> -->
+            <mat-radio-button class="mat-card-section" value="chartType.gauge">Calibración</mat-radio-button>
          </mat-radio-group>
         <!-- </section> -->
       </mat-card>
-      
+
     </div>
 
     <toco-search-aggregations-visual
         *ngIf="sr"
-        [typeChart]="typeChart"
+        [chartType]="currentChartType"
         [aggregations]="aggr_keys"
         [selectedAggr]="aggrsSelection"
         (keySelect)="aggrChange($event)"
@@ -120,4 +120,3 @@
 </ng-template>
 
   </mat-drawer-container>
-  
