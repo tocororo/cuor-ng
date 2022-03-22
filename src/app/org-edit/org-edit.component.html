@@ -18,12 +18,13 @@
     <mat-card-content>
 
         <org-edit-form #orgeditform
-            [org]="org"            
+            [org]="org"
             [loading]="loading"
         ></org-edit-form>
 
     </mat-card-content>
     <mat-card-actions align="start">
+      <ng-container *ngIf="pathname === 'edit';else containerRequestChanges">
         <ng-container *ngIf="isValidForm();else templateButtonUpdate">
             <button mat-raised-button color="primary" (click)="update(true)">Guardar</button>
             <button mat-raised-button color="accent" (click)="update()">Guardar y seguir editando</button>
@@ -32,6 +33,15 @@
             <button mat-raised-button color="primary" disabled>Guardar</button>
             <button mat-raised-button color="accent" disabled>Guardar y seguir editando</button>
         </ng-template>
+      </ng-container>
 
+      <ng-template #containerRequestChanges>
+        <ng-container *ngIf="isValidForm();else templateButtonUpdate">
+        </ng-container>
+        <ng-template #templateButtonUpdate>
+          <button mat-raised-button color="primary" disabled>Guardar y enviar solicitud</button>
+        </ng-template>
+        <button mat-raised-button color="primary" (click)="update(true)">Guardar y enviar solicitud</button>
+      </ng-template>
     </mat-card-actions>
 </mat-card>

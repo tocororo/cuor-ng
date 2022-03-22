@@ -1,0 +1,44 @@
+<toco-progress [loading]="loading"></toco-progress>
+
+<div
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="start center"
+  style="height: 80px; padding: 0 16px;"
+>
+  <button mat-icon-button routerLink="/{{org.id}}/view" matTooltip="Ver la Organización">
+    <mat-icon class="mat-18">visibility</mat-icon>
+  </button>
+  <span class="mat-h2" style="margin: 0;">Solicitud de cambios en los metadatos para: {{org.name}}</span>
+</div>
+
+<!-- <toco-progress [loading]="loading"></toco-progress> -->
+<mat-card>
+
+  <mat-card-content>
+
+    <org-edit-form #orgeditform
+                   [org]="org"
+                   [loading]="loading"
+                   [editDisabled]="true"
+    ></org-edit-form>
+
+  </mat-card-content>
+  <mat-card-actions align="start">
+    <ng-container *ngIf="false;else containerReviewChanges">
+      <ng-container *ngIf="isValidForm();else templateButtonUpdate">
+        <button mat-raised-button color="primary" (click)="update(true)" matTooltip="Guardar cambios y seguir editando">Guardar cambios</button>
+        <button mat-raised-button color="accent" (click)="update()" matTooltip="Una vez marcada como atendida no podran realizarse más cambios">Marcar como atendida</button>
+      </ng-container>
+      <ng-template #templateButtonUpdate>
+        <button mat-raised-button color="accent" disabled>Guardar cambios</button>
+        <button mat-raised-button color="accent" disabled>Marcar como atendida</button>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #containerReviewChanges>
+        <button mat-raised-button color="primary" >Atender solicitud</button>
+        <button mat-raised-button color="primary" (click)="openCommentDialog()">Rechazar solicitud</button>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>

@@ -14,3 +14,57 @@
     width: 100%;
     justify-content: space-between;
 }
+
+.indicator-container{
+  width: 100%;
+  padding-bottom: 18px;
+  margin: 0.25em 0;
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+      color: orange;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-wrapper {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.indicator-list-container{
+  width: 100%;
+  padding-bottom: 18px;
+  margin: 0.25em 0;
+  ::ng-deep {
+    .mat-list-item {
+      border: 1px solid orange;
+      border-radius: 5px;
+    }
+    .mat-list-item-content {
+      width: 100% !important;
+      justify-content: space-between;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-wrapper {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.indicator-outline{
+  border: 2px solid orange;
+  border-radius: 4px;
+  padding: 8px;
+  padding-bottom: 0px;
+  margin-bottom: 0;
+}
+
+.indicator{
+  margin-left: 10px;
+  padding: 8px;
+  background-color: orange;
+  width: 8%;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}

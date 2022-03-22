@@ -66,6 +66,8 @@ import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizati
 import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm,
   OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
+import {CommentDialogComponent, OrgReviewerComponent} from './org-reviewer/org-reviewer.component';
+import { RequestChangesListComponent } from './request-changes-list/request-changes-list.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { OrgsMapComponent } from './orgs-map/orgs-map.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
@@ -128,34 +130,37 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 	ExpansionPanelLayoutComponent,
 	WikiTopicsProfileComponent,
     OrgEditFormComponent,
+    CommentDialogComponent,
+
     Step3DisambiguateHelp,
-    NotificationsComponent,
+
+    OrgReviewerComponent,
     OrgsMapComponent,
     Error404Component,
-    ErrorPageComponent
-    ],
-    imports: [
-        MatRadioModule,
-        NgxChartsModule,
+    ErrorPageComponent,
+    RequestChangesListComponent
+  ],
+  imports: [
+    MatRadioModule,
+    NgxChartsModule,
 
-        BrowserAnimationsModule,
-        SharedModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            }
-        }),
-        ReactiveFormsModule,
-        CoreModule,
-        StaticsModule,
-        OrganizationsModule,
-        TocoFormsModule,
-        OrgRoutingModule,
-        SearchModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
+    ReactiveFormsModule,
+    CoreModule,
+    StaticsModule,
+    OrganizationsModule,
+    TocoFormsModule,
+    OrgRoutingModule,
+    SearchModule,
 
-<<<<<<< src/app/org.module.ts
         MarkdownModule.forRoot({
             loader: HttpClient
         }),
@@ -170,27 +175,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         MatomoModule,
         NotificationModule
     ],
-=======
-    MarkdownModule.forRoot({
-      loader: HttpClient
-      }),
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
-    AuthenticationModule,
-    MatomoModule,
-  ],
->>>>>>> src/app/org.module.ts
   entryComponents: [
     OrganizationDialogRelasionship,
     OrganizationDialogDeleteConfirm,
     OrganizationDialogInfoConfirm,
     OrganizationDialogorgEditAddress,
-    Step3DisambiguateHelp
+    Step3DisambiguateHelp,
+    CommentDialogComponent,
+
   ],
   providers: [
     SearchService,

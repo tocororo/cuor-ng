@@ -46,6 +46,7 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
 
   /** Component label */
   @Input() label = '';
+  @Input() disabled = false;
 
   _max: Moment;
   @Input()

@@ -15,6 +15,7 @@ import { OrgEditFormComponent } from './org-edit-form/org-edit-form.component';
 export class OrgEditComponent implements OnInit {
 
   org: Organization;
+  public pathname: string
 
   @Input() loading: boolean = true;
 
@@ -29,6 +30,10 @@ export class OrgEditComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    this._activatedRoute.url.subscribe(path => {
+      this.pathname = path[1].path;
+    });
 
     this._activatedRoute.data.subscribe(
       (data: { 'org': Hit<Organization> }) => {
