@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Aggr } from 'toco-lib';
 
-export interface AggregationsSelection{
-  [id: string]: string[]
-}
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+
+import { Aggr, AggregationsSelection } from 'toco-lib';
+
+import { ChartType } from "../charts/chart-utils";
 
 @Component({
   selector: "toco-search-aggregations-visual",
@@ -12,10 +12,10 @@ export interface AggregationsSelection{
 })
 export class AggregationsComponent implements OnInit {
   @Input()
-  aggregations: { [id: string]: Aggr } = {};
+  aggregations: { [id: string]: Aggr } = { };
 
   @Input()
-  typeChart:string
+  chartType: ChartType;
 
   /***
    * {
@@ -29,7 +29,7 @@ export class AggregationsComponent implements OnInit {
    *
    */
   @Input()
-  selectedAggr: AggregationsSelection = {};
+  selectedAggr: AggregationsSelection = { };
 
   @Output()
   keySelect = new EventEmitter<AggregationsSelection>();
@@ -52,6 +52,7 @@ export class AggregationsComponent implements OnInit {
   }
 
   //aqui se agregan los casos que puedan haber en las agregaciones para q salgan siempre en español
+  // o traducirse
   private _translate(key){
     switch (key)
     {

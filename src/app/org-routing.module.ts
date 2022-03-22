@@ -8,7 +8,7 @@ import { ImportComponent } from './import/import.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
 import { UserService } from './org.service';
-import { OrganizationDetailResolverService } from './organization-detail-resolver.service.ts';
+import { OrganizationDetailResolverService, OrganizationActiveResolverService } from './organization-detail-resolver.service.ts';
 import { AdminPermissionService, CuratorPermissionService } from './permission.service';
 import { SearchComponent } from './search/search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
@@ -22,8 +22,10 @@ import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-wor
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
 import {OrgReviewerComponent} from "./org-reviewer/org-reviewer.component";
 import {RequestChangesListComponent} from "./request-changes-list/request-changes-list.component";
+import {NotificationsComponent} from "./notifications/notifications.component";
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
-
+import { Error404Component } from './error404/error404.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 
@@ -32,7 +34,7 @@ const routes: Routes = [
 		path:':uuid/view',
 		component: OrgViewerComponent,
 		resolve: {
-			'org': OrganizationDetailResolverService
+			'org': OrganizationActiveResolverService
 		}
   },
 	{
@@ -83,6 +85,10 @@ const routes: Routes = [
 		path: 'import',
 		component: ImportComponent,
 		canActivate: [OauthAuthenticationService, AdminPermissionService]
+	},
+  {
+		path: 'error',
+		component: ErrorPageComponent,
 	},
 	{
 		path:'',
@@ -161,12 +167,16 @@ const routes: Routes = [
 	/*
 	end of Perfiles
 	*/
+  {
+    path:'notifications',
+    component: NotificationsComponent,
+  },
 	{
 		path: '**',
-		redirectTo: '',
-		pathMatch: 'full'
+		//redirectTo: '',
+		pathMatch: 'full',
 		//TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí.
-		//component: PageNotFoundComponent
+		component: Error404Component
 	},
 
 

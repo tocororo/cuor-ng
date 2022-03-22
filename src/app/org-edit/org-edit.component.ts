@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
@@ -57,19 +57,20 @@ export class OrgEditComponent implements OnInit {
     let edited = new Organization()
     edited.deepcopy(this._orgEditForm.orgFormGroup.value)
     edited.name = this._orgEditForm.orgFormGroup.controls['name'].value;
-    //console.log(edited);
+    console.log(edited);
 
     this._orgService.editOrganization(edited).subscribe({
       next: (result: Hit<Organization>) => {
-        console.log(result.metadata)
-        let newOrg = new Organization();
-        newOrg.deepcopy(result.metadata);
-        this.org = newOrg;
-        this._orgEditForm.orgFormGroup.patchValue(this.org);
-        this._orgEditForm.initData();
+        console.log("Comprobando result", result)
+        // let newOrg = new Organization();
+        // newOrg.deepcopy(result.metadata);
+        // this.org = newOrg;
+        // this._orgEditForm.orgFormGroup.patchValue(this.org);
+        // this._orgEditForm.initData();
 
         const m = new MessageHandler(null,this._dialog);
         m.showMessage(StatusCode.OK, "La Organización fue modificada correctamente", HandlerComponent.dialog, "Operación exitosa", "50%");
+        this.loading = false;
 
         if (leave){
           this._router.navigate(["/"+this.org.id+"/view"]);
@@ -78,7 +79,7 @@ export class OrgEditComponent implements OnInit {
       error: err => {
         console.log(err);
         const m = new MessageHandler(this._snackBar);
-        m.showMessage(StatusCode.OK, err.message);
+        m.showMessage(StatusCode.serverError, err.message);
         this.loading = false;
       },
       complete: () => this.loading = false

@@ -1,12 +1,12 @@
 
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
+import { TranslateService } from '@ngx-translate/core';
 import { MetadataService, Organization, SearchResponse } from 'toco-lib';
-
-import { HttpClient } from "@angular/common/http";
 import { OrgService } from '../org.service';
+
+
 
 
 @Component({
@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
 	public organizationsTotal: number = 0;
 	public cubanOrganizationTotal: number = 0;
+	public cubanOrganizations: Organization[] = undefined;
 
 	public homeCharts = {
 		type: [],
@@ -91,6 +92,8 @@ export class HomeComponent implements OnInit {
 			next: (searchResponse: SearchResponse<Organization>) => {
 
 				this.organizationsTotal = searchResponse.hits.total;
+				this.cubanOrganizations = searchResponse.hits.hits.map( hit => hit.metadata);
+        console.log('orgs===',searchResponse.hits.hits.map( hit => hit.metadata))
 
 				searchResponse.aggregations['country'].buckets.forEach(element => {
 					if (!element.key.localeCompare('Cuba'))
@@ -124,7 +127,7 @@ export class HomeComponent implements OnInit {
 	{
 		this.router.navigate(['search'], {
 			relativeTo: this.activatedRoute,
-			queryParams: { q: event, country: 'Cuba', status: 'active' },
+			queryParams: { q: event, status: 'active' },
 			queryParamsHandling: '',
 		});
 	}
@@ -132,7 +135,7 @@ export class HomeComponent implements OnInit {
 	public goAbout(){
 		this.router.navigate(['about'],  {
 			relativeTo: this.activatedRoute,
-			queryParams: { q: event, country: 'Cuba', status: 'active' },
+			queryParams: { q: event, status: 'active' },
 			queryParamsHandling: '',
 		})
 	}

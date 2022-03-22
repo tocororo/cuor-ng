@@ -1,3 +1,4 @@
+import { Error404Component } from './error404/error404.component';
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,9 +13,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { MatomoModule } from 'ngx-matomo';
 
-import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth,
-  OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
-  TocoFormsModule } from 'toco-lib';
+import {
+    AuthenticationModule, CoreModule, Environment, NotificationModule, OrganizationServiceNoAuth,
+    OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
+    TocoFormsModule
+} from 'toco-lib';
 
 import { environment } from 'src/environments/environment';
 
@@ -65,14 +68,15 @@ import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialo
 import { OrgEditComponent } from './org-edit/org-edit.component';
 import {CommentDialogComponent, OrgReviewerComponent} from './org-reviewer/org-reviewer.component';
 import { RequestChangesListComponent } from './request-changes-list/request-changes-list.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { OrgsMapComponent } from './orgs-map/orgs-map.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
-export function storageFactory() : OAuthStorage
-{
-  return localStorage
+export function storageFactory(): OAuthStorage {
+  return localStorage;
 }
 
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
-{
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -97,7 +101,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     PieGridComponent,
     AggregationsComponent,
     GaugeChartComponent,
-    //DialogChartComponent
+    // DialogChartComponent
     DisambiguateComponent,
     DisambiguationComponent,
     DisambiguateCardFieldComponent,
@@ -115,23 +119,25 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     EditAddressComponent,
 
     WikiOrganizationsComponent,
-		WikiOrgEmployesProfileComponent,
-		TableLayoutComponent,
-		OrgSearchWikiComponent,
-		WikiAuthorProfileComponent,
-		WikiWorkProfileComponent,
-		WikiTopicProfileComponent,
-		WikiVenueProfileComponent,
-		WikiAuthorsProfileComponent,
-		ExpansionPanelLayoutComponent,
-		WikiTopicsProfileComponent,
+	WikiOrgEmployesProfileComponent,
+	TableLayoutComponent,
+	OrgSearchWikiComponent,
+	WikiAuthorProfileComponent,
+	WikiWorkProfileComponent,
+	WikiTopicProfileComponent,
+	WikiVenueProfileComponent,
+	WikiAuthorsProfileComponent,
+	ExpansionPanelLayoutComponent,
+	WikiTopicsProfileComponent,
     OrgEditFormComponent,
     CommentDialogComponent,
 
     Step3DisambiguateHelp,
 
     OrgReviewerComponent,
-
+    OrgsMapComponent,
+    Error404Component,
+    ErrorPageComponent,
     RequestChangesListComponent
   ],
   imports: [
@@ -155,19 +161,20 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     OrgRoutingModule,
     SearchModule,
 
-    MarkdownModule.forRoot({
-      loader: HttpClient
-      }),
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
-    AuthenticationModule,
-    MatomoModule
-  ],
+        MarkdownModule.forRoot({
+            loader: HttpClient
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        AuthenticationModule,
+        MatomoModule,
+        NotificationModule
+    ],
   entryComponents: [
     OrganizationDialogRelasionship,
     OrganizationDialogDeleteConfirm,

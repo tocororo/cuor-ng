@@ -1,0 +1,24 @@
+.map-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 50%;
+  width: 100%;
+  position: relative;
+}
+
+.map-container {
+  margin: 30px;
+  height: 100%;
+  width: 55%;
+  position: relative;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+  position: relative;
+}
+
+#map {
+  height: 100%;
+}
