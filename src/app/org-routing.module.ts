@@ -20,6 +20,7 @@ import { WikiTopicsProfileComponent } from './wiki-organizations/profiles/wiki-t
 import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
 import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
+import {NotificationsComponent} from "./notifications/notifications.component";
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 import { Error404Component } from './error404/error404.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
@@ -141,6 +142,10 @@ const routes: Routes = [
 	/*
 	end of Perfiles
 	*/
+  {
+    path:'notifications',
+    component: NotificationsComponent,
+  },
 	{
 		path: '**',
 		//redirectTo: '',

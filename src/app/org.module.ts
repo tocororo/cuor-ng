@@ -13,9 +13,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { MatomoModule } from 'ngx-matomo';
 
-import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth,
-  OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
-  TocoFormsModule } from 'toco-lib';
+import {
+    AuthenticationModule, CoreModule, Environment, NotificationModule, OrganizationServiceNoAuth,
+    OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
+    TocoFormsModule
+} from 'toco-lib';
 
 import { environment } from 'src/environments/environment';
 
@@ -64,6 +66,7 @@ import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizati
 import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialogDeleteConfirm,
   OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { OrgsMapComponent } from './orgs-map/orgs-map.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 
@@ -114,44 +117,60 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     EditAddressComponent,
 
     WikiOrganizationsComponent,
-		WikiOrgEmployesProfileComponent,
-		TableLayoutComponent,
-		OrgSearchWikiComponent,
-		WikiAuthorProfileComponent,
-		WikiWorkProfileComponent,
-		WikiTopicProfileComponent,
-		WikiVenueProfileComponent,
-		WikiAuthorsProfileComponent,
-		ExpansionPanelLayoutComponent,
-		WikiTopicsProfileComponent,
-        OrgEditFormComponent,
-        Step3DisambiguateHelp,
-        OrgsMapComponent
-        Step3DisambiguateHelp,
-        Error404Component,
-        ErrorPageComponent
-  ],
-  imports: [
-    MatRadioModule,
-    NgxChartsModule,
+	WikiOrgEmployesProfileComponent,
+	TableLayoutComponent,
+	OrgSearchWikiComponent,
+	WikiAuthorProfileComponent,
+	WikiWorkProfileComponent,
+	WikiTopicProfileComponent,
+	WikiVenueProfileComponent,
+	WikiAuthorsProfileComponent,
+	ExpansionPanelLayoutComponent,
+	WikiTopicsProfileComponent,
+    OrgEditFormComponent,
+    Step3DisambiguateHelp,
+    NotificationsComponent,
+    OrgsMapComponent,
+    Error404Component,
+    ErrorPageComponent
+    ],
+    imports: [
+        MatRadioModule,
+        NgxChartsModule,
 
-    BrowserAnimationsModule,
-    SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
-    ReactiveFormsModule,
-    CoreModule,
-    StaticsModule,
-    OrganizationsModule,
-    TocoFormsModule,
-    OrgRoutingModule,
-    SearchModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        ReactiveFormsModule,
+        CoreModule,
+        StaticsModule,
+        OrganizationsModule,
+        TocoFormsModule,
+        OrgRoutingModule,
+        SearchModule,
 
+<<<<<<< src/app/org.module.ts
+        MarkdownModule.forRoot({
+            loader: HttpClient
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        AuthenticationModule,
+        MatomoModule,
+        NotificationModule
+    ],
+=======
     MarkdownModule.forRoot({
       loader: HttpClient
       }),
@@ -165,6 +184,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AuthenticationModule,
     MatomoModule,
   ],
+>>>>>>> src/app/org.module.ts
   entryComponents: [
     OrganizationDialogRelasionship,
     OrganizationDialogDeleteConfirm,
