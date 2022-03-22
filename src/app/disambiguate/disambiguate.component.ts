@@ -1,13 +1,12 @@
-import { ActivatedRoute } from '@angular/router';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar, MatStepper, MatDialogRef } from '@angular/material';
-import { Hit, MessageHandler, Organization, Redirected, StatusCode, MetadataService } from 'toco-lib';
+import { MatDialog, MatSnackBar, MatStepper } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Hit, MessageHandler, MetadataService, Organization, Redirect, RedirectPropertiesIdtype, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
+import { OrganizationDialogDeleteConfirm, OrgEditFormComponent } from '../org-edit/org-edit-form/org-edit-form.component';
 import { OrgService } from '../org.service';
-import { Router } from '@angular/router';
-import { OrgEditFormComponent, OrganizationDialogDeleteConfirm } from '../org-edit/org-edit-form/org-edit-form.component';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { DisambiguationComponent } from './disambiguation/disambiguation.component';
 
 
@@ -213,10 +212,10 @@ export class DisambiguateComponent implements OnInit {
         else if (result["ERROR"])
         {
           console.log("hubo un error", result["ERROR"]);
-          
+
           const m = new MessageHandler(this._snackBar);
           m.showMessage(StatusCode.serverError, result["ERROR"]);
-        }        
+        }
       },
       error: err => {
         console.log(err);
@@ -229,13 +228,16 @@ export class DisambiguateComponent implements OnInit {
     // cambiar el estado de las secundarias a reconect
     this.secundariesOrganizations.forEach(secOrg => {
       secOrg.status = "redirected";
-      secOrg.redirect = new Redirected();
-      secOrg.redirect.idtype = 'sceibaid'; //de momento esto es el uudi, necesita analisis si se daran URIs
-      secOrg.redirect.value = this.masterOrganization.id;
+      secOrg.redirect = new Redirect();
+      let idtype = new RedirectPropertiesIdtype();
+      idtype.type = 'sceibaid';
+      secOrg.redirect.properties.idtype = idtype; //de momento esto es el uudi, necesita analisis si se daran URIs
+      let idvalue = {type: this.masterOrganization.id}
+      secOrg.redirect.properties.value = idvalue;
       let rec = new Organization();
       rec.deepcopy(secOrg);
       console.log("secundary org enviada", rec);
-      
+
       this._orgService.editOrganization(rec).subscribe({
         next: (result: Hit<Organization>) => {
           console.log("sec org ", result);
@@ -251,7 +253,7 @@ export class DisambiguateComponent implements OnInit {
       const m = new MessageHandler(this._snackBar);
       m.showMessage(StatusCode.OK, "Su realizó la desambiguación correctamente");
     }
-    
+
     this._resetStepper();
 
     if (leave){
