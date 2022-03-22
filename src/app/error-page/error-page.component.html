@@ -1,0 +1,33 @@
+<div style="margin: 2em; text-align: center;">
+  <h2>Ha ocurrido un error.</h2>
+
+
+
+
+  <div class="w-100" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="end center" >
+    <div class="w-50" [ngStyle.xs]="{width: '100%'}">
+      <a [routerLink]="['/']" class="sceiba-a">
+        <h3 *ngIf="title">{{ title }}</h3>
+        <h2>Regresar Inicio</h2>
+        <img src="assets/images/svg/404-error-3060993.svg"
+        alt="Ha ocurrido un error"
+        style="width: 50%; margin-bottom: -20px; padding: 16px;" [ngStyle.xs]="{width: '100%'}">
+      </a>
+      <br/>
+      <small>
+        Imagen de <a href="https://pixabay.com/es/users/cripi-1028451/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3060993">Christelle Olivier</a> en <a href="https://pixabay.com/es/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3060993">Pixabay</a>
+      </small>
+    </div>
+    <div class="w-50" [ngStyle.xs]="{width: '100%'}">
+        <h2 *ngIf="status">{{ status | translate }}</h2>
+        <p class="mat-h3" *ngIf="message">
+          {{ message }}
+        </p>
+        <p class="mat-h3" *ngIf="!message">
+          Ha ocurrido un error inesperado, contacte a los administradores del sistema y describa lo sucedido. Prontamente será atendido.
+          Muchas gracias y perdone las molestias que pueda ocasionar este error.
+        </p>
+    </div>
+</div>
+
+</div>

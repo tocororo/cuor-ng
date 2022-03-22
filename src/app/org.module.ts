@@ -1,3 +1,4 @@
+import { Error404Component } from './error404/error404.component';
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -66,14 +67,14 @@ import { OrgEditFormComponent, OrganizationDialogRelasionship, OrganizationDialo
   OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { OrgsMapComponent } from './orgs-map/orgs-map.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
-export function storageFactory() : OAuthStorage
-{
-  return localStorage
+export function storageFactory(): OAuthStorage {
+  return localStorage;
 }
 
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
-{
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -98,7 +99,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     PieGridComponent,
     AggregationsComponent,
     GaugeChartComponent,
-    //DialogChartComponent
+    // DialogChartComponent
     DisambiguateComponent,
     DisambiguationComponent,
     DisambiguateCardFieldComponent,
@@ -116,22 +117,23 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     EditAddressComponent,
 
     WikiOrganizationsComponent,
-		WikiOrgEmployesProfileComponent,
-		TableLayoutComponent,
-		OrgSearchWikiComponent,
-		WikiAuthorProfileComponent,
-		WikiWorkProfileComponent,
-		WikiTopicProfileComponent,
-		WikiVenueProfileComponent,
-		WikiAuthorsProfileComponent,
-		ExpansionPanelLayoutComponent,
-		WikiTopicsProfileComponent,
+	WikiOrgEmployesProfileComponent,
+	TableLayoutComponent,
+	OrgSearchWikiComponent,
+	WikiAuthorProfileComponent,
+	WikiWorkProfileComponent,
+	WikiTopicProfileComponent,
+	WikiVenueProfileComponent,
+	WikiAuthorsProfileComponent,
+	ExpansionPanelLayoutComponent,
+	WikiTopicsProfileComponent,
     OrgEditFormComponent,
-
     Step3DisambiguateHelp,
-
-    NotificationsComponent
-  ],
+    NotificationsComponent,
+    OrgsMapComponent,
+    Error404Component,
+    ErrorPageComponent
+    ],
     imports: [
         MatRadioModule,
         NgxChartsModule,
@@ -153,6 +155,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
         OrgRoutingModule,
         SearchModule,
 
+<<<<<<< src/app/org.module.ts
         MarkdownModule.forRoot({
             loader: HttpClient
         }),
@@ -167,6 +170,21 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
         MatomoModule,
         NotificationModule
     ],
+=======
+    MarkdownModule.forRoot({
+      loader: HttpClient
+      }),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
+    AuthenticationModule,
+    MatomoModule,
+  ],
+>>>>>>> src/app/org.module.ts
   entryComponents: [
     OrganizationDialogRelasionship,
     OrganizationDialogDeleteConfirm,
