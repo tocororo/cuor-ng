@@ -180,7 +180,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         }),
         AuthenticationModule,
         MatomoModule,
-        NotificationModule
+        // NotificationModule
     ],
   entryComponents: [
     OrganizationDialogRelasionship,

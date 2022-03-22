@@ -14,7 +14,7 @@ class EnvironmentImpl implements Environment {
   appHost = 'https://localhost:4200';
   appName = 'Orgs';
   oauthRedirectUri = 'https://localhost:4200/';
-  oauthClientId = 'bh9bv1TXPH7HO8ulSgVUs8rBknmEn5xlH6kDdKqH';
+  oauthClientId = 'k3tnNCB1oXsQXKG6WnJEmxudELpxQuLPwyHsWfcx';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
