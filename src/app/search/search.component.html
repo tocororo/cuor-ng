@@ -96,13 +96,13 @@
       </button>
 
       <mat-card>
-        <!-- <section class="example-section"> -->
-         <!--  <label class="example-margin">Align:</label> -->
-          <mat-radio-group [(ngModel)]="typeChart">
-            <mat-radio-button class="example-margin" value="Polar Chart">Pastel</mat-radio-button>
-            <mat-radio-button class="example-margin" value="Vertical Bar">Barra</mat-radio-button>
-            <!-- <mat-radio-button class="example-margin" value="Pie Grid">Pie Grid</mat-radio-button> -->
-            <mat-radio-button class="example-margin" value="Gauge Chart">Calibración</mat-radio-button>
+        <!-- <section class="mat-card-section"> -->
+         <!--  <label class="mat-card-margin">Align:</label> -->
+          <mat-radio-group [(ngModel)]="currentChartType">
+            <mat-radio-button class="mat-card-margin" value="chartType.polar">Pastel</mat-radio-button>
+            <mat-radio-button class="mat-card-margin" value="chartType.verticalBar">Barra</mat-radio-button>
+            <!-- <mat-radio-button class="mat-card-section" value="chartType.pieGrid">Pie Grid</mat-radio-button> -->
+            <mat-radio-button class="mat-card-section" value="chartType.gauge">Calibración</mat-radio-button>
          </mat-radio-group>
         <!-- </section> -->
       </mat-card>
@@ -111,7 +111,7 @@
 
     <toco-search-aggregations-visual
         *ngIf="sr"
-        [typeChart]="typeChart"
+        [chartType]="currentChartType"
         [aggregations]="aggr_keys"
         [selectedAggr]="aggrsSelection"
         (keySelect)="aggrChange($event)"
