@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
@@ -52,7 +52,7 @@ export class OrgEditComponent implements OnInit {
     let edited = new Organization()
     edited.deepcopy(this._orgEditForm.orgFormGroup.value)
     edited.name = this._orgEditForm.orgFormGroup.controls['name'].value;
-    //console.log(edited);
+    console.log(edited);
 
     this._orgService.editOrganization(edited).subscribe({
       next: (result: Hit<Organization>) => {

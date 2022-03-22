@@ -4,7 +4,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subject } from 'rxjs';
 import { Environment, Organization, SearchResponse, User } from 'toco-lib';
-import { DPA } from './org-edit/edit-address/edit-address.component';
 
 
 
@@ -347,12 +346,13 @@ export class OrgService {
 
   public editOrganization(org: Organization): Observable<any> {
     const payload = org.entitystringify();
+    console.log("payload", payload)
     console.log("edit service org ", org);
     const url = this.environment.cuorApi + this.prefix + "/" + org.id + "/curate";
     let aux = this.http.post<any>(url, payload, this.httpOptions);
     console.log("API response:", aux);
     return aux;
-    
+
   }
 
   public fileUpload(formData: FormData) {
