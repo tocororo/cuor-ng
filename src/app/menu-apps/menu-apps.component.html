@@ -1,0 +1,115 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-around flex-end">
+  <a
+    [routerLink]="['/']"
+    class="apps mat-caption"
+    matTooltip="{{ 'SCEIBA' | translate }}"
+  >
+    <img src="/assets/icons/apps/sceiba.svg" [alt]="'SCEIBA' | translate" />
+    <span>{{ "SCEIBA" | translate }}</span>
+  </a>
+  <mat-divider class="w-90"></mat-divider>
+
+  <a
+    [routerLink]="['/search']"
+    class="apps mat-caption"
+    matTooltip="{{ 'SCEIBA_DESCUBRE_SUB' | translate }}"
+  >
+    <img src="/assets/icons/apps/discover.svg" [alt]="'BUSQUEDA' | translate" />
+    <span>{{ "BUSQUEDA" | translate }}</span>
+  </a>
+  <a
+    href="https://cuba-catalogo.sceiba.org"
+    target="_blank"
+    class="apps mat-caption"
+    matTooltip="{{ 'SCEIBA_CATALOGO_SUB' | translate }}"
+  >
+    <img
+      src="/assets/icons/apps/catalog.svg"
+      [alt]="'SCEIBA_CATALOGO' | translate"
+    />
+    <span>{{ "SCEIBA_CATALOGO" | translate }}</span>
+  </a>
+
+  <a
+    href="https://cuba-revistasmes.sceiba.org"
+    target="_blank"
+    class="apps mat-caption"
+    matTooltip="{{ 'DIRECTORIO_MES_SUB' | translate }}"
+  >
+    <img
+      src="/assets/icons/apps/revistasmes.png"
+      [alt]="'DIRECTORIO_MES' | translate"
+      style="width: 55px; height: 55px"
+    />
+    <span>{{ "DIRECTORIO_MES" | translate }}</span>
+  </a>
+  <mat-divider class="w-90"></mat-divider>
+
+  <a
+    href="https://cuba-organizaciones.sceiba.org"
+    target="_blank"
+    class="apps mat-caption"
+    matTooltip="{{ 'SCEIBA_ORGANIZACIONES_SUB' | translate }}"
+  >
+    <img
+      src="/assets/icons/apps/organizaciones.svg"
+      [alt]="'ORGANIZACIONES' | translate"
+      style="width: 60px; height: 60px"
+    />
+    <span>{{ "ORGANIZACION" | translate }}</span>
+  </a>
+  <a
+    href="https://cuba-personas.sceiba.org"
+    target="_blank"
+    class="apps mat-caption"
+    matTooltip="{{ 'PERSONAS_SUB' | translate }}"
+  >
+    <img
+      src="/assets/icons/apps/persons.svg"
+      [alt]="'PERSONAS' | translate"
+      style="width: 60px; height: 60px"
+    />
+    <span>{{ "PERSONAS" | translate }}</span>
+  </a>
+  <a
+    href="https://vocabularios.sceiba.cu"
+    target="_blank"
+    class="apps mat-caption"
+    matTooltip="{{ 'SCEIBA_VOCABULARIOS_SUB' | translate }}"
+  >
+    <img
+      src="/assets/icons/apps/vocabs.svg"
+      [alt]="'SCEIBA_VOCABULARIOS' | translate"
+      style="width: 55px; height: 55px"
+    />
+    <span>{{ "SCEIBA_VOCABULARIOS" | translate }}</span>
+  </a>
+  <mat-divider class="w-90"></mat-divider>
+
+  <a
+    href="https://courses.sceiba.org"
+    target="_blank"
+    class="apps mat-caption"
+    matTooltip="{{ 'SMOODLE_SUB' | translate }}"
+  >
+    <img
+      src="/assets/icons/apps/scourses.svg"
+      [alt]="'SMOODLE' | translate"
+      style="width: 55px; height: 55px"
+    />
+    <span>{{ "SMOODLE" | translate }}</span>
+  </a>
+  <a
+    href="https://evaluaciones.sceiba.org"
+    target="_blank"
+    class="apps mat-caption"
+    matTooltip="{{ 'EVALUACION' | translate }}"
+  >
+    <img
+      src="/assets/icons/apps/evaluations.svg"
+      [alt]="'EVALUACION' | translate"
+      style="width: 55px; height: 55px"
+    />
+    <span>{{ "EVALUACION_APP" | translate }}</span>
+  </a>
+</div>

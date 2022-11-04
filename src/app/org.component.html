@@ -192,76 +192,7 @@
 </mat-menu>
 
 <mat-menu #menuApps="matMenu">
-  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-    <a
-      href="https://sceiba.cu"
-      target="_blank"
-      class="apps"
-      matTooltip="Sceiba"
-    >
-      <img
-        class="app-featured"
-        src="/assets/icons/sceiba.svg"
-        alt="Sceiba"
-        style="width: 55px; height: 55px"
-      />
-    </a>
-    <mat-divider class="w-90"></mat-divider>
-
-    <a
-      href="https://catalogo.sceiba.cu"
-      target="_blank"
-      class="apps"
-      matTooltip="{{ 'CATALOGO' | translate }}"
-    >
-      <img
-        src="/assets/icons/catalog.svg"
-        [alt]="'CATALOGO' | translate"
-        style="width: 55px; height: 55px"
-      />
-    </a>
-
-    <a
-      href="https://orgs.sceiba.cu"
-      target="_blank"
-      class="apps"
-      matTooltip="{{ 'ORGANIZACIONES' | translate }}"
-    >
-      <img
-        src="/assets/icons/organizacion.svg"
-        [alt]="'ORGANIZACIONES' | translate"
-        style="width: 55px; height: 55px"
-      />
-    </a>
-
-    <a
-      href="https://vocabularios.sceiba.cu"
-      target="_blank"
-      class="apps"
-      matTooltip="{{ 'VOCABULARIOS' | translate }}"
-    >
-      <img
-        src="/assets/icons/vocabs.svg"
-        [alt]="'VOCABULARIOS' | translate"
-        style="width: 55px; height: 55px"
-      />
-    </a>
-    <mat-divider class="w-90"></mat-divider>
-
-    <a
-      href="https://revistasmes.sceiba.cu"
-      target="_blank"
-      class="apps"
-      matTooltip="{{ 'REVISTAS_MES' | translate }}"
-    >
-      <img
-        class="app-featured"
-        src="/assets/icons/mes.svg"
-        [alt]="'REVISTAS_MES' | translate"
-        style="width: 55px; height: 55px"
-      />
-    </a>
-  </div>
+  <sceiba-menu-apps></sceiba-menu-apps>
 </mat-menu>
 
 <div

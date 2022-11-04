@@ -39,6 +39,7 @@ import { CardsSliderComponent } from './home/cards-slider/cards-slider.component
 import { HomeComponent } from './home/home.component';
 import { ImportComponent } from './import/import.component';
 import { InputFileComponent } from './import/input-file/input-file.component';
+import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 import {
@@ -145,7 +146,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     NotificationsComponent,
 
     PdfExcelComponent,
-    PdfDialogComponent
+    PdfDialogComponent,
+    SceibaMenuAppsComponent
   ],
   imports: [
     MatRadioModule,
