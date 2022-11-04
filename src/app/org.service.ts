@@ -378,7 +378,7 @@ export class OrgService {
       // headers: this.headers
     };
     // console.log(params);
-    const req = this.environment.cuorApi + 'organizations/';
+    const req = this.environment.sceibaApi + 'search/organizations/';
     // console.log(req);
 
     return this.http.get<SearchResponse<Organization>>(req, options);
