@@ -13,9 +13,8 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
-<img src="assets/icons/getwaves.io.top1.svg" alt="" style="margin-top: -4px; width: 100%;">
 
-<div class="w-70" style="margin-top: -3em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em', 'padding-top':'60px'}">
+<div class="w-70" style="margin-top: 0.5em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em', 'padding-top':'60px'}">
     <div class="mat-h2 text-format" markdown [src]="'/assets/markdown/home-about.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
     <div fxLayout="row" fxLayoutAlign="start" class="w-100 pt-20">
         <button mat-raised-button color="primary" (click)="goAbout()">{{ 'CONOZCA_DE_NOS' | translate }}</button>
@@ -101,7 +100,7 @@
 
 <!-- <app-cards-slider></app-cards-slider> -->
 
-<div class="prefooter" [ngStyle.xs]="{'padding-bottom':'60px'}">
+<div class="prefooter" [ngStyle.xs]="{'padding-bottom':'-40px'}">
     <div style="width: 32%; min-width: 22em;">
         <div class="info-card">
             <img src="assets/icons/sceiba.svg" alt="">
@@ -112,7 +111,7 @@
             <p class="mat-h3">{{ 'DEFINICION_TOCORORO' | translate }}</p>
         </div>
     </div>
-    <div style="width: 50%; margin-bottom: -70px; padding: 16px;" [ngStyle.xs]="{width: '100%'}">
+    <div style="width: 50%; margin-bottom: 0px; padding: 16px;" [ngStyle.xs]="{width: '100%'}">
         <p class="mat-h3">{{ 'EXPLICACION_1' | translate }}</p>
         <p class="mat-h3">{{ 'EXPLICACION_2' | translate }}</p>
         <p class="mat-h3">{{ 'EXPLICACION_3' | translate }}</p>

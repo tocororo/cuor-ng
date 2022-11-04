@@ -45,19 +45,22 @@ export class OrgsMapComponent implements AfterViewInit {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       });
 
-  const havana = marker([23.113592, -82.366592]).bindPopup('I am a blue leaf.');
-  const santiagoCuba = marker([20.02083, -75.82667]).bindPopup('I am a blue leaf.');
-  const santaClara = marker([22.40694, -79.96472]).bindPopup('I am a blue leaf.');
-  const lasTunas = marker([20.96167, -76.95111]).bindPopup('I am a blue leaf.');
-  const cienfuegos = marker([22.14957, -80.44662]).bindPopup('I am a blue leaf.');
-  const holguin = marker([20.88722, -76.26306]).bindPopup('I am a blue leaf.');
-  const matanzas = marker([23.04111, -81.5775]).bindPopup('I am a blue leaf.');
-  const guantanamo = marker([20.14444, -75.20917]).bindPopup('I am a blue leaf.');
-  const pinarRio = marker([22.41667, -83.69667]).bindPopup('I am a blue leaf.');
-  const artemisa = marker([22.81667, -82.75944]).bindPopup('I am a blue leaf.');
-  const sanctiSpiritu = marker([21.92972, -79.4425]).bindPopup('I am a blue leaf.');
-  const camaguey = marker([21.3839, -77.9072 ]).bindPopup('I am a blue leaf.');
-  const granma = marker([20.38449, -76.64127]).bindPopup('I am a blue leaf.');
+      const pinarRio = marker([22.41667, -83.69667]).bindPopup('Pinar del Río');
+      const artemisa = marker([22.81667, -82.75944]).bindPopup('Artemisa');
+      const havana = marker([23.113592, -82.366592]).bindPopup('La Habana');
+      const mayabeque = marker([22.966666666667, -82.15]).bindPopup('Mayabeque');
+      const matanzas = marker([23.0511, -81.5753]).bindPopup('Matanzas');
+      const cienfuegos = marker([22.14957, -80.44662]).bindPopup('Cienfuegos');
+      const santaClara = marker([22.40694, -79.96472]).bindPopup('Villa Clara');
+      const sanctiSpiritu = marker([21.92972, -79.4425]).bindPopup('Sancti Spiritus');
+      const ciegoDeAvila = marker([21.8481, -78.7631]).bindPopup('Ciego de Ávila');
+      const camaguey = marker([21.3839, -77.9072 ]).bindPopup('Camagüey');
+      const lasTunas = marker([20.96167, -76.95111]).bindPopup('Las Tunas');
+      const holguin = marker([20.88722, -76.26306]).bindPopup('Holguín');
+      const granma = marker([20.38449, -76.64127]).bindPopup('Granma');
+      const santiagoCuba = marker([20.02083, -75.82667]).bindPopup('Santiago de Cuba');
+      const guantanamo = marker([20.14444, -75.20917]).bindPopup('Guantánamo');
+      const islaDeLaJuventud = marker([21.75, -82.85]).bindPopup('Municipio Especial Isla de la Juventud');
 
   this.states = layerGroup([
     havana,
@@ -71,7 +74,10 @@ export class OrgsMapComponent implements AfterViewInit {
     artemisa,
     sanctiSpiritu,
     camaguey,
-    granma
+    granma,
+    ciegoDeAvila,
+    mayabeque,
+    islaDeLaJuventud
   ]);
 
   this.baseMaps = {
@@ -111,7 +117,7 @@ export class OrgsMapComponent implements AfterViewInit {
   }
 
 onMapClick() {
-    this.map.on('click', e => alert('You clicked the map at ' + e.latlng));
+    // this.map.on('click', e => alert('You clicked the map at ' + e.latlng));
   }
 
 }
