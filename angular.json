@@ -41,8 +41,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "baseHref": "https://organizaciones.sceiba.cu",
-              "deployUrl": "https://organizaciones.sceiba.cu/",
+              "baseHref": "https://cuba-organizaciones.sceiba.org",
+              "deployUrl": "https://cuba-organizaciones.sceiba.org/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -58,7 +58,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
