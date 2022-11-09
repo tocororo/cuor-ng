@@ -55,17 +55,7 @@ export class OrgRootComponent {
 
   public authBackend: AuthBackend;
 
-  public oauthInfo: OauthInfo = {
-    serverHost: this.environment.sceibaHost,
-    loginUrl: this.environment.sceibaHost + "oauth/authorize",
-    tokenEndpoint: this.environment.sceibaHost + "oauth/token",
-    userInfoEndpoint: this.environment.sceibaApi + "me",
-    appHost: this.environment.appHost,
-    appName: this.environment.appName,
-    oauthRedirectUri: this.environment.oauthRedirectUri,
-    oauthClientId: this.environment.oauthClientId,
-    oauthScope: this.environment.oauthScope,
-  };
+  public oauthInfo: OauthInfo;
 
   public constructor(
     private environment: Environment,
@@ -78,6 +68,8 @@ export class OrgRootComponent {
     private _transServ: TranslateService,
     private matomoInjector: MatomoInjector
   ) {
+    let env: any = this.environment;
+    this.oauthInfo = env.oauthInfo;
     this.matomoInjector.init(environment.matomoUrl, environment.matomoSiteId);
   }
 
