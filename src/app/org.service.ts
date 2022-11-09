@@ -385,14 +385,14 @@ export class OrgService {
   }
 
   getActiveOrganizationById(id: string): Observable<SearchResponse<Organization>> {
-    const req = this.environment.cuorApi + 'organizations/active/' + id ;
+    const req = this.environment.sceibaApi + 'organizations/active/' + id ;
     // console.log(req);
 
     return this.newHttp.get<SearchResponse<Organization>>(req);
   }
 
   getOrganizationById(id: string): Observable<SearchResponse<Organization>> {
-    const req = this.environment.cuorApi + 'organizations/' + id ;
+    const req = this.environment.sceibaApi + 'pid/organization/' + id ;
     // console.log(req);
 
     return this.newHttp.get<SearchResponse<Organization>>(req);
