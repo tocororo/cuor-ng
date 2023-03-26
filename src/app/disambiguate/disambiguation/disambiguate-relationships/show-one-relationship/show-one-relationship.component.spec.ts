@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ShowOneRelationshipComponent } from './show-one-relationship.component';
 
@@ -6,7 +6,7 @@ describe('ShowOneRelationshipComponent', () => {
   let component: ShowOneRelationshipComponent;
   let fixture: ComponentFixture<ShowOneRelationshipComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ShowOneRelationshipComponent ]
     })
