@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatRadioModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -184,16 +184,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         MatomoModule,
         // NotificationModule
     ],
-  entryComponents: [
-    OrganizationDialogRelasionship,
-    OrganizationDialogDeleteConfirm,
-    OrganizationDialogInfoConfirm,
-    OrganizationDialogorgEditAddress,
-    Step3DisambiguateHelp,
-    CommentDialogComponent,
-
-    PdfDialogComponent
-  ],
   providers: [
     SearchService,
     // EnvServiceProvider,

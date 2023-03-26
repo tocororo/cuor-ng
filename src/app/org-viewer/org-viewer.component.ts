@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OAuthStorage } from 'angular-oauth2-oidc';
