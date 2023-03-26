@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -45,7 +46,7 @@
 //     src: local('DINPro Medium'), url('assets/fonts/DINPro-Medium tr.woff') format('woff');
 // }
 
-$toco-typography: mat-typography-config(
+$toco-typography: mat.define-typography-config(
   /* $font-family: '"DINPro Medium"',*/
 
   /*$display-4: mat-typography-level(32px, 48px, 500),
@@ -64,10 +65,10 @@ $toco-typography: mat-typography-config(
 );
 
 // Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
-@include mat-base-typography($toco-typography);
+@include mat.typography-hierarchy($toco-typography);
 // Override typography for a specific Angular Material components.
-@include mat-checkbox-typography($toco-typography);
+@include mat.checkbox-typography($toco-typography);
 // Override typography for all Angular Material, including mat-base-typography and all components.
-@include angular-material-typography($toco-typography);
+@include mat.all-component-typographies($toco-typography);
 
-@include mat-core($toco-typography);
+@include mat.core($toco-typography);
