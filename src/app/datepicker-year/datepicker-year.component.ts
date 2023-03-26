@@ -76,7 +76,7 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
 
   @Input() touchUi = false;
 
-  @ViewChild(MatDatepicker, { static: false }) _picker: MatDatepicker<Moment>;
+  @ViewChild(MatDatepicker) _picker: MatDatepicker<Moment>;
 
   _inputCtrl: FormControl = new FormControl();
 

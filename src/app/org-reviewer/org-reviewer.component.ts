@@ -21,7 +21,7 @@ export class OrgReviewerComponent implements OnInit {
 
   @Input() loading = true;
 
-  @ViewChild('orgeditform', { static: false }) private _orgEditForm: OrgEditFormComponent;
+  @ViewChild('orgeditform') private _orgEditForm: OrgEditFormComponent;
 
 
 constructor(

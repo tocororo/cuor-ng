@@ -19,7 +19,7 @@ export class OrgEditComponent implements OnInit {
 
   @Input() loading: boolean = true;
 
-  @ViewChild('orgeditform', { static: false }) private _orgEditForm: OrgEditFormComponent;
+  @ViewChild('orgeditform') private _orgEditForm: OrgEditFormComponent;
 
   constructor(
     private _activatedRoute: ActivatedRoute,

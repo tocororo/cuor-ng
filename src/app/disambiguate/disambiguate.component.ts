@@ -18,9 +18,9 @@ import { DisambiguationComponent } from './disambiguation/disambiguation.compone
 })
 export class DisambiguateComponent implements OnInit {
 
-  @ViewChild('orgeditcomp', { static: false }) private _orgEdit: OrgEditFormComponent;
-  @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
-  @ViewChild('disambiguatecomp', {static: false}) private _disambiguateComp: DisambiguationComponent;
+  @ViewChild('orgeditcomp') private _orgEdit: OrgEditFormComponent;
+  @ViewChild('stepper') private myStepper: MatStepper;
+  @ViewChild('disambiguatecomp') private _disambiguateComp: DisambiguationComponent;
 
 
   masterOrganization: Organization;

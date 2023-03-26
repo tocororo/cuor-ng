@@ -73,7 +73,7 @@ export class SearchComponent implements OnInit
 
   loading: boolean = true;
 
-  @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
 
   public constructor(
     private _cuorService: OrgService,
