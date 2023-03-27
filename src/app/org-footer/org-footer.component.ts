@@ -22,13 +22,14 @@ export class OrgFooterComponent implements OnInit {
     // @Input()
     // public extraImagePath = '';
 
-    public constructor(public iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) { }
+    public constructor(public iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
+      this.iconRegistry.addSvgIcon('facebook',this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/facebook.svg'));
+      this.iconRegistry.addSvgIcon('twitter',this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/twitter.svg'));
+      this.iconRegistry.addSvgIcon('github', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/github.svg'));
+    }
 
     public ngOnInit(): void {
         if ( this.sites == undefined ) this.sites = new Array();
         if ( this.information == undefined ) this.information = new Array();
-        this.iconRegistry.addSvgIcon('facebook',this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/facebook.svg'));
-        this.iconRegistry.addSvgIcon('twitter',this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/twitter.svg'));
-        this.iconRegistry.addSvgIcon('github',this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/github.svg'));
     }
 }

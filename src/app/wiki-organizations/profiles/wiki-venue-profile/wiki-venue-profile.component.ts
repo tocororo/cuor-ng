@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { QueryVenue } from '../../../../services/query.venue.service';
 
@@ -62,7 +62,7 @@ export class WikiVenueProfileComponent implements OnInit {
     const firstPageId = pageIds.length ? pageIds[0] : null;
     return firstPageId ? pages[firstPageId].extract : null;
   };
-  
+
   goWikipedia() {
     var term = this.title.replace(/ /g, "%20");
     window.open(`https://es.wikipedia.org/wiki/${term}`, '_blank');

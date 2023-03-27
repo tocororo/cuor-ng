@@ -4,29 +4,29 @@
         <mat-panel-title>
             {{accordionChipsTitle}}
         </mat-panel-title>
-        <mat-panel-title *ngIf="!isMaster" > 
+        <mat-panel-title *ngIf="!isMaster" >
                 <button
-                mat-icon-button 
-                aria-label="Incluir todos los elementos" 
-                matTooltip="Agregar todos los elementos a la organizacion principal" 
+                mat-icon-button
+                aria-label="Incluir todos los elementos"
+                matTooltip="Agregar todos los elementos a la organizacion principal"
                 (click)="onPropagate(contentList)">
                     <mat-icon color="warn">merge_type_left</mat-icon>
                 </button>
             </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <mat-chip-list>
+    <mat-chip-listbox>
         <ng-container *ngFor="let item of contentList; let i = index">
-            <mat-chip>{{item}}</mat-chip>
-            <button *ngIf="!isMaster" 
-            mat-icon-button 
-            aria-label="Incluir otro elemento  a la organizacion principal" 
-            matTooltip="Agregar elemento a la organizacion principal" 
+            <mat-chip-option>{{item}}</mat-chip-option>
+            <button *ngIf="!isMaster"
+            mat-icon-button
+            aria-label="Incluir otro elemento  a la organizacion principal"
+            matTooltip="Agregar elemento a la organizacion principal"
             (click)="onPropagate([item])">
                 <mat-icon color="primary">merge_type</mat-icon>
             </button>
         </ng-container>
-    </mat-chip-list>
+    </mat-chip-listbox>
 </mat-expansion-panel>
 
 <mat-expansion-panel *ngIf="!contentList || contentList.length==0">

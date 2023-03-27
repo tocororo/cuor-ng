@@ -10,10 +10,10 @@
   <ng-container *ngIf="content != undefined " >
     <div id="divContent" style="text-align: justify; width: 90%; "> </div>
   </ng-container>
-   
+
   <br>
-  <mat-card 
-        style= "background-color: #fff3cd; 
+  <mat-card
+        style= "background-color: #fff3cd;
                 color: #85694b;
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: bold;
@@ -24,15 +24,15 @@
     <br>
     <br>
   <!-- <wiki-org-search style="width: 70%;"></wiki-org-search> -->
-    
-  <mat-chip-list aria-label="org selection" >
+
+  <mat-chip-listbox aria-label="org selection" >
       <span>Similares: </span>
       <ng-container *ngFor="let sim of similars">
-        <mat-chip class="linkSimilars" *ngIf="this.title != sim.label" matTooltip={{sim.description}} (click)="redirectHere(sim.QID, sim.label, sim.lang)"> 
-          {{sim.label}} 
-        </mat-chip>
+        <mat-chip-option class="linkSimilars" *ngIf="this.title != sim.label" matTooltip={{sim.description}} (click)="redirectHere(sim.QID, sim.label, sim.lang)">
+          {{sim.label}}
+        </mat-chip-option>
       </ng-container>
-  </mat-chip-list>
+  </mat-chip-listbox>
   <br>
   <br>
   <br>

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QueryOrgSearch } from 'src/services/query-wiki-org-search.service';
 import { QueryOrgEmployes } from '../../../../services/query-org-employes.service';
@@ -28,7 +28,7 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   @Input() data_viewer:any ;
-  
+
 
   constructor(
     private router: Router,
@@ -38,15 +38,15 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
     private querySimilar: QueryOrgSearch
   ) { }
 
-  
+
 
   ngOnInit() {
 
     /* this.QID = this.localParams.QID
     this.title = this.localParams.label
-    this.lang = this.localParams.lang */ 
-    
-    if (this.data_viewer) {      
+    this.lang = this.localParams.lang */
+
+    if (this.data_viewer) {
       this.QID = this.data_viewer.QID;
       this.title = this.data_viewer.label
       this.lang = this.data_viewer.label
@@ -58,15 +58,15 @@ export class WikiOrgEmployesProfileComponent implements OnInit {
         this.title = params['label'];
         this.lang = params['lang'];
       },
-      error: err => console.log(err)      
+      error: err => console.log(err)
       })
     }
-    
+
     /* this.router.navigate(['.'], {
       relativeTo:this.route, queryParams: {  } ,
       queryParamsHandling: 'merge'
     }) */
-        
+
     var term = this.title.replace(/ /g, "%20");
     //console.log(term);
     this.data_viewer.lang == 'es' ?

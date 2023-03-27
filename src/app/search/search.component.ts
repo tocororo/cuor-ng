@@ -1,7 +1,7 @@
 
 import { HttpParams } from "@angular/common/http";
 import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
-import { LegacyPageEvent as PageEvent } from "@angular/material/legacy-paginator";
+import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
 
@@ -18,7 +18,7 @@ import { OrgService } from "../org.service";
 export class SearchComponent implements OnInit
 {
   /**
-   * Represents the `ChartType` enum for internal use. 
+   * Represents the `ChartType` enum for internal use.
    */
   public readonly chartType: typeof ChartType;
 

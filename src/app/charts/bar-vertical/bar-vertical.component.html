@@ -16,9 +16,9 @@
         (select)="onSelect($event)">
     </ngx-charts-bar-vertical>
 
-    <mat-chip-list [selectable]="'false'" class="control-without-interactivity">
-        <mat-chip [selectable]="'false'" [disableRipple]="'true'">{{xAxisLabel}}</mat-chip>
-    </mat-chip-list>
+    <mat-chip-listbox [selectable]="'false'" class="control-without-interactivity">
+        <mat-chip-option [selectable]="'false'" [disableRipple]="'true'">{{xAxisLabel}}</mat-chip-option>
+    </mat-chip-listbox>
 
 </div>
 

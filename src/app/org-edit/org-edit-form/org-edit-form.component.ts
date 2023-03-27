@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { OrgService } from 'src/app/org.service';
 import { Address, Identifier, LabelDiffLang, Organization, OrganizationRelationships, Relationship } from 'toco-lib';
@@ -532,9 +532,9 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
       //console.log('AAAAAAAAAAAA')
       //console.log(key)
       //console.log(items[key])
-      //console.log("agregando de item relations", items[key])   
+      //console.log("agregando de item relations", items[key])
       formArrayGroup.push(this._formBuilder.group(
-        {                 
+        {
           id: new UntypedFormControl(items[key].id),
           identifiers: this.addItemsFormArrayIdentifiers(items[key].identifiers),
           label: new UntypedFormControl(items[key].label),

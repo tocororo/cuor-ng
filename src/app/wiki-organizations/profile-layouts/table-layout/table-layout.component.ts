@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -61,7 +61,7 @@ export class TableLayoutComponent implements OnInit, OnChanges {
   }
 
   authorsProfile(strQID, newlabel){
-    //localStorage.setItem('localParams',JSON.stringify({strQID: strQID, label: newlabel})) 
+    //localStorage.setItem('localParams',JSON.stringify({strQID: strQID, label: newlabel}))
     this.router.navigate(['wiki-organizations/authors'], {
       queryParams: { QID: strQID, label: newlabel },
       queryParamsHandling: 'merge'
@@ -69,8 +69,8 @@ export class TableLayoutComponent implements OnInit, OnChanges {
   }
 
   workProfile(QID, newlabel) {
- 
- //localStorage.setItem('localParams',JSON.stringify({QID: QID, label: newlabel}))   
+
+ //localStorage.setItem('localParams',JSON.stringify({QID: QID, label: newlabel}))
   this.router.navigate(['wiki-organizations/work'], {
       queryParams: { QID: QID, label: newlabel },
       queryParamsHandling: 'merge'
@@ -79,7 +79,7 @@ export class TableLayoutComponent implements OnInit, OnChanges {
 
   venueProfile(QID, newlabel) {
 
-//localStorage.setItem('localParams',JSON.stringify({QID: QID, label: newlabel}))    
+//localStorage.setItem('localParams',JSON.stringify({QID: QID, label: newlabel}))
   this.router.navigate(['wiki-organizations/venue'], {
       queryParams: { QID: QID, label: newlabel },
       queryParamsHandling: 'merge'
@@ -88,7 +88,7 @@ export class TableLayoutComponent implements OnInit, OnChanges {
 
   topicProfile(QID, newlabel) {
 
-//localStorage.setItem('localParams',JSON.stringify({QID: QID, label: newlabel}))    
+//localStorage.setItem('localParams',JSON.stringify({QID: QID, label: newlabel}))
   this.router.navigate(['wiki-organizations/topic'], {
       queryParams: { QID: QID, label: newlabel },
       queryParamsHandling: 'merge'

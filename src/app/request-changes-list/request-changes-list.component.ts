@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
-import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-request-changes-list',
