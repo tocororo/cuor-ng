@@ -1,7 +1,7 @@
 
 import { HttpParams } from "@angular/common/http";
 import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
-import { PageEvent } from "@angular/material/paginator";
+import { LegacyPageEvent as PageEvent } from "@angular/material/legacy-paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
 

@@ -84,7 +84,7 @@ $toco-warn: mat.define-palette(mat.$deep-orange-palette);
 
 $toco-theme: mat.define-light-theme($toco-primary, $toco-accent, $toco-warn);
 
-@include mat.all-component-themes($toco-theme);
+@include mat.all-legacy-component-themes($toco-theme);
 @include toco-app-theme($toco-theme);
 
 // .alternate-theme {
