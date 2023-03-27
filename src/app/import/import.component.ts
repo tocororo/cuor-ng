@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageHandler, StatusCode } from 'toco-lib';
 import { OrgService } from '../org.service';
@@ -13,19 +13,19 @@ export class ImportComponent implements OnInit {
 
   private fileUploadGRID: File;
 
-  public importFormGroup: FormGroup;
+  public importFormGroup: UntypedFormGroup;
 
-  constructor(private orgservice: OrgService, private _builder: FormBuilder, private _snackbar: MatSnackBar) { }
+  constructor(private orgservice: OrgService, private _builder: UntypedFormBuilder, private _snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.importFormGroup = this._builder.group({
-      grid: new FormControl(null, this.isFile),
-      C_orga: new FormControl(null, this.isFile),
-      C_Uniones: new FormControl(null, this.isFile),
-      RE0420: new FormControl(null, this.isFile),
-      CNOA0420: new FormControl(null, this.isFile),
-      ME0420: new FormControl(null, this.isFile),
-      dpa: new FormControl(null, this.isFile)
+      grid: new UntypedFormControl(null, this.isFile),
+      C_orga: new UntypedFormControl(null, this.isFile),
+      C_Uniones: new UntypedFormControl(null, this.isFile),
+      RE0420: new UntypedFormControl(null, this.isFile),
+      CNOA0420: new UntypedFormControl(null, this.isFile),
+      ME0420: new UntypedFormControl(null, this.isFile),
+      dpa: new UntypedFormControl(null, this.isFile)
     });
   }
 

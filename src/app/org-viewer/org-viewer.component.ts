@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,13 +25,13 @@ export class OrgViewerComponent implements OnInit {
   public appHost: string;
   public user: string;
   orgFilter = [{ type: 'country', value: 'Cuba' }, { type: 'status', value: 'active' }];
-  public form = new FormGroup({
-    anomalyDescription: new FormControl('', Validators.required),
-    duplicateDescription: new FormControl(''),
+  public form = new UntypedFormGroup({
+    anomalyDescription: new UntypedFormControl('', Validators.required),
+    duplicateDescription: new UntypedFormControl(''),
   });
 
   masterOrganization: Organization;
-  masterFormControl: FormControl;
+  masterFormControl: UntypedFormControl;
 
 
   public constructor(
