@@ -193,11 +193,11 @@ body { margin: 0; }
   text-decoration: underline;
 }
 
-ngx-charts-pie-chart.home-charts{
-  svg.ngx-charts{
-    margin-top: -11em;
-  }
-}
+// ngx-charts-pie-chart.home-charts{
+//   svg.ngx-charts{
+//     margin-top: -11em;
+//   }
+// }
 
 .mymatBadge  .mat-badge-content{
   width: auto !important;
@@ -208,24 +208,24 @@ ngx-charts-pie-chart.home-charts{
 .home-charts .chart-legend .legend-labels{
   white-space: normal;
 }
-@media (max-width: 1270px){
-  ngx-charts-pie-chart.home-charts{
-    svg.ngx-charts{
-      margin-top: -8em;
-    }
-  }
-}
-@media (max-width: 870px){
-  ngx-charts-pie-chart.home-charts{
-    svg.ngx-charts{
-      margin-top: -3em;
-    }
-  }
-}
-@media (max-width: 500px){
-  ngx-charts-pie-chart.home-charts{
-    svg.ngx-charts{
-      margin-top: -1em;
-    }
-  }
-}
+// @media (max-width: 1270px){
+//   ngx-charts-pie-chart.home-charts{
+//     svg.ngx-charts{
+//       margin-top: -8em;
+//     }
+//   }
+// }
+// @media (max-width: 870px){
+//   ngx-charts-pie-chart.home-charts{
+//     svg.ngx-charts{
+//       margin-top: -3em;
+//     }
+//   }
+// }
+// @media (max-width: 500px){
+//   ngx-charts-pie-chart.home-charts{
+//     svg.ngx-charts{
+//       margin-top: -1em;
+//     }
+//   }
+// }
