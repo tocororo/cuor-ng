@@ -1,14 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "es2020",
     "moduleResolution": "node",
+    "module": "esnext",
     "importHelpers": true,
     "target": "ES2022",
     "typeRoots": [
@@ -22,6 +22,16 @@
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
+    "strictInjectionParameters": true,
+    "enableIvy": true,
+    "preserveWhitespaces": false,
+    "buildOptimizer": true,
+    "sourceMap": true,
+    "polyfills": "./polyfills.ts",
+    "browserTarget": "app:build:production"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js"
+  ],
 }
