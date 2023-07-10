@@ -12,7 +12,8 @@ import { MarkdownModule } from 'ngx-markdown';
 import { MatomoModule } from 'ngx-matomo';
 import { environment } from 'src/environments/environment';
 import {
-  AuthenticationModule, CoreModule, Environment, NotificationModule, OrganizationServiceNoAuth,
+  AuthenticationModule, CoreModule, Environment,
+  OrganizationServiceNoAuth,
   OrganizationsModule, SearchModule, SearchService, SharedModule, StaticsModule,
   TocoFormsModule
 } from 'toco-lib';
@@ -43,14 +44,19 @@ import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { EditAddressComponent } from './org-edit/edit-address/edit-address.component';
 import {
+  OrgEditFormComponent,
   OrganizationDialogDeleteConfirm,
-  OrganizationDialogInfoConfirm, OrganizationDialogorgEditAddress, OrganizationDialogRelasionship, OrgEditFormComponent
+  OrganizationDialogInfoConfirm,
+  OrganizationDialogRelasionship,
+  OrganizationDialogorgEditAddress
 } from './org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from './org-edit/org-edit.component';
 import { OrgFooterComponent } from './org-footer/org-footer.component';
+import { OrgGetComponent } from './org-get/org-get.component';
 import { CommentDialogComponent, OrgReviewerComponent } from './org-reviewer/org-reviewer.component';
 import { OrgRoutingModule } from './org-routing.module';
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
+
 import { OrgRootComponent } from './org.component';
 import { OrgService } from './org.service';
 import { OrgsMapComponent } from './orgs-map/orgs-map.component';
@@ -92,6 +98,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SearchListComponent,
     StaticPagesComponent,
     OrgViewerComponent,
+    OrgGetComponent,
     OrgEditComponent,
     OrganizationDialogRelasionship,
     DatepickerYearComponent,

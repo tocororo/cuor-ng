@@ -3,9 +3,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar, MatStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Hit, MessageHandler, MetadataService, Organization, Redirect, RedirectPropertiesIdtype, StatusCode } from 'toco-lib';
+import { Hit, MessageHandler, MetadataService, Organization, Redirect, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
-import { OrganizationDialogDeleteConfirm, OrgEditFormComponent } from '../org-edit/org-edit-form/org-edit-form.component';
+import { OrgEditFormComponent, OrganizationDialogDeleteConfirm } from '../org-edit/org-edit-form/org-edit-form.component';
 import { OrgService } from '../org.service';
 import { DisambiguationComponent } from './disambiguation/disambiguation.component';
 
@@ -229,11 +229,9 @@ export class DisambiguateComponent implements OnInit {
     this.secundariesOrganizations.forEach(secOrg => {
       secOrg.status = "redirected";
       secOrg.redirect = new Redirect();
-      let idtype = new RedirectPropertiesIdtype();
-      idtype.type = 'sceibaid';
-      secOrg.redirect.properties.idtype = idtype; //de momento esto es el uudi, necesita analisis si se daran URIs
-      let idvalue = {type: this.masterOrganization.id}
-      secOrg.redirect.properties.value = idvalue;
+      secOrg.redirect.idtype = 'sceibaid';
+      let idvalue = this.masterOrganization.id;
+      secOrg.redirect.value = idvalue;
       let rec = new Organization();
       rec.deepcopy(secOrg);
       console.log("secundary org enviada", rec);

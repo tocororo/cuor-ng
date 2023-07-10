@@ -1,0 +1,8 @@
+
+<mat-form-field [ngStyle]="{'width': '100%'}" >
+  <mat-label>ORG PID</mat-label>
+  <input matInput placeholder="Type ORG_PID" aria-label="ORG PID" (change)="pidUpdated($event)">
+  <button mat-raised-button (click)="getOrg()" aria-label="search">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>

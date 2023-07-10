@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subject } from 'rxjs';
-import { Environment, Organization, SearchResponse, User } from 'toco-lib';
+import { Environment, Hit, Organization, SearchResponse, User } from 'toco-lib';
 
 
 
@@ -384,18 +384,18 @@ export class OrgService {
     return this.http.get<SearchResponse<Organization>>(req, options);
   }
 
-  getActiveOrganizationById(id: string): Observable<SearchResponse<Organization>> {
+  getActiveOrganizationById(id: string): Observable<Hit<Organization>> {
     const req = this.environment.sceibaApi + 'organizations/active/' + id ;
     // console.log(req);
 
-    return this.newHttp.get<SearchResponse<Organization>>(req);
+    return this.newHttp.get<Hit<Organization>>(req);
   }
 
-  getOrganizationById(id: string): Observable<SearchResponse<Organization>> {
+  getOrganizationById(id: string): Observable<Hit<Organization>> {
     const req = this.environment.sceibaApi + 'pid/organization/' + id ;
     // console.log(req);
 
-    return this.newHttp.get<SearchResponse<Organization>>(req);
+    return this.newHttp.get<Hit<Organization>>(req);
   }
 
 }
