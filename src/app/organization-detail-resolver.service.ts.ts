@@ -2,9 +2,9 @@ import { ShowErrorService } from './show-error.service';
 
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, take } from 'rxjs/operators';
-import { Organization, SearchResponse } from 'toco-lib';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { Hit, Organization } from 'toco-lib';
 import { OrgService } from './org.service';
 import { Permission } from './permission.service';
 
@@ -44,12 +44,12 @@ const orgExample: any = {
 @Injectable({
 	providedIn: 'root',
 })
-export class OrganizationDetailResolverService implements Resolve<SearchResponse<Organization>>
+export class OrganizationDetailResolverService implements Resolve<Hit<Organization>>
 {
 	public constructor(private router: Router, private service: OrgService)
 	{ }
 
-	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchResponse<Organization>>
+	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Hit<Organization>>
 	{
 		let uuid = route.paramMap.get('uuid');
 		return this.service.getOrganizationById(uuid).pipe(
@@ -73,7 +73,7 @@ export class OrganizationDetailResolverService implements Resolve<SearchResponse
 @Injectable({
 	providedIn: 'root',
 })
-export class OrganizationActiveResolverService implements Resolve<SearchResponse<Organization>>
+export class OrganizationActiveResolverService implements Resolve<Hit<Organization>>
 {
 	public constructor(
     private router: Router,
@@ -84,7 +84,7 @@ export class OrganizationActiveResolverService implements Resolve<SearchResponse
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
 	{
 		let uuid = route.paramMap.get('uuid');
-    let serviceAnswer : Observable<SearchResponse<Organization>>;
+    let serviceAnswer : Observable<Hit<Organization>>;
 		if (this.hasCurationPermission){
       serviceAnswer = this.service.getOrganizationById(uuid);
     }
@@ -100,7 +100,7 @@ export class OrganizationActiveResolverService implements Resolve<SearchResponse
             if (hit["ERROR"]){
               console.log("Error desde el backend, ", hit["ERROR"]);
               this.errorService.sendErrors({
-				  "title": "Error desde el servidor", 
+				  "title": "Error desde el servidor",
 				  "status":"402",
 				  "message": hit["ERROR"]
 				});

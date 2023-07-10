@@ -15,14 +15,9 @@
     <mat-step [stepControl]="masterFormControl">
         <ng-template matStepLabel>Seleccione una Organización</ng-template>
 
-        <toco-org-search
-          [orgFilter]="orgFilter"
-          [label]="'Organización que se considera original o principal'"
-          [cleaning]="'false'"
-          [appearance]="'outline'"
-          (selectedOrg)="receivingMaster($event)"
-          (keyup)="loading = true">
-        </toco-org-search>
+        <app-org-get
+          (selectedOrg)="receivingMaster($event)">
+        </app-org-get>
 
         <toco-org-view
           *ngIf="masterOrganization"
@@ -36,14 +31,18 @@
     <mat-step [stepControl]="secundaryFormGroup">
       <ng-template matStepLabel>Seleccione organizaciones análogas</ng-template>
 
-      <toco-org-search
+      <app-org-get
+          (selectedOrg)="receivingSecundaries($event)">
+        </app-org-get>
+
+      <!-- <toco-org-search
         [orgFilter]="orgFilter"
         [label]="'Seleccionando organizaciones que son análogas'"
         [cleaning]="'true'"
         [appearance]="'outline'"
         (selectedOrg)="receivingSecundaries($event)"
         (keyup)="loading = true">
-      </toco-org-search>
+      </toco-org-search> -->
 
       <!-- <mat-action-list *ngIf="secundaryFormGroup">
         <ng-container *ngFor="let org of secundaryFormGroup.value.analogas; let pos = index">
