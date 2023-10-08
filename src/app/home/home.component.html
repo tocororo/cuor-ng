@@ -15,6 +15,10 @@
 
 
 <div class="w-70" style="margin-top: 0.5em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em', 'padding-top':'60px'}">
+    <button mat-button (click)="installPwa()">Add to Home screen</button>
+  <button mat-icon-button (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
     <div class="mat-h2 text-format" markdown [src]="'/assets/markdown/home-about.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
     <div fxLayout="row" fxLayoutAlign="start" class="w-100 pt-20">
         <button mat-raised-button color="primary" (click)="goAbout()">{{ 'CONOZCA_DE_NOS' | translate }}</button>
