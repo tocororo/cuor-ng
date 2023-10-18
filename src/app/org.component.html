@@ -36,7 +36,7 @@
       fxLayoutGap="15px"
     >
       <button
-        mat-icon-button
+        mat-button
         [matMenuTriggerFor]="menuLanguages"
         matTooltip="{{ 'IDIOMA' | translate }}"
       >
@@ -44,12 +44,12 @@
       </button>
 
         <!-- <toco-notification-button
-          [buttonType]="'mat-icon-button'"
+          [buttonType]="'mat-button'"
           >
         </toco-notification-button> -->
 
       <!-- <button
-        mat-icon-button
+        mat-button
         [matMenuTriggerFor]="menuNetwork"
         matTooltip="{{ 'REDES_SOC' | translate }}"
       >
@@ -57,7 +57,7 @@
       </button> -->
 
       <button
-        mat-icon-button
+        mat-button
         [matMenuTriggerFor]="menuApps"
         matTooltip="{{ 'APLICACIONES' | translate }}"
       >
@@ -65,7 +65,7 @@
       </button>
 
       <button
-        mat-icon-button
+        mat-button
         [matMenuTriggerFor]="menuHelp"
         matTooltip="{{ 'AYUDA' | translate }}"
       >
@@ -73,7 +73,7 @@
       </button>
 
       <!-- <button
-        mat-icon-button
+        mat-button
         [matMenuTriggerFor]="menuLogin"
         matTooltip="{{ 'USUARIO' | translate }}"
       >
@@ -81,7 +81,7 @@
       </button> -->
 
       <button *ngIf="user"
-        mat-icon-button
+        mat-button
         [matMenuTriggerFor]="menuUser"
         matTooltip="{{ user.email }}"
       >

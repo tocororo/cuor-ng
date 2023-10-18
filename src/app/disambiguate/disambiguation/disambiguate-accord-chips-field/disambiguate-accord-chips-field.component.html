@@ -6,7 +6,7 @@
         </mat-panel-title>
         <mat-panel-title *ngIf="!isMaster" >
                 <button
-                mat-icon-button
+                mat-button
                 aria-label="Incluir todos los elementos"
                 matTooltip="Agregar todos los elementos a la organizacion principal"
                 (click)="onPropagate(contentList)">
@@ -19,7 +19,7 @@
         <ng-container *ngFor="let item of contentList; let i = index">
             <mat-chip-option>{{item}}</mat-chip-option>
             <button *ngIf="!isMaster"
-            mat-icon-button
+            mat-button
             aria-label="Incluir otro elemento  a la organizacion principal"
             matTooltip="Agregar elemento a la organizacion principal"
             (click)="onPropagate([item])">

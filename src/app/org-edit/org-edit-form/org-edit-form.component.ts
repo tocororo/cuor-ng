@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { OrgService } from 'src/app/org.service';
@@ -93,7 +93,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     this.copyOrg();
     this.initData();
     this.loading = false;
-    console.log("init before date inic ", this.org.established);
+    console.log("init before date inic ", this.org);
 
     if(this.org.established)
     {

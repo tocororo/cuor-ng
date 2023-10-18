@@ -11,13 +11,13 @@
     <div *ngIf="search_type; then search_list_button else search_charts_button"></div>
 
     <ng-template #search_list_button>
-      <button mat-icon-button  matTooltip="Estadisticas" (click)="changeView()">
+      <button mat-button  matTooltip="Estadisticas" (click)="changeView()">
         <mat-icon>insert_chart</mat-icon>
       </button>
     </ng-template>
 
     <ng-template #search_charts_button>
-      <button mat-icon-button  matTooltip="Organizaciones" (click)="changeView()">
+      <button mat-button  matTooltip="Organizaciones" (click)="changeView()">
         <mat-icon>list</mat-icon>
       </button>
     </ng-template>
@@ -58,7 +58,7 @@
 
     <div fxLayout="row nowrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
       <button
-        mat-icon-button
+        mat-button
         (click)="drawer.toggle()"
         matTooltip="Filtros avanzados"
       >
@@ -88,7 +88,7 @@
 
     <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
       <button
-        mat-icon-button
+        mat-button
         (click)="drawer.toggle()"
         matTooltip="Filtros avanzados"
       >

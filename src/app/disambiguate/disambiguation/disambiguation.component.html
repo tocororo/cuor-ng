@@ -12,7 +12,7 @@
           </mat-slide-toggle>
           <ng-container *ngIf="showSecundaries&&secundariesOrganizations&&secundariesOrganizations.length>1">
             <button
-              mat-icon-button
+              mat-button
               aria-label="Organización Anterior"
               matTooltip="Organización Anterior"
               [disabled]="!canGoPrevius()"
@@ -21,7 +21,7 @@
               <mat-icon>navigate_before</mat-icon>
             </button>
             <button
-              mat-icon-button
+              mat-button
               aria-label="Próxima Organización"
               matTooltip="Próxima Organización"
               [disabled]="!canGoNext()"

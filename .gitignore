@@ -50,3 +50,6 @@ Thumbs.db
 src/enviroment/enviroment.ts
 
 build.sh
+.angular
+.venv
+.vscode

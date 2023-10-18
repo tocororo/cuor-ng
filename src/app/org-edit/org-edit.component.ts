@@ -56,6 +56,8 @@ export class OrgEditComponent implements OnInit {
     this._orgEditForm.fillObjectControls();
 
     let edited = new Organization()
+    console.log(this._orgEditForm.orgFormGroup.value);
+
     edited.deepcopy(this._orgEditForm.orgFormGroup.value)
     edited.name = this._orgEditForm.orgFormGroup.controls['name'].value;
     console.log(edited);

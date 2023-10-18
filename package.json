@@ -1,7 +1,7 @@
 {
   "name": "organizations",
-  "version": "0.0.0",
-  "scripts": {
+  "version": "0.0.1",
+  "scr`i`pts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -29,7 +29,6 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^4.0.0",
     "@swimlane/ngx-charts": "^20.1.2",
-    "ajv": "^8.12.0",
     "angular-oauth2-oidc": "^8.0.4",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
