@@ -18,33 +18,33 @@ export class WikiTopicsProfileComponent implements OnInit {
   justify: string = 'flex-end';
   title: string = '';
   QID: any = '';
-  
+
   serviceTopics: any = [];
   serviceWorkCombinationTopics: any = [];
   serviceAutores: any = [];
-  
+
   services: any = [];
-  
+
   displayedColumns: string[] = [];
   dataSource: MatTableDataSource<any>;
-  
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  
+
   constructor(
     private route: ActivatedRoute
   ) { }
-  
+
   async ngOnInit() {
     await this.route.queryParams.subscribe(async (params) => {
       this.QID = params['QID']
-      this.title = params['label']    
+      this.title = params['label']
       console.log(this.QID);
-      
+
       this.serviceTopics = await topics(this.QID);
       this.serviceWorkCombinationTopics = await workCombinationTopics(this.QID);
       this.serviceAutores = await autores(this.QID);
-  
+
       this.services = [
         {
           key: 1,
@@ -64,7 +64,7 @@ export class WikiTopicsProfileComponent implements OnInit {
           value: await this.serviceAutores,
           label: 'Autores que publican sobre el tema'
         }
-      ]  
+      ]
     })
-  }  
+  }
 }

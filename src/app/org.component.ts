@@ -3,7 +3,6 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
-import { MatomoInjector } from "ngx-matomo";
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import {
   AuthBackend,
@@ -66,11 +65,9 @@ export class OrgRootComponent {
     private oauthService: OAuthService,
     protected http: HttpClient,
     private _transServ: TranslateService,
-    private matomoInjector: MatomoInjector
   ) {
     let env: any = this.environment;
     this.oauthInfo = env.oauthInfo;
-    this.matomoInjector.init(environment.matomoUrl, environment.matomoSiteId);
   }
 
   public ngOnInit(): void {

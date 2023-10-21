@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DatepickerYearComponent } from './datepicker-year.component';
 
@@ -6,7 +6,7 @@ describe('DatepickerYearComponent', () => {
   let component: DatepickerYearComponent;
   let fixture: ComponentFixture<DatepickerYearComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DatepickerYearComponent ]
     })

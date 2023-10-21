@@ -61,7 +61,7 @@
 >
 </app-card-item-info>
 
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10%" style="padding-top: 4em;">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10%" style="padding-top: 4em; min-height: 70vh;">
     <ngx-charts-pie-chart
         class="home-charts"
         *ngIf="loadCharts"
@@ -73,7 +73,7 @@
         [legendPosition]="legendPosition"
         [labels]="showLabels"
         [doughnut]="isDoughnut"
-        style="margin-left: 2.5em;">
+        style="margin-left: 2.5em; min-height: 400px;">
     </ngx-charts-pie-chart>
 
     <ngx-charts-bar-vertical
@@ -87,7 +87,7 @@
         [legendPosition]="legendPosition"
         [xAxisLabel]="''"
         [yAxisLabel]="''"
-        style="margin-left: 2.5em;">
+        style="margin-left: 2.5em; min-height: 450px;">
     </ngx-charts-bar-vertical>
 
 </div>

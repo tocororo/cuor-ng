@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PdfExcelComponent } from './pdf-excel.component';
 
@@ -6,7 +6,7 @@ describe('PdfExcelComponent', () => {
   let component: PdfExcelComponent;
   let fixture: ComponentFixture<PdfExcelComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PdfExcelComponent ]
     })

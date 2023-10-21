@@ -15,7 +15,7 @@ export class WikiAuthorsProfileComponent implements OnInit {
   title: string = '';
   QID: any = '';
   localParams:any = JSON.parse(localStorage.getItem('localParams'));
-  
+
   services: any = [];
   dataSource: MatTableDataSource<any>;
 
@@ -31,7 +31,7 @@ export class WikiAuthorsProfileComponent implements OnInit {
   async ngOnInit() {
    /*  this.QID = this.localParams.QID
     this.title = this.localParams.label */
-    
+
     this.route.queryParams.subscribe((params) => {
       this.QID = params['QID']
       this.title = params['label']
@@ -64,7 +64,7 @@ export class WikiAuthorsProfileComponent implements OnInit {
         this.sortArray(this.services)
       }
     });
-    
+
     this.querService.jointlyAuthoredWorks(this.QID).subscribe({
       next: res => {
         this.services.push({
@@ -77,7 +77,7 @@ export class WikiAuthorsProfileComponent implements OnInit {
         this.sortArray(this.services)
       }
     });
-    
+
     this.querService.worksPublicationYear(this.QID).subscribe({
       next: res => {
         this.services.push({
@@ -90,7 +90,7 @@ export class WikiAuthorsProfileComponent implements OnInit {
         this.sortArray(this.services)
       }
     });
-    
+
     this.querService.citationsPublicationYear(this.QID).subscribe({
       next: res => {
         this.services.push({
@@ -103,7 +103,7 @@ export class WikiAuthorsProfileComponent implements OnInit {
         this.sortArray(this.services)
       }
     });
-    
+
   /*   this.querService.coAuthorsGraph(this.QID).subscribe({
       next: res => {
         this.services.push({
@@ -116,7 +116,7 @@ export class WikiAuthorsProfileComponent implements OnInit {
         this.sortArray(this.services)
       }
     }); */
-    
+
   }
 }
 

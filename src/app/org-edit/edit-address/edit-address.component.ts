@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { OrgService } from 'src/app/org.service';
@@ -16,11 +16,11 @@ export class EditAddressComponent implements OnInit {
   public address: Address;
 
   @Output()
-  public addressEmiter : EventEmitter<FormGroup> ;
+  public addressEmiter : EventEmitter<UntypedFormGroup> ;
 
-  public formGroup: FormGroup;
+  public formGroup: UntypedFormGroup;
 
-  public autocompleteFormControl: FormControl;
+  public autocompleteFormControl: UntypedFormControl;
 
   public dpa: DPA[] = [];
 
@@ -31,8 +31,8 @@ export class EditAddressComponent implements OnInit {
   postalRegExpression = '\\d{5}([-]\\d{4})?';
   coordinatesRegExpression = '^[+-]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?,\\s*[-+]?(180(\\.0+)?|((1]0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$';
 
-  constructor(private _formBuilder: FormBuilder, private _orgService: OrgService) {
-    this.addressEmiter = new EventEmitter<FormGroup>(true);
+  constructor(private _formBuilder: UntypedFormBuilder, private _orgService: OrgService) {
+    this.addressEmiter = new EventEmitter<UntypedFormGroup>(true);
     
    }
 
@@ -56,23 +56,23 @@ export class EditAddressComponent implements OnInit {
       }
     }   
 
-    this.autocompleteFormControl = new FormControl("");
+    this.autocompleteFormControl = new UntypedFormControl("");
 
     this.formGroup = this._formBuilder.group({
-      city: new FormControl(this.address.city),
-      country: new FormControl(this.address.country),
-      country_code: new FormControl(this.address.country_code),
-      lat: new FormControl(this.address.lat),
-      lng: new FormControl(this.address.lng),
-      line_1: new FormControl(this.address.line_1),
-      line_2: new FormControl(this.address.line_2),
-      line_3: new FormControl(this.address.line_3),
-      postcode: new FormControl(this.address.postcode, Validators.pattern(this.postalRegExpression)),
-      primary: new FormControl(this.address.primary),
-      state: new FormControl(this.address.state),
-      state_code: new FormControl(this.address.state_code),
-      municipality: new FormControl(this.address.municipality),
-      municipality_dpa: new FormControl(this.address.municipality_dpa)
+      city: new UntypedFormControl(this.address.city),
+      country: new UntypedFormControl(this.address.country),
+      country_code: new UntypedFormControl(this.address.country_code),
+      lat: new UntypedFormControl(this.address.lat),
+      lng: new UntypedFormControl(this.address.lng),
+      line_1: new UntypedFormControl(this.address.line_1),
+      line_2: new UntypedFormControl(this.address.line_2),
+      line_3: new UntypedFormControl(this.address.line_3),
+      postcode: new UntypedFormControl(this.address.postcode, Validators.pattern(this.postalRegExpression)),
+      primary: new UntypedFormControl(this.address.primary),
+      state: new UntypedFormControl(this.address.state),
+      state_code: new UntypedFormControl(this.address.state_code),
+      municipality: new UntypedFormControl(this.address.municipality),
+      municipality_dpa: new UntypedFormControl(this.address.municipality_dpa)
       //TODO: falta agregar GeoNamesCity... pero eso junto a `lat` y `lng` deben salir cuando se muestre un mapa para que el usuario seleccione
     });    
 

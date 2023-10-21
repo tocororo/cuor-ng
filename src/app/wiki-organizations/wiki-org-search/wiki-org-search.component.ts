@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export interface Country {
 })
 export class OrgSearchWikiComponent implements OnInit {
 
-  orgCtrl = new FormControl('');
+  orgCtrl = new UntypedFormControl('');
   country: string = 'Q241';
   position: string = 'below'
   filteredOrg: any = [];
@@ -28,7 +28,7 @@ export class OrgSearchWikiComponent implements OnInit {
   search = null;
   filteredCountry: Country[] = [];
   filteredOptions: Observable<Country[]>;
-  countryCtrl = new FormControl('Cuba');
+  countryCtrl = new UntypedFormControl('Cuba');
   filtro = false;
   autocompleteFilter=false;
   checkedAll = false;

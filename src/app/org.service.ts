@@ -1,6 +1,6 @@
 import { HttpBackend, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subject } from 'rxjs';
 import { Environment, Hit, Organization, SearchResponse, User } from 'toco-lib';
@@ -404,7 +404,7 @@ export class OrgService {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService implements CanActivate {
+export class UserService  {
 
   user: User;
 

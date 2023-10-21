@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input-file',
@@ -15,7 +15,7 @@ export class InputFileComponent implements OnInit {
   public enctype: string;
 
   @Input()
-  public control: FormControl
+  public control: UntypedFormControl
 
   @Input()
   public placeholder: string;
@@ -40,7 +40,7 @@ export class InputFileComponent implements OnInit {
     if (this.width == undefined) this.width = "100%";
     if (this.accept == undefined) this.accept = ".json";
     if (this.enctype == undefined) this.enctype = "multipart/form-data";
-    if (this.control == undefined) this.control = new FormControl();
+    if (this.control == undefined) this.control = new UntypedFormControl();
   }
 
   /**

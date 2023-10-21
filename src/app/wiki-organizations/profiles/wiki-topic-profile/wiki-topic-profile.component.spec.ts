@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { WikiTopicProfileComponent } from './wiki-topic-profile.component';
 
@@ -6,7 +6,7 @@ describe('WikiTopicProfileComponent', () => {
   let component: WikiTopicProfileComponent;
   let fixture: ComponentFixture<WikiTopicProfileComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ WikiTopicProfileComponent ]
     })

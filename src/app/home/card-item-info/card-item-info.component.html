@@ -1,13 +1,46 @@
-
-<div class="w-100" fxLayout="column" fxLayoutAlign="center center"  style="margin-top: 2em;">
-    <div class="card-info-container w-50" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxlayoutGap="25px" [ngStyle.md]="{width: '70%'}" [ngStyle.sm]="{width: '90%'}" [ngStyle.xs]="{width: '85%'}">
-        <h1 style="width: 100%; text-align: center;">{{ title }}</h1>
-        <mat-action-list [ngStyle.xs]="{width: '95%'}">
-            <button mat-list-item *ngFor="let shoe of info; let pos=index" (click)="this.selectedPos = pos" style="margin: 16px 0;">
-                <img matListAvatar src="{{ shoe.icon}}" alt="{{ shoe.label }}">
-                {{ shoe.label }}
-            </button>
-        </mat-action-list>
-        <p *ngIf="selectedPos != -1" class="mat-h3 w-50" [ngStyle.xs]="{width: '95%'}">{{ info[selectedPos].text | translate }}</p>
+<div
+  class="w-100"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  style="margin-top: 2em"
+>
+  <div
+    class="card-info-container w-50"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-around center"
+    fxlayoutGap="25px"
+    [ngStyle.md]="{ width: '70%' }"
+    [ngStyle.sm]="{ width: '90%' }"
+    [ngStyle.xs]="{ width: '85%' }"
+  >
+    <h1 style="width: 100%; text-align: center">{{ title }}</h1>
+    <mat-action-list [ngStyle.xs]="{ width: '95%' }">
+      <button
+        mat-list-item
+        *ngFor="let shoe of info; let pos = index"
+        (click)="this.selectedPos = pos"
+        style="margin: 16px 0; display: flex; align-items: center;"
+      >
+      <div style="display: flex; align-items: center;">
+          <img
+            width="40px"
+            height="40px"
+            style="overflow: hidden; border-radius: 100%"
+            matListAvatar
+            src="{{ shoe.icon }}"
+            alt="{{ shoe.label }}"
+          />
+        <span style="margin-left: 10px;">{{ shoe.label }}</span>
     </div>
+      </button>
+    </mat-action-list>
+    <p
+      *ngIf="selectedPos != -1"
+      class="mat-h3 w-50"
+      [ngStyle.xs]="{ width: '95%' }"
+    >
+      {{ info[selectedPos].text | translate }}
+    </p>
+  </div>
 </div>

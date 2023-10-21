@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
 import { OrgService } from '../org.service';
@@ -19,7 +20,7 @@ export class OrgEditComponent implements OnInit {
 
   @Input() loading: boolean = true;
 
-  @ViewChild('orgeditform', { static: false }) private _orgEditForm: OrgEditFormComponent;
+  @ViewChild('orgeditform') private _orgEditForm: OrgEditFormComponent;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -55,6 +56,8 @@ export class OrgEditComponent implements OnInit {
     this._orgEditForm.fillObjectControls();
 
     let edited = new Organization()
+    console.log(this._orgEditForm.orgFormGroup.value);
+
     edited.deepcopy(this._orgEditForm.orgFormGroup.value)
     edited.name = this._orgEditForm.orgFormGroup.controls['name'].value;
     console.log(edited);

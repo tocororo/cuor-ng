@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DisambiguateRelationshipsComponent } from './disambiguate-relationships.component';
 
@@ -6,7 +6,7 @@ describe('DisambiguateRelationshipsComponent', () => {
   let component: DisambiguateRelationshipsComponent;
   let fixture: ComponentFixture<DisambiguateRelationshipsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DisambiguateRelationshipsComponent ]
     })

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DateAdapter, MatDatepicker, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { ControlValueAccessor, UntypedFormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import * as moment from 'moment';
 import { Moment } from 'moment';
@@ -76,9 +77,9 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
 
   @Input() touchUi = false;
 
-  @ViewChild(MatDatepicker, { static: false }) _picker: MatDatepicker<Moment>;
+  @ViewChild(MatDatepicker) _picker: MatDatepicker<Moment>;
 
-  _inputCtrl: FormControl = new FormControl();
+  _inputCtrl: UntypedFormControl = new UntypedFormControl();
 
   // Function to call when the date changes.
   onChange = (year: number) => { };

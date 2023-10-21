@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DisambiguateCardFieldComponent } from './disambiguate-card-field.component';
 
@@ -6,7 +6,7 @@ describe('DisambiguateCardFieldComponent', () => {
   let component: DisambiguateCardFieldComponent;
   let fixture: ComponentFixture<DisambiguateCardFieldComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DisambiguateCardFieldComponent ]
     })

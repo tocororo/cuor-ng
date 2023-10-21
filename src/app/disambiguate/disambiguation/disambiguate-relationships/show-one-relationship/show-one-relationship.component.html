@@ -5,9 +5,9 @@
                 {{accordionTitle}}
             </mat-panel-title>
             <mat-panel-description *ngIf="!isMaster">
-                <button mat-icon-button 
-                aria-label="Incluir todos los elementos" 
-                matTooltip="Agregar todos los elementos a la organizacion principal" 
+                <button mat-button
+                aria-label="Incluir todos los elementos"
+                matTooltip="Agregar todos los elementos a la organizacion principal"
                 (click)="onPropagate(contentList)">
                     <mat-icon color="warn">merge_type_left</mat-icon>
                 </button>
@@ -16,10 +16,10 @@
 
         <mat-list role="list">
             <mat-list-item *ngFor="let item of contentList; let i = index" role="listitem">
-                <a href="">{{item.label}}</a> 
-                <button *ngIf="!isMaster" mat-icon-button 
-                aria-label="Incluir otro elemento a la organizacion principal" 
-                matTooltip="Agregar elemento a la organizacion principal" 
+                <a href="">{{item.label}}</a>
+                <button *ngIf="!isMaster" mat-button
+                aria-label="Incluir otro elemento a la organizacion principal"
+                matTooltip="Agregar elemento a la organizacion principal"
                 (click)="onPropagate([item])">
                     <mat-icon color="primary">merge_type</mat-icon>
                 </button>

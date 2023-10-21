@@ -5,8 +5,8 @@
                     Relaciones con otras Organizaciones
                 </mat-panel-title>
                 <mat-panel-title *ngIf="!isMaster">
-                        <button mat-icon-button aria-label="Incluir todos los elementos" 
-                        matTooltip="Agregar todos los elementos a la organizacion principal" 
+                        <button mat-button aria-label="Incluir todos los elementos"
+                        matTooltip="Agregar todos los elementos a la organizacion principal"
                         (click)="onPropagate()">
                             <mat-icon color="warn">merge_type_left</mat-icon>
                         </button>
@@ -19,7 +19,7 @@
                 [contentList]=parents
                 (propagate)="getPropagateRelationships($event)"
                 ></app-show-one-relationship>
-                
+
                 <app-show-one-relationship
                 [isMaster]=isMaster
                 accordionTitle="Hijas"

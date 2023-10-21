@@ -5,7 +5,7 @@
   <ng-template #PDF>
     <div *ngIf="pdfType === 'single'; then singlePdf else listPdf"></div>
     <ng-template #singlePdf>
-      <button mat-icon-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+      <button mat-button  *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
         <mat-icon class="mat-18">picture_as_pdf</mat-icon>
       </button>
     </ng-template>
@@ -30,10 +30,10 @@
 <!--      fxLayoutAlign="space-between center"-->
 <!--      style="height: 80px;"-->
 <!--    >-->
-      <button mat-icon-button *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
+      <button mat-button *ngIf="'true'" (click)="saveAsPDF()" matTooltip="Exportar como PDF">
         <mat-icon class="mat-18">picture_as_pdf</mat-icon>
       </button>
-      <button mat-icon-button  *ngIf="'true'" (click)="saveAsEXCEL()" matTooltip="Exportar como EXCEL">
+      <button mat-button  *ngIf="'true'" (click)="saveAsEXCEL()" matTooltip="Exportar como EXCEL">
         <mat-icon class="mat-18">picture_as_pdf</mat-icon>
       </button>
 <!--    </div>-->

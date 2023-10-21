@@ -1,7 +1,9 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar, MatStepper } from '@angular/material';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hit, MessageHandler, MetadataService, Organization, Redirect, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
@@ -18,19 +20,19 @@ import { DisambiguationComponent } from './disambiguation/disambiguation.compone
 })
 export class DisambiguateComponent implements OnInit {
 
-  @ViewChild('orgeditcomp', { static: false }) private _orgEdit: OrgEditFormComponent;
-  @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
-  @ViewChild('disambiguatecomp', {static: false}) private _disambiguateComp: DisambiguationComponent;
+  @ViewChild('orgeditcomp') private _orgEdit: OrgEditFormComponent;
+  @ViewChild('stepper') private myStepper: MatStepper;
+  @ViewChild('disambiguatecomp') private _disambiguateComp: DisambiguationComponent;
 
 
   masterOrganization: Organization;
   secundariesOrganizations: Organization[];
 
-  masterFormControl: FormControl;
+  masterFormControl: UntypedFormControl;
 
-  secundaryFormGroup: FormGroup;
+  secundaryFormGroup: UntypedFormGroup;
   showSecundaries = false;
-  orgMasterCtrl: FormControl;
+  orgMasterCtrl: UntypedFormControl;
 
   step = -1;
 
@@ -39,7 +41,7 @@ export class DisambiguateComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _snackBar: MatSnackBar,
     private _dialog: MatDialog,
     private _orgService: OrgService,
@@ -51,9 +53,9 @@ export class DisambiguateComponent implements OnInit {
   private initFields() {
     this.secundariesOrganizations = new Array();
 
-    this.orgMasterCtrl = new FormControl('', Validators.required);
+    this.orgMasterCtrl = new UntypedFormControl('', Validators.required);
 
-    this.masterFormControl = new FormControl(null, Validators.required)
+    this.masterFormControl = new UntypedFormControl(null, Validators.required)
 
     this.secundaryFormGroup = this._formBuilder.group({
       analogas: this.addItemsFormArray(null)
@@ -112,8 +114,8 @@ export class DisambiguateComponent implements OnInit {
     if (isUndefined(items)) {
       formArrayGroup.push(this._formBuilder.group(
         {
-          id: new FormControl("", Validators.required),
-          name: new FormControl("", Validators.required),
+          id: new UntypedFormControl("", Validators.required),
+          name: new UntypedFormControl("", Validators.required),
         }
       ));
     }
@@ -121,8 +123,8 @@ export class DisambiguateComponent implements OnInit {
       for (const item in items) {
         formArrayGroup.push(this._formBuilder.group(
           {
-            id: new FormControl(item['id']),
-            name: new FormControl(item['name'])
+            id: new UntypedFormControl(item['id']),
+            name: new UntypedFormControl(item['name'])
           }
         ));
       }
@@ -158,10 +160,10 @@ export class DisambiguateComponent implements OnInit {
   }
 
   addSecundaryOrgControl(secundaryOrg) {
-    (this.secundaryFormGroup.get('analogas') as FormArray).push(this._formBuilder.group(
+    (this.secundaryFormGroup.get('analogas') as UntypedFormArray).push(this._formBuilder.group(
       {
-        id: new FormControl(secundaryOrg.id),
-        name: new FormControl(secundaryOrg.name),
+        id: new UntypedFormControl(secundaryOrg.id),
+        name: new UntypedFormControl(secundaryOrg.name),
       }
     ));
   }
@@ -174,13 +176,13 @@ export class DisambiguateComponent implements OnInit {
 
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '60%',
-      data: { label: (this.secundaryFormGroup.get('analogas') as FormArray).value[pos].name }
+      data: { label: (this.secundaryFormGroup.get('analogas') as UntypedFormArray).value[pos].name }
     });
 
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if (isDeleted) {
         this.secundariesOrganizations.splice(pos, 1);
-        (this.secundaryFormGroup.get('analogas') as FormArray).removeAt(pos);
+        (this.secundaryFormGroup.get('analogas') as UntypedFormArray).removeAt(pos);
 
         this._disambiguateComp.changingSecundaryPos(pos);
       }

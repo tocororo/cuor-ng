@@ -6,10 +6,10 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://localhost:5000/';
-  cuorHost = 'https://localhost:5000/';
-  sceibaApi = 'https://localhost:5000/api/';
-  cuorApi = 'https://localhost:5000/api/';
+  sceibaHost = 'https://sceiba.reduniv.edu.cu/';
+  cuorHost = 'https://sceiba.reduniv.edu.cu/';
+  sceibaApi = 'https://sceiba.reduniv.edu.cu/api/';
+  cuorApi = 'https://sceiba.reduniv.edu.cu/api/';
 
   appHost = 'https://localhost:4200';
   appName = 'Organizaciones - Sceiba';
@@ -63,4 +63,4 @@ export const environment = new EnvironmentImpl();
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

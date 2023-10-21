@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { OrgService } from 'src/app/org.service';
 import { Address, Identifier, LabelDiffLang, Organization, OrganizationRelationships, Relationship } from 'toco-lib';
@@ -19,7 +20,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   @Input() editDisabled: boolean = false;
   public pathname: string;
   public indicator: string = 'Nuevos cambios';
-  orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
+  orgFormGroup: UntypedFormGroup = this._formBuilder.group({ id: ''},[]);
 
   // TODO: pasar para organization.entity, es similar a organizationRelationship
   selectOptions = [
@@ -73,7 +74,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _orgService: OrgService) { }
@@ -92,7 +93,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     this.copyOrg();
     this.initData();
     this.loading = false;
-    console.log("init before date inic ", this.org.established);
+    console.log("init before date inic ", this.org);
 
     if(this.org.established)
     {
@@ -139,34 +140,34 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
     if(this.org){
       this.orgFormGroup = this._formBuilder.group({
-        id: new FormControl(this.org.id, Validators.required),
+        id: new UntypedFormControl(this.org.id, Validators.required),
 
         acronyms: this.addItemsFormArray(this.org.acronyms),
 
         aliases: this.addItemsFormArray(this.org.aliases),
 
-        established: new FormControl( this.org.established, Validators.required),
+        established: new UntypedFormControl( this.org.established, Validators.required),
 
-        onei_registry: new FormControl( this.org.onei_registry),
+        onei_registry: new UntypedFormControl( this.org.onei_registry),
 
         identifiers: this.addItemsFormArrayIdentifiers(this.org.identifiers),
 
         labels: this.addItemsFormArrayLabels(this.org.labels),
 
-        name: new FormControl({value: this.org.name, disabled: true}, Validators.required),
+        name: new UntypedFormControl({value: this.org.name, disabled: true}, Validators.required),
 
         relationships: this.addItemsFormArrayRelationships(this.org.relationships),
 
-        status: new FormControl(this.org.status? this.org.status : "" ),
+        status: new UntypedFormControl(this.org.status? this.org.status : "" ),
 
         types: this.addItemsFormArray(this.org.types),
 
 
         addresses: this.addItemsFormArrayAddresses(this.org.addresses),
 
-        wikipedia_url: new FormControl(this.org.wikipedia_url, [Validators.nullValidator, Validators.pattern(this.urlRegExpression)]),
+        wikipedia_url: new UntypedFormControl(this.org.wikipedia_url, [Validators.nullValidator, Validators.pattern(this.urlRegExpression)]),
 
-        email_address: new FormControl(this.org.email_address, [Validators.nullValidator, Validators.email]),
+        email_address: new UntypedFormControl(this.org.email_address, [Validators.nullValidator, Validators.email]),
 
         ip_addresses: this.addItemsFormArray(this.org.ip_addresses),
 
@@ -199,7 +200,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe((isUpdated: boolean) => {
       if(isUpdated){
-        this.orgFormGroup.setControl('name', new FormControl(this.orgFormGroup.controls['name'].value, Validators.required));
+        this.orgFormGroup.setControl('name', new UntypedFormControl(this.orgFormGroup.controls['name'].value, Validators.required));
       }
     });
 
@@ -210,19 +211,19 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
    ******************************************************************/
   addAcronyms(){
     this.org.acronyms.push("");
-    (this.orgFormGroup.get('acronyms') as FormArray).push(this._formBuilder.control(''));
+    (this.orgFormGroup.get('acronyms') as UntypedFormArray).push(this._formBuilder.control(''));
   }
 
   deleteAcronyms(pos: number){
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '40%',
-      data: { label: (this.orgFormGroup.get('acronyms') as FormArray).value[pos]}
+      data: { label: (this.orgFormGroup.get('acronyms') as UntypedFormArray).value[pos]}
     });
 
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.acronyms.splice(pos,1);
-        (this.orgFormGroup.get('acronyms') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('acronyms') as UntypedFormArray).removeAt(pos);
       }
     });
   }
@@ -246,19 +247,19 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   addlinks(){
     //const regUrl = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
     this.org.links.push("");
-    (this.orgFormGroup.get('links') as FormArray).push(this._formBuilder.control('', Validators.pattern(this.urlRegExpression)));
+    (this.orgFormGroup.get('links') as UntypedFormArray).push(this._formBuilder.control('', Validators.pattern(this.urlRegExpression)));
   }
 
   deletelinks(pos: number){
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '40%',
-      data: { label: (this.orgFormGroup.get('links') as FormArray).value[pos]}
+      data: { label: (this.orgFormGroup.get('links') as UntypedFormArray).value[pos]}
     });
 
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.links.splice(pos,1);
-        (this.orgFormGroup.get('links') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('links') as UntypedFormArray).removeAt(pos);
       }
     });
   }
@@ -268,20 +269,20 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
    ******************************************************************/
   addAliases(){
     this.org.aliases.push("");
-    (this.orgFormGroup.get('aliases') as FormArray).push(this._formBuilder.control(''));
+    (this.orgFormGroup.get('aliases') as UntypedFormArray).push(this._formBuilder.control(''));
   }
 
   deleteAliases(pos: number){
 
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '40%',
-      data: { label: (this.orgFormGroup.get('aliases') as FormArray).value[pos]}
+      data: { label: (this.orgFormGroup.get('aliases') as UntypedFormArray).value[pos]}
     });
 
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.aliases.splice(pos,1);
-        (this.orgFormGroup.get('aliases') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('aliases') as UntypedFormArray).removeAt(pos);
       }
     });
 
@@ -293,19 +294,19 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
   addTypes(){
     this.org.types.push("");
-    (this.orgFormGroup.get('types') as FormArray).push(this._formBuilder.control(''));
+    (this.orgFormGroup.get('types') as UntypedFormArray).push(this._formBuilder.control(''));
   }
 
   deleteTypes(pos: number){
     const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
       width: '40%',
-      data: { label: (this.orgFormGroup.get('types') as FormArray).value[pos]}
+      data: { label: (this.orgFormGroup.get('types') as UntypedFormArray).value[pos]}
     });
 
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.types.splice(pos,1);
-        (this.orgFormGroup.get('types') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('types') as UntypedFormArray).removeAt(pos);
       }
     });
   }
@@ -320,14 +321,14 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   public labelsControl = this._formBuilder.array([]);
   addLabels(){
     this.org.labels.push(new LabelDiffLang());
-    (this.orgFormGroup.get('labels') as FormArray).push(this._formBuilder.group({
-        label: new FormControl(""),
-        iso639: new FormControl("")
+    (this.orgFormGroup.get('labels') as UntypedFormArray).push(this._formBuilder.group({
+        label: new UntypedFormControl(""),
+        iso639: new UntypedFormControl("")
       })
     );
     this.labelsControl.push(this._formBuilder.group({
-        label: new FormControl(""),
-        iso639: new FormControl("")
+        label: new UntypedFormControl(""),
+        iso639: new UntypedFormControl("")
       })
     );
     //console.log(this.org, this.orgFormGroup, this.labelsControl);
@@ -342,7 +343,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.labels.splice(pos,1);
-        (this.orgFormGroup.get('labels') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('labels') as UntypedFormArray).removeAt(pos);
         this.labelsControl.removeAt(pos);
       }
     });
@@ -353,8 +354,8 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     for (const key in items) {
       formArrayGroup.push(this._formBuilder.group(
         {
-          label: new FormControl(items[key].label),
-          iso639: new FormControl(items[key].iso639)
+          label: new UntypedFormControl(items[key].label),
+          iso639: new UntypedFormControl(items[key].iso639)
         })
       );
     }
@@ -376,7 +377,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
       next: (result: Address) => {
         if (result && dialogRef.componentInstance.data.address) {
           //console.log("result", result, dialogRef.componentInstance.data);
-          this.org.addresses.push((dialogRef.componentInstance.data.address as FormGroup).value);
+          this.org.addresses.push((dialogRef.componentInstance.data.address as UntypedFormGroup).value);
           // changes other as `primary`
           if (this.org.addresses[this.org.addresses.length -1].primary){
           this.changeAddresPrimary(this.org.addresses.length -1)
@@ -393,12 +394,12 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     //console.log("ANTES de editar ADDRESS", this.org, this.orgFormGroup, this.addressesControl, " --------- ", (this.orgFormGroup.get("addresses") as FormArray).value[pos]);
     const dialogRef = this._dialog.open(OrganizationDialogorgEditAddress, {
       width: '60%',
-      data: { address: (this.orgFormGroup.get("addresses") as FormArray).value[pos] }
+      data: { address: (this.orgFormGroup.get("addresses") as UntypedFormArray).value[pos] }
     });
 
     dialogRef.afterClosed().subscribe((result: Relationship) => {
       if (result) {
-        this.org.addresses[pos] = (dialogRef.componentInstance.data.address as FormGroup).value;
+        this.org.addresses[pos] = (dialogRef.componentInstance.data.address as UntypedFormGroup).value;
         // changes other as `primary`
         if (this.org.addresses[pos].primary){
           this.changeAddresPrimary(pos);
@@ -419,7 +420,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.addresses.splice(pos,1);
-        (this.orgFormGroup.get('addresses') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('addresses') as UntypedFormArray).removeAt(pos);
         this.addressesControl.removeAt(pos);
       }
     });
@@ -430,20 +431,20 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     for (const key in items) {
       formArrayGroup.push(this._formBuilder.group(
         {
-          city: new FormControl(items[key].city),
-          country: new FormControl(items[key].country),
-          country_code: new FormControl(items[key].country_code),
-          lat: new FormControl(items[key].lat),
-          lng: new FormControl(items[key].lng),
-          line_1: new FormControl(items[key].line_1),
-          line_2: new FormControl(items[key].line_2),
-          line_3: new FormControl(items[key].line_3),
-          postcode: new FormControl(items[key].postcode),
-          primary: new FormControl(items[key].primary),
-          state: new FormControl(items[key].state),
-          state_code: new FormControl(items[key].state_code),
-          municipality: new FormControl(items[key].municipality),
-          municipality_dpa: new FormControl(items[key].municipality_dpa)
+          city: new UntypedFormControl(items[key].city),
+          country: new UntypedFormControl(items[key].country),
+          country_code: new UntypedFormControl(items[key].country_code),
+          lat: new UntypedFormControl(items[key].lat),
+          lng: new UntypedFormControl(items[key].lng),
+          line_1: new UntypedFormControl(items[key].line_1),
+          line_2: new UntypedFormControl(items[key].line_2),
+          line_3: new UntypedFormControl(items[key].line_3),
+          postcode: new UntypedFormControl(items[key].postcode),
+          primary: new UntypedFormControl(items[key].primary),
+          state: new UntypedFormControl(items[key].state),
+          state_code: new UntypedFormControl(items[key].state_code),
+          municipality: new UntypedFormControl(items[key].municipality),
+          municipality_dpa: new UntypedFormControl(items[key].municipality_dpa)
         })
       );
     }
@@ -467,14 +468,14 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
 
   addIdentifiers(){
     this.org.identifiers.push(new Identifier());
-    (this.orgFormGroup.get('identifiers') as FormArray).push(this._formBuilder.group({
-        idtype: new FormControl(""),
-        value: new FormControl("")
+    (this.orgFormGroup.get('identifiers') as UntypedFormArray).push(this._formBuilder.group({
+        idtype: new UntypedFormControl(""),
+        value: new UntypedFormControl("")
       })
     );
     this.identifiersControl.push(this._formBuilder.group({
-        idtype: new FormControl(""),
-        value: new FormControl("")
+        idtype: new UntypedFormControl(""),
+        value: new UntypedFormControl("")
       })
     );
   }
@@ -488,7 +489,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.identifiers.splice(pos,1);
-        (this.orgFormGroup.get('identifiers') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('identifiers') as UntypedFormArray).removeAt(pos);
         this.identifiersControl.removeAt(pos);
       }
     });
@@ -499,8 +500,8 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     for (const key in items) {
       formArrayGroup.push(this._formBuilder.group(
         {
-          idtype: new FormControl(items[key].idtype),
-          value: new FormControl(items[key].value)
+          idtype: new UntypedFormControl(items[key].idtype),
+          value: new UntypedFormControl(items[key].value)
         })
       );
     }
@@ -531,13 +532,13 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
       //console.log('AAAAAAAAAAAA')
       //console.log(key)
       //console.log(items[key])
-      //console.log("agregando de item relations", items[key])   
+      //console.log("agregando de item relations", items[key])
       formArrayGroup.push(this._formBuilder.group(
-        {                 
-          id: new FormControl(items[key].id),
+        {
+          id: new UntypedFormControl(items[key].id),
           identifiers: this.addItemsFormArrayIdentifiers(items[key].identifiers),
-          label: new FormControl(items[key].label),
-          type: new FormControl(items[key].type)
+          label: new UntypedFormControl(items[key].label),
+          type: new UntypedFormControl(items[key].type)
         })
       );
     }
@@ -553,7 +554,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
       if(isDeleted){
         this.org.relationships.splice(pos,1);
-        (this.orgFormGroup.get('relationships') as FormArray).removeAt(pos);
+        (this.orgFormGroup.get('relationships') as UntypedFormArray).removeAt(pos);
         this.relationshipsControl.removeAt(pos);
       }
     });

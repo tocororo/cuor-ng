@@ -3,7 +3,8 @@ import {HandlerComponent, Hit, MessageHandler, Organization, StatusCode} from 't
 import {OrgEditFormComponent} from '../org-edit/org-edit-form/org-edit-form.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrgService} from '../org.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {
   comment: string;
@@ -21,7 +22,7 @@ export class OrgReviewerComponent implements OnInit {
 
   @Input() loading = true;
 
-  @ViewChild('orgeditform', { static: false }) private _orgEditForm: OrgEditFormComponent;
+  @ViewChild('orgeditform') private _orgEditForm: OrgEditFormComponent;
 
 
 constructor(

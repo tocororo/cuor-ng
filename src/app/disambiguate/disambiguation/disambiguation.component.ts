@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Hit, MessageHandler, Organization, Relationship, StatusCode } from 'toco-lib';
 import { OrgService } from '../../org.service';
 

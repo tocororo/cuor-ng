@@ -3,7 +3,7 @@ import * as XLSX from 'xlsx';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const options = [ { key: 'identifiers', value: 'Lista de los identificadores de la organización'},
@@ -34,7 +34,7 @@ export class PdfExcelComponent implements OnInit {
   @Input() type: 'pdf' | 'excel' | null = null;
   @Input() viewType: 'icon' | 'button' = 'icon';
 
-  orgFormGroup: FormGroup = this._formBuilder.group({ id: ''},[]);
+  orgFormGroup: UntypedFormGroup = this._formBuilder.group({ id: ''},[]);
   keys: string[] = []
   pdfArray: any = []
 
@@ -57,23 +57,23 @@ export class PdfExcelComponent implements OnInit {
   };
 
   constructor(public PdfDialog: MatDialog,
-  private _formBuilder: FormBuilder,) { }
+  private _formBuilder: UntypedFormBuilder,) { }
 
   ngOnInit() {
     this.orgFormGroup = this._formBuilder.group({
-      identifiers: new FormControl(false),
-      aliases: new FormControl(false),
-      acronyms: new FormControl(false),
-      types: new FormControl(false),
-      wikipedia_url: new FormControl(false),
-      redirect: new FormControl(false),
-      email_address: new FormControl(false),
-      established: new FormControl(false),
-      onei_registry: new FormControl(false),
-      links: new FormControl(false),
-      labels: new FormControl(false),
-      addresses: new FormControl(false),
-      relationships: new FormControl((false),)
+      identifiers: new UntypedFormControl(false),
+      aliases: new UntypedFormControl(false),
+      acronyms: new UntypedFormControl(false),
+      types: new UntypedFormControl(false),
+      wikipedia_url: new UntypedFormControl(false),
+      redirect: new UntypedFormControl(false),
+      email_address: new UntypedFormControl(false),
+      established: new UntypedFormControl(false),
+      onei_registry: new UntypedFormControl(false),
+      links: new UntypedFormControl(false),
+      labels: new UntypedFormControl(false),
+      addresses: new UntypedFormControl(false),
+      relationships: new UntypedFormControl((false),)
     })
   }
   identifiers(value, tableLayout) {
@@ -377,7 +377,7 @@ export class PdfDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<PdfExcelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FormGroup) {}
+    @Inject(MAT_DIALOG_DATA) public data: UntypedFormGroup) {}
 
   onNoClick(): void {
     this.dialogRef.close();

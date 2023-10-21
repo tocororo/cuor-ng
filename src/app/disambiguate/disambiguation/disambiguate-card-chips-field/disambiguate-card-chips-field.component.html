@@ -1,43 +1,43 @@
 <mat-card *ngIf="contentList && contentList.length">
-    <mat-card-header>            
+    <mat-card-header>
         <mat-card-subtitle>
             {{chipsTitle}}
-            <button *ngIf="!isMaster" mat-icon-button 
-            aria-label="Incluir todos los elementos" 
-            matTooltip="Agregar todos a la organizacion principal" 
+            <button *ngIf="!isMaster" mat-button
+            aria-label="Incluir todos los elementos"
+            matTooltip="Agregar todos a la organizacion principal"
             (click)="onPropagate(contentList)">
                 <mat-icon color="warn">merge_type_left</mat-icon>
-            </button>             
-        </mat-card-subtitle>                       
+            </button>
+        </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>        
+    <mat-card-content>
         <mat-list role="list">
             <mat-list-item *ngFor="let item of contentList; let i = index" role="listitem">
                 {{item[idName]}} : {{item[valueName]}}
-                <button *ngIf="!isMaster" mat-icon-button 
-                aria-label="Incluir a la lista principal" 
-                matTooltip="Agregar a la organizacion principal" 
+                <button *ngIf="!isMaster" mat-button
+                aria-label="Incluir a la lista principal"
+                matTooltip="Agregar a la organizacion principal"
                 (click)="onPropagate([item])">
                     <mat-icon color="primary">merge_type</mat-icon>
-                </button> 
-            </mat-list-item>                   
+                </button>
+            </mat-list-item>
         </mat-list>
     </mat-card-content>
-    <mat-card-footer *ngIf="isMaster">            
+    <mat-card-footer *ngIf="isMaster">
         &nbsp;
         &nbsp;
     </mat-card-footer>
-</mat-card> 
+</mat-card>
 
 <mat-card *ngIf="!contentList || contentList.length==0">
-    <mat-card-header>            
-        <mat-card-subtitle>{{chipsTitle}}</mat-card-subtitle>                       
+    <mat-card-header>
+        <mat-card-subtitle>{{chipsTitle}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>        
+    <mat-card-content>
         <mat-label class="text-muted text-through">Vacío</mat-label>
     </mat-card-content>
-    <mat-card-footer *ngIf="isMaster">            
+    <mat-card-footer *ngIf="isMaster">
         &nbsp;
         &nbsp;
-    </mat-card-footer>    
+    </mat-card-footer>
 </mat-card>

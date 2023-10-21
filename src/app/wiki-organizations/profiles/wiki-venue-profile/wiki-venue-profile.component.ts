@@ -62,7 +62,7 @@ export class WikiVenueProfileComponent implements OnInit {
     const firstPageId = pageIds.length ? pageIds[0] : null;
     return firstPageId ? pages[firstPageId].extract : null;
   };
-  
+
   goWikipedia() {
     var term = this.title.replace(/ /g, "%20");
     window.open(`https://es.wikipedia.org/wiki/${term}`, '_blank');

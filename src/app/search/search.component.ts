@@ -1,7 +1,8 @@
 
 import { HttpParams } from "@angular/common/http";
 import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
-import { MatDrawer, PageEvent } from "@angular/material";
+import { PageEvent } from "@angular/material/paginator";
+import { MatDrawer } from "@angular/material/sidenav";
 import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
 
 import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
@@ -17,7 +18,7 @@ import { OrgService } from "../org.service";
 export class SearchComponent implements OnInit
 {
   /**
-   * Represents the `ChartType` enum for internal use. 
+   * Represents the `ChartType` enum for internal use.
    */
   public readonly chartType: typeof ChartType;
 
@@ -73,7 +74,7 @@ export class SearchComponent implements OnInit
 
   loading: boolean = true;
 
-  @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
 
   public constructor(
     private _cuorService: OrgService,
