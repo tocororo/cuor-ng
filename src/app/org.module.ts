@@ -10,7 +10,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { OAuthStorage } from "angular-oauth2-oidc";
 import { MarkdownModule } from "ngx-markdown";
-import { MatomoModule } from "ngx-matomo";
 import { environment } from "src/environments/environment";
 import {
   AuthenticationModule,
@@ -198,17 +197,17 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       },
     }),
     AuthenticationModule,
-    MatomoModule.forRoot({
-      trackers: [
-        {
-          trackerUrl: environment.matomoUrl,
-          siteId: environment.matomoSiteId,
-        },
-      ],
-      routeTracking: {
-        enable: true,
-      },
-    }),
+    // MatomoModule.forRoot({
+    //   trackers: [
+    //     {
+    //       trackerUrl: environment.matomoUrl,
+    //       siteId: environment.matomoSiteId,
+    //     },
+    //   ],
+    //   routeTracking: {
+    //     enable: true,
+    //   },
+    // }),
     // NotificationModule
   ],
   providers: [
