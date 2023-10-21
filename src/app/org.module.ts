@@ -1,11 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatRadioModule } from "@angular/material/radio";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 // testing charts organizations
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { OAuthStorage } from "angular-oauth2-oidc";
@@ -20,7 +20,6 @@ import {
   OrganizationsModule,
   SearchModule,
   SearchService,
-  SharedModule,
   StaticsModule,
   TocoFormsModule
 } from "toco-lib";
@@ -79,6 +78,7 @@ import {
 import { RequestChangesListComponent } from "./request-changes-list/request-changes-list.component";
 import { SearchListComponent } from "./search-list/search-list.component";
 import { SearchComponent } from "./search/search.component";
+import { SharedModule } from "./shared/shared.module";
 import { StaticPagesComponent } from "./static-pages/static-pages.component";
 import { ExpansionPanelLayoutComponent } from "./wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component";
 import { TableLayoutComponent } from "./wiki-organizations/profile-layouts/table-layout/table-layout.component";
@@ -167,7 +167,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SceibaMenuAppsComponent,
   ],
   imports: [
-    MatRadioModule,
     NgxChartsModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -184,6 +183,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     StaticsModule,
     OrganizationsModule,
     TocoFormsModule,
+    FormsModule,
+    FlexLayoutModule,
     OrgRoutingModule,
     SearchModule,
     MarkdownModule.forRoot({

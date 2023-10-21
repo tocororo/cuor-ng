@@ -1,7 +1,7 @@
 import { ShowErrorService } from './show-error.service';
 
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Hit, Organization } from 'toco-lib';
@@ -44,7 +44,7 @@ const orgExample: any = {
 @Injectable({
 	providedIn: 'root',
 })
-export class OrganizationDetailResolverService implements Resolve<Hit<Organization>>
+export class OrganizationDetailResolverService 
 {
 	public constructor(private router: Router, private service: OrgService)
 	{ }
@@ -73,7 +73,7 @@ export class OrganizationDetailResolverService implements Resolve<Hit<Organizati
 @Injectable({
 	providedIn: 'root',
 })
-export class OrganizationActiveResolverService implements Resolve<Hit<Organization>>
+export class OrganizationActiveResolverService 
 {
 	public constructor(
     private router: Router,

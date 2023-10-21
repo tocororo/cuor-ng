@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
 import { MessageHandler, StatusCode } from 'toco-lib';
@@ -8,7 +8,7 @@ import { MessageHandler, StatusCode } from 'toco-lib';
 @Injectable({
   providedIn: 'root'
 })
-export class CuratorPermissionService implements CanActivate{
+export class CuratorPermissionService {
 
   constructor(
     // private oauthStorage: OAuthStorage,
@@ -33,7 +33,7 @@ export class CuratorPermissionService implements CanActivate{
 @Injectable({
   providedIn: 'root'
 })
-export class AdminPermissionService implements CanActivate{
+export class AdminPermissionService {
 
   constructor(
     // private oauthStorage: OAuthStorage,
