@@ -11,8 +11,8 @@ import {
   OauthInfo,
   User
 } from "toco-lib";
-import { UserService } from "./org.service";
-import { Permission } from "./permission.service";
+import { UserService } from "./services/org.service";
+import { Permission } from "./services/permission.service";
 
 @Component({
   selector: "toco-org-root",

@@ -5,12 +5,15 @@ import { OauthAuthenticationService } from 'toco-lib';
 import { DisambiguateComponent } from './disambiguate/disambiguate.component';
 import { HomeComponent } from './home/home.component';
 import { ImportComponent } from './import/import.component';
+import { NotificationsComponent } from "./notifications/notifications.component";
 import { OrgEditComponent } from './org-edit/org-edit.component';
+import { OrgReviewerComponent } from "./org-reviewer/org-reviewer.component";
 import { OrgViewerComponent } from './org-viewer/org-viewer.component';
-import { UserService } from './org.service';
-import { OrganizationDetailResolverService, OrganizationActiveResolverService } from './organization-detail-resolver.service.ts';
-import { AdminPermissionService, CuratorPermissionService } from './permission.service';
+import { RequestChangesListComponent } from "./request-changes-list/request-changes-list.component";
 import { SearchComponent } from './search/search.component';
+import { UserService } from './services/org.service';
+import { OrganizationActiveResolverService, OrganizationDetailResolverService } from './services/organization-detail-resolver.service.ts';
+import { AdminPermissionService, CuratorPermissionService } from './services/permission.service';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { WikiAuthorProfileComponent } from './wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
 import { WikiAuthorsProfileComponent } from './wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
@@ -20,12 +23,9 @@ import { WikiTopicsProfileComponent } from './wiki-organizations/profiles/wiki-t
 import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
 import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
-import {OrgReviewerComponent} from "./org-reviewer/org-reviewer.component";
-import {RequestChangesListComponent} from "./request-changes-list/request-changes-list.component";
-import {NotificationsComponent} from "./notifications/notifications.component";
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
-import { Error404Component } from './error404/error404.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { Error404Component } from './error404/error404.component';
 
 
 

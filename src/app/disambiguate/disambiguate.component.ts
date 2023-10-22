@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Hit, MessageHandler, MetadataService, Organization, Redirect, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
 import { OrgEditFormComponent, OrganizationDialogDeleteConfirm } from '../org-edit/org-edit-form/org-edit-form.component';
-import { OrgService } from '../org.service';
+import { OrgService } from '../services/org.service';
 import { DisambiguationComponent } from './disambiguation/disambiguation.component';
 
 

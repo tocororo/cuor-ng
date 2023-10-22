@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
-import { OrgService } from '../org.service';
+import { OrgService } from '../services/org.service';
 import { OrgEditFormComponent } from './org-edit-form/org-edit-form.component';
 
 

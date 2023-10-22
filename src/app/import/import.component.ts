@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageHandler, StatusCode } from 'toco-lib';
-import { OrgService } from '../org.service';
+import { OrgService } from '../services/org.service';
 
 @Component({
   selector: 'app-import',

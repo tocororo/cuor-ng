@@ -1,10 +1,10 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
-import {HandlerComponent, Hit, MessageHandler, Organization, StatusCode} from 'toco-lib';
-import {OrgEditFormComponent} from '../org-edit/org-edit-form/org-edit-form.component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {OrgService} from '../org.service';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
+import { OrgEditFormComponent } from '../org-edit/org-edit-form/org-edit-form.component';
+import { OrgService } from '../services/org.service';
 
 export interface DialogData {
   comment: string;

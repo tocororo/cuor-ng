@@ -8,7 +8,7 @@ import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/route
 import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
 
 import { ChartType } from "../charts/chart-utils";
-import { OrgService } from "../org.service";
+import { OrgService } from "../services/org.service";
 
 @Component({
   selector: "app-search",

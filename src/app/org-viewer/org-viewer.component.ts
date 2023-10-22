@@ -9,7 +9,7 @@ import { OAuthStorage } from 'angular-oauth2-oidc';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Environment, MetadataService, Organization } from 'toco-lib';
-import { Permission } from '../permission.service';
+import { Permission } from '../services/permission.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({

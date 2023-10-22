@@ -1,7 +1,7 @@
-import { ShowErrorService } from './../show-error.service';
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ShowErrorService } from '../services/show-error.service';
 
 @Component({
   selector: 'app-error-page',
@@ -19,17 +19,17 @@ export class ErrorPageComponent implements OnDestroy {
   constructor(
     private router: Router,
     private errorService: ShowErrorService
-    ) { 
+    ) {
     // subscribe to error component service
     this.subscription = this.errorService.getErrors().subscribe(error => {
       console.log(" antes de comprobar ", error);
-      
+
       if (error) {
         this.title = error.title;
         this.status = error.status;
         this.message = error.message;
         console.log("error entrado a ver si llega ", this.title, this.status, this.message);
-        
+
       } else {
         // with errors then redirecting to home page
         this.router.navigate(['/']);
@@ -37,7 +37,7 @@ export class ErrorPageComponent implements OnDestroy {
     });
 
   }
-  
+
   ngOnDestroy(){
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();

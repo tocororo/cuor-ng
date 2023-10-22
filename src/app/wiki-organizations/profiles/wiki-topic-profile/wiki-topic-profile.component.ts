@@ -12,7 +12,7 @@ import {
 
 
   publicationsPerYear, publishingAbaut, recentWorksTopic
-} from '../../../../services/query-topic.service';
+} from '../../../services/query-topic.service';
 
 @Component({
   selector: 'app-wiki-topic-profile',

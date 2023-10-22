@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { QueryWork } from '../../../../services/query-works.service';
+import { QueryWork } from '../../../services/query-works.service';
 
 @Component({
   selector: 'wiki-work-profile',

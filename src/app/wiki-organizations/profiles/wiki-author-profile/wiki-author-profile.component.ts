@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QueryAuthors } from '../../../../services/query-authors.service';
+import { QueryAuthors } from '../../../services/query-authors.service';
 
 @Component({
   selector: 'app-wiki-author-profile',

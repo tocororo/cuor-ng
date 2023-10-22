@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { OrgService } from 'src/app/org.service';
-import { Address, Organization } from 'toco-lib';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { OrgService } from 'src/app/services/org.service';
+import { Address } from 'toco-lib';
 
 @Component({
   selector: 'app-edit-address',
@@ -33,7 +31,7 @@ export class EditAddressComponent implements OnInit {
 
   constructor(private _formBuilder: UntypedFormBuilder, private _orgService: OrgService) {
     this.addressEmiter = new EventEmitter<UntypedFormGroup>(true);
-    
+
    }
 
   ngOnInit() {
@@ -45,16 +43,16 @@ export class EditAddressComponent implements OnInit {
       this.address.country_code = "CU";
     }
     else {
-      if (this.address.state) {        
+      if (this.address.state) {
         const first_state =  this.dpa.find((option : DPA) =>  option.iso == this.address.state_code);
-        
-        if(first_state != undefined){          
-          this.municipalities = first_state.municipalities;          
+
+        if(first_state != undefined){
+          this.municipalities = first_state.municipalities;
           console.log("minicipalities -------->>>> ", this.municipalities);
-          
+
         }
       }
-    }   
+    }
 
     this.autocompleteFormControl = new UntypedFormControl("");
 
@@ -74,10 +72,10 @@ export class EditAddressComponent implements OnInit {
       municipality: new UntypedFormControl(this.address.municipality),
       municipality_dpa: new UntypedFormControl(this.address.municipality_dpa)
       //TODO: falta agregar GeoNamesCity... pero eso junto a `lat` y `lng` deben salir cuando se muestre un mapa para que el usuario seleccione
-    });    
+    });
 
     console.log("Form group address: ", this.formGroup);
-    
+
 
     this.formGroup.valueChanges.subscribe({
       next: ( ) =>{

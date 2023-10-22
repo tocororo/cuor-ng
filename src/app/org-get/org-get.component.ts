@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { EventEmitter, Output } from '@angular/core';
 import { Environment, Organization } from 'toco-lib';
-import { OrgService } from '../org.service';
+import { OrgService } from '../services/org.service';
 
 
 

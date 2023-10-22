@@ -3,8 +3,8 @@ import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { QueryOrgSearch } from 'src/app/services/query-wiki-org-search.service';
 import { Organization } from 'toco-lib';
-import { QueryOrgSearch } from '../../../services/query-wiki-org-search.service';
 
 export interface Country {
   QID: string;
@@ -61,7 +61,7 @@ export class OrgSearchWikiComponent implements OnInit {
   @Output()
   selectedOrg: EventEmitter<Organization> = new EventEmitter<Organization>();
 
- 
+
 
   constructor(
     private router: Router,
@@ -98,18 +98,18 @@ export class OrgSearchWikiComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.label),
         map(label => label ? this._filter(label) : res.slice())
       );
-        console.log(res);        
+        console.log(res);
       },
-      error: err => console.log(err)      
+      error: err => console.log(err)
     })
   }
 
   searchOrg() {
     if (typeof this.orgCtrl.value === 'string' && this.orgCtrl.value != '') {
     this.querySimilar.getSimilars(this.orgCtrl.value).subscribe({
-      next: res => {  
+      next: res => {
         if (res && typeof res === 'object') {
-              this.filteredSimilarsOrg = res;  
+              this.filteredSimilarsOrg = res;
               if (this.filteredSimilarsOrg.length > 0) {
                 this.search = true;
                 this.searchLabel = this.orgCtrl.value;
@@ -117,16 +117,16 @@ export class OrgSearchWikiComponent implements OnInit {
               } else {
                 this.search = false;
                 this.orgCtrl.setValue("");
-              }     
-        }      
+              }
+        }
       },
       error: err => console.log(err)
-    });      
+    });
   }
   }
 
   /* This function redirect to the profile for employes and afiliates od the organization
-   * 
+   *
    */
   redirectProfile(QID, newlabel, lang) {
     //localStorage.setItem('localParams',JSON.stringify({QID:QID, label:newlabel, lang:lang}))

@@ -68,7 +68,6 @@ import {
 import { OrgRoutingModule } from "./org-routing.module";
 import { OrgViewerComponent } from "./org-viewer/org-viewer.component";
 import { OrgRootComponent } from "./org.component";
-import { OrgService } from "./org.service";
 import { OrgsMapComponent } from "./orgs-map/orgs-map.component";
 import {
   PdfDialogComponent,
@@ -77,6 +76,7 @@ import {
 import { RequestChangesListComponent } from "./request-changes-list/request-changes-list.component";
 import { SearchListComponent } from "./search-list/search-list.component";
 import { SearchComponent } from "./search/search.component";
+import { OrgService } from "./services/org.service";
 import { SharedModule } from "./shared/shared.module";
 import { StaticPagesComponent } from "./static-pages/static-pages.component";
 import { ExpansionPanelLayoutComponent } from "./wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component";

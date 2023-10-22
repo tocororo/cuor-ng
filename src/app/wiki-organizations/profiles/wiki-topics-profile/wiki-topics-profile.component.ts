@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   autores, topics,
   workCombinationTopics
-} from '../../../../services/query-topic.service';
+} from '../../../services/query-topic.service';
 
 @Component({
   selector: 'wiki-topics-profile',
