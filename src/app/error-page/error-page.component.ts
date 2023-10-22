@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ShowErrorService } from '../services/show-error.service';
+import { ShowErrorService } from '../_services/show-error.service';
 
 @Component({
   selector: 'app-error-page',

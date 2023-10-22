@@ -3,8 +3,8 @@ import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { QueryOrgSearch } from 'src/app/services/query-wiki-org-search.service';
 import { Organization } from 'toco-lib';
+import { QueryOrgSearch } from '../../_services/query-wiki-org-search.service';
 
 export interface Country {
   QID: string;

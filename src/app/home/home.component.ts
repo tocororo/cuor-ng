@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MetadataService, Organization, SearchResponse } from 'toco-lib';
-import { OrgService } from '../services/org.service';
+import { OrgService } from '../_services/org.service';
 
 
 

@@ -3,8 +3,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
+import { OrgService } from '../_services/org.service';
 import { OrgEditFormComponent } from '../org-edit/org-edit-form/org-edit-form.component';
-import { OrgService } from '../services/org.service';
 
 export interface DialogData {
   comment: string;

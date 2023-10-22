@@ -4,9 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import {
-  autores, topics,
-  workCombinationTopics
-} from '../../../services/query-topic.service';
+    autores, topics,
+    workCombinationTopics
+} from '../../../_services/query-topic.service';
 
 @Component({
   selector: 'wiki-topics-profile',

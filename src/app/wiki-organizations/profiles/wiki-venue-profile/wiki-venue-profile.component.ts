@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { QueryVenue } from '../../../services/query.venue.service';
+import { QueryVenue } from '../../../_services/query.venue.service';
 
 const getFirstPageExtract = jsonResponse => {
   const pages = jsonResponse.query.pages;

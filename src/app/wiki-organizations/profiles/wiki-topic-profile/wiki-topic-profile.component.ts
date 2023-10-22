@@ -4,15 +4,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import {
-  authorsCited, authorsPublishingAbout,
+    authorsCited, authorsPublishingAbout,
 
 
 
-  awardsRecived, coOccurringTopics, earliestWorksTopic,
+    awardsRecived, coOccurringTopics, earliestWorksTopic,
 
 
-  publicationsPerYear, publishingAbaut, recentWorksTopic
-} from '../../../services/query-topic.service';
+    publicationsPerYear, publishingAbaut, recentWorksTopic
+} from '../../../_services/query-topic.service';
 
 @Component({
   selector: 'app-wiki-topic-profile',

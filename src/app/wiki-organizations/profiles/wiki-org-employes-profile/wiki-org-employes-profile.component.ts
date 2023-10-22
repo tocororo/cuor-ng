@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QueryOrgEmployes } from '../../../services/query-org-employes.service';
-import { QueryOrgSearch } from '../../../services/query-wiki-org-search.service';
+import { QueryOrgEmployes } from '../../../_services/query-org-employes.service';
+import { QueryOrgSearch } from '../../../_services/query-wiki-org-search.service';
 
 @Component({
   selector: 'wiki-org-employes-profile',  //'app-wiki-profile',

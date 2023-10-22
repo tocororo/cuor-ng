@@ -5,14 +5,14 @@ import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import {
-  AuthBackend,
-  Environment,
-  OauthAuthenticationService,
-  OauthInfo,
-  User
+    AuthBackend,
+    Environment,
+    OauthAuthenticationService,
+    OauthInfo,
+    User
 } from "toco-lib";
-import { UserService } from "./services/org.service";
-import { Permission } from "./services/permission.service";
+import { UserService } from "./_services/org.service";
+import { Permission } from "./_services/permission.service";
 
 @Component({
   selector: "toco-org-root",

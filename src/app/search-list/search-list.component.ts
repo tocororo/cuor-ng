@@ -2,7 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { HitList, Organization } from 'toco-lib';
-import { Permission } from '../services/permission.service';
+import { Permission } from '../_services/permission.service';
 
 @Component({
 	selector: 'search-list',

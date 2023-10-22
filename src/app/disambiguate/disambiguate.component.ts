@@ -7,8 +7,8 @@ import { MatStepper } from '@angular/material/stepper';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hit, MessageHandler, MetadataService, Organization, Redirect, StatusCode } from 'toco-lib';
 import { isUndefined } from 'util';
+import { OrgService } from '../_services/org.service';
 import { OrgEditFormComponent, OrganizationDialogDeleteConfirm } from '../org-edit/org-edit-form/org-edit-form.component';
-import { OrgService } from '../services/org.service';
 import { DisambiguationComponent } from './disambiguation/disambiguation.component';
 
 

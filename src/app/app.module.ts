@@ -12,16 +12,17 @@ import { OAuthStorage } from "angular-oauth2-oidc";
 import { MarkdownModule } from "ngx-markdown";
 import { environment } from "src/environments/environment";
 import {
-  AuthenticationModule,
-  CoreModule,
-  Environment,
-  OrganizationServiceNoAuth,
-  OrganizationsModule,
-  SearchModule,
-  SearchService,
-  StaticsModule,
-  TocoFormsModule
+    AuthenticationModule,
+    CoreModule,
+    Environment,
+    OrganizationServiceNoAuth,
+    OrganizationsModule,
+    SearchModule,
+    SearchService,
+    StaticsModule,
+    TocoFormsModule
 } from "toco-lib";
+import { OrgService } from "./_services/org.service";
 import { AggregationsComponent } from "./aggregations/aggregations.component";
 import { OrgRoutingModule } from "./app-routing.module";
 import { OrgRootComponent } from "./app.component";
@@ -39,8 +40,8 @@ import { DisambiguateRelationshipsComponent } from "./disambiguate/disambiguatio
 import { ShowOneRelationshipComponent } from "./disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component";
 import { DisambiguateTextFieldComponent } from "./disambiguate/disambiguation/disambiguate-text-field/disambiguate-text-field.component";
 import {
-  DisambiguationComponent,
-  Step3DisambiguateHelp,
+    DisambiguationComponent,
+    Step3DisambiguateHelp,
 } from "./disambiguate/disambiguation/disambiguation.component";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 import { Error404Component } from "./error404/error404.component";
@@ -54,29 +55,28 @@ import { SceibaMenuAppsComponent } from "./menu-apps/menu-apps.component";
 import { NotificationsComponent } from "./notifications/notifications.component";
 import { EditAddressComponent } from "./org-edit/edit-address/edit-address.component";
 import {
-  OrgEditFormComponent,
-  OrganizationDialogDeleteConfirm,
-  OrganizationDialogInfoConfirm,
-  OrganizationDialogRelasionship,
-  OrganizationDialogorgEditAddress,
+    OrgEditFormComponent,
+    OrganizationDialogDeleteConfirm,
+    OrganizationDialogInfoConfirm,
+    OrganizationDialogRelasionship,
+    OrganizationDialogorgEditAddress,
 } from "./org-edit/org-edit-form/org-edit-form.component";
 import { OrgEditComponent } from "./org-edit/org-edit.component";
 import { OrgFooterComponent } from "./org-footer/org-footer.component";
 import { OrgGetComponent } from "./org-get/org-get.component";
 import {
-  CommentDialogComponent,
-  OrgReviewerComponent,
+    CommentDialogComponent,
+    OrgReviewerComponent,
 } from "./org-reviewer/org-reviewer.component";
 import { OrgViewerComponent } from "./org-viewer/org-viewer.component";
 import { OrgsMapComponent } from "./orgs-map/orgs-map.component";
 import {
-  PdfDialogComponent,
-  PdfExcelComponent,
+    PdfDialogComponent,
+    PdfExcelComponent,
 } from "./pdf-excel/pdf-excel.component";
 import { RequestChangesListComponent } from "./request-changes-list/request-changes-list.component";
 import { SearchListComponent } from "./search-list/search-list.component";
 import { SearchComponent } from "./search/search.component";
-import { OrgService } from "./services/org.service";
 import { SharedModule } from "./shared/shared.module";
 import { StaticPagesComponent } from "./static-pages/static-pages.component";
 import { ExpansionPanelLayoutComponent } from "./wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component";

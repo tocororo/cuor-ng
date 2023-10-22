@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { OrgService } from 'src/app/services/org.service';
+import { OrgService } from 'src/app/_services/org.service';
 import { Address } from 'toco-lib';
 
 @Component({
