@@ -3,9 +3,9 @@ import { UntypedFormArray, UntypedFormBuilder, UntypedFormControl, UntypedFormGr
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { OrgService } from 'src/app/_services/org.service';
 import { Address, Identifier, LabelDiffLang, Organization, OrganizationRelationships, Relationship } from 'toco-lib';
 import { isUndefined } from 'util';
+import { OrgService } from '../../_services/org.service';
 
 
 @Component({
