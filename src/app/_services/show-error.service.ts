@@ -1,5 +1,5 @@
-import { Observable, of, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 export interface IError {
   title: string;
@@ -13,8 +13,8 @@ export interface IError {
 export class ShowErrorService {
 
     /**
-     * A Subject that behaves as the bridge between the two components. 
-     * It emits an IError if there is an HTTP request error. 
+     * A Subject that behaves as the bridge between the two components.
+     * It emits an IError if there is an HTTP request error.
      */
 
   public errorSubject = new Subject<IError>();
@@ -26,7 +26,7 @@ export class ShowErrorService {
   }
 
   clearErrors() {
-      this.errorSubject.next();
+      this.errorSubject.next(null);
   }
 
   getErrors(): Observable<IError> {
