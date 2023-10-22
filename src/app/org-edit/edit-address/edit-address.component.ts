@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { OrgService } from 'src/app/_services/org.service';
 import { Address } from 'toco-lib';
+import { OrgService } from '../../_services/org.service';
 
 @Component({
   selector: 'app-edit-address',
