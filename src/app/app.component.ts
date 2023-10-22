@@ -16,8 +16,8 @@ import { Permission } from "./services/permission.service";
 
 @Component({
   selector: "toco-org-root",
-  templateUrl: "./org.component.html",
-  styleUrls: ["./org.component.scss"],
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class OrgRootComponent {
   /**

@@ -23,6 +23,8 @@ import {
   TocoFormsModule
 } from "toco-lib";
 import { AggregationsComponent } from "./aggregations/aggregations.component";
+import { OrgRoutingModule } from "./app-routing.module";
+import { OrgRootComponent } from "./app.component";
 import { BarVerticalComponent } from "./charts/bar-vertical/bar-vertical.component";
 import { ChartsComponent } from "./charts/charts.component";
 import { GaugeChartComponent } from "./charts/gauge-chart/gauge-chart.component";
@@ -65,9 +67,7 @@ import {
   CommentDialogComponent,
   OrgReviewerComponent,
 } from "./org-reviewer/org-reviewer.component";
-import { OrgRoutingModule } from "./org-routing.module";
 import { OrgViewerComponent } from "./org-viewer/org-viewer.component";
-import { OrgRootComponent } from "./org.component";
 import { OrgsMapComponent } from "./orgs-map/orgs-map.component";
 import {
   PdfDialogComponent,
