@@ -97,37 +97,37 @@ const routes: Routes = [
     {
         path: 'faq',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/faq.', title: 'FAQ'}
+        data: {src: '/assets/markdown/organizaciones/faq.', title: 'FAQ'}
 	},
 	{
         path: 'terms',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/terms.', title: 'Términos de uso'}
+        data: {src: '/assets/markdown/organizaciones/terms.', title: 'Términos de uso'}
 	},
 	{
         path: 'privacy',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/privacy.', title: 'Políticas de privacidad'}
+        data: {src: '/assets/markdown/organizaciones/privacy.', title: 'Políticas de privacidad'}
     },
     {
         path: 'about',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/about.', title: 'Sobre Nosotros'}
+        data: {src: '/assets/markdown/organizaciones/about.', title: 'Sobre Nosotros'}
     },
     {
         path: 'help',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/help.', title: 'Ayuda'}
+        data: {src: '/assets/markdown/organizaciones/help.', title: 'Ayuda'}
     },
     {
         path: 'contact',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/contact.', title: 'Contacto'}
+        data: {src: '/assets/markdown/organizaciones/contact.', title: 'Contacto'}
 	},
 	{
         path: 'inclussion',
         component: StaticPagesComponent,
-        data: {src: 'assets/markdown/inclussion.', title: '¿Nueva Organización?'}
+        data: {src: 'assets/markdown/organizaciones/inclussion.', title: '¿Nueva Organización?'}
 	},
 	/*
 	Perfiles

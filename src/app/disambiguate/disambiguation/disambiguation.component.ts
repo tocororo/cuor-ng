@@ -365,7 +365,7 @@ export class DisambiguationComponent implements OnInit, OnChanges {
   template: `
     <h1 mat-dialog-title> Ayuda para la desambiguación de metadatos </h1>
     <div mat-dialog-content>
-      <div markdown [src]="'/assets/markdown/help.step3.disambiguation.md'"></div>
+      <div markdown [src]="'/assets/markdown/organizaciones/help.step3.disambiguation.md'"></div>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="onNoClick()" cdkFocusInitial color="primary">Cerrar</button>

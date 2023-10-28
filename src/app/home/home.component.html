@@ -1,119 +1,203 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
+    <div class="pt-2em pb-2em ph-10">
+      <h1
+        class="mat-display-2"
+        style="margin: 0; text-align: center; color: white"
+      >
+        {{ "SCEIBA_ORGANIZACIONES_SUB" | translate }}
+      </h1>
+    </div>
+  </div>
 
-<mat-toolbar color="primary" style="font-size: initial;" [ngStyle.xs]="{'padding-top':'20px'}">
-    <mat-toolbar-row fxHide.xs="true"></mat-toolbar-row>
-    <mat-toolbar-row fxLayoutAlign="center center" style="height: auto; white-space: normal;">
-        <div fxLayout="column" fxLayoutAlign="center center" fxFlex="70%" fxFlex.lt-sm="100%">
-            <toco-search-query-input [buttonColor]="'accent'" [query]="''" (queryChange)="queryChange($event)" class="w-100"></toco-search-query-input>
-            <p class="w-100" style="margin: 0;">
-                <!-- <a [routerLink]="['/search']" class="a-grey mat-h4">
-                    Incluir Organizaciones Internacionales
-                </a> -->
-            </p>
-        </div>
+  <!-- <div class="w-100 bg-primary-color" fxLayout="row" fxLayoutAlign="center center"> -->
+  <div class="w-100" fxLayout="row" fxLayoutAlign="center center">
+    <div class="w-80" style="margin: 1em 0">
+      <toco-search-query-input
+          [buttonColor]="'primary'"
+          [query]="''"
+          (queryChange)="queryChange($event)"
+          class="w-100"
+        ></toco-search-query-input>
+    </div>
+  </div>
+<!--
+  <mat-toolbar
+    color="primary"
+    style="font-size: initial"
+    [ngStyle.xs]="{ 'padding-top': '20px' }"
+  >
+    <mat-toolbar-row
+      fxLayoutAlign="center center"
+      style="height: auto; white-space: normal"
+    >
+      <div
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxFlex="70%"
+        fxFlex.lt-sm="100%"
+      >
+        <toco-search-query-input
+          [buttonColor]="'accent'"
+          [query]="''"
+          (queryChange)="queryChange($event)"
+          class="w-100"
+        ></toco-search-query-input>
+        <p class="w-100" style="margin: 0">
+        </p>
+      </div>
     </mat-toolbar-row>
-</mat-toolbar>
+  </mat-toolbar> -->
 
-
-<div class="w-70" style="margin-top: 0.5em; margin-left: 4em;" [ngStyle.xs]="{width: '90%', 'margin-left': '1em', 'padding-top':'60px'}">
-    <div class="mat-h2 text-format" markdown [src]="'/assets/markdown/home-about.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
+  <div
+    class="w-70"
+    style="margin-top: 0.5em; margin-left: 4em"
+    [ngStyle.xs]="{ width: '90%', 'margin-left': '1em', 'padding-top': '60px' }"
+  >
+    <div
+      class="mat-h2 text-format"
+      markdown
+      [src]="
+        '/assets/markdown/organizaciones/home-about.' +
+        (transServ.currentLang == 'es' ? 'es.md' : 'en.md')
+      "
+    ></div>
     <div fxLayout="row" fxLayoutAlign="start" class="w-100 pt-20">
-        <button mat-raised-button color="primary" (click)="goAbout()">{{ 'CONOZCA_DE_NOS' | translate }}</button>
+      <button mat-raised-button color="primary" (click)="goAbout()">
+        {{ "CONOZCA_DE_NOS" | translate }}
+      </button>
     </div>
-</div>
+  </div>
 
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center end" class="w-100">
+  <div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center end"
+    class="w-100"
+  >
     <app-card-svg
-        [title]="'CARD_SVG_TITLE_1' | translate"
-        [text]="'CARD_SVG_TEXT_1' | translate"
+      [title]="'CARD_SVG_TITLE_1' | translate"
+      [text]="'CARD_SVG_TEXT_1' | translate"
     >
     </app-card-svg>
 
     <app-card-svg
-        [title]="'CARD_SVG_TITLE_2' | translate"
-        [text]="'CARD_SVG_TEXT_2' | translate"
+      [title]="'CARD_SVG_TITLE_2' | translate"
+      [text]="'CARD_SVG_TEXT_2' | translate"
     >
     </app-card-svg>
 
     <app-card-svg
-        [title]="'CARD_SVG_TITLE_3' | translate"
-        [text]="'CARD_SVG_TEXT_3' | translate"
+      [title]="'CARD_SVG_TITLE_3' | translate"
+      [text]="'CARD_SVG_TEXT_3' | translate"
     >
     </app-card-svg>
-</div>
+  </div>
 
-<br>
-<br>
-<div class="w-100 " fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="end center" fxLayoutGap="10%" fxLayoutGap.md="6%" fxLayoutGap.xs="16px">
-    <p class="w-50 mat-h3" [ngStyle.xs]="{width: '70%'}" style="margin-left: 4em;">
-        {{ 'SERVICIOS_DE_INTERC_1' | translate }}
-        <a class="sceiba-a" [routerLink]="['/contact']">{{ 'SERVICIOS_DE_INTERC_2' | translate }}</a>
-        {{ 'SERVICIOS_DE_INTERC_3' | translate }}
+  <br />
+  <br />
+  <div
+    class="w-100"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="end center"
+    fxLayoutGap="10%"
+    fxLayoutGap.md="6%"
+    fxLayoutGap.xs="16px"
+  >
+    <p
+      class="w-50 mat-h3"
+      [ngStyle.xs]="{ width: '70%' }"
+      style="margin-left: 4em"
+    >
+      {{ "SERVICIOS_DE_INTERC_1" | translate }}
+      <a class="sceiba-a" [routerLink]="['/contact']">{{
+        "SERVICIOS_DE_INTERC_2" | translate
+      }}</a>
+      {{ "SERVICIOS_DE_INTERC_3" | translate }}
     </p>
-    <div class="buble" [ngStyle.xs]="{width: '100%'}">
-        <h1 class="mat-h1">{{ 'SERVICIOS_DE_INTERC_4' | translate }}</h1>
-        <img src="assets/icons/buble.svg" alt="" style="width: 18em;" [ngStyle.xs]="{width: '100%'}">
+    <div class="buble" [ngStyle.xs]="{ width: '100%' }">
+      <h1 class="mat-h1">{{ "SERVICIOS_DE_INTERC_4" | translate }}</h1>
+      <img
+        src="assets/icons/buble.svg"
+        alt=""
+        style="width: 18em"
+        [ngStyle.xs]="{ width: '100%' }"
+      />
     </div>
-</div>
+  </div>
 
-<app-card-item-info class="w-100"
+  <app-card-item-info
+    class="w-100"
     [title]="'CARD_ITEM_INFO_HARV_TITLE' | translate"
     [info]="harvesterInfo"
->
-</app-card-item-info>
+  >
+  </app-card-item-info>
 
-<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10%" style="padding-top: 4em; min-height: 70vh;">
+  <div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10%"
+    style="padding-top: 4em; min-height: 70vh"
+  >
     <ngx-charts-pie-chart
-        class="home-charts"
-        *ngIf="loadCharts"
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="homeCharts.total"
-        [gradient]="gradient"
-        [legend]="showLegend"
-        [legendPosition]="legendPosition"
-        [labels]="showLabels"
-        [doughnut]="isDoughnut"
-        style="margin-left: 2.5em; min-height: 400px;">
+      class="home-charts"
+      *ngIf="loadCharts"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="homeCharts.total"
+      [gradient]="gradient"
+      [legend]="showLegend"
+      [legendPosition]="legendPosition"
+      [labels]="showLabels"
+      [doughnut]="isDoughnut"
+      style="margin-left: 2.5em; min-height: 400px"
+    >
     </ngx-charts-pie-chart>
 
     <ngx-charts-bar-vertical
-        class="home-charts"
-        *ngIf="loadCharts"
-        [view]="barView"
-        [scheme]="colorScheme"
-        [results]="homeCharts.type"
-        [gradient]="gradient"
-        [legend]="showLegend"
-        [legendPosition]="legendPosition"
-        [xAxisLabel]="''"
-        [yAxisLabel]="''"
-        style="margin-left: 2.5em; min-height: 450px;">
+      class="home-charts"
+      *ngIf="loadCharts"
+      [view]="barView"
+      [scheme]="colorScheme"
+      [results]="homeCharts.type"
+      [gradient]="gradient"
+      [legend]="showLegend"
+      [legendPosition]="legendPosition"
+      [xAxisLabel]="''"
+      [yAxisLabel]="''"
+      style="margin-left: 2.5em; min-height: 450px"
+    >
     </ngx-charts-bar-vertical>
+  </div>
 
-</div>
-
-<orgs-map [cubanOrganizations]="cubanOrganizations"></orgs-map>
+  <!-- <orgs-map [cubanOrganizations]="cubanOrganizations"></orgs-map>
 <br>
-<br>
+<br> -->
 
-<!-- <hr style="width: 96%; box-shadow: 2px 1px 14px #00000033;"> -->
+  <!-- <hr style="width: 96%; box-shadow: 2px 1px 14px #00000033;"> -->
 
-<!-- <app-cards-slider></app-cards-slider> -->
+  <!-- <app-cards-slider></app-cards-slider> -->
 
-<div class="prefooter" [ngStyle.xs]="{'padding-bottom':'-40px'}">
-    <div style="width: 32%; min-width: 22em;">
-        <div class="info-card">
-            <img src="assets/icons/sceiba.svg" alt="">
-            <p class="mat-h3">{{ 'DEFINICION_SCEIBA' | translate }}</p>
-        </div>
-        <div class="info-card">
-            <img src="assets/images/tocororo.png" alt="">
-            <p class="mat-h3">{{ 'DEFINICION_TOCORORO' | translate }}</p>
-        </div>
+  <div class="prefooter" [ngStyle.xs]="{ 'padding-bottom': '-40px' }">
+    <div style="width: 32%; min-width: 22em">
+      <div class="info-card">
+        <img src="assets/icons/sceiba.svg" alt="" />
+        <p class="mat-h3">{{ "DEFINICION_SCEIBA" | translate }}</p>
+      </div>
+      <div class="info-card">
+        <img src="assets/images/tocororo.png" alt="" />
+        <p class="mat-h3">{{ "DEFINICION_TOCORORO" | translate }}</p>
+      </div>
     </div>
-    <div style="width: 50%; margin-bottom: 0px; padding: 16px;" [ngStyle.xs]="{width: '100%'}">
-        <p class="mat-h3">{{ 'EXPLICACION_1' | translate }}</p>
-        <p class="mat-h3">{{ 'EXPLICACION_2' | translate }}</p>
-        <p class="mat-h3">{{ 'EXPLICACION_3' | translate }}</p>
+    <div
+      style="width: 50%; margin-bottom: 0px; padding: 16px"
+      [ngStyle.xs]="{ width: '100%' }"
+    >
+      <p class="mat-h3">{{ "EXPLICACION_1" | translate }}</p>
+      <p class="mat-h3">{{ "EXPLICACION_2" | translate }}</p>
+      <p class="mat-h3">{{ "EXPLICACION_3" | translate }}</p>
     </div>
+  </div>
 </div>

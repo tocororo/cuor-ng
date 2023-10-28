@@ -208,6 +208,46 @@ body { margin: 0; }
 .home-charts .chart-legend .legend-labels{
   white-space: normal;
 }
+
+
+.primary-color{
+  background-color: mat.get-color-from-palette($toco-primary);
+  color: #fff;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 4px;
+}
+.bg-primary-color {
+ background-color: mat.get-color-from-palette($toco-primary);
+}
+
+.ligth-green {
+ //background-color: mat-color($toco-primary, 50);
+ background-color: rgba(0,0,0,0.1);
+ color: white;
+ max-width: 400px;
+ border: 1px solid;
+ border-color: mat.get-color-from-palette($toco-primary);
+}
+
+.ligth-green-card {
+ //background-color: mat-color($toco-primary, 50);
+ background-color: rgb(0 127 63 / 6%);
+ color: black;
+ border: 1px solid;
+ border-color: #007e3e4f;
+}
+
+.markdown-card-green-light{
+ background: #f3fff9;
+ padding: 8px;
+ margin: 8px;
+ border-radius: 16px;
+}
+.mat-menu-panel{
+ max-width: 330px !important;
+}
+
 // @media (max-width: 1270px){
 //   ngx-charts-pie-chart.home-charts{
 //     svg.ngx-charts{
