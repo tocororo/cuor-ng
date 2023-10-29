@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
+import { Environment, HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
 import { OrgService } from '../_services/org.service';
 import { OrgEditFormComponent } from '../org-edit/org-edit-form/org-edit-form.component';
 
@@ -25,14 +25,17 @@ export class OrgReviewerComponent implements OnInit {
   @ViewChild('orgeditform') private _orgEditForm: OrgEditFormComponent;
 
 
-constructor(
+  public env: Environment;
+
+  constructor(
+    private _env: Environment,
     private _activatedRoute: ActivatedRoute,
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router,
     private _orgService: OrgService,
     public dialog: MatDialog
-  ) { }
+  ) { this.env = this._env;}
 
   ngOnInit() {
     this._activatedRoute.data.subscribe(

@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
+import { Environment, HandlerComponent, Hit, MessageHandler, Organization, StatusCode } from 'toco-lib';
 import { OrgService } from '../_services/org.service';
 import { OrgEditFormComponent } from './org-edit-form/org-edit-form.component';
 
@@ -22,13 +22,16 @@ export class OrgEditComponent implements OnInit {
 
   @ViewChild('orgeditform') private _orgEditForm: OrgEditFormComponent;
 
+  public env: Environment;
+
   constructor(
+    private _env: Environment,
     private _activatedRoute: ActivatedRoute,
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _router: Router,
     private _orgService: OrgService
-    ) { }
+    ) {this.env = this._env; }
 
   ngOnInit() {
 

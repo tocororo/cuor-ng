@@ -1,47 +1,55 @@
 <toco-progress [loading]="loading"></toco-progress>
 
 <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="start center"
-    style="height: 80px; padding: 0 16px;"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="start center"
+  style="height: 80px; padding: 0 16px"
+>
+  <button
+    mat-button
+    [routerLink]="[env.organizations, org.id, 'view']"
+    matTooltip="Ver la Organización"
   >
-    <button mat-button routerLink="/{{org.id}}/view" matTooltip="Ver la Organización">
-        <mat-icon class="mat-18">visibility</mat-icon>
-    </button>
-    <span class="mat-h2" style="margin: 0;">Editando: {{org.name}}</span>
-  </div>
+    <mat-icon class="mat-18">visibility</mat-icon>
+  </button>
+  <span class="mat-h2" style="margin: 0">Editando: {{ org.name }}</span>
+</div>
 
-  <!-- <toco-progress [loading]="loading"></toco-progress> -->
+<!-- <toco-progress [loading]="loading"></toco-progress> -->
 <mat-card>
-
-    <mat-card-content>
-
-        <org-edit-form #orgeditform
-            [org]="org"
-            [loading]="loading"
-        ></org-edit-form>
-
-    </mat-card-content>
-    <mat-card-actions align="start">
-      <ng-container *ngIf="pathname === 'edit';else containerRequestChanges">
-        <ng-container *ngIf="isValidForm();else templateButtonUpdate">
-            <button mat-raised-button color="primary" (click)="update(true)">Guardar</button>
-            <button mat-raised-button color="accent" (click)="update()">Guardar y seguir editando</button>
-        </ng-container>
-        <ng-template #templateButtonUpdate>
-            <button mat-raised-button color="primary" disabled>Guardar</button>
-            <button mat-raised-button color="accent" disabled>Guardar y seguir editando</button>
-        </ng-template>
+  <mat-card-content>
+    <org-edit-form #orgeditform [org]="org" [loading]="loading"></org-edit-form>
+  </mat-card-content>
+  <mat-card-actions align="start">
+    <ng-container *ngIf="pathname === 'edit'; else containerRequestChanges">
+      <ng-container *ngIf="isValidForm(); else templateButtonUpdate">
+        <button mat-raised-button color="primary" (click)="update(true)">
+          Guardar
+        </button>
+        <button mat-raised-button color="accent" (click)="update()">
+          Guardar y seguir editando
+        </button>
       </ng-container>
-
-      <ng-template #containerRequestChanges>
-        <ng-container *ngIf="isValidForm();else templateButtonUpdate">
-        </ng-container>
-        <ng-template #templateButtonUpdate>
-          <button mat-raised-button color="primary" disabled>Guardar y enviar solicitud</button>
-        </ng-template>
-        <button mat-raised-button color="primary" (click)="update(true)">Guardar y enviar solicitud</button>
+      <ng-template #templateButtonUpdate>
+        <button mat-raised-button color="primary" disabled>Guardar</button>
+        <button mat-raised-button color="accent" disabled>
+          Guardar y seguir editando
+        </button>
       </ng-template>
-    </mat-card-actions>
+    </ng-container>
+
+    <ng-template #containerRequestChanges>
+      <ng-container *ngIf="isValidForm(); else templateButtonUpdate">
+      </ng-container>
+      <ng-template #templateButtonUpdate>
+        <button mat-raised-button color="primary" disabled>
+          Guardar y enviar solicitud
+        </button>
+      </ng-template>
+      <button mat-raised-button color="primary" (click)="update(true)">
+        Guardar y enviar solicitud
+      </button>
+    </ng-template>
+  </mat-card-actions>
 </mat-card>

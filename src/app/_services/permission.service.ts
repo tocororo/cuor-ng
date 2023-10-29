@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
 import { MessageHandler, StatusCode } from 'toco-lib';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class CuratorPermissionService {
 
   constructor(
-    // private oauthStorage: OAuthStorage,
+    private oauthStorage: OAuthStorage,
     private _router: Router,
     private _snackBar: MatSnackBar) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-    let permission = new Permission();
+    let permission = new Permission(this.oauthStorage);
 
     if (permission.hasPermissions("curator") || permission.hasPermissions("admin")){
       return true;
@@ -31,17 +32,17 @@ export class CuratorPermissionService {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
 })
 export class AdminPermissionService {
 
   constructor(
-    // private oauthStorage: OAuthStorage,
+    private oauthStorage: OAuthStorage,
     private _router: Router,
     private _snackBar: MatSnackBar) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    let permission = new Permission();
+    let permission = new Permission(this.oauthStorage);
 
     if (permission.hasPermissions("admin")){
       return true;
@@ -55,12 +56,12 @@ export class AdminPermissionService {
 
 export class Permission {
 
-  constructor() {}
+  constructor(private oauthStorage: OAuthStorage) {}
 
   public hasPermissions(roleName: string): boolean {
-    if (localStorage.getItem('roles') && localStorage.getItem('roles').length > 0){
+    if (this.oauthStorage.getItem('roles') && this.oauthStorage.getItem('roles').length > 0){
 
-      const roles = localStorage.getItem('roles').split(",")
+      const roles = this.oauthStorage.getItem('roles').split(",")
 
       for (const rol in roles) {
         if (roles[rol] == roleName){

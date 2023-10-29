@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Environment } from 'toco-lib';
 
 
 
@@ -24,9 +25,12 @@ export class TableLayoutComponent implements OnInit, OnChanges {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
 
+  public env: Environment;
+
   constructor(
+    private _env: Environment,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { this.env = this._env;}
 
   ngOnInit() {  }
 

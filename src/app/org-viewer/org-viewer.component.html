@@ -17,8 +17,8 @@
 
     <ng-template #view_cuor_button>
         <div>
-            <button mat-button *ngIf="hasPermission" routerLink="/{{org.id}}/edit" matTooltip="Editar la Organización">
-            <!-- <button mat-button *ngIf="'true'" routerLink="/{{org.id}}/edit" matTooltip="Editar la Organización"> -->
+            <button mat-button *ngIf="hasPermission" [routerLink]="[env.organizations, org.id, 'edit']" matTooltip="Editar la Organización">
+
                 <mat-icon class="mat-18">mode_edit</mat-icon>
             </button>
             <!-- <span class="mat-h2" style="margin: 0;">{{org.name}}</span> -->

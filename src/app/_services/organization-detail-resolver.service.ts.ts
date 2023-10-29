@@ -2,6 +2,7 @@ import { ShowErrorService } from './show-error.service';
 
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Hit, Organization } from 'toco-lib';
@@ -44,7 +45,7 @@ const orgExample: any = {
 @Injectable({
 	providedIn: 'root',
 })
-export class OrganizationDetailResolverService 
+export class OrganizationDetailResolverService
 {
 	public constructor(private router: Router, private service: OrgService)
 	{ }
@@ -73,9 +74,10 @@ export class OrganizationDetailResolverService
 @Injectable({
 	providedIn: 'root',
 })
-export class OrganizationActiveResolverService 
+export class OrganizationActiveResolverService
 {
 	public constructor(
+    private oauthStorage: OAuthStorage,
     private router: Router,
     private service: OrgService,
     private errorService: ShowErrorService
@@ -124,7 +126,7 @@ export class OrganizationActiveResolverService
 	 * hasPermission return true if the user have permission
 	 */
 	public get hasCurationPermission(): boolean {
-		let permission = new Permission();
+		let permission = new Permission(this.oauthStorage);
 
 		if (permission.hasPermissions("curator") || permission.hasPermissions("admin")) {
 			return true;

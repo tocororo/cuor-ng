@@ -1,7 +1,8 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
-import { HitList, Organization } from 'toco-lib';
+import { OAuthStorage } from 'angular-oauth2-oidc';
+import { Environment, HitList, Organization } from 'toco-lib';
 import { Permission } from '../_services/permission.service';
 
 @Component({
@@ -16,8 +17,12 @@ export class SearchListComponent implements OnInit
 	public hitList: HitList<Organization>;
   public pdfType: 'list' | 'single' =  'list';
 
-    public constructor()
-	{ }
+  public env: Environment;
+
+  constructor(
+    private oauthStorage: OAuthStorage,
+    private _env: Environment)
+	{ this.env = this._env;}
 
 	public ngOnInit(): void
 	{
@@ -27,7 +32,7 @@ export class SearchListComponent implements OnInit
 	* hasPermission return true if the user have permission
 	*/
 	public get hasPermission(): boolean {
-		let permission = new Permission();
+		let permission = new Permission(this.oauthStorage);
 
 		if (permission.hasPermissions("curator")|| permission.hasPermissions("admin")) {
 			return true;

@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Environment } from 'toco-lib';
 import { ShowErrorService } from '../_services/show-error.service';
 
 @Component({
@@ -15,11 +16,13 @@ export class ErrorPageComponent implements OnDestroy {
   @Input() message: string; //error description , what was the problem or error
 
   subscription: Subscription;
+  public env: Environment;
 
-  constructor(
+  constructor(private environment: Environment,
     private router: Router,
     private errorService: ShowErrorService
     ) {
+      this.env = this.environment;
     // subscribe to error component service
     this.subscription = this.errorService.getErrors().subscribe(error => {
       console.log(" antes de comprobar ", error);

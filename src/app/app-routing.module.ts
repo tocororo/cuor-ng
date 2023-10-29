@@ -1,7 +1,6 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OauthAuthenticationService } from 'toco-lib';
 import { UserService } from './_services/org.service';
 import { OrganizationActiveResolverService, OrganizationDetailResolverService } from './_services/organization-detail-resolver.service.ts';
 import { AdminPermissionService, CuratorPermissionService } from './_services/permission.service';
@@ -79,12 +78,12 @@ const routes: Routes = [
 	{
 		path: 'disambiguate',
 		component: DisambiguateComponent,
-		canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+		canActivate: [ CuratorPermissionService, AdminPermissionService]
 	},
 	{
 		path: 'import',
 		component: ImportComponent,
-		canActivate: [OauthAuthenticationService, AdminPermissionService]
+		canActivate: [ AdminPermissionService]
 	},
   {
 		path: 'error',

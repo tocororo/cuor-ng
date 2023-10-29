@@ -33,17 +33,18 @@ export class OrgViewerComponent implements OnInit {
   masterOrganization: Organization;
   masterFormControl: UntypedFormControl;
 
+  public env: Environment;
 
-  public constructor(
+  constructor(
+    private _env: Environment,
     private _activatedRoute: ActivatedRoute,
     private router: Router,
     public iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
     private metadata: MetadataService,
-    private env: Environment,
     private oauthStorage: OAuthStorage,
 
-  ) { }
+  ) { this.env = this._env;}
   loading = true;
   view_type = true;
   data: any = '';
@@ -90,7 +91,7 @@ export class OrgViewerComponent implements OnInit {
   * hasPermission return true if the user have permission
   */
   public get hasPermission(): boolean {
-    const permission = new Permission();
+    const permission = new Permission(this.oauthStorage);
 
     if (permission.hasPermissions('curator') || permission.hasPermissions('admin')) {
       return true;

@@ -6,7 +6,7 @@
   fxLayoutAlign="start center"
   style="height: 80px; padding: 0 16px;"
 >
-  <button mat-button routerLink="/{{org.id}}/view" matTooltip="Ver la Organización">
+  <button mat-button [routerLink]="[env.organizations,org.id, 'view']" matTooltip="Ver la Organización">
     <mat-icon class="mat-18">visibility</mat-icon>
   </button>
   <span class="mat-h2" style="margin: 0;">Solicitud de cambios en los metadatos para: {{org.name}}</span>

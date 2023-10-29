@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MetadataService, Organization, SearchResponse } from 'toco-lib';
+import { Environment, MetadataService, Organization, SearchResponse } from 'toco-lib';
 import { OrgService } from '../_services/org.service';
 
 
@@ -61,7 +61,9 @@ export class HomeComponent implements OnInit {
 	public apiText:string;
 	public homeCards: any = [];
 
-	public constructor(
+  public env: Environment;
+
+  constructor(private environment: Environment,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private _cuorService: OrgService,
@@ -69,7 +71,7 @@ export class HomeComponent implements OnInit {
     private metadata: MetadataService,
     public transServ: TranslateService
     )
-	{ }
+	{  this.env = this.environment;}
 
 	public ngOnInit(): void
 	{

@@ -5,11 +5,11 @@ import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import {
-    AuthBackend,
-    Environment,
-    OauthAuthenticationService,
-    OauthInfo,
-    User
+  AuthBackend,
+  Environment,
+  OauthAuthenticationService,
+  OauthInfo,
+  User
 } from "toco-lib";
 import { UserService } from "./_services/org.service";
 import { Permission } from "./_services/permission.service";
@@ -259,7 +259,7 @@ export class OrgRootComponent {
    * hasPermission return true if the user have permission
    */
   public get hasPermission(): boolean {
-    let permission = new Permission();
+    let permission = new Permission(this.oauthStorage);
 
     if (
       permission.hasPermissions("curator") ||
@@ -274,7 +274,7 @@ export class OrgRootComponent {
    * hasPermission return true if the user have permission
    */
   public get hasPermissionAdmin(): boolean {
-    let permission = new Permission();
+    let permission = new Permission(this.oauthStorage);
 
     if (permission.hasPermissions("admin")) {
       return true;

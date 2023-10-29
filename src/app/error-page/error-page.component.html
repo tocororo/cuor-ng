@@ -6,7 +6,8 @@
 
   <div class="w-100" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="end center" >
     <div class="w-50" [ngStyle.xs]="{width: '100%'}">
-      <a [routerLink]="['/']" class="sceiba-a">
+
+      <a [routerLink]="[env.organizations,'']" class="sceiba-a">
         <h3 *ngIf="title">{{ title }}</h3>
         <h2>Regresar Inicio</h2>
         <img src="assets/images/svg/404-error-3060993.svg"

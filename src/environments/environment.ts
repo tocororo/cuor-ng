@@ -31,7 +31,7 @@ class EnvironmentImpl implements Environment {
   discover = 'https://cuba.sceiba.org/search';
   catalog = 'https://cuba-catalogo.sceiba.org/';
   revistasmes = 'https://cuba-revistasmes.sceiba.org/';
-  organizations = 'https://cuba-organizaciones.sceiba.org/';
+  organizations = '';
   persons = 'https://cuba-personas.sceiba.org/';
   vocabularies = 'https://vocabularios.sceiba.cu/';
   moodle = 'https://courses.sceiba.org/';

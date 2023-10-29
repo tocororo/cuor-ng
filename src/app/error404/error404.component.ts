@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Environment } from 'toco-lib';
 
 @Component({
   selector: 'app-error404',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Error404Component implements OnInit {
 
-  constructor() { }
+  public env: Environment;
+
+  constructor(private environment: Environment) { this.env = this.environment;}
 
   ngOnInit() {
   }
